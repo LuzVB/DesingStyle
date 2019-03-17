@@ -1,0 +1,83 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/Controller/masterInicio/paginaPrincipal.master.cs" Inherits="View_masterInicio_paginaPrincipal" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+      
+        .auto-style1 {
+            width: 100%;
+        }
+      
+        .auto-style2 {
+            width: 30%;
+        }
+      
+        .auto-style4 {
+            width: 70%;
+            padding-left:32%;
+        }
+      
+        .auto-style5 {
+            text-align: center;
+        }
+      
+        .auto-style6 {
+            font-family: Georgia, "Times New Roman", Times, serif;
+        }
+      
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <table class="auto-style1">
+            <tr>
+                <td class="auto-style2">
+                    <asp:ImageButton ID="ImageButton1" runat="server" ImageUrl="~/Imagenes/logo/logo.png" Width="60%" OnClick="ImageButton1_Click" />
+                </td>
+                <td class="auto-style4">
+                     <asp:Menu ID="Menu1" runat="server" BackColor="White" DynamicHorizontalOffset="2" Font-Names="Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif" Font-Size="X-Large" ForeColor="#3399FF" Orientation="Horizontal" StaticSubMenuIndent="10px">
+                          <DynamicHoverStyle BackColor="#93A6FF" ForeColor="White" />
+                          <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                          <DynamicMenuStyle BackColor="#99CCFF" />
+                          <DynamicSelectedStyle BackColor="#3399FF" />
+                          <Items>
+                             <asp:MenuItem NavigateUrl="~/View/masterInicio/principal/QuienesSomos.aspx" Text="Quienes somos" Value="Inicio"></asp:MenuItem>
+                             <asp:MenuItem NavigateUrl="~/View/masterInicio/principal/inicioSesion.aspx" Text="Iniciar sesión" Value="Iniciar sesión "></asp:MenuItem>
+                             <asp:MenuItem NavigateUrl="~/View/masterInicio/principal/Registro.aspx" Text="Registrate" Value="Registro "></asp:MenuItem>
+                           </Items>
+                           <StaticHoverStyle BackColor="#9fe0dd" ForeColor="White" />
+                           <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                           <StaticSelectedStyle BackColor="#6699FF" />
+                    </asp:Menu>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+       
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+                  
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style5" colspan="2">
+                    <br />
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/logo/logo.png" Width="10%" />
+                    <br />
+                     <span class="auto-style6">Copyright © 2019 - Web creada con Visual Studio </span> <br class="auto-style6"/>
+                     <span class="auto-style6">Aviso legal, política de privacidad y de afiliación · Política de Cookies 
+                    <br />
+                    </span> 
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
