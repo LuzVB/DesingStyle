@@ -23,7 +23,7 @@
             padding-left:32%;
         }
       
-        .auto-style5 {
+        .footer {
             text-align: center;
         }
       
@@ -67,7 +67,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="auto-style5" colspan="2">
+                <td class="footer" colspan="2">
                     <br />
                     <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/logo/logo.png" Width="10%" />
                     <br />

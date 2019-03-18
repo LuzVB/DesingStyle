@@ -34,6 +34,7 @@ public class DAORegistroCliente
             dataAdapter.SelectCommand.Parameters.Add("_correo", NpgsqlDbType.Text).Value = cliente.Correo;
             dataAdapter.SelectCommand.Parameters.Add("_contrasena", NpgsqlDbType.Text).Value = cliente.Contraseña;
             dataAdapter.SelectCommand.Parameters.Add("_fecha_nacimiento", NpgsqlDbType.Date).Value = cliente.Fecha_nacimiento;
+            dataAdapter.SelectCommand.Parameters.Add("_telefono", NpgsqlDbType.Integer).Value = cliente.Telefono;
             dataAdapter.SelectCommand.Parameters.Add("_estado", NpgsqlDbType.Integer).Value = cliente.Estado;
             dataAdapter.SelectCommand.Parameters.Add("_id_rol", NpgsqlDbType.Integer).Value = cliente.Rol;
             dataAdapter.SelectCommand.Parameters.Add("_session", NpgsqlDbType.Text).Value = cliente.Session;
@@ -65,6 +66,34 @@ public class DAORegistroCliente
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_contarcorreo", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
             dataAdapter.SelectCommand.Parameters.Add("_correo", NpgsqlDbType.Text).Value = user.Correo;
+
+            conection.Open();
+            dataAdapter.Fill(usuario);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return usuario;
+    }
+
+    public DataTable contarId(ERegistroUsuario user)
+    {
+        DataTable usuario = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_contarid", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = user.Cedula;
 
             conection.Open();
             dataAdapter.Fill(usuario);

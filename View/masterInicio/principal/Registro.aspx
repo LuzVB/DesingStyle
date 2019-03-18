@@ -75,6 +75,10 @@
         .auto-style36 {
             width: 18px;
         }
+        .auto-style37 {
+            width: 60%;
+            height: 35px;
+        }
      </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -89,7 +93,7 @@
     </tr>
    
     <tr>
-        <%--<td class="auto-style13">--%>          <%-- <table class="auto-style16">--%>
+        <%--<td class="auto-style13">--%><%-- <table class="auto-style16">--%>
                     <td class="auto-style11">
                         <table class="auto-style23">
                             <tr>
@@ -129,6 +133,8 @@
                                 <td class="auto-style24">
                                     <asp:TextBox ID="Tx_correo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email"></asp:TextBox>
                                     <cc1:filteredtextboxextender ID="FTBE_correo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_correo" />
+                                    <br />
+                                    <asp:Label ID="L_ErrorCorreo" runat="server" CssClass="auto-style32" Font-Size="100%" ForeColor="Red"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
@@ -142,6 +148,8 @@
                                 <td class="auto-style24">
                                     <asp:TextBox ID="Tx_cedula" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10"></asp:TextBox>
                                     <cc1:filteredtextboxextender ID="FTBE_cedula" runat="server" FilterType="Numbers" TargetControlID="Tx_cedula" />
+                                    <br />
+                                    <asp:Label ID="L_ErrorCedula" runat="server" CssClass="auto-style32" Font-Size="100%" ForeColor="Red"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
@@ -154,6 +162,20 @@
                                 </td>
                                 <td class="auto-style24">
                                     <asp:TextBox ID="Tx_fecha" runat="server" BorderColor="#0099FF" TextMode="Date" Width="95%" Height="25px"></asp:TextBox>
+                                    <br />
+                                    <asp:Label ID="L_ErrorFechaNacimiento" runat="server" CssClass="auto-style32" Font-Size="100%" ForeColor="Red"></asp:Label>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="auto-style28">
+                                    <asp:Label ID="L_Telefono" runat="server" Text="Telefono" CssClass="auto-style18"></asp:Label>
+                                </td>
+                                <td class="auto-style26">
+                                    <asp:RequiredFieldValidator ID="RFV_CrearTelefono" runat="server" ControlToValidate="Tx_Telefono" ErrorMessage="(*)" ForeColor="Red" SetFocusOnError="True" ValidationGroup="crearCuenta"></asp:RequiredFieldValidator>
+                                    <cc1:filteredtextboxextender ID="FTBE_Telefono" runat="server" FilterType="Numbers" TargetControlID="Tx_Telefono" />
+                                </td>
+                                <td class="auto-style37">
+                                    <asp:TextBox ID="Tx_Telefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10"></asp:TextBox>
                                 </td>
                             </tr>
                             <tr>
@@ -190,7 +212,7 @@
                     </td>
                     
                     
-            <%--</table>--%>       <%-- </td>--%>
+            <%--</table>--%><%-- </td>--%>
         <td class="auto-style15">
            
             <asp:Image ID="Image2" runat="server" ImageUrl="~/Imagenes/paginaInicio/registro/registro3.png" class="imgRegistro" />

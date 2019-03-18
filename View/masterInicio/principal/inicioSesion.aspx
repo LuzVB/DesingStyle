@@ -45,9 +45,6 @@
      .auto-style19 {
          padding:0.6%;
      }
-        .auto-style20 {
-            width: 100%;
-        }
         .auto-style21 {
             margin-left: 0px;
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -60,8 +57,7 @@
         }
         .auto-style23 {
             font-size: 100%;
-            padding-left:15%;
-
+            text-align: center;
         }
         .auto-style23 a:link{
             color:#0099FF;
@@ -77,6 +73,16 @@
 
         .auto-style24 {
             text-align: left;
+            height: 22px;
+        }
+
+        .auto-style25 {
+            width: 100%;
+            text-align: center;
+        }
+
+        .auto-style26 {
+            height: 22px;
         }
 
      </style>
@@ -103,7 +109,7 @@
                                     <asp:Label ID="L_Icorreo" runat="server" Text="Correo" CssClass="auto-style18"></asp:Label>
                                     <br />
                                 </td>
-                                <td class="auto-style20">
+                                <td class="auto-style25">
                                     <asp:TextBox ID="Tx_Icorreo" runat="server" BorderColor="#0099FF" Width="50%" Height="25px" TextMode="Email" ValidationGroup="VG_InicioSesion"></asp:TextBox>
                                     <cc1:filteredtextboxextender ID="FTBE_Icorreo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_Icorreo" /><%--validar caracter especiales--%>
                                     <asp:RequiredFieldValidator ID="RFV_ICorreo" runat="server" ErrorMessage="(*)" ControlToValidate="Tx_Icorreo" ForeColor="Red" ValidationGroup="VG_InicioSesion" SetFocusOnError="True"></asp:RequiredFieldValidator>
@@ -115,7 +121,7 @@
                                     <asp:Label ID="L_Icontraseña" runat="server" Text="Contraseña" CssClass="auto-style18"></asp:Label>
                                     <br />
                                 </td>
-                                <td class="auto-style20">
+                                <td class="auto-style25">
                                     <asp:TextBox ID="Tx_Icontraseña" runat="server" BorderColor="#0099FF" TextMode="Password" Width="50%" Height="25px" ValidationGroup="VG_InicioSesion"></asp:TextBox>
                                     <cc1:filteredtextboxextender ID="FTBE_IContraseña" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_Icontraseña" /><%--validar caracter especiales--%>
                                     <asp:RequiredFieldValidator ID="RFV_IContraseña" runat="server" ErrorMessage="(*)" ControlToValidate="Tx_Icontraseña" ForeColor="Red" ValidationGroup="VG_InicioSesion" SetFocusOnError="True"></asp:RequiredFieldValidator>
@@ -129,7 +135,7 @@
                                 </td>
                             </tr>
                               <tr>
-                                <td class="auto-style9"></td>
+                                <td class="auto-style26"></td>
                                 <td class="auto-style24" >
                                    
                                     <asp:Label ID="LB_IError" runat="server" ForeColor="Red"></asp:Label>
@@ -138,11 +144,11 @@
                             </tr>
                              <tr>
                                 <td class="auto-style9"></td>
-                                <td class="auto-style23" ><a href="Registro.aspx">¿Olvido su contraseña?</a></td>
+                                <td class="auto-style23" ><a href="generarTokenContraseña.aspx">¿Olvido su contraseña?</a></td>
                             </tr>
                             <tr>
                                 <td class="auto-style9"></td>
-                                <td class="auto-style23" ><a href="../../masterUsuarios/administrador/datosPersonales.aspx">Recuperar cuenta</a></td>
+                                <td class="auto-style23" ><a href="generarTokenCuenta.aspx">Recuperar cuenta</a></td>
                             </tr>
                         </table>
                     </td>

@@ -23,11 +23,15 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
         cliente.Correo = Tx_correo.Text;
         cliente.Contraseña = Tx_contraseña.Text;
         cliente.Fecha_nacimiento = DateTime.Parse(Tx_fecha.Text);
+        cliente.Telefono = Int32.Parse(Tx_Telefono.Text);
         cliente.Estado = 1;
         cliente.Rol = 3;
         cliente.Session = Session.SessionID;
+        DataTable contarCorreo = new DAORegistroCliente().contarCorreos(cliente);
+        DataTable contarId = new DAORegistroCliente().contarId(cliente);
         DateTime fechaCliente = DateTime.Parse(Tx_fecha.Text);
         int edadCliente = System.DateTime.Now.Year - fechaCliente.Year;
+        int error = 0;
 
         if (System.DateTime.Now.Subtract(fechaCliente.AddYears(edadCliente)).TotalDays < 0)
         {
@@ -35,42 +39,53 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
 
         }
 
-        DataTable contarCorreo = new DAORegistroCliente().contarCorreos(cliente);
-
-        if (contarCorreo.Rows[0]["correro"].Equals(""))
+        if (contarCorreo.Rows[0]["user_correo"].Equals("1"))
         {
-            L_ErrorCrear.Text = "NOcoincide";
+            L_ErrorCorreo.Text = "";
+            error = 0;
         }
         else
         {
-            L_ErrorCrear.Text = "SIcoincide";
+            L_ErrorCorreo.Text = "El correo ya existe";
+            error = 1;
+        }
+
+        if (contarId.Rows[0]["user_id"].Equals(-1))
+        {
+            L_ErrorCedula.Text = "";
+            error = 0;
+        }
+        else
+        {
+            L_ErrorCedula.Text = "La cedula ya se encuentra registrada ";
+            error = 1;
         }
 
 
-        //if (edadCliente > 18)
-        //{
+        if (edadCliente > 18)
+        {
+            L_ErrorFechaNacimiento.Text = "";
+            error = 0;
+        }
+        else
+        {
+            L_ErrorFechaNacimiento.Text = "Fecha de nacimiento incorrecta, no es mayor de edad.";
+            error = 1;
+        }
 
-        //    new DAORegistroCliente().registroCliente(cliente);
+        if(error == 0)
+        {
+            new DAORegistroCliente().registroCliente(cliente);
 
-        //    L_ErrorCrear.Text = "Cuenta creada, inicie sesión ";
+            L_ErrorCrear.Text = "Cuenta creada, inicie sesión ";
 
-        //    Tx_nombre.Text = "";
-        //    Tx_apellidos.Text = "";
-        //    Tx_correo.Text = "";
-        //    Tx_cedula.Text = "";
-        //    Tx_fecha.Text = "";
-
-        //}
-        //else
-        //{
-
-        //    Tx_nombre.Text = "";
-        //    Tx_apellidos.Text = "";
-        //    Tx_correo.Text = "";
-        //    Tx_cedula.Text = "";
-        //    Tx_fecha.Text = "";
-        //    L_ErrorCrear.Text = "Fecha de nacimiento incorrecta, no es mayor de edad.";
-        //}
-
+            Tx_nombre.Text = "";
+            Tx_apellidos.Text = "";
+            Tx_correo.Text = "";
+            Tx_cedula.Text = "";
+            Tx_fecha.Text = "";
+            Tx_Telefono.Text = "";
+        }
+        
     }
 }

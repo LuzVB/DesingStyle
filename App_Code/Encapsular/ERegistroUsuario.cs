@@ -14,6 +14,7 @@ public class ERegistroUsuario
     private int cedula;
     private DateTime fecha_nacimiento;
     private string contraseña;
+    private int telefono;
     private string session;
     private int estado;
     private int rol;
@@ -27,4 +28,5 @@ public class ERegistroUsuario
     public string Session { get => session; set => session = value; }
     public int Estado { get => estado; set => estado = value; }
     public int Rol { get => rol; set => rol = value; }
+    public int Telefono { get => telefono; set => telefono = value; }
 }
