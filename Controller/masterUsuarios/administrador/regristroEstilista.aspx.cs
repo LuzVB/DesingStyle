@@ -9,6 +9,18 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        if (Session["rol"] == null)
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+        else if (Session["rol"].ToString().Equals("2"))
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+        else if (Session["rol"].ToString().Equals("3"))
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+
     }
 }

@@ -1,109 +1,104 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/View/masterUsuarios/masterUsuarios.master" AutoEventWireup="true" CodeFile="~/Controller/masterUsuarios/cliente/Estilista.aspx.cs" Inherits="View_masterUsuarios_cliente_Estilista" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-     <style type="text/css">
-              
+     
+    <style type="text/css">
+        .auto-style8 {
+            width: 100%;
+            margin:2%;
+        }
+        .auto-style9 {
+            width: 80%;
+        }
+        .auto-style10 {
+            height: 22px;
+            font-size: 120%;
+            text-align: right;
+        }
         .auto-style11 {
-            width: 30%;
-        }
-        .auto-style12 {
-            width: 70%;
-            height: 23px;
-            text-align: center;
-        }
-        .auto-style13 {
-            width: 30%;
-            height: 23px;
-        }
-        .auto-style23 {
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            font-size: 140%;
-        }
-        .auto-style24 {
-            height: 23px;
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            font-size: 160%;
-        }
-        .auto-style25 {
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            font-size: 140%;
-            padding-left:30%;
-        }
-        .auto-style26 {
-            width: 70%;
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            font-size: 160%;
+            width: 80%;
+            height: 22px;
         }
         .img_perfil{
             object-fit:cover;
         }
-        .auto-style28 {
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            padding-left:17%;
-             height: 42px;
-         }
-        .auto-style29 {
-            width: 70%;
-            
+        .auto-style12 {
+            text-align: center;
         }
-         .auto-style1 {
-          width: 70%;
-          font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-          padding-left:17%;
-         }
-         </style>
+        .auto-style13 {
+            width: 80%;
+            text-align: left;
+            padding-left: 30%;
+        }
+        .auto-style14 {
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        }
+        .auto-style15 {
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            font-size: 160%;
+            text-align: center;
+        }
+        .auto-style16 {
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            font-size: 140%;
+        }
+        .auto-style17 {
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            font-size: 120%;
+        }
+    </style>
+     
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-        <table class="auto-style1">
-    <tr>
-        <td class="auto-style26">ESTILISTA</td>
-        <td class="auto-style11"><asp:ScriptManager ID="ScriptManager1" runat="server">
-            </asp:ScriptManager></td>
-    </tr>
-    <tr>
-        <td class="auto-style29">
-            <table class="auto-style1">
-                <tr>
-                    <td>Seleccione el estlista que desea ver </td>
-                </tr>
-                <tr>
-                    <td>Estilista&nbsp;&nbsp;&nbsp;&nbsp;
-                        <asp:RequiredFieldValidator ID="RFV_Estilista" runat="server" ControlToValidate="DropDownList_Estilista" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
-                        <asp:DropDownList ID="DropDownList_Estilista" runat="server">
-                        </asp:DropDownList>
-                    </td>
-                </tr>
-            </table>
-        </td>
-        <td class="auto-style11">&nbsp;</td>
-    </tr>
-    <tr>
-        <td class="auto-style12">
-            <asp:Image ID="I_PerfilEstilista" runat="server" class="img_perfil" Height="200px" Width="40%" ImageUrl="~/Imagenes/perfil/estilista1.jpg" />
-        </td>
-        <td class="auto-style13">                       
-            &nbsp;</td>
-    </tr>
-    <tr>
-        <td class="auto-style24" colspan="2">
-            <asp:Label ID="LB_nombreEstilista" runat="server" CssClass="auto-style25"></asp:Label>
-        </td>
-    </tr>
-    <tr>
-        <td class="auto-style24"><strong>BIOGRAFÍA</strong></td>
-       
-    </tr>
-    <tr>
-        <td class="auto-style28" colspan="2">
-            <asp:Label ID="L_Biografia" runat="server" Text="[L_Biografia]"></asp:Label>
-        </td>
-    </tr>
-
-    <tr>
-        <td class="auto-style23" colspan="2">&nbsp;</td>
-    </tr>
-
   
-</table>
+    <table class="auto-style8">
+        <tr>
+            <td colspan="2" class="auto-style15"><strong>ESTILISTA</strong></td>
+        </tr>
+        <tr>
+            
+            <td colspan="2" class="auto-style16">Seleccione el estlista que desea ver</td>
+        </tr>
+        <tr>
+            <td class="auto-style10"><span class="auto-style17">Estilista 
+                </span> 
+                <asp:RequiredFieldValidator ID="RFV_Estilista" runat="server" ControlToValidate="DropDownList_Estilista" ErrorMessage="(*)" ForeColor="Red" CssClass="auto-style17"></asp:RequiredFieldValidator>
+            </td>
+            <td class="auto-style11"> 
+              <asp:DropDownList ID="DropDownList_Estilista" runat="server" CssClass="auto-style17">
+              </asp:DropDownList>
+
+            </td>
+              
+        </tr>
+        <tr>
+            <td class="auto-style12" colspan="2">
+                <asp:Image ID="I_PerfilEstilista" runat="server" class="img_perfil" Height="200px" Width="50%" ImageUrl="~/Imagenes/perfil/estilista1.jpg" CssClass="auto-style14" />
+           </td>
+        </tr>
+        <tr>
+            <td class="auto-style14">&nbsp;</td>
+            <td class="auto-style13">
+                <asp:Label ID="LB_nombreEstilista" runat="server" CssClass="auto-style25" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 120%"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td class="auto-style16" colspan="2">BIOGRAFÍA</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <asp:Label ID="L_Biografia" runat="server" Text="[L_Biografia]" CssClass="auto-style17"></asp:Label>
+            </td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td class="auto-style9">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td class="auto-style9">&nbsp;</td>
+        </tr>
+    </table>
+  
 </asp:Content>
 

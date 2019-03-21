@@ -92,7 +92,7 @@
     <tr>
         <td class="auto-style35" colspan="2">
             <asp:Label ID="L_servicio" runat="server" Text="Servicio"></asp:Label>
-            &nbsp;<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+            &nbsp;<asp:RequiredFieldValidator ID="RFV_ServicioReserva" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DropDownList_servicio"></asp:RequiredFieldValidator>
             <asp:DropDownList ID="DropDownList_servicio" runat="server" Height="25px" Width="30%">
             </asp:DropDownList>
         </td>
@@ -122,7 +122,7 @@
         <td colspan="2" class="auto-style37">
             <asp:Label ID="L_Hora" runat="server" Text="Hora"></asp:Label>
 &nbsp;
-            <asp:RequiredFieldValidator ID="RFV_Hora" runat="server" ControlToValidate="DropDownList_Hora" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="RFV_Hora" runat="server" ControlToValidate="DropDownList_Hora" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_reservar"></asp:RequiredFieldValidator>
             <asp:DropDownList ID="DropDownList_Hora" runat="server" Height="25px" Width="30%">
             </asp:DropDownList>
         </td>
@@ -134,14 +134,14 @@
         <td class="auto-style36" colspan="2">
 
             <asp:Label ID="L_estilista" runat="server" CssClass="auto-style31" Text="Estilista" Width="104px"></asp:Label>
-            <asp:RequiredFieldValidator ID="RFV_Estilista" runat="server" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="RFV_Estilista" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DropDownList_Estilista" ValidationGroup="VG_reservar"></asp:RequiredFieldValidator>
             <asp:DropDownList ID="DropDownList_Estilista" runat="server" Height="25px" Width="30%">
             </asp:DropDownList>
     </tr>
     <tr>
         <td class="auto-style3">&nbsp;</td>
         <td class="auto-style11">
-            <asp:Button ID="BT_GuardarReserva" runat="server" Text="Reservar" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_cambioContraseña" CssClass="auto-style21" />
+            <asp:Button ID="BT_GuardarReserva" runat="server" Text="Reservar" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_reservar" CssClass="auto-style21" />
         </td>
     </tr>
 </table>

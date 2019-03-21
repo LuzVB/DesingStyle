@@ -9,7 +9,21 @@ public partial class View_masterUsuarios_cliente_Estilista : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        LB_nombreEstilista.Text = "Valen";
+
+        if (Session["rol"] == null)
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+        else if (Session["rol"].ToString().Equals("1"))
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+        else if (Session["rol"].ToString().Equals("2"))
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+
+        LB_nombreEstilista.Text = Session["nombre"].ToString();
         L_Biografia.Text = "manicure,pedicure etc";
     }
 }

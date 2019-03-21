@@ -97,7 +97,7 @@
        
         <tr>
             <td class="auto-style18">
-                <asp:Button ID="Bt_recuperarCuenta" runat="server" BorderColor="#0099FF" Text="Recuperar contraseña" ValidationGroup="VG_RecuperarCuenta" Height="35px" Width="50%" Font-Bold="True" CssClass="auto-style10" OnClick="Bt_GuardarContraseña_Click" />
+                <asp:Button ID="Bt_recuperarCuenta" runat="server" BorderColor="#0099FF" Text="Recuperar cuenta" ValidationGroup="VG_RecuperarCuenta" Height="35px" Width="50%" Font-Bold="True" CssClass="auto-style10" OnClick="Bt_GuardarContraseña_Click" />
             </td>
             <td >&nbsp;</td>
         </tr>

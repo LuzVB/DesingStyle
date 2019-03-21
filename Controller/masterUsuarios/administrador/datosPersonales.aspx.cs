@@ -9,6 +9,21 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        L_Bienvenida.Text = "Bienvenido " + "Nombre_Admin";
+        if (Session["rol"] == null)
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+        else if (Session["rol"].ToString().Equals("2"))
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+        else if (Session["rol"].ToString().Equals("3"))
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+       
+
+
+        L_Bienvenida.Text = "Bienvenido " + Session["nombre"];
     }
 }

@@ -9,11 +9,20 @@ public partial class View_masterUsuarios_estilista_PerfilEstilista : System.Web.
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-       
-        LB_nombreEstilista.Text = "Luz Velasquez";
+        if (Session["rol"] == null)
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+        else if (Session["rol"].ToString().Equals("1"))
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+        else if (Session["rol"].ToString().Equals("3"))
+        {
+            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+        }
+
+        LB_nombreEstilista.Text = Session["nombre"].ToString();
         
     }
-
-
-    
 }

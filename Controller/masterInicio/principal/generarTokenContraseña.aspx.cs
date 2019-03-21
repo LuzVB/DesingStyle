@@ -42,7 +42,7 @@ public partial class View_masterInicio_principal_generarTokenContraseña : Syste
         }
         else if (int.Parse(validez.Rows[0]["id"].ToString()) == -2)
         {
-            LB_RContraseñaError.Text = "Ya extsite un token, por favor verifique su correo.";
+            LB_RContraseñaError.Text = "Ya existe un token, por favor verifique su correo.";
         }
         else
         {
