@@ -16,7 +16,7 @@
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
         }
         .auto-style11 {
-           padding-left:20%;
+           /*padding-left:20%;*/
         }
         .letra {
          font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -26,9 +26,9 @@
         
     }
         .auto-style26 {
-            text-align: center;
-    }
-    </style>
+            font-size: 100%;
+        }
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <table class="auto-style1">
@@ -41,7 +41,61 @@
 
                 <div class="auto-style11">
 
-                <asp:GridView ID="GV_Estilista" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" PageSize="5" Width="80%" CssClass="auto-style14" ShowHeaderWhenEmpty="True" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">
+                <asp:GridView ID="GV_Estilista" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" PageSize="5" Width="95%" CssClass="auto-style14" ShowHeaderWhenEmpty="True" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" DataSourceID="ODS_Servicio" AutoGenerateColumns="False" DataKeyNames="id">
+                    <Columns>
+                        <asp:TemplateField HeaderText="Nombre">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("nombre") %>' CssClass="auto-style26" Width="100%"></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("nombre") %>' ></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Descripcion">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("descripcion") %>' CssClass="auto-style26" Width="100%"></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("descripcion") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Precio">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("precio") %>' CssClass="auto-style26" Width="100%"></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("precio") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Duracion">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("duracion") %>' CssClass="auto-style26" Width="100%"></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("duracion") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Estado">
+                            <EditItemTemplate>
+                                <asp:DropDownList ID="DDL_AEstado" runat="server" SelectedValue='<%# Bind("estado") %>' Width="100%">
+                                    <asp:ListItem Value="Disponible">Disponible</asp:ListItem>
+                                    <asp:ListItem Value="No disponible">No disponible</asp:ListItem>
+                                </asp:DropDownList>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label5" runat="server" Text='<%# Bind("estado") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField ShowHeader="False">
+                            <EditItemTemplate>
+                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Actualizar"></asp:LinkButton>
+                                &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancelar"></asp:LinkButton>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit" Text="Editar" Width="40%"></asp:LinkButton>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
                 <FooterStyle BackColor="White" ForeColor="#000066" />
                 <HeaderStyle BackColor="#018BDE" Font-Bold="True" ForeColor="White" />
                 <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
@@ -53,7 +107,7 @@
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
             </asp:GridView>
                 </div>
-                    <asp:ObjectDataSource ID="ODS_Servicio" runat="server" SelectMethod="mostrarservicio" TypeName="DAOServicio" UpdateMethod="modificarServicico" DeleteMethod="modificarEstado">
+                    <asp:ObjectDataSource ID="ODS_Servicio" runat="server" SelectMethod="mostrarservicio" TypeName="DAOServicio" UpdateMethod="modificarServicico2" DeleteMethod="modificarEstado">
                         <DeleteParameters>
                             <asp:Parameter Name="id" Type="Int32" />
                         </DeleteParameters>
@@ -62,6 +116,7 @@
                             <asp:Parameter Name="descripcion" Type="String" />
                             <asp:Parameter Name="precio" Type="Int32" />
                             <asp:Parameter Name="duracion" Type="String" />
+                            <asp:Parameter Name="estado" Type="String" />
                             <asp:Parameter Name="id" Type="Int32" />
                         </UpdateParameters>
                     </asp:ObjectDataSource>
@@ -87,8 +142,8 @@
                 <asp:TextBox ID="Tx_descripcionServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroServicio" ></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_descripcionServicio" runat="server" ControlToValidate="Tx_descripcionServicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroServicio" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
-                <cc1:TextBoxWatermarkExtender id="TBWEDOB_descripcionServicio" runat="server" targetcontrolid="Tx_descripcionServicio" watermarktext="Descripción" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
-                <cc1:filteredtextboxextender ID="FTBE_descripcionServicio" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" TargetControlID="Tx_descripcionServicio" InvalidChars=" ñ" />
+                <cc1:TextBoxWatermarkExtender id="TBWEDOB_descripcionServicio" runat="server" targetcontrolid="Tx_descripcionServicio" watermarktext="Descripcion" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
+                <cc1:filteredtextboxextender ID="FTBE_descripcionServicio" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" TargetControlID="Tx_descripcionServicio" InvalidChars=" ñ´" />
         </tr>
         <tr>
             <td class="auto-style8"><asp:TextBox ID="Tx_PrecioServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroServicio"></asp:TextBox>
@@ -101,8 +156,8 @@
                <asp:TextBox ID="Tx_duracionServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroServicio"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_duracionServicio" runat="server" ControlToValidate="Tx_duracionServicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroServicio" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
-                <cc1:TextBoxWatermarkExtender id="TBWEDOB_duracionServicio" runat="server" targetcontrolid="Tx_duracionServicio" watermarktext="Duración" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
-                <%--<cc1:filteredtextboxextender ID="FTBE_duracionServicio" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" TargetControlID="Tx_duracionServicio" InvalidChars=" ñ" />--%>
+                <cc1:TextBoxWatermarkExtender id="TBWEDOB_duracionServicio" runat="server" targetcontrolid="Tx_duracionServicio" watermarktext="Duracion" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
+                <cc1:filteredtextboxextender ID="FTBE_duracionServicio" runat="server" FilterType="Numbers,Custom, UppercaseLetters, LowercaseLetters" TargetControlID="Tx_duracionServicio" InvalidChars=" ñ´:" />
         </tr>
         <tr>
             <td class="auto-style8">
@@ -112,7 +167,7 @@
         </tr>
         <tr>
             <td class="auto-style8">&nbsp;</td>
-            <td class="auto-style25"><asp:ImageButton ID="IB_GuardarServicio" runat="server" Height="62px" Width="15%" ValidationGroup="registroServicio" ImageUrl="~/Imagenes/guardar.png" /></td>
+            <td class="auto-style25"><asp:ImageButton ID="IB_GuardarServicio" runat="server" Height="62px" Width="15%" ValidationGroup="registroServicio" ImageUrl="~/Imagenes/guardar.png" OnClick="IB_GuardarServicio_Click" /></td>
         </tr>
     </table>
 </asp:Content>

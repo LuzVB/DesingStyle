@@ -20,10 +20,11 @@ public partial class View_masterUsuarios_administrador_registroServicios : Syste
         servicio.Descripcion = Tx_descripcionServicio.Text;
         servicio.Precio = Int32.Parse(Tx_PrecioServicio.Text);
         servicio.Duracion = Tx_duracionServicio.Text;
-        servicio.Estado = 1;
-        servicio.Session = Session.SessionID;
+        servicio.Estado = "Disponible";
+        servicio.Session = Session["user"].ToString();
 
-        DataTable datos = new DAOServicio().registroServicio(servicio);
+        DataTable datos = new DAOServicio().registroServicio2(servicio);
+        GV_Estilista.DataBind();
         Response.Redirect("registroServicios.aspx");
     }
 
@@ -42,5 +43,10 @@ public partial class View_masterUsuarios_administrador_registroServicios : Syste
         //    ClientScriptManager cm = this.ClientScript;
         //    cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('solo Imagenes');</script>");
         //}
+    }
+
+    protected void IB_GuardarServicio_Click1(object sender, ImageClickEventArgs e)
+    {
+
     }
 }
