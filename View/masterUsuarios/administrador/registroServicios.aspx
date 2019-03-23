@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/View/masterUsuarios/masterUsuarios.master" AutoEventWireup="true" CodeFile="~/Controller/masterUsuarios/administrador/registroServicios.aspx.cs" Inherits="View_masterUsuarios_administrador_registroServicios" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/View/masterUsuarios/masterUsuarios.master" AutoEventWireup="true" CodeFile="~/Controller/masterUsuarios/administrador/registroServicios.aspx.cs" Inherits="View_masterUsuarios_administrador_registroServicios" %>
+
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %> 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
@@ -17,9 +18,15 @@
         .auto-style11 {
            padding-left:20%;
         }
+        .letra {
+         font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+        }
         .auto-style25 {
            padding-bottom:7%;
         
+    }
+        .auto-style26 {
+            text-align: center;
     }
     </style>
 </asp:Content>
@@ -46,6 +53,19 @@
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
             </asp:GridView>
                 </div>
+                    <asp:ObjectDataSource ID="ODS_Servicio" runat="server" SelectMethod="mostrarservicio" TypeName="DAOServicio" UpdateMethod="modificarServicico" DeleteMethod="modificarEstado">
+                        <DeleteParameters>
+                            <asp:Parameter Name="id" Type="Int32" />
+                        </DeleteParameters>
+                        <UpdateParameters>
+                            <asp:Parameter Name="nombre" Type="String" />
+                            <asp:Parameter Name="descripcion" Type="String" />
+                            <asp:Parameter Name="precio" Type="Int32" />
+                            <asp:Parameter Name="duracion" Type="String" />
+                            <asp:Parameter Name="id" Type="Int32" />
+                        </UpdateParameters>
+                    </asp:ObjectDataSource>
+                </div>
            
 
             </td>
@@ -63,8 +83,8 @@
             </td>
                 <cc1:TextBoxWatermarkExtender id="TBWEDOB_NombreServicio" runat="server" targetcontrolid="Tx_NombreServicio" watermarktext="Nombre" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
                 <cc1:filteredtextboxextender ID="FTBE_NombreServicio" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" TargetControlID="Tx_NombreServicio" InvalidChars=" ñ" />
-
-            <td class="auto-style9"><asp:TextBox ID="Tx_descripcionServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroServicio"></asp:TextBox>
+            <td class="auto-style9">
+                <asp:TextBox ID="Tx_descripcionServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroServicio" ></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_descripcionServicio" runat="server" ControlToValidate="Tx_descripcionServicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroServicio" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
                 <cc1:TextBoxWatermarkExtender id="TBWEDOB_descripcionServicio" runat="server" targetcontrolid="Tx_descripcionServicio" watermarktext="Descripción" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
@@ -77,7 +97,8 @@
                 <cc1:TextBoxWatermarkExtender id="TBWEDOB_PrecioServicio" runat="server" targetcontrolid="Tx_PrecioServicio" watermarktext="Precio" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
                 <cc1:filteredtextboxextender ID="FTBE_PrecioServicio" runat="server" FilterType="Numbers" TargetControlID="Tx_PrecioServicio" />
 
-           <td class="auto-style9"><asp:TextBox ID="Tx_duracionServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroServicio" TextMode="Time"></asp:TextBox>
+           <td class="auto-style9">
+               <asp:TextBox ID="Tx_duracionServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroServicio"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_duracionServicio" runat="server" ControlToValidate="Tx_duracionServicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroServicio" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
                 <cc1:TextBoxWatermarkExtender id="TBWEDOB_duracionServicio" runat="server" targetcontrolid="Tx_duracionServicio" watermarktext="Duración" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
@@ -85,9 +106,7 @@
         </tr>
         <tr>
             <td class="auto-style8">
-                <asp:DropDownList ID="DDL_EstadoServicio" runat="server" Height="25px" Width="95%">
-                </asp:DropDownList>
-                <asp:RequiredFieldValidator ID="RFV_EstadoServicio" runat="server" ControlToValidate="DDL_EstadoServicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroServicio" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                <asp:Label ID="desactivar" runat="server" Text="Label"></asp:Label>
             </td>
             <td class="auto-style9">&nbsp;</td>
         </tr>
@@ -97,4 +116,5 @@
         </tr>
     </table>
 </asp:Content>
+
 
