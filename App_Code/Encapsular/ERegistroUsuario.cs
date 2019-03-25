@@ -18,7 +18,8 @@ public class ERegistroUsuario
     private string session;
     private int estado;
     private int rol;
-
+    private int usuario;
+    private int servicio;
     public string Nombre { get => nombre; set => nombre = value; }
     public string Apellido { get => apellido; set => apellido = value; }
     public string Correo { get => correo; set => correo = value; }
@@ -29,4 +30,6 @@ public class ERegistroUsuario
     public int Estado { get => estado; set => estado = value; }
     public int Rol { get => rol; set => rol = value; }
     public int Telefono { get => telefono; set => telefono = value; }
+    public int Usuario { get => usuario; set => usuario = value; }
+    public int Servicio { get => servicio; set => servicio = value; }
 }
