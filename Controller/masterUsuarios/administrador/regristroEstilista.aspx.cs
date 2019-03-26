@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 
 public partial class View_masterUsuarios_administrador_regristroEstilista : System.Web.UI.Page
 {
@@ -32,7 +32,7 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
         estilista.Cedula = Int32.Parse(Tx_CodigoEstilista.Text);
         estilista.Nombre = Tx_NombreEstilista.Text;
         estilista.Apellido= Tx_ApellidoEstilista.Text;
-        estilista.Telefono =Int32.Parse(Tx_TelefonoEstilista.Text);
+        estilista.Telefono2 =Tx_TelefonoEstilista.Text;
         estilista.Correo = Tx_CorreoEstilista.Text;
         estilista.Contraseña = Tx_ContraseñaEstilista.Text;
         estilista.Estado = 1;
@@ -51,6 +51,19 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
 
         GV_Estilista.DataBind();
 
+
+        ERegistroHorario datoHorario = new ERegistroHorario();
+        DAORegistroEstilista guardarHorario = new DAORegistroEstilista();
+        DataTable horario = guardarHorario.mostrarHorario();
+        for (int i = 0; i < horario.Rows.Count; i++)
+        {
+            datoHorario.Fechaini = DateTime.Parse(horario.Rows[i]["hora_inicio"].ToString());
+            datoHorario.Fechafin = DateTime.Parse(horario.Rows[i]["hora_fin"].ToString());
+            datoHorario.Estado = true;
+            datoHorario.Idestilista = int.Parse(Tx_CodigoEstilista.Text);
+            guardarHorario.registroHorario(datoHorario);
+        }
+
         Response.Redirect("regristroEstilista.aspx");
     }
 
@@ -67,8 +80,19 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
         Response.Redirect("regristroEstilista.aspx");
     }
 
-    protected void Tx_NombreEstilista_TextChanged(object sender, EventArgs e)
-    {
+    //protected void Tx_NombreEstilista_TextChanged(object sender, EventArgs e)
+    //{
 
-    }
+    //    //Class1 cs = new Class1();
+    //    //DAO_Prueba p = new DAO_Prueba();
+    //    //DataTable horario = p.mostrarHorario();
+    //    //for(int i=0; i<horario.Rows.Count; i++){
+    //    //    cs.Fechaini = DateTime.Parse(horario.Rows[i]["hora_inicio"].ToString());
+    //    //    cs.Fechafin = DateTime.Parse(horario.Rows[i]["hora_fin"].ToString());
+    //    //    cs.Estado = true;
+    //    //    cs.Idestilista = int.Parse(Tx_CodigoEstilista.Text);
+    //    //    p.registroCliente(cs);
+    //    //}
+
+    //}
 }

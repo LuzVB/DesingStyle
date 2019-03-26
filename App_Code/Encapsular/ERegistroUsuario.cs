@@ -15,11 +15,14 @@ public class ERegistroUsuario
     private DateTime fecha_nacimiento;
     private string contraseña;
     private int telefono;
+    private string telefono2;
     private string session;
     private int estado;
     private int rol;
     private int usuario;
     private int servicio;
+
+
     public string Nombre { get => nombre; set => nombre = value; }
     public string Apellido { get => apellido; set => apellido = value; }
     public string Correo { get => correo; set => correo = value; }
@@ -32,4 +35,5 @@ public class ERegistroUsuario
     public int Telefono { get => telefono; set => telefono = value; }
     public int Usuario { get => usuario; set => usuario = value; }
     public int Servicio { get => servicio; set => servicio = value; }
+    public string Telefono2 { get => telefono2; set => telefono2 = value; }
 }

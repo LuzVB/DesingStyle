@@ -39,12 +39,8 @@
             padding-left:17%;
             height: 215px;
         }
-        .auto-style31 {
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            font-size: 100%;
-        }
         .auto-style32 {
-            width: 70%;
+            width: 36%;
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 160%;
             height: 77px;
@@ -71,10 +67,27 @@
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 160%;
         }
+        .auto-style39 {
+            height: 41px;
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            font-size: 160%;
+            width: 36%;
+            text-align: left;
+        }
+        .auto-style40 {
+            width: 36%
+        }
+        .auto-style41 {
+            width: 100%;
+            margin-right: 0px;
+        }
+        .auto-style42 {
+            font-size: 70%;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-     <table class="auto-style1">
+     <table class="auto-style41">
     <tr>
         <td class="auto-style32">RESERVAR CITA</td>
         <td class="auto-style33"><asp:ScriptManager ID="ScriptManager1" runat="server">
@@ -92,9 +105,36 @@
     <tr>
         <td class="auto-style35" colspan="2">
             <asp:Label ID="L_servicio" runat="server" Text="Servicio"></asp:Label>
-            &nbsp;<asp:RequiredFieldValidator ID="RFV_ServicioReserva" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DropDownList_servicio"></asp:RequiredFieldValidator>
-            <asp:DropDownList ID="DropDownList_servicio" runat="server" Height="25px" Width="30%">
+            &nbsp;<asp:RequiredFieldValidator ID="RFV_ServicioReserva" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DDL_servicio"></asp:RequiredFieldValidator>
+            <asp:DropDownList ID="DDL_servicio" runat="server" Height="25px" Width="30%" DataSourceID="ODS_servicio" DataTextField="nombre_servicio" DataValueField="id" CssClass="auto-style42" AutoPostBack="True">
             </asp:DropDownList>
+            <asp:ObjectDataSource ID="ODS_servicio" runat="server" SelectMethod="mostrarServicio" TypeName="DAO_Reserva"></asp:ObjectDataSource>
+        </td>
+    </tr>
+    <tr>
+        <td class="auto-style23" colspan="2">Seleccione el estilista</td>
+    </tr>
+    <tr>
+        <td class="auto-style39" >
+            Estilista
+            <asp:RequiredFieldValidator ID="RFV_Estilista" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DropDownList_Estilista" ValidationGroup="VG_reservar"></asp:RequiredFieldValidator>
+          
+        </td>
+        <td class="auto-style36" >
+              <asp:UpdatePanel ID="UP_Estilista" runat="server">
+                <ContentTemplate>
+                    <asp:DropDownList ID="DropDownList_Estilista" runat="server" DataSourceID="ODS_luz" DataTextField="nombre_estilista" DataValueField="id" Height="25px" Width="70%" CssClass="auto-style42">
+                    </asp:DropDownList>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="DDL_servicio" EventName="SelectedIndexChanged" />
+                </Triggers>
+            </asp:UpdatePanel>
+            <asp:ObjectDataSource ID="ODS_luz" runat="server" SelectMethod="mostrarEstilistas" TypeName="DAO_Reserva">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="DDL_servicio" DefaultValue="id" Name="id_servicio" PropertyName="SelectedValue" Type="Int32" />
+                </SelectParameters>
+            </asp:ObjectDataSource>
         </td>
     </tr>
     <tr>
@@ -102,46 +142,59 @@
     </tr>
     <tr>
         <td class="auto-style28" colspan="2">
-            <asp:Calendar ID="Calendar1" runat="server" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="#003399" Height="200px" Width="220px">
-                <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
-                <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
-                <OtherMonthDayStyle ForeColor="#999999" />
-                <SelectedDayStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
-                <SelectorStyle BackColor="#99CCCC" ForeColor="#336666" />
-                <TitleStyle BackColor="#003399" BorderColor="#3366CC" BorderWidth="1px" Font-Bold="True" Font-Size="10pt" ForeColor="#CCCCFF" Height="25px" />
-                <TodayDayStyle BackColor="#99CCCC" ForeColor="White" />
-                <WeekendDayStyle BackColor="#CCCCFF" />
-            </asp:Calendar>
+            <asp:UpdatePanel ID="UP_calendario" runat="server">
+                <ContentTemplate>
+                    <asp:Calendar ID="C_Reserva" runat="server" SelectedDate="03/25/2019 14:22:28">
+                        <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
+                        <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
+                        <OtherMonthDayStyle ForeColor="#999999" />
+                        <SelectedDayStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
+                        <SelectorStyle BackColor="#99CCCC" ForeColor="#336666" />
+                        <TitleStyle BackColor="#003399" BorderColor="#3366CC" BorderWidth="1px" Font-Bold="True" Font-Size="10pt" ForeColor="#CCCCFF" Height="25px" />
+                        <TodayDayStyle BackColor="#99CCCC" ForeColor="White" />
+                        <WeekendDayStyle BackColor="#CCCCFF" />
+                    </asp:Calendar>
+                </ContentTemplate>
+                
+           </asp:UpdatePanel>
         </td>
     </tr>
     <tr>
         <td class="auto-style36" colspan="2">
             Seleccione la hora que quiere reservar</td>
     </tr>
-    <tr>
-        <td colspan="2" class="auto-style37">
-            <asp:Label ID="L_Hora" runat="server" Text="Hora"></asp:Label>
-&nbsp;
-            <asp:RequiredFieldValidator ID="RFV_Hora" runat="server" ControlToValidate="DropDownList_Hora" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_reservar"></asp:RequiredFieldValidator>
-            <asp:DropDownList ID="DropDownList_Hora" runat="server" Height="25px" Width="30%">
-            </asp:DropDownList>
-        </td>
-    </tr>
-    <tr>
-        <td class="auto-style23" colspan="2">Seleccione el estilista</td>
-    </tr>
-    <tr>
-        <td class="auto-style36" colspan="2">
 
-            <asp:Label ID="L_estilista" runat="server" CssClass="auto-style31" Text="Estilista" Width="104px"></asp:Label>
-            <asp:RequiredFieldValidator ID="RFV_Estilista" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DropDownList_Estilista" ValidationGroup="VG_reservar"></asp:RequiredFieldValidator>
-            <asp:DropDownList ID="DropDownList_Estilista" runat="server" Height="25px" Width="30%">
-            </asp:DropDownList>
-    </tr>
     <tr>
-        <td class="auto-style3">&nbsp;</td>
+        <td class="auto-style37">
+           Hora
+            <asp:RequiredFieldValidator ID="RFV_Hora" runat="server" ControlToValidate="DDL_Hora" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_reservar"></asp:RequiredFieldValidator>
+           
+        </td>
+        <td class="auto-style36" >
+             <asp:UpdatePanel ID="UP_Hora" runat="server">
+                <ContentTemplate>
+                    <asp:DropDownList ID="DDL_Hora" runat="server" CssClass="auto-style42" DataSourceID="ODS_PruebaHorarios" DataTextField="horario_estilista" DataValueField="id" Height="25px" Width="70%">
+                    </asp:DropDownList>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="C_Reserva" EventName="SelectionChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="DropDownList_Estilista" EventName="SelectedIndexChanged" />
+                </Triggers>
+            </asp:UpdatePanel>
+            <asp:ObjectDataSource ID="ODS_PruebaHorarios" runat="server" SelectMethod="mostrarHorarios" TypeName="DAO_Reserva">
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="DropDownList_Estilista" DefaultValue="id" Name="id_estilista" PropertyName="SelectedValue" Type="Int32" />
+                    <asp:ControlParameter ControlID="C_Reserva" DefaultValue="25/03/2019 2:22 p. m." Name="hora_inicio" PropertyName="SelectedDate" Type="String" />
+                </SelectParameters>
+            </asp:ObjectDataSource>
+        </td>
+
+    </tr>
+    
+    <tr>
+        <td class="auto-style40">&nbsp;</td>
         <td class="auto-style11">
-            <asp:Button ID="BT_GuardarReserva" runat="server" Text="Reservar" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_reservar" CssClass="auto-style21" />
+            <asp:Button ID="BT_GuardarReserva" runat="server" Text="Reservar" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_reservar" CssClass="auto-style21" OnClick="BT_GuardarReserva_Click" />
         </td>
     </tr>
 </table>

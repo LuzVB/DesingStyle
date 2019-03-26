@@ -39,6 +39,9 @@
             padding-top: 1%;
             color: #000000;
         }
+        .auto-style17 {
+            margin-bottom: 0px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -149,7 +152,7 @@
         </td>
         <cc1:TextBoxWatermarkExtender id="TBWEDOB_codigoEstilista" runat="server" targetcontrolid="Tx_CodigoEstilista" watermarktext="Cedula" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
         <cc1:filteredtextboxextender ID="FTBE_CodigoEstilista" runat="server" FilterType="Numbers" TargetControlID="Tx_CodigoEstilista" />
-        <td class="auto-style9"><asp:TextBox ID="Tx_NombreEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista" OnTextChanged="Tx_NombreEstilista_TextChanged"></asp:TextBox>
+        <td class="auto-style9"><asp:TextBox ID="Tx_NombreEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista" ></asp:TextBox>
             <asp:RequiredFieldValidator ID="RFV_INombreEstilista" runat="server" ControlToValidate="Tx_NombreEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista" SetFocusOnError="True"></asp:RequiredFieldValidator>
         </td>
         <cc1:TextBoxWatermarkExtender id="TBWEDOB_NombreEstilista" runat="server" targetcontrolid="Tx_NombreEstilista" watermarktext="Nombre" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
@@ -171,14 +174,15 @@
             <asp:RequiredFieldValidator ID="RFV_ICorreoEstilista" runat="server" ControlToValidate="Tx_CorreoEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista" SetFocusOnError="True"></asp:RequiredFieldValidator>
         </td>
          <cc1:TextBoxWatermarkExtender id="TBWEDOB_Tx_CorreoEstilista" runat="server" targetcontrolid="Tx_CorreoEstilista" watermarktext="Correo" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
-         <cc1:filteredtextboxextender ID="FTBE_CorreoEstilista" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@" TargetControlID="Tx_CorreoEstilista" />
+         <%--<cc1:filteredtextboxextender ID="FTBE_CorreoEstilista" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@." TargetControlID="Tx_CorreoEstilista" />--%>
         <td class="auto-style10">
-            <asp:RequiredFieldValidator ID="RFV_servicio" runat="server" ControlToValidate="DDL_servicio" ErrorMessage="Registre el servicio (*)" ForeColor="#CC0000" InitialValue="&quot; &quot;"></asp:RequiredFieldValidator>
+            
             <br />
             <asp:DropDownList ID="DDL_servicio" runat="server" DataSourceID="ODS_Servicio" DataTextField="nombre" DataValueField="id" Height="25px" Width="95%" ValidationGroup="registroEstilista">
-            </asp:DropDownList>
+            </asp:DropDownList><asp:RequiredFieldValidator ID="RFV_servicio" runat="server" ControlToValidate="DDL_servicio" ErrorMessage="Registre el servicio (*)" ForeColor="#CC0000" InitialValue="&quot; &quot;"></asp:RequiredFieldValidator>
             <asp:ObjectDataSource ID="ODS_Servicio" runat="server" SelectMethod="obtenerServicio" TypeName="DAORegistroEstilista"></asp:ObjectDataSource>
-        </td>
+        <%-- <cc1:filteredtextboxextender ID="FTBE_CorreoEstilista" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_CorreoEstilista" />--%>
+       
     </tr>
     <tr>
         <td class="auto-style8"><asp:TextBox ID="Tx_ContraseñaEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista"></asp:TextBox>
@@ -187,7 +191,7 @@
          <cc1:TextBoxWatermarkExtender id="TBWEDOB_Tx_ContraseñaEstilista" runat="server" targetcontrolid="Tx_ContraseñaEstilista" watermarktext="Contraseña" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
         <cc1:filteredtextboxextender ID="FTBE_ContraseñaEstilista" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_ContraseñaEstilista" />
         <td class="auto-style9">&nbsp;</td>
-        <td class="auto-style10"><asp:ImageButton ID="IB_GuardarEstilista" runat="server" Height="50px" Width="15%" ValidationGroup="registroEstilista" ImageUrl="~/Imagenes/guardar.png" OnClick="IB_GuardarEstilista_Click" />
+        <td class="auto-style10"><asp:ImageButton ID="IB_GuardarEstilista" runat="server" Height="50px" Width="15%" ValidationGroup="registroEstilista" ImageUrl="~/Imagenes/guardar.png" OnClick="IB_GuardarEstilista_Click" CssClass="auto-style17" />
         </td>
     </tr>
     <tr>

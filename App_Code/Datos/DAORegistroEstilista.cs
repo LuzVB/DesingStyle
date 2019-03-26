@@ -28,7 +28,7 @@ public class DAORegistroEstilista
             dataAdapter.SelectCommand.Parameters.Add("_correo", NpgsqlDbType.Text).Value = estilista.Correo;
             dataAdapter.SelectCommand.Parameters.Add("_contrasena", NpgsqlDbType.Text).Value = estilista.Contraseña;
             dataAdapter.SelectCommand.Parameters.Add("_fecha_nacimiento", NpgsqlDbType.Date).Value = estilista.Fecha_nacimiento;
-            dataAdapter.SelectCommand.Parameters.Add("_telefono", NpgsqlDbType.Integer).Value = estilista.Telefono;
+            dataAdapter.SelectCommand.Parameters.Add("_telefono", NpgsqlDbType.Bigint).Value = Int64.Parse(estilista.Telefono2);
             dataAdapter.SelectCommand.Parameters.Add("_estado", NpgsqlDbType.Integer).Value = estilista.Estado;
             dataAdapter.SelectCommand.Parameters.Add("_id_rol", NpgsqlDbType.Integer).Value = estilista.Rol;
             dataAdapter.SelectCommand.Parameters.Add("_session", NpgsqlDbType.Text).Value = estilista.Session;
@@ -36,9 +36,10 @@ public class DAORegistroEstilista
             conection.Open();
             dataAdapter.Fill(insertarEstilista);
         }
-        catch (Npgsql.PostgresException e) {
+        catch (Npgsql.PostgresException e)
+        {
 
-            MessageBox.Show("El estilista ya se encuentra registrado con ese servicio");
+            //MessageBox.Show("El estilista ya se encuentra registrado con ese servicio");
         }
         catch (Exception Ex)
         {
@@ -72,7 +73,7 @@ public class DAORegistroEstilista
         }
         //catch (Npgsql.PostgresException e)
         //{
-       
+
         //    MessageBox.Show("El estilista ya se encuentra registrado con ese servicio");
         //}
         catch (Exception Ex)
@@ -160,7 +161,7 @@ public class DAORegistroEstilista
             dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = id;
             dataAdapter.SelectCommand.Parameters.Add("_nombre", NpgsqlDbType.Text).Value = nombre;
             dataAdapter.SelectCommand.Parameters.Add("_apellido", NpgsqlDbType.Text).Value = apellido;
-            dataAdapter.SelectCommand.Parameters.Add("_telefono", NpgsqlDbType.Integer).Value = telefono;
+            dataAdapter.SelectCommand.Parameters.Add("_telefono", NpgsqlDbType.Bigint).Value = telefono;
             dataAdapter.SelectCommand.Parameters.Add("_correo", NpgsqlDbType.Text).Value = correo;
             dataAdapter.SelectCommand.Parameters.Add("_contrasena", NpgsqlDbType.Text).Value = contrasena;
             dataAdapter.SelectCommand.Parameters.Add("_estado", NpgsqlDbType.Integer).Value =Int32.Parse(estado);
@@ -209,5 +210,64 @@ public class DAORegistroEstilista
         return Usuario;
     }
 
-   
+    public DataTable mostrarHorario()
+    {
+        DataTable horario = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horario4", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(horario);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return horario;
+    }
+
+    public DataTable registroHorario(ERegistroHorario cs)//los parametros se deben llamar igual como en la BD 
+    {
+        DataTable insertarHorario = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.insert_horario", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = cs.Idestilista;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_inicio", NpgsqlDbType.Timestamp).Value = cs.Fechaini;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_final", NpgsqlDbType.Timestamp).Value = cs.Fechafin;
+            dataAdapter.SelectCommand.Parameters.Add("_estado", NpgsqlDbType.Boolean).Value = cs.Estado;
+
+            conection.Open();
+            dataAdapter.Fill(insertarHorario);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return insertarHorario;
+    }
+
+
+
 }
