@@ -69,6 +69,17 @@
             <td class="auto-style10">&nbsp;</td>
         </tr>
         <tr>
+            <td>
+                <asp:Panel ID="P_Alerta" runat="server" Visible="False">
+                    <div class="alert alert-warning" role="alert">
+                        <asp:Label ID="L_Alerta" runat="server">
+                        </asp:Label>
+                    </div>
+                </asp:Panel>
+            </td>
+        </tr>
+        <tr>
+            
             <td colspan="2">
                 <asp:FormView ID="FV_datosAdmin" runat="server"  Width="100%" DataSourceID="ODS_Admin">
                 <ItemTemplate>
@@ -107,7 +118,7 @@
         
         <tr>
             <td class="auto-style9">&nbsp;</td>
-            <td class="auto-style10"><asp:Button ID="BT_GuardarAdm" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_DatosPersonales " /></td>
+            <td class="auto-style10"><asp:Button ID="BT_GuardarAdm" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_DatosPersonales " OnClick="BT_GuardarAdm_Click" /></td>
         </tr>
         <tr>
             <td class="auto-style16"><strong>CAMBIAR CONTRASEÑA</strong></td>
@@ -128,13 +139,17 @@
         </tr>
         <tr>
             <td class="auto-style9">
+
+                <asp:Label ID="LB_ErrorContraseña" runat="server" ForeColor="Red" CssClass="auto-style22"></asp:Label>
+
+            </td>
+            <td class="auto-style10"><asp:Button ID="BT_GuardarContraAdm" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_AContraseña" OnClick="BT_GuardarContraAdm_Click" /></td>
+        </tr>
+        <tr>
+            <td  class="footerDatos"colspan="2">
                 <asp:ScriptManager ID="ScriptManager1" runat="server">
                 </asp:ScriptManager>
             </td>
-            <td class="auto-style10"><asp:Button ID="BT_GuardarContraAdm" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_AContraseña" /></td>
-        </tr>
-        <tr>
-            <td  class="footerDatos"colspan="2">&nbsp;</td>
         </tr>
     </table>
     

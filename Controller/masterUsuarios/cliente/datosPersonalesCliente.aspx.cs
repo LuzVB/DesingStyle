@@ -32,65 +32,54 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
         apellido = datosCliente.Rows[0]["apellido"].ToString();
         L_Bienvenida.Text = ("HOLA " + nombre + " " + apellido).ToUpper();
 
-        //this.RegisterStartupScript("mensaje", "<script type='text/javascript'>function Confirm(){ if (Page_ClientValidate()){ var confirm_value = document.createElement('INPUT');confirm_value.type = 'hidden';if (confirm('Data has been Added.Do you wish to Continue ? ')){ confirm_value.value = 'Yes';}else{ confirm_value.value = 'No';}document.forms[0].appendChild(confirm_value);}}</script>");
-        ////L_Bienvenida.Text = Application["visitor"].ToString();
-
-        ////function Confirm()
-        ////{
-        ////    if (Page_ClientValidate())
-        ////    {
-        ////        var confirm_value = document.createElement("INPUT");
-        ////        confirm_value.type = "hidden";
-        ////        confirm_value.name = "confirm_value";
-        ////        if (confirm("Data has been Added. Do you wish to Continue ?"))
-        ////        {
-        ////            confirm_value.value = "Yes";
-        ////        }
-        ////        else
-        ////        {
-        ////            confirm_value.value = "No";
-        ////        }
-        ////        document.forms[0].appendChild(confirm_value);
-        ////    }
-        ////}
-
-        //if (Application["visitor"].ToString() == "0")
-        //{
-        //    //contador = 1;
-
-        //    telefono = datosCliente.Rows[0]["telefono"].ToString();
-        //    correo = datosCliente.Rows[0]["correo"].ToString();
-
-
-        //    Tx_ClienteNombre.Text = nombre;
-        //    Tx_ClienteApellido.Text = apellido;
-        //    Tx_ClienteTelefono.Text = telefono;
-        //    Tx_ClienteCorreo.Text = correo;
-
-        //    Application["visitor"] = 1;
-
-        //}
-
+        
 
     }
 
     protected void BT_GuardarCliente_Click(object sender, EventArgs e)
     {
-        string _nombre, _apellido, _telefono, _correo;
-        int _id;
-        
-        _id = int.Parse(Session["user_id"].ToString());
-        _nombre = ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteNombre")).Text;
-        _apellido = ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteApellido")).Text;
-        _telefono = ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteTelefono")).Text;
-        _correo = ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteCorreo")).Text;
 
-        DAOCliente guardarCambios = new DAOCliente();
-        guardarCambios.modificarCliente(_id, _nombre, _apellido, _telefono, _correo, Session["user"].ToString());
+        ECliente cliente = new ECliente();
+        int error = 0;
 
+        cliente.Id = int.Parse(Session["user_id"].ToString());
+        cliente.Nombre = ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteNombre")).Text;
+        cliente.Apellido = ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteApellido")).Text;
+        cliente.Telefono = Int64.Parse(((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteTelefono")).Text);
+        cliente.Correo = ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteCorreo")).Text;
+        cliente.Session = Session["user"].ToString();
 
-        Response.Redirect("~/View/masterUsuarios/cliente/datosPersonalesCliente.aspx");
-        
+        DataTable contarCorreo = new DAOCliente().contarCorreos(cliente);
+        DataTable datosAdmin = new DAOCliente().mostrarCliente(int.Parse(Session["user_id"].ToString()));
+
+        if (datosAdmin.Rows[0]["correo"].ToString() == cliente.Correo)
+        {
+            error = 0;
+            P_Alerta.Visible = false;
+        }
+        else if (contarCorreo.Rows[0]["user_correo"].Equals("1"))
+        {
+            error = 0;
+            P_Alerta.Visible = false;
+        }
+        else
+        {
+            L_Alerta.Text = "El correo ya existe";
+            P_Alerta.Visible = true;
+
+            ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteCorreo")).Text = datosAdmin.Rows[0]["correo"].ToString();
+
+            error = 1;
+        }
+
+        if (error == 0)
+        {
+            DAOCliente guardarCambios = new DAOCliente();
+            guardarCambios.modificarCliente(cliente);
+
+            Response.Redirect("~/View/masterUsuarios/cliente/datosPersonalesCliente.aspx");
+        }
+
     }
 
 

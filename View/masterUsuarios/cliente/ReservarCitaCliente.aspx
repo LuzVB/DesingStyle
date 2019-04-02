@@ -88,6 +88,11 @@
         .auto-style43 {
             color: #000000;
         }
+        .modalBackground{
+            background-color: black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -202,7 +207,7 @@
         </td>
     </tr>
 </table>
-    <cc1:modalpopupextender ID="MPE_confirmarReserva" runat="server" PopupControlID="P_confirmarReserva" CancelControlID="BT_Cancelar" TargetControlID="L_Target"></cc1:modalpopupextender>
+    <cc1:modalpopupextender ID="MPE_confirmarReserva" runat="server" PopupControlID="P_confirmarReserva" CancelControlID="BT_Cancelar" TargetControlID="L_Target" BackgroundCssClass="modalBackground"></cc1:modalpopupextender>
     <asp:Label ID="L_Target" runat="server" Text=""></asp:Label>
     <asp:Panel ID="P_confirmarReserva" runat="server" Width="40%">
         <div class="alert alert-info" role="alert" style=" width:100% " >

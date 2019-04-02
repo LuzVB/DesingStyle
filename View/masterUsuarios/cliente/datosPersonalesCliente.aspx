@@ -65,28 +65,12 @@
             font-size: 90%;
         }
 
-        /*.modal .modal-header {
-          border-bottom: none;
-          position: relative;
+        .modalBackground{
+            background-color: black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
         }
-        .modal .modal-header .btn {
-          position: absolute;
-          top: 0;
-          right: 0;
-          margin-top: 0;
-          border-top-left-radius: 0;
-          border-bottom-right-radius: 0;
-        }
-        .modal .modal-footer {
-          border-top: none;
-          padding: 0;
-        }
-        .modal .modal-footer .btn-group > .btn:first-child {
-          border-bottom-left-radius: 0;
-        }
-        .modal .modal-footer .btn-group > .btn:last-child {
-          border-top-right-radius: 0;
-        }*/
+
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -131,18 +115,26 @@
                 </strong>
             </td>
         </tr>
-        
-
-       
+        <tr>
+            <td class="auto-style18"><strong><span class="auto-style17">DATOS PERSONALES</span></strong></td>
+            <td class="auto-style20">&nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                <asp:Panel ID="P_Alerta" runat="server" Visible="False">
+                    <div class="alert alert-warning" role="alert">
+                        <asp:Label ID="L_Alerta" runat="server">
+                        </asp:Label>
+                    </div>
+                </asp:Panel>
+            </td>
+        </tr>
         <tr>
             <td colspan="2">
                 <asp:FormView ID="FV_MostrarCliente" runat="server" DataSourceID="ODS_mostrarCliente" Width="100%">
                     <ItemTemplate>
                         <table class="auto-style1">
-                           <tr>
-                                <td class="auto-style18"><strong><span class="auto-style17">DATOS PERSONALES</span></strong></td>
-                                <td class="auto-style20">&nbsp;</td>
-                              </tr>
+                           
                               <tr>
                                 <td class="auto-style12">Nombre</td>
                                 <td class="auto-style12">Apellido</td>
@@ -245,7 +237,7 @@
         </tr>
     </table>
 
-    <cc1:ModalPopupExtender ID="MPE_EliminarCuenta" runat="server" PopupControlID="P_eliminarCuenta" CancelControlID="BT_Cancelar" TargetControlID="L_Target"></cc1:ModalPopupExtender>
+    <cc1:ModalPopupExtender ID="MPE_EliminarCuenta" runat="server" PopupControlID="P_eliminarCuenta" CancelControlID="BT_Cancelar" TargetControlID="L_Target" BackgroundCssClass="modalBackground"></cc1:ModalPopupExtender>
     <asp:Label ID="L_Target" runat="server" Text=""></asp:Label>
     <asp:Panel ID="P_eliminarCuenta" runat="server">
         <div class="alert alert-primary" role="alert" style=" width: 80% " >

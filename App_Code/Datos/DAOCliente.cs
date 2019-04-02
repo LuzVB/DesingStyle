@@ -47,24 +47,20 @@ public class DAOCliente
         }
         return mostrarCliente;
     }
-    public DataTable modificarCliente(int id, string nombre, string apellido, string telefono, string correo , string session)//los parametros se deben llamar igual como en la BD 
+
+    public DataTable contarCorreos(ECliente cliente)
     {
-        DataTable modificarCliente = new DataTable();
+        DataTable usuario = new DataTable();
         NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
-        //Session = Session.SessionID;
+
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_actualizar_cliente2", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_contarcorreo", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = id;
-            dataAdapter.SelectCommand.Parameters.Add("_nombre", NpgsqlDbType.Text).Value = nombre;
-            dataAdapter.SelectCommand.Parameters.Add("_apellido", NpgsqlDbType.Text).Value = apellido;
-            dataAdapter.SelectCommand.Parameters.Add("_telefono", NpgsqlDbType.Bigint).Value = Int64.Parse(telefono);
-            dataAdapter.SelectCommand.Parameters.Add("_correo", NpgsqlDbType.Text).Value = correo;
-            dataAdapter.SelectCommand.Parameters.Add("_session", NpgsqlDbType.Text).Value = session;
+            dataAdapter.SelectCommand.Parameters.Add("_correo", NpgsqlDbType.Text).Value = cliente.Correo;
 
             conection.Open();
-            dataAdapter.Fill(modificarCliente);
+            dataAdapter.Fill(usuario);
         }
         catch (Exception Ex)
         {
@@ -77,7 +73,40 @@ public class DAOCliente
                 conection.Close();
             }
         }
-        return modificarCliente;
+        return usuario;
+    }
+
+    public DataTable modificarCliente(ECliente cliente)//los parametros se deben llamar igual como en la BD 
+    {
+        DataTable modCliente = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+        //Session = Session.SessionID;
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_actualizar_cliente2", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = cliente.Id;
+            dataAdapter.SelectCommand.Parameters.Add("_nombre", NpgsqlDbType.Text).Value = cliente.Nombre;
+            dataAdapter.SelectCommand.Parameters.Add("_apellido", NpgsqlDbType.Text).Value = cliente.Apellido;
+            dataAdapter.SelectCommand.Parameters.Add("_telefono", NpgsqlDbType.Bigint).Value = cliente.Telefono;
+            dataAdapter.SelectCommand.Parameters.Add("_correo", NpgsqlDbType.Text).Value = cliente.Correo;
+            dataAdapter.SelectCommand.Parameters.Add("_session", NpgsqlDbType.Text).Value = cliente.Session;
+
+            conection.Open();
+            dataAdapter.Fill(modCliente);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return modCliente;
     }
 
     public DataTable actualizarContrasena(EUsuario datos)
