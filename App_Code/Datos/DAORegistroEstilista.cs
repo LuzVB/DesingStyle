@@ -217,7 +217,8 @@ public class DAORegistroEstilista
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horario4", conection);
+            //NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horario4", conection);//primera prueba 
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horarioprueba", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
             conection.Open();
@@ -244,7 +245,8 @@ public class DAORegistroEstilista
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.insert_horario", conection);
+           // NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.insert_horario", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_insert_horario", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
             dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = cs.Idestilista;
             dataAdapter.SelectCommand.Parameters.Add("_hora_inicio", NpgsqlDbType.Timestamp).Value = cs.Fechaini;

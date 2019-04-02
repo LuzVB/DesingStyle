@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/View/masterUsuarios/masterUsuarios.master" AutoEventWireup="true" CodeFile="~/Controller/masterUsuarios/cliente/ReservarCitaCliente.aspx.cs" Inherits="View_masterUsuarios_cliente_ReservarCitaCliente" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">
@@ -84,6 +85,9 @@
         .auto-style42 {
             font-size: 70%;
         }
+        .auto-style43 {
+            color: #000000;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -117,13 +121,13 @@
     <tr>
         <td class="auto-style39" >
             Estilista
-            <asp:RequiredFieldValidator ID="RFV_Estilista" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DropDownList_Estilista" ValidationGroup="VG_reservar"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="RFV_Estilista" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DDL_Estilista" ValidationGroup="VG_reservar"></asp:RequiredFieldValidator>
           
         </td>
         <td class="auto-style36" >
               <asp:UpdatePanel ID="UP_Estilista" runat="server">
                 <ContentTemplate>
-                    <asp:DropDownList ID="DropDownList_Estilista" runat="server" DataSourceID="ODS_luz" DataTextField="nombre_estilista" DataValueField="id" Height="25px" Width="70%" CssClass="auto-style42">
+                    <asp:DropDownList ID="DDL_Estilista" runat="server" DataSourceID="ODS_luz" DataTextField="nombre_estilista" DataValueField="id" Height="25px" Width="70%" CssClass="auto-style42">
                     </asp:DropDownList>
                 </ContentTemplate>
                 <Triggers>
@@ -144,7 +148,7 @@
         <td class="auto-style28" colspan="2">
             <asp:UpdatePanel ID="UP_calendario" runat="server">
                 <ContentTemplate>
-                    <asp:Calendar ID="C_Reserva" runat="server" SelectedDate="03/25/2019 14:22:28">
+                    <asp:Calendar ID="C_Reserva" runat="server">
                         <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
                         <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
                         <OtherMonthDayStyle ForeColor="#999999" />
@@ -178,13 +182,13 @@
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="C_Reserva" EventName="SelectionChanged" />
-                    <asp:AsyncPostBackTrigger ControlID="DropDownList_Estilista" EventName="SelectedIndexChanged" />
+                    <asp:AsyncPostBackTrigger ControlID="DDL_Estilista" EventName="SelectedIndexChanged" />
                 </Triggers>
             </asp:UpdatePanel>
             <asp:ObjectDataSource ID="ODS_PruebaHorarios" runat="server" SelectMethod="mostrarHorarios" TypeName="DAO_Reserva">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DropDownList_Estilista" DefaultValue="id" Name="id_estilista" PropertyName="SelectedValue" Type="Int32" />
-                    <asp:ControlParameter ControlID="C_Reserva" DefaultValue="25/03/2019 2:22 p. m." Name="hora_inicio" PropertyName="SelectedDate" Type="String" />
+                    <asp:ControlParameter ControlID="DDL_Estilista" DefaultValue="id" Name="id_estilista" PropertyName="SelectedValue" Type="Int32" />
+                    <asp:ControlParameter ControlID="C_Reserva" DefaultValue="1" Name="hora_inicio" PropertyName="SelectedDate" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
         </td>
@@ -198,5 +202,29 @@
         </td>
     </tr>
 </table>
+    <cc1:modalpopupextender ID="MPE_confirmarReserva" runat="server" PopupControlID="P_confirmarReserva" CancelControlID="BT_Cancelar" TargetControlID="L_Target"></cc1:modalpopupextender>
+    <asp:Label ID="L_Target" runat="server" Text=""></asp:Label>
+    <asp:Panel ID="P_confirmarReserva" runat="server" Width="40%">
+        <div class="alert alert-info" role="alert" style=" width:100% " >
+          <h4 class="alert-heading">RESERVAR</h4>
+            Servicio&nbsp;
+            <asp:Label ID="L_servicioPanel" runat="server" CssClass="auto-style43"></asp:Label><br />
+            Estilista&nbsp;&nbsp;
+            <asp:Label ID="L_estilistaPanel" runat="server" CssClass="auto-style43"></asp:Label><br />
+            Fecha&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:Label ID="L_fechaPanel" runat="server" CssClass="auto-style43"></asp:Label>
+            <br />
+            Hora&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;
+            <asp:Label ID="L_horaPanel" runat="server" CssClass="auto-style43"></asp:Label>
+          <hr>
+            <div>
+              <asp:Button ID="BT_Reservar" runat="server" Text="Reservar"  class="btn btn-outline-success" OnClick="BT_Reservar_Click" />
+              <asp:Button ID="BT_Cancelar" runat="server" Text="Cancelar"  class="btn btn-outline-primary"/>
+            </div>
+           
+        </div>
+    </asp:Panel>
+
+
 </asp:Content>
 

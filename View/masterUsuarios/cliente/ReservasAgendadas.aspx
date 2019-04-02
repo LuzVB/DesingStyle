@@ -9,13 +9,17 @@
             }
         .auto-style14 {
             padding-top:15%;
+            font-size: 105%;
         }
         .auto-style18 {
-            padding-left:20%;
+            /*padding-left:20%;*/
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 120%;
            
         }
+        .imgNoRegistro{
+           text-align: center;
+       }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -28,18 +32,53 @@
             <td class="auto-style18" colspan="2"> 
                  <div class="auto-style21">
 
-                <asp:GridView ID="GV_reservasAgendadas" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="80%" CssClass="auto-style14" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" AutoGenerateColumns="False" >
+                <asp:GridView ID="GV_reservasAgendadas" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="100%" CssClass="auto-style14" AllowPaging="True"  style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="ODS_mostrarReserva" >
                     <Columns>
-                        <asp:BoundField HeaderText="Servicio" />
-                        <asp:BoundField HeaderText="Fecha" />
-                        <asp:BoundField HeaderText="Hora" />
-                        <asp:BoundField HeaderText="Precio" />
-                        <asp:BoundField HeaderText="Estilista" />
-                        <asp:CommandField HeaderText="Cancelar" ShowDeleteButton="True" />
+                        <asp:TemplateField HeaderText="Fecha y hora de Incio">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("_dia_hora_inicio") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("_dia_hora_inicio") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Fecha y hora Final">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("_dia_hora_final") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("_dia_hora_final") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Servicio">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("nombre_servicio") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("nombre_servicio") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Estilista">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("nombre_estilista") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("nombre_estilista") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Precio">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("precio") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label5" runat="server" Text='<%# Bind("precio") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
                 <EmptyDataTemplate>
-                            <asp:Image ID="noRegistro" runat="server" ImageUrl="~/Imagenes/no-encontrado.png" Width="20%" CssClass="imgNoRegistro" />
-                            No hay inasistencias
+                       <asp:Image ID="noRegistro" runat="server" ImageUrl="~/Imagenes/no-encontrado.png" Width="20%" CssClass="imgNoRegistro" />
+                       No hay citas agendadas
+                       <asp:Button ID="BT_redirigirCita" runat="server" Text="Reservar cita" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%"  OnClick="BT_redirigirCitan_Click"  />
                 </EmptyDataTemplate>
                 <FooterStyle BackColor="White" ForeColor="#000066" />
                 <HeaderStyle BackColor="#018BDE" Font-Bold="True" ForeColor="White" />
@@ -52,6 +91,11 @@
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                   
             </asp:GridView>
+                     <asp:ObjectDataSource ID="ODS_mostrarReserva" runat="server" SelectMethod="mostrarReservas" TypeName="DAO_Reserva">
+                         <SelectParameters>
+                             <asp:SessionParameter DefaultValue="" Name="id_cliente" SessionField="user_id" Type="Int32" />
+                         </SelectParameters>
+                     </asp:ObjectDataSource>
                 </div>
             
             </td>

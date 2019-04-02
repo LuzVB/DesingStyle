@@ -22,4 +22,9 @@ public partial class View_masterUsuarios_cliente_ReservasAgendadas : System.Web.
             Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
         }
     }
+
+    protected void BT_redirigirCitan_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/View/masterUsuarios/cliente/ReservarCitaCliente.aspx");
+    }
 }

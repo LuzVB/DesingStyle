@@ -22,6 +22,8 @@ public class ERegistroHorario
     private Int32 idReserva;
     private Int32 idCliente;
     private Int32 idServicio;
+    private string session; 
+    
 
 
 
@@ -34,4 +36,5 @@ public class ERegistroHorario
     public int IdReserva { get => idReserva; set => idReserva = value; }
     public int IdCliente { get => idCliente; set => idCliente = value; }
     public int IdServicio { get => idServicio; set => idServicio = value; }
+    public string Session { get => session; set => session = value; }
 }

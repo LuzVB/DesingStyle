@@ -95,4 +95,28 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
     //    //}
 
     //}
+
+    protected void Tx_NombreEstilista_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void GV_Estilista_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+
+
+    protected void IB_ServicioAdicional_Click(object sender, ImageClickEventArgs e)
+    {
+        ERegistroUsuario ServicioAdi = new ERegistroUsuario();
+        ServicioAdi.Usuario = Int32.Parse(DDL_estilistas.SelectedValue.ToString());
+        ServicioAdi.Servicio = Int32.Parse(DDL_Aservicio.SelectedValue.ToString());
+        ServicioAdi.Session = Session["user"].ToString();
+
+
+        DataTable servicioa = new DAORegistroEstilista().ServicioEAdcional(ServicioAdi);
+        Response.Redirect("regristroEstilista.aspx");
+    }
 }

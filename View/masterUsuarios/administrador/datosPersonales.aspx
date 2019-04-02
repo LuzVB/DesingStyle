@@ -46,6 +46,11 @@
            padding-left:5%;
            padding-right:5%;
         }
+        .auto-style17 {
+            padding-left: 5%;
+            padding-right: 5%;
+            width: 100%;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -64,25 +69,42 @@
             <td class="auto-style10">&nbsp;</td>
         </tr>
         <tr>
-            <td class="auto-style12">Nombre</td>
-            <td class="auto-style12">Apellido</td>
+            <td colspan="2">
+                <asp:FormView ID="FV_datosAdmin" runat="server"  Width="100%" DataSourceID="ODS_Admin">
+                <ItemTemplate>
+                    <%--<table class="tablaAdm">--%>
+                       <tr>
+                            <td class="auto-style12">Nombre
+                            </td>
+                            <td class="auto-style12">Apellido</td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("nombre") %>'></asp:TextBox></td>
+                            <cc1:filteredtextboxextender ID="FTBE_AdmNombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_AdmNombre" />
+                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("apellido") %>'></asp:TextBox></td>
+                            <cc1:filteredtextboxextender ID="FTBE_AdmApellido" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_AdmApellido" />
+                        </tr>
+                        <tr>
+                            <td class="auto-style12">Teléfono</td>
+                            <td class="auto-style12">Correo</td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("telefono") %>'></asp:TextBox></td>
+                            <cc1:filteredtextboxextender ID="FTBE_AdmTelefono" runat="server" FilterType="Numbers" TargetControlID="Tx_AdmTelefono" />
+                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmCorreo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" ValidationGroup="VG_DatosPersonales "  Text='<%# Bind("correo") %>'></asp:TextBox></td>
+                            <cc1:filteredtextboxextender ID="FTBE_AdmCorreo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_AdmCorreo" />
+                        </tr>
+                <%--    </table>--%>
+                </ItemTemplate>
+                </asp:FormView>
+                <asp:ObjectDataSource ID="ODS_Admin" runat="server" SelectMethod="mostrarAdmin" TypeName="DAOAdmin">
+                    <SelectParameters>
+                        <asp:SessionParameter Name="id" SessionField="user_id" Type="Int32" />
+                    </SelectParameters>
+                </asp:ObjectDataSource>
+            </td>
         </tr>
-        <tr>
-            <td class="auto-style9"><asp:TextBox ID="Tx_AdmNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales "></asp:TextBox></td>
-            <cc1:filteredtextboxextender ID="FTBE_AdmNombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_AdmNombre" />
-            <td class="auto-style9"><asp:TextBox ID="Tx_AdmApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales "></asp:TextBox></td>
-            <cc1:filteredtextboxextender ID="FTBE_AdmApellido" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_AdmApellido" />
-        </tr>
-        <tr>
-            <td class="auto-style12">Teléfono</td>
-            <td class="auto-style12">Correo</td>
-        </tr>
-        <tr>
-            <td class="auto-style9"><asp:TextBox ID="Tx_AdmTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales "></asp:TextBox></td>
-            <cc1:filteredtextboxextender ID="FTBE_AdmTelefono" runat="server" FilterType="Numbers" TargetControlID="Tx_AdmTelefono" />
-            <td class="auto-style9"><asp:TextBox ID="Tx_AdmCorreo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" ValidationGroup="VG_DatosPersonales "></asp:TextBox></td>
-            <cc1:filteredtextboxextender ID="FTBE_AdmCorreo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_AdmCorreo" />
-        </tr>
+        
         <tr>
             <td class="auto-style9">&nbsp;</td>
             <td class="auto-style10"><asp:Button ID="BT_GuardarAdm" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_DatosPersonales " /></td>
