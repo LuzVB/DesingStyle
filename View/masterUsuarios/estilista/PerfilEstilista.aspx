@@ -62,6 +62,21 @@
             width: 70%;
             
         }
+        .auto-style30 {
+            height: 23px;
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            font-size: 160%;
+            text-align: center;
+        }
+        .auto-style31 {
+            width: 70%;
+            text-align: center;
+            height: 97px;
+        }
+        .auto-style32 {
+            width: 30%;
+            height: 97px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -75,7 +90,7 @@
     </tr>
     <tr>
         <td class="auto-style29">
-            <asp:Label ID="LB_nombreEstilista" runat="server" CssClass="auto-style25"></asp:Label>
+            <asp:Label ID="LB_nombreEstilista" runat="server" CssClass="auto-style25" ForeColor="#0099FF"></asp:Label>
         </td>
         <td class="auto-style11">&nbsp;</td>
     </tr>
@@ -87,9 +102,13 @@
             &nbsp;</td>
     </tr>
     <tr>
-        <td class="auto-style24">&nbsp;</td>
+        <td class="auto-style30">&nbsp;</td>
         <td class="auto-style22">                       
-            <asp:Button ID="BT_CambiarImagen" runat="server" Text="Cambiar imagen" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_InicioSesion" CssClass="auto-style21" />
+            <asp:Button ID="BT_CambiarImagen" runat="server" Text="Cambiar imagen" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_InicioSesion" CssClass="auto-style21" OnClick="BT_CambiarImagen_Click" />
+            <br />
+            <br />
+            <asp:RequiredFieldValidator ID="RFV_Up" runat="server" ControlToValidate="FU_Perfil" ErrorMessage="Agregue su imagen (*)" ForeColor="Red" ValidationGroup="VG_InicioSesion"></asp:RequiredFieldValidator>
+            <asp:FileUpload ID="FU_Perfil" runat="server" />
         </td>
     </tr>
     <tr>
@@ -102,41 +121,53 @@
     </tr>
     <tr>
         <td class="auto-style27">
-           <asp:TextBox ID="Tx_IBiografia" runat="server" BorderColor="#0099FF" Width="50%" Height="100px" TextMode="Email" ValidationGroup="VG_Biografia" ></asp:TextBox>
-           <cc1:filteredtextboxextender ID="FTBE_IBiografia" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ." TargetControlID="Tx_IBiografia" /></td>
+            <asp:RequiredFieldValidator ID="RVF_biografia" runat="server" ControlToValidate="Tx_IBiografia" ErrorMessage="Registre Su biografia (*)" ForeColor="Red" ValidationGroup="VG_Biografia"></asp:RequiredFieldValidator>
+            <br />
+           <asp:TextBox ID="Tx_IBiografia" runat="server" BorderColor="#0099FF" Width="50%" Height="100px" TextMode="SingleLine" ValidationGroup="VG_Biografia" ></asp:TextBox>
+            <%--  <cc1:TextBoxWatermarkExtender id="TBWEDOB_contraseñaNueva" runat="server" targetcontrolid="Tx_ContraseñaNueva" watermarktext="Contraseña nueva" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>--%>
         <td class="auto-style11">&nbsp;</td>
     </tr>
     <tr>
         <td class="auto-style8">&nbsp;</td>
         <td class="auto-style11">
                                    
-                                    <asp:Button ID="BT_GuardarBiografia" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_Biografia" CssClass="auto-style21" />
-                                </td>
+        <asp:Button ID="BT_GuardarBiografia" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_Biografia" CssClass="auto-style21" OnClick="BT_GuardarBiografia_Click" />
+        </td>
     </tr>
     <tr>
         <td class="auto-style23"><strong>CAMBIAR CONTRASEÑA</strong></td>
         <td class="auto-style11">&nbsp;</td>
     </tr>
     <tr>
-        <td class="auto-style27">
-
-            <asp:TextBox ID="Tx_ContraseñaActual" runat="server" BorderColor="#0099FF" Width="30%" Height="25px" TextMode="Email" ValidationGroup="VG_cambioContraseña" TargetControlID="Tx_ContraseñaActual"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RFV_ContraseñaActual" runat="server" ControlToValidate="Tx_ContraseñaActual" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_cambioContraseña" SetFocusOnError="True"></asp:RequiredFieldValidator>
-            <cc1:TextBoxWatermarkExtender id="TBWEDOB_contraseñaActual" runat="server" targetcontrolid="Tx_ContraseñaActual" watermarktext="Contraseña actual" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
-            <cc1:filteredtextboxextender ID="FTBE_contraseñaActual" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_ContraseñaActual" />
+        <td class="auto-style31">
+            <table class="w-100">
+                <tr>
+                    <td class="text-center">Contraseña Actual</td>
+                    <td class="text-center">Contraseña Nueva</td>
+                </tr>
+            </table>
+            <br />
+            <asp:RequiredFieldValidator ID="RFV_contraseñaActual" runat="server" ControlToValidate="Tx_ContraseñaActual" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_cambioContraseña"></asp:RequiredFieldValidator>
+            <asp:TextBox ID="Tx_ContraseñaActual" runat="server" BorderColor="#0099FF" Width="40%" Height="25px" OnTextChanged="Tx_ContraseñaActual_TextChanged" TextMode="Password" ValidationGroup="VG_cambioContraseña"></asp:TextBox>
+            <cc1:filteredtextboxextender ID="FTBE_ContraseñaActual" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_ContraseñaActual" />
+            <%--<cc1:filteredtextboxextender ID="FTBE_contraseñaNueva" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@" TargetControlID="Tx_ContraseñaNueva" />--%>
+            <%--<cc1:filteredtextboxextender ID="FTBE_contraseñaActual" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@" TargetControlID="Tx_ContraseñaActual" />--%>
             
-            <asp:TextBox ID="Tx_ContraseñaNueva" runat="server" BorderColor="#0099FF" Width="30%" Height="25px" TextMode="Email" ValidationGroup="VG_cambioContraseña"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RFV_ContraseñaNueva" runat="server" ControlToValidate="Tx_ContraseñaNueva" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_cambioContraseña" SetFocusOnError="True"></asp:RequiredFieldValidator>
-            <cc1:TextBoxWatermarkExtender id="TBWEDOB_contraseñaNueva" runat="server" targetcontrolid="Tx_ContraseñaNueva" watermarktext="Contraseña nueva" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
-            <cc1:filteredtextboxextender ID="FTBE_contraseñaNueva" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_ContraseñaNueva" />
+            &nbsp;<asp:RequiredFieldValidator ID="RFV_contraseñaNueva" runat="server" ControlToValidate="Tx_ContraseñaNueva" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_cambioContraseña"></asp:RequiredFieldValidator>
+            <asp:TextBox ID="Tx_ContraseñaNueva" runat="server" BorderColor="#0099FF" Width="40%" Height="25px" TextMode="Password" ValidationGroup="VG_cambioContraseña"></asp:TextBox>
+            <cc1:filteredtextboxextender ID="FTBE_ContraseñaNueva" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_ContraseñaNueva" />
+            <%--  <cc1:TextBoxWatermarkExtender id="TBWEDOB_contraseñaNueva" runat="server" targetcontrolid="Tx_ContraseñaNueva" watermarktext="Contraseña nueva" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>--%>
+            <%--<cc1:filteredtextboxextender ID="FTBE_contraseñaNueva" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@" TargetControlID="Tx_ContraseñaNueva" />--%>
                                    
 
-        <td class="auto-style11">&nbsp;</td>
+        <td class="auto-style32"></td>
     </tr>
     <tr>
-        <td class="auto-style8">&nbsp;</td>
+        <td class="auto-style8">
+            <asp:Label ID="LB_ErrorContraseña" runat="server" ForeColor="Red"></asp:Label>
+        </td>
         <td class="auto-style11">
-            <asp:Button ID="BT_GuardarBiografia0" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_cambioContraseña" CssClass="auto-style21" />
+            <asp:Button ID="BT_GuardarBiografia0" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_cambioContraseña" CssClass="auto-style21" OnClick="BT_GuardarBiografia0_Click" />
         </td>
     </tr>
 </table>
