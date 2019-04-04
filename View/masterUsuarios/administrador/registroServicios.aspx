@@ -25,9 +25,6 @@
            padding-bottom:7%;
         
     }
-        .auto-style26 {
-            font-size: 100%;
-        }
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -41,7 +38,7 @@
 
                 <div class="auto-style11">
 
-                <asp:GridView ID="GV_Estilista" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" PageSize="5" Width="95%" CssClass="auto-style14" ShowHeaderWhenEmpty="True" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" DataSourceID="ODS_Servicio" AutoGenerateColumns="False" DataKeyNames="id">
+                <asp:GridView ID="GV_Estilista" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" PageSize="5" Width="95%" CssClass="auto-style14" ShowHeaderWhenEmpty="True" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" DataSourceID="ODS_Servicio" AutoGenerateColumns="False" DataKeyNames="id" OnRowUpdating="GV_Estilista_RowUpdating">
                     <Columns>
                         <asp:TemplateField HeaderText="Nombre">
                             <EditItemTemplate>
@@ -59,17 +56,65 @@
                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("descripcion") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Precio">
+                        <asp:TemplateField HeaderText="Precio ($)">
+                            
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("precio") %>' CssClass="auto-style26" Width="100%"></asp:TextBox>
+                                <asp:DropDownList ID="DDL_precio" runat="server" SelectedValue='<%# Bind("precio") %>'>
+                                
+                                                <asp:ListItem Value="10000">$10.000</asp:ListItem>
+                                                <asp:ListItem Value="15000">$15.000</asp:ListItem>
+                                                <asp:ListItem Value="20000">$20.000</asp:ListItem>
+                                                <asp:ListItem Value="25000">$25.000</asp:ListItem>
+                                                <asp:ListItem Value="30000">$30.000</asp:ListItem>
+                                                <asp:ListItem Value="35000">$35.000</asp:ListItem>
+                                                <asp:ListItem Value="40000">$40.000</asp:ListItem>
+                                                <asp:ListItem Value="45000">$45.000</asp:ListItem>
+                                                <asp:ListItem Value="50000">$50.000</asp:ListItem>
+                                                <asp:ListItem Value="55000">$55.000</asp:ListItem>
+                                                <asp:ListItem Value="60000">$60.000</asp:ListItem>
+                                                <asp:ListItem Value="65000">$65.000</asp:ListItem>
+                                                <asp:ListItem Value="70000">$70.000</asp:ListItem>
+                                                <asp:ListItem Value="75000">$75.000</asp:ListItem> 
+                                                <asp:ListItem Value="80000">$80.000</asp:ListItem>
+                                                <asp:ListItem Value="85000">$85.000</asp:ListItem>
+                                                <asp:ListItem Value="90000">$90.000</asp:ListItem>
+                                                <asp:ListItem Value="95000">$95.000</asp:ListItem>
+                                                <asp:ListItem Value="100000">$100.000</asp:ListItem>
+                                                <asp:ListItem Value="200000">$200.000</asp:ListItem>
+                                                <asp:ListItem Value="300000">$300.000</asp:ListItem>
+                                                <asp:ListItem Value="400000">$400.000</asp:ListItem>
+                                                <asp:ListItem Value="500000">$500.000</asp:ListItem>
+                                                <asp:ListItem Value="600000">$600.000</asp:ListItem>
+                                    </asp:DropDownList>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label3" runat="server" Text='<%# Bind("precio") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Duracion">
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("duracion") %>' CssClass="auto-style26" Width="100%"></asp:TextBox>
+                        <asp:TemplateField HeaderText="Duracion(HH:MM)">
+                             <EditItemTemplate>
+                                <asp:DropDownList ID="DDL_duracion" runat="server" SelectedValue='<%# Bind("duracion") %>'>
+                                                   <asp:ListItem Value="00:15:00">00:15</asp:ListItem>
+                                                   <asp:ListItem Value="00:30:00">00:30</asp:ListItem>
+                                                   <asp:ListItem Value="00:45:00">00:45</asp:ListItem>
+                                                   <asp:ListItem Value="01:00:00">01:00</asp:ListItem>
+                                                   <asp:ListItem Value="01:15:00">01:15</asp:ListItem>
+                                                   <asp:ListItem Value="01:30:00">01:30</asp:ListItem>
+                                                   <asp:ListItem Value="01:45:00">01:45</asp:ListItem>
+                                                   <asp:ListItem Value="02:00:00">02:00</asp:ListItem>
+                                                   <asp:ListItem Value="02:15:00">02:15</asp:ListItem>
+                                                   <asp:ListItem Value="02:30:00">02:30</asp:ListItem>
+                                                   <asp:ListItem Value="02:45:00">02:45</asp:ListItem>
+                                                   <asp:ListItem Value="03:00:00">03:00</asp:ListItem>
+                                                   <asp:ListItem Value="03:15:00">03:15</asp:ListItem>
+                                                   <asp:ListItem Value="03:30:00">03:30</asp:ListItem>
+                                                   <asp:ListItem Value="03:45:00">03:45</asp:ListItem>
+                                                   <asp:ListItem Value="04:00:00">04:00</asp:ListItem>
+                                                   <asp:ListItem Value="04:15:00">04:15</asp:ListItem>
+                                                   <asp:ListItem Value="04:30:00">04:30</asp:ListItem>
+                                                   <asp:ListItem Value="04:45:00">04:45</asp:ListItem>
+                                                   <asp:ListItem Value="05:00:00">05:00</asp:ListItem>
+                                    </asp:DropDownList>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label4" runat="server" Text='<%# Bind("duracion") %>'></asp:Label>
@@ -146,23 +191,65 @@
                 <cc1:filteredtextboxextender ID="FTBE_descripcionServicio" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" TargetControlID="Tx_descripcionServicio" InvalidChars=" ñ´" />
         </tr>
         <tr>
-            <td class="auto-style8"><asp:TextBox ID="Tx_PrecioServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroServicio"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RFV_PrecioServicio" runat="server" ControlToValidate="Tx_PrecioServicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroServicio" SetFocusOnError="True"></asp:RequiredFieldValidator>
+            <td class="auto-style8">
+                <asp:DropDownList ID="DDL_precio" runat="server" Height="25px" Width="95%">
+                   <asp:ListItem Value="10000">Precio($)</asp:ListItem>
+                                                <asp:ListItem Value="10000">$10.000</asp:ListItem>
+                                                <asp:ListItem Value="15000">$15.000</asp:ListItem>
+                                                <asp:ListItem Value="20000">$20.000</asp:ListItem>
+                                                <asp:ListItem Value="25000">$25.000</asp:ListItem>
+                                                <asp:ListItem Value="30000">$30.000</asp:ListItem>
+                                                <asp:ListItem Value="35000">$35.000</asp:ListItem>
+                                                <asp:ListItem Value="40000">$40.000</asp:ListItem>
+                                                <asp:ListItem Value="45000">$45.000</asp:ListItem>
+                                                <asp:ListItem Value="50000">$50.000</asp:ListItem>
+                                                <asp:ListItem Value="55000">$55.000</asp:ListItem>
+                                                <asp:ListItem Value="60000">$60.000</asp:ListItem>
+                                                <asp:ListItem Value="65000">$65.000</asp:ListItem>
+                                                <asp:ListItem Value="70000">$70.000</asp:ListItem>
+                                                <asp:ListItem Value="75000">$75.000</asp:ListItem> 
+                                                <asp:ListItem Value="80000">$80.000</asp:ListItem>
+                                                <asp:ListItem Value="85000">$85.000</asp:ListItem>
+                                                <asp:ListItem Value="90000">$90.000</asp:ListItem>
+                                                <asp:ListItem Value="95000">$95.000</asp:ListItem>
+                                                <asp:ListItem Value="100000">$100.000</asp:ListItem>
+                                                <asp:ListItem Value="200000">$200.000</asp:ListItem>
+                                                <asp:ListItem Value="300000">$300.000</asp:ListItem>
+                                                <asp:ListItem Value="400000">$400.000</asp:ListItem>
+                                                <asp:ListItem Value="500000">$500.000</asp:ListItem>
+                                                <asp:ListItem Value="600000">$600.000</asp:ListItem>
+                </asp:DropDownList>
             </td>
-                <cc1:TextBoxWatermarkExtender id="TBWEDOB_PrecioServicio" runat="server" targetcontrolid="Tx_PrecioServicio" watermarktext="Precio" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
-                <cc1:filteredtextboxextender ID="FTBE_PrecioServicio" runat="server" FilterType="Numbers" TargetControlID="Tx_PrecioServicio" />
 
            <td class="auto-style9">
-               <asp:TextBox ID="Tx_duracionServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroServicio"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RFV_duracionServicio" runat="server" ControlToValidate="Tx_duracionServicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroServicio" SetFocusOnError="True"></asp:RequiredFieldValidator>
+               <asp:DropDownList ID="DDL_duracion" runat="server" Height="25px" Width="95%">
+                   <asp:ListItem Value="00:15">Duracion(HH:MM)</asp:ListItem>
+                   <asp:ListItem>00:15</asp:ListItem>
+                   <asp:ListItem>00:30</asp:ListItem>
+                   <asp:ListItem>00:45</asp:ListItem>
+                   <asp:ListItem>01:00</asp:ListItem>
+                   <asp:ListItem>01:15</asp:ListItem>
+                   <asp:ListItem>01:30</asp:ListItem>
+                   <asp:ListItem>01:45</asp:ListItem>
+                   <asp:ListItem>02:00</asp:ListItem>
+                   <asp:ListItem>02:15</asp:ListItem>
+                   <asp:ListItem>02:30</asp:ListItem>
+                   <asp:ListItem>02:45</asp:ListItem>
+                   <asp:ListItem>03:00</asp:ListItem>
+                   <asp:ListItem>03:15</asp:ListItem>
+                   <asp:ListItem>03:30</asp:ListItem>
+                   <asp:ListItem>03:45</asp:ListItem>
+                   <asp:ListItem>04:00</asp:ListItem>
+                   <asp:ListItem>04:15</asp:ListItem>
+                   <asp:ListItem>04:30</asp:ListItem>
+                   <asp:ListItem>04:45</asp:ListItem>
+                   <asp:ListItem>05:00</asp:ListItem>
+               </asp:DropDownList>
             </td>
-                <cc1:TextBoxWatermarkExtender id="TBWEDOB_duracionServicio" runat="server" targetcontrolid="Tx_duracionServicio" watermarktext="Duracion" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
-                <cc1:filteredtextboxextender ID="FTBE_duracionServicio" runat="server" FilterType="Numbers,Custom, UppercaseLetters, LowercaseLetters" TargetControlID="Tx_duracionServicio" InvalidChars=" ñ´:" />
         </tr>
         <tr>
             <td class="auto-style8">
-                <asp:Label ID="desactivar" runat="server" Text="Label"></asp:Label>
-            </td>
+                &nbsp;</td>
             <td class="auto-style9">&nbsp;</td>
         </tr>
         <tr>

@@ -80,12 +80,6 @@ public class DAOServicio
         return insertarServicio;
     }
 
-
-
-
-
-
-
     public DataTable modificarServicico(string nombre, string descripcion, int precio, string duracion,int id)//los parametros se deben llamar igual como en la BD 
     {
         DataTable modificarServicio = new DataTable();
@@ -125,7 +119,7 @@ public class DAOServicio
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_actualizar_servicio2", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_actualizar_servicio_alerta", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
             dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = id;
             dataAdapter.SelectCommand.Parameters.Add("_nombre", NpgsqlDbType.Text).Value = nombre;
@@ -133,9 +127,9 @@ public class DAOServicio
             dataAdapter.SelectCommand.Parameters.Add("_precio", NpgsqlDbType.Integer).Value = precio;
             dataAdapter.SelectCommand.Parameters.Add("_estado", NpgsqlDbType.Text).Value = estado;
             dataAdapter.SelectCommand.Parameters.Add("_duracion", NpgsqlDbType.Text).Value = duracion;
-
             conection.Open();
             dataAdapter.Fill(modificarServicio);
+          
         }
         catch (Exception Ex)
         {
@@ -150,7 +144,6 @@ public class DAOServicio
         }
         return modificarServicio;
     }
-
 
     public DataTable mostrarservicio()
     {

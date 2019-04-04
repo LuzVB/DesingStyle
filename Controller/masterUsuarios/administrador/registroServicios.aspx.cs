@@ -18,11 +18,10 @@ public partial class View_masterUsuarios_administrador_registroServicios : Syste
         EServicio servicio = new EServicio();
         servicio.Nombre = Tx_NombreServicio.Text;
         servicio.Descripcion = Tx_descripcionServicio.Text;
-        servicio.Precio = Int32.Parse(Tx_PrecioServicio.Text);
-        servicio.Duracion = Tx_duracionServicio.Text;
+        servicio.Precio = Int32.Parse(DDL_precio.SelectedValue);
+        servicio.Duracion = DDL_duracion.SelectedValue;
         servicio.Estado = "Disponible";
         servicio.Session = Session["user"].ToString();
-
         DataTable datos = new DAOServicio().registroServicio2(servicio);
         GV_Estilista.DataBind();
         Response.Redirect("registroServicios.aspx");
@@ -46,6 +45,16 @@ public partial class View_masterUsuarios_administrador_registroServicios : Syste
     }
 
     protected void IB_GuardarServicio_Click1(object sender, ImageClickEventArgs e)
+    {
+
+    }
+
+    protected void GV_Estilista_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        
+    }
+
+    protected void Tx_precio_TextChanged(object sender, EventArgs e)
     {
 
     }
