@@ -5,7 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-//using System.Windows.Forms;
+using System.Windows.Forms;
+using Label = System.Web.UI.WebControls.Label;
 
 public partial class View_masterUsuarios_administrador_regristroEstilista : System.Web.UI.Page
 {
@@ -24,15 +25,17 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
             Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
         }
 
+        
     }
 
     protected void IB_GuardarEstilista_Click(object sender, ImageClickEventArgs e)
     {
+        int error = 0;
         ERegistroUsuario estilista = new ERegistroUsuario();
         estilista.Cedula = Int32.Parse(Tx_CodigoEstilista.Text);
         estilista.Nombre = Tx_NombreEstilista.Text;
-        estilista.Apellido= Tx_ApellidoEstilista.Text;
-        estilista.Telefono2 =Tx_TelefonoEstilista.Text;
+        estilista.Apellido = Tx_ApellidoEstilista.Text;
+        estilista.Telefono = Int32.Parse(Tx_TelefonoEstilista.Text);
         estilista.Correo = Tx_CorreoEstilista.Text;
         estilista.Contraseña = Tx_ContraseñaEstilista.Text;
         estilista.Estado = 1;
@@ -40,44 +43,62 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
         estilista.Session = Session["user"].ToString();
 
 
-        ERegistroUsuario EstilistaServicio = new ERegistroUsuario();
-        EstilistaServicio.Usuario = Int32.Parse(Tx_CodigoEstilista.Text);
-        EstilistaServicio.Servicio =Int32.Parse(DDL_servicio.SelectedValue.ToString());
-        EstilistaServicio.Session = Session["user"].ToString();
-
-      
-        DataTable datos = new DAORegistroEstilista().registroEstilista(estilista);
-        DataTable datos2 = new DAORegistroEstilista().registroEstilistaServicio(EstilistaServicio);
-
-        GV_Estilista.DataBind();
-
-
-        ERegistroHorario datoHorario = new ERegistroHorario();
-        DAORegistroEstilista guardarHorario = new DAORegistroEstilista();
-        DataTable horario = guardarHorario.mostrarHorario();
-        for (int i = 0; i < horario.Rows.Count; i++)
+        int index = Int32.Parse(DDL_servicio.SelectedIndex.ToString());
+        if (index <= -1  )
         {
-            datoHorario.Fechaini = DateTime.Parse(horario.Rows[i]["hora_inicio"].ToString());
-            datoHorario.Fechafin = DateTime.Parse(horario.Rows[i]["hora_fin"].ToString());
-            datoHorario.Estado = true;
-            datoHorario.Idestilista = int.Parse(Tx_CodigoEstilista.Text);
-            guardarHorario.registroHorario(datoHorario);
+            L_ServicioR.Visible = true;
         }
+        else
+        {
+            L_ServicioR.Visible = false;
+            ERegistroUsuario EstilistaServicio = new ERegistroUsuario();
 
-        Response.Redirect("regristroEstilista.aspx");
+
+            EstilistaServicio.Usuario = Int32.Parse(Tx_CodigoEstilista.Text);
+            EstilistaServicio.Servicio = Int32.Parse(DDL_servicio.SelectedValue.ToString());
+            EstilistaServicio.Session = Session["user"].ToString();
+            DataTable contarCorreo = new DAORegistroCliente().contarCorreos(estilista);
+
+            if (contarCorreo.Rows[0]["user_correo"].Equals("1"))
+            {
+
+                DataTable datos = new DAORegistroEstilista().registroEstilista(estilista);
+                DataTable datos2 = new DAORegistroEstilista().registroEstilistaServicio(EstilistaServicio);
+                error = 0;
+                L_correo.Visible = false;
+                ERegistroHorario datoHorario = new ERegistroHorario();
+                DAORegistroEstilista guardarHorario = new DAORegistroEstilista();
+                DataTable horario = guardarHorario.mostrarHorario();
+                for (int i = 0; i < horario.Rows.Count; i++)
+                {
+                    datoHorario.Fechaini = DateTime.Parse(horario.Rows[i]["hora_inicio"].ToString());
+                    datoHorario.Fechafin = DateTime.Parse(horario.Rows[i]["hora_fin"].ToString());
+                    datoHorario.Estado = true;
+                    datoHorario.Idestilista = int.Parse(Tx_CodigoEstilista.Text);
+                    guardarHorario.registroHorario(datoHorario);
+                }
+            }
+            else
+            {
+                error = 1;
+                L_correo.Visible = true;
+            }
+
+            GV_Estilista.DataBind();
+
+            Response.Redirect("regristroEstilista.aspx");
+        }
     }
 
-    protected void Bt_Aservicio_Click(object sender, EventArgs e)
+
+    protected void Tx_NombreEstilista_TextChanged(object sender, EventArgs e)
     {
 
-        ERegistroUsuario ServicioAdi = new ERegistroUsuario();
-        ServicioAdi.Usuario = Int32.Parse(DDL_estilistas.SelectedValue.ToString());
-        ServicioAdi.Servicio = Int32.Parse(DDL_Aservicio.SelectedValue.ToString());
-        ServicioAdi.Session = Session["user"].ToString();
+    }
 
+    protected void GV_Estilista_SelectedIndexChanged(object sender, EventArgs e)
+    {
 
-        DataTable servicioa = new DAORegistroEstilista().ServicioEAdcional(ServicioAdi);
-        Response.Redirect("regristroEstilista.aspx");
     }
 
     //protected void Tx_NombreEstilista_TextChanged(object sender, EventArgs e)
@@ -96,27 +117,57 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
 
     //}
 
-    protected void Tx_NombreEstilista_TextChanged(object sender, EventArgs e)
+    protected void ServicioAd_Click(object sender, ImageClickEventArgs e)
     {
+        int indexEstilista = Int32.Parse(DDL_estilistas.SelectedIndex.ToString());
+        int indexAServicio = Int32.Parse(DDL_Aservicio.SelectedIndex.ToString());
 
+        if (indexEstilista <= -1)
+        {
+
+            L_REstilista.Visible = true;
+
+        }
+        else if (indexAServicio <= -1) {
+
+            L_RServicio.Visible = true;
+        }
+        else {
+
+
+            ERegistroUsuario ServicioAdi = new ERegistroUsuario();
+            ServicioAdi.Usuario = Int32.Parse(DDL_estilistas.SelectedValue.ToString());
+            ServicioAdi.Servicio = Int32.Parse(DDL_Aservicio.SelectedValue.ToString());
+            ServicioAdi.Session = Session["user"].ToString();
+
+
+            DataTable servicioa = new DAORegistroEstilista().ServicioEAdcional(ServicioAdi);
+            Response.Redirect("regristroEstilista.aspx");
+        }
     }
 
-    protected void GV_Estilista_SelectedIndexChanged(object sender, EventArgs e)
+    protected void GV_Estilista_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-
+        
+        if (e.Row.FindControl("L_Estado") != null)
+        {
+            if (((Label)e.Row.FindControl("L_Estado")).Text.Equals("1"))
+            {
+                ((Label)e.Row.FindControl("L_Estado")).Visible = false;
+                ((Label)e.Row.FindControl("L_Prueba")).Text = "Activo";
+            }
+            else if (((Label)e.Row.FindControl("L_Estado")).Text.Equals("2"))
+            {
+                ((Label)e.Row.FindControl("L_Estado")).Visible = false;
+                ((Label)e.Row.FindControl("L_Prueba")).Text = "Despedido";
+            }
+            else {
+                ((Label)e.Row.FindControl("L_Prueba")).Text = "Activo";
+            }
+        }
+     
     }
 
-
-
-    protected void IB_ServicioAdicional_Click(object sender, ImageClickEventArgs e)
-    {
-        ERegistroUsuario ServicioAdi = new ERegistroUsuario();
-        ServicioAdi.Usuario = Int32.Parse(DDL_estilistas.SelectedValue.ToString());
-        ServicioAdi.Servicio = Int32.Parse(DDL_Aservicio.SelectedValue.ToString());
-        ServicioAdi.Session = Session["user"].ToString();
-
-
-        DataTable servicioa = new DAORegistroEstilista().ServicioEAdcional(ServicioAdi);
-        Response.Redirect("regristroEstilista.aspx");
-    }
 }
+
+   
