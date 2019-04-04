@@ -82,16 +82,12 @@
                 </asp:ScriptManager>
             </td>
             <td class="auto-style10">
-                <asp:GridView ID="GV_alertaCliente" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" CssClass="auto-style14" PageSize="1" ShowHeaderWhenEmpty="True" Width="30%">
+                <asp:GridView ID="GV_alertaCliente" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" CssClass="auto-style14" PageSize="1" ShowHeaderWhenEmpty="True" Width="30%" DataKeyNames="id" DataSourceID="ODS_Alerta" style="margin-left: 0px" OnSelectedIndexChanged="GV_alertaCliente_SelectedIndexChanged">
                     <Columns>
-                        <asp:TemplateField HeaderText="Alerta">
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server"></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
+                        <asp:BoundField DataField="descripcion" HeaderText="Alerta" />
+                        <asp:BoundField DataField="servicio" HeaderText="servico" />
+                        <asp:BoundField DataField="apellido_estilista" HeaderText="Estilista" />
+                        <asp:CommandField DeleteText="Aceptar" ShowDeleteButton="True" />
                     </Columns>
                     <FooterStyle BackColor="White" ForeColor="#000066" />
                     <HeaderStyle BackColor="#018BDE" Font-Bold="True" ForeColor="White" />
@@ -103,6 +99,14 @@
                     <SortedDescendingCellStyle BackColor="#CAC9C9" />
                     <SortedDescendingHeaderStyle BackColor="#00547E" />
                 </asp:GridView>
+                <asp:ObjectDataSource ID="ODS_Alerta" runat="server" SelectMethod="Alerta" TypeName="DAOCliente" DeleteMethod="eliminarAlerta">
+                    <DeleteParameters>
+                        <asp:Parameter Name="id" Type="Int32" />
+                    </DeleteParameters>
+                    <SelectParameters>
+                        <asp:SessionParameter DefaultValue="id" Name="id" SessionField="user_id" Type="Int32" />
+                    </SelectParameters>
+                </asp:ObjectDataSource>
             </td>
         </tr>
         <tr>

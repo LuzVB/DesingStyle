@@ -25,15 +25,18 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
         {
             Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
         }
-
+        if (GV_alertaCliente.Rows.Count == 0)
+        {
+            GV_alertaCliente.Visible = false;
+        }
+        else {
+            GV_alertaCliente.Visible = true;
+        }
         DataTable datosCliente = new DAOCliente().mostrarCliente(int.Parse(Session["user_id"].ToString()));
         string nombre, apellido/*, telefono, correo*/;
         nombre = datosCliente.Rows[0]["nombre"].ToString();
         apellido = datosCliente.Rows[0]["apellido"].ToString();
         L_Bienvenida.Text = ("HOLA " + nombre + " " + apellido).ToUpper();
-
-        
-
     }
 
     protected void BT_GuardarCliente_Click(object sender, EventArgs e)
@@ -154,5 +157,10 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
 
     }
 
-    
+
+
+    protected void GV_alertaCliente_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
