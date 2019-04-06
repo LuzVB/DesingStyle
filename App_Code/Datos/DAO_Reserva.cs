@@ -74,6 +74,34 @@ public class DAO_Reserva
         return estilista;
     }
 
+    public DataTable mostrarPrecio(int id_servicio)
+    {
+        DataTable precio = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_cargar_precio", conection);
+            dataAdapter.SelectCommand.Parameters.Add("_id_servicio", NpgsqlDbType.Integer).Value = id_servicio;
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(precio);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return precio;
+    }
+
     public DataTable mostrarHorarios(int id_estilista, string hora_inicio)
     {
         DateTime fecha = new DateTime();
@@ -222,13 +250,14 @@ public class DAO_Reserva
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_insert_reserva2", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_insert_reserva3", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
             dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = datos.Idestilista;
             dataAdapter.SelectCommand.Parameters.Add("_dia_hora_inicio", NpgsqlDbType.Timestamp).Value = datos.Fechaini;
             dataAdapter.SelectCommand.Parameters.Add("_dia_hora_final", NpgsqlDbType.Timestamp).Value = datos.Fechafin;
             dataAdapter.SelectCommand.Parameters.Add("_id_servicio", NpgsqlDbType.Integer).Value = datos.IdServicio;
             dataAdapter.SelectCommand.Parameters.Add("_id_usuario", NpgsqlDbType.Integer).Value = datos.IdCliente;
+            dataAdapter.SelectCommand.Parameters.Add("_precio", NpgsqlDbType.Integer).Value = datos.Precio;
             dataAdapter.SelectCommand.Parameters.Add("_session", NpgsqlDbType.Text).Value = datos.Session;
 
             conection.Open();
@@ -255,7 +284,7 @@ public class DAO_Reserva
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostrar_reservas6", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostrar_reservas7", conection);
             dataAdapter.SelectCommand.Parameters.Add("_id_cliente", NpgsqlDbType.Integer).Value = id_cliente;
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 

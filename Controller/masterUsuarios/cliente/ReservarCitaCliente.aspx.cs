@@ -23,7 +23,7 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         {
             Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
         }
-        
+
     }
 
 
@@ -32,6 +32,12 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         string hora, fecha;
         DateTime fechaCliente;
 
+        int servicioID;
+        servicioID = int.Parse(DDL_servicio.SelectedValue.ToString());
+
+        DAO_Reserva buscarPrecio = new DAO_Reserva();
+        DataTable precio = buscarPrecio.mostrarPrecio(servicioID);
+
         fechaCliente = DateTime.Parse(DDL_Hora.SelectedItem.ToString());
         hora = fechaCliente.ToShortTimeString();
         fecha = fechaCliente.ToShortDateString();
@@ -39,7 +45,8 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         L_estilistaPanel.Text = DDL_Estilista.SelectedItem.ToString();
         L_servicioPanel.Text = DDL_servicio.SelectedItem.ToString();
         L_fechaPanel.Text = fecha;
-        L_horaPanel.Text = hora; 
+        L_horaPanel.Text = hora;
+        L_PrecioM.Text = "$ " + precio.Rows[0]["precio_servicio"].ToString();
 
         MPE_confirmarReserva.Show();
     }
@@ -51,6 +58,8 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         DateTime horaCliente, horaFinal;
         int servicio, hora, minuto, duracionFinal, id_estilista, id_servicio;
         DAO_Reserva mostrarDuracion = new DAO_Reserva();
+        DAO_Reserva buscarPrecio = new DAO_Reserva();
+        
 
 
         diaReserva = C_Reserva.SelectedDate.ToShortDateString();
@@ -99,14 +108,59 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
             rangoHorario.actulizarReserva(reserva);
         }
 
+        DataTable precio = buscarPrecio.mostrarPrecio(id_servicio);
         gReserva.IdCliente = int.Parse(Session["user_id"].ToString());
         gReserva.Idestilista = id_estilista;
         gReserva.IdServicio = servicio;
         gReserva.Session = Session["user"].ToString();
         gReserva.Fechaini = DateTime.Parse(hora_cliente);
         gReserva.Fechafin = horaFinal;
+        gReserva.Precio = int.Parse(precio.Rows[0]["precio_servicio"].ToString());
 
         guardarReserva.guardarReserva(gReserva);
 
+        MPE_ReservaExitosa.Show();
+    }
+
+
+    protected void DDL_servicio_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        int servicioID;
+        servicioID = int.Parse(DDL_servicio.SelectedValue.ToString());
+
+        DAO_Reserva buscarPrecio = new DAO_Reserva();
+        DataTable precio = buscarPrecio.mostrarPrecio(servicioID);
+
+        L_Precio.Text = "$ " + precio.Rows[0]["precio_servicio"].ToString();
+
+    }
+
+    protected void BT_Aceptar_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/View/masterUsuarios/cliente/ReservasAgendadas.aspx");
+    }
+
+    protected void C_Reserva_SelectionChanged(object sender, EventArgs e)
+    {
+        DateTime fecha = new DateTime();
+        DateTime calendario2 = new DateTime();
+        fecha = DateTime.Now;
+        string calendario, fecha2;
+
+        calendario = C_Reserva.SelectedDate.ToShortDateString();
+        fecha2 = fecha.ToShortDateString();
+
+        fecha = DateTime.Parse(fecha2);
+        calendario2 = DateTime.Parse(calendario);
+
+        if (calendario2 < fecha)
+        {
+            LB_CalendarioAlert.Visible = true;
+            LB_CalendarioAlert.Text = "No hay reservas por favor seleccione otra fecha.";
+        }
+        else
+        {
+            LB_CalendarioAlert.Visible = false;
+        }
     }
 }

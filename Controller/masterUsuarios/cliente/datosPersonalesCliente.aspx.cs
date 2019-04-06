@@ -53,9 +53,9 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
         cliente.Session = Session["user"].ToString();
 
         DataTable contarCorreo = new DAOCliente().contarCorreos(cliente);
-        DataTable datosAdmin = new DAOCliente().mostrarCliente(int.Parse(Session["user_id"].ToString()));
+        DataTable datoscliente = new DAOCliente().mostrarCliente(int.Parse(Session["user_id"].ToString()));
 
-        if (datosAdmin.Rows[0]["correo"].ToString() == cliente.Correo)
+        if (datoscliente.Rows[0]["correo"].ToString() == cliente.Correo)
         {
             error = 0;
             P_Alerta.Visible = false;
@@ -70,7 +70,7 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
             L_Alerta.Text = "El correo ya existe";
             P_Alerta.Visible = true;
 
-            ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteCorreo")).Text = datosAdmin.Rows[0]["correo"].ToString();
+            ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteCorreo")).Text = datoscliente.Rows[0]["correo"].ToString();
 
             error = 1;
         }

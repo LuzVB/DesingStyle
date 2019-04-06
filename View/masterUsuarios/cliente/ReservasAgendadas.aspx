@@ -32,7 +32,7 @@
             <td class="auto-style18" colspan="2"> 
                  <div class="auto-style21">
 
-                <asp:GridView ID="GV_reservasAgendadas" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="100%" CssClass="auto-style14" AllowPaging="True"  style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="ODS_mostrarReserva" >
+                <asp:GridView ID="GV_reservasAgendadas" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="100%" CssClass="auto-style14" AllowPaging="True"  style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="ODS_mostrarReserva" PageSize="5" >
                     <Columns>
                         <asp:TemplateField HeaderText="Fecha y hora de Incio">
                             <EditItemTemplate>
@@ -71,7 +71,7 @@
                                 <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("precio") %>'></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label5" runat="server" Text='<%# Bind("precio") %>'></asp:Label>
+                                <asp:Label ID="Label5" runat="server" Text='<%# Bind("precio" , "{0:C}") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Columns>
