@@ -67,7 +67,7 @@
     <tr>
         <td colspan="3" class="auto-style11">
             
-            <asp:GridView ID="GV_Estilista" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" PageSize="5" Width="85%" CssClass="auto-style14" ShowHeaderWhenEmpty="True" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="ODS_Estilista" OnSelectedIndexChanged="GV_Estilista_SelectedIndexChanged" OnRowDataBound="GV_Estilista_RowDataBound" >
+            <asp:GridView ID="GV_Estilista" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" PageSize="5" Width="85%" CssClass="auto-style14" ShowHeaderWhenEmpty="True" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="ODS_Estilista" OnSelectedIndexChanged="GV_Estilista_SelectedIndexChanged" OnRowDataBound="GV_Estilista_RowDataBound" OnDataBound="GV_Estilista_DataBound" >
                 <Columns>
                     <asp:TemplateField HeaderText="Documento">
                         <EditItemTemplate>
@@ -240,9 +240,9 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:DropDownList ID="DDL_estilistas" runat="server" Height="25px" Width="96%" DataSourceID="ODS_Estilista2" DataTextField="id" DataValueField="id" ValidationGroup="Adicional">
-                        </asp:DropDownList>
                         <asp:ObjectDataSource ID="ODS_Estilista2" runat="server" SelectMethod="obtenerEstilista" TypeName="DAORegistroEstilista"></asp:ObjectDataSource>
+                        <asp:DropDownList ID="DDL_estilistas" runat="server" DataSourceID="ODS_Estilista2" DataTextField="id" DataValueField="id" Height="25px" ValidationGroup="Adicional" Width="96%">
+                        </asp:DropDownList>
                     </td>
                     <td>
                         <asp:DropDownList ID="DDL_Aservicio" runat="server" Height="25px" Width="96%" DataSourceID="ODS_Servicio2" DataTextField="nombre" DataValueField="id" ValidationGroup="Adicional">

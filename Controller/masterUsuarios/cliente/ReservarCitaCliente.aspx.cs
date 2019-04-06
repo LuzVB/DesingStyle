@@ -163,4 +163,29 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
             LB_CalendarioAlert.Visible = false;
         }
     }
+
+    protected void ODS_servicio_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
+    {
+       
+    }
+
+    protected void DDL_servicio_DataBound(object sender, EventArgs e)
+    {
+
+        if (DDL_servicio.SelectedValue.Equals(""))
+        {
+            L_Precio.Text = "";
+        }
+        else
+        {
+           int servicioID = int.Parse(DDL_servicio.SelectedValue.ToString());
+
+            DAO_Reserva buscarPrecio = new DAO_Reserva();
+            DataTable precio = buscarPrecio.mostrarPrecio(servicioID);
+
+            L_Precio.Text = "$ " + precio.Rows[0]["precio_servicio"].ToString();
+        }
+
+       
+    }
 }

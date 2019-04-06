@@ -53,7 +53,8 @@ public class DAO_Reserva
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_cargar_estilista", conection);
+            //NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_cargar_estilista", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_cargar_estilista2", conection);
             dataAdapter.SelectCommand.Parameters.Add("_id_servicio", NpgsqlDbType.Integer).Value = id_servicio;
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
@@ -118,7 +119,16 @@ public class DAO_Reserva
             hora_ini = DateTime.Parse(hora_inicio).ToShortDateString();
         }
 
-        
+        //if (id_estilista.Equals(null))
+        //{
+        //    id_estilista = 0;
+        //}
+        //else
+        //{
+            
+        //}
+
+
 
         DateTime hora_iniBD = DateTime.Parse(hora_ini + " 08:00:00");
         DateTime hora_finBD = DateTime.Parse(hora_ini + " 17:00:00");
@@ -127,7 +137,8 @@ public class DAO_Reserva
 
         try /*1203125647*/
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horarios2", conection);
+            //NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horarios2", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horarios5", conection);
             dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = id_estilista;
             dataAdapter.SelectCommand.Parameters.Add("_hora_inicio", NpgsqlDbType.Timestamp).Value = hora_iniBD;
             dataAdapter.SelectCommand.Parameters.Add("_hora_final", NpgsqlDbType.Timestamp).Value = hora_finBD;

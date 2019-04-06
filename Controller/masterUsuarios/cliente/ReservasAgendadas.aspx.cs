@@ -27,4 +27,10 @@ public partial class View_masterUsuarios_cliente_ReservasAgendadas : System.Web.
     {
         Response.Redirect("~/View/masterUsuarios/cliente/ReservarCitaCliente.aspx");
     }
+
+    protected void GV_reservasAgendadas_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        //aqui va el update de cancelar la cita
+    }
+    
 }

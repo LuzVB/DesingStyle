@@ -168,6 +168,11 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
      
     }
 
+
+    protected void GV_Estilista_DataBound(object sender, EventArgs e)
+    {
+        DDL_estilistas.DataBind();
+    }
 }
 
    

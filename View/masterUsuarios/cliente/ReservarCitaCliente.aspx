@@ -113,9 +113,9 @@
             &nbsp;<asp:RequiredFieldValidator ID="RFV_ServicioReserva" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DDL_servicio"></asp:RequiredFieldValidator>
         </td>
         <td class="auto-style36">
-            <asp:DropDownList ID="DDL_servicio" runat="server" Height="25px" Width="70%" DataSourceID="ODS_servicio" DataTextField="nombre_servicio" DataValueField="id" CssClass="auto-style42" AutoPostBack="True" OnSelectedIndexChanged="DDL_servicio_SelectedIndexChanged" >
+            <asp:DropDownList ID="DDL_servicio" runat="server" Height="25px" Width="70%" DataSourceID="ODS_servicio" DataTextField="nombre_servicio" DataValueField="id" CssClass="auto-style42" AutoPostBack="True" OnSelectedIndexChanged="DDL_servicio_SelectedIndexChanged" OnDataBound="DDL_servicio_DataBound" >
             </asp:DropDownList>
-            <asp:ObjectDataSource ID="ODS_servicio" runat="server" SelectMethod="mostrarServicio" TypeName="DAO_Reserva"></asp:ObjectDataSource>
+            <asp:ObjectDataSource ID="ODS_servicio" runat="server" SelectMethod="mostrarServicio" TypeName="DAO_Reserva" OnSelecting="ODS_servicio_Selecting"></asp:ObjectDataSource>
         </td>
     </tr>
     <tr>
@@ -153,7 +153,7 @@
             </asp:UpdatePanel>
             <asp:ObjectDataSource ID="ODS_luz" runat="server" SelectMethod="mostrarEstilistas" TypeName="DAO_Reserva">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DDL_servicio" DefaultValue="id" Name="id_servicio" PropertyName="SelectedValue" Type="Int32" />
+                    <asp:ControlParameter ControlID="DDL_servicio" DefaultValue="0" Name="id_servicio" PropertyName="SelectedValue" Type="Int32" />
                 </SelectParameters>
             </asp:ObjectDataSource>
         </td>
@@ -216,7 +216,7 @@
             </asp:UpdatePanel>
             <asp:ObjectDataSource ID="ODS_PruebaHorarios" runat="server" SelectMethod="mostrarHorarios" TypeName="DAO_Reserva">
                 <SelectParameters>
-                    <asp:ControlParameter ControlID="DDL_Estilista" DefaultValue="id" Name="id_estilista" PropertyName="SelectedValue" Type="Int32" />
+                    <asp:ControlParameter ControlID="DDL_Estilista" DefaultValue="0" Name="id_estilista" PropertyName="SelectedValue" Type="Int32" />
                     <asp:ControlParameter ControlID="C_Reserva" DefaultValue="1" Name="hora_inicio" PropertyName="SelectedDate" Type="String" />
                 </SelectParameters>
             </asp:ObjectDataSource>
