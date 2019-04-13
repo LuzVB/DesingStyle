@@ -30,6 +30,8 @@ public partial class View_masterUsuarios_estilista_catalogoEstilista : System.We
         EUsuario user = new EUsuario();
         user.UserId = int.Parse(Session["user_id"].ToString());
         user.Session = Session["user"].ToString();
+        Random rnd = new Random();
+        int numero = rnd.Next(1, 10000);
         FileUpload FU_IMuestra = ((FileUpload)FU_Catalogo.FindControl("FU_Catalogo"));
         ClientScriptManager cm = this.ClientScript;
 
@@ -41,7 +43,7 @@ public partial class View_masterUsuarios_estilista_catalogoEstilista : System.We
         }
         else
         {
-            user.Muestra = "~\\Imagenes\\perfil\\" + Session["nombre"].ToString() + System.IO.Path.GetFileName(FU_IMuestra.PostedFile.FileName);
+            user.Muestra = "~\\Imagenes\\perfil\\" + Session["nombre"].ToString() + numero + System.IO.Path.GetFileName(FU_IMuestra.PostedFile.FileName);
             FU_IMuestra.PostedFile.SaveAs(Server.MapPath(user.Muestra));
 
             DataTable datos = new DAOPerfilEstilista().registroCatalogo(user);

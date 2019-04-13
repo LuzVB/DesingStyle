@@ -22,22 +22,22 @@
          .auto-style10 {
              text-align: center;
          }
-         .auto-style11 {
-             width: 70%;
-             font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-             color: #018BDE;
-             margin-right: 0px;
-         }
-        
+                 
          .auto-style12 {
              color: #000000;
              font-weight: normal;
          }
+         .auto-style13 {
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            /*padding-left:17%;*/
+            height: 215px;
+        width: 321px;
+    }
         
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <table class="auto-style11">
+    <table class="auto-style13">
         <tr>
             <td class="auto-style9">
                 <h3 class="auto-style5">Catalogo</h3>
@@ -88,7 +88,9 @@
         </tr>
         <tr>
             <td class="auto-style8"><br />
-                <asp:RequiredFieldValidator ID="RFV_Catalogo" runat="server" ControlToValidate="FU_Catalogo" ErrorMessage="Agregar Imagen (*)" ForeColor="Red" ValidationGroup="VG_Imagen"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="RFV_Catalogo" runat="server" ControlToValidate="FU_Catalogo" ErrorMessage="Agregar Imagen (*)"  class="alert alert-danger" ValidationGroup="VG_Imagen"></asp:RequiredFieldValidator>
+                <br />
+                <br />
                 <br />
                 <asp:FileUpload ID="FU_Catalogo" runat="server" BorderColor="#0099FF" />
                 <br />

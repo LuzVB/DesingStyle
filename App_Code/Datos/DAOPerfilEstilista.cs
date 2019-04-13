@@ -179,4 +179,33 @@ public class DAOPerfilEstilista
             }
         }
     }
+
+    public DataTable mostrarReservasEstilista(int id, string _fecha)
+    {
+        DataTable catalogo = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_reserva_estilista", conection);
+            dataAdapter.SelectCommand.Parameters.Add("_id_usuario", NpgsqlDbType.Integer).Value = id;
+            dataAdapter.SelectCommand.Parameters.Add("_fecha", NpgsqlDbType.Date).Value = DateTime.Parse(_fecha);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(catalogo);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return catalogo;
+    }
 }

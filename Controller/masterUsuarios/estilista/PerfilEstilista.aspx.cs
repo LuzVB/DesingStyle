@@ -64,12 +64,21 @@ public partial class View_masterUsuarios_estilista_PerfilEstilista : System.Web.
 
     protected void BT_GuardarBiografia_Click(object sender, EventArgs e)
     {
-        EUsuario estilista = new EUsuario();
-        estilista.UserId = int.Parse(Session["user_id"].ToString());
-        estilista.Biografia = Tx_IBiografia.Text;
 
-        DAOPerfilEstilista guardarCambios = new DAOPerfilEstilista();
-        guardarCambios.actualizarBiografia(estilista);
+        if (((TextBox)FV_Biografia.Row.FindControl("Tx_IBiografia")).Text.Length > 300)
+        {
+            RFV_Biografia.Visible = true;
+            RFV_Biografia.Text = "No puede registrar mas de 300 caracteres";
+        }
+        else
+        {
+            EUsuario estilista = new EUsuario();
+            estilista.UserId = int.Parse(Session["user_id"].ToString());
+            estilista.Biografia = ((TextBox)FV_Biografia.Row.FindControl("Tx_IBiografia")).Text;
+            DAOPerfilEstilista guardarCambios = new DAOPerfilEstilista();
+            guardarCambios.actualizarBiografia(estilista);
+            RFV_Biografia.Visible = false;
+        }
     }
 
     protected void BT_CambiarImagen_Click(object sender, EventArgs e)
@@ -98,6 +107,11 @@ public partial class View_masterUsuarios_estilista_PerfilEstilista : System.Web.
     }
 
     protected void Tx_ContraseñaActual_TextChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void FV_Biografia_PageIndexChanging(object sender, FormViewPageEventArgs e)
     {
 
     }

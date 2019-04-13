@@ -166,6 +166,34 @@ public class DAOCliente
         return Usuario;
     }
 
+    public DataTable mostrarEstilista(int id)
+    {
+        DataTable mostrarCliente = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_mostar_estilista2", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = id;
+
+            conection.Open();
+            dataAdapter.Fill(mostrarCliente);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return mostrarCliente;
+    }
+
     public DataTable Alerta(int id)
     {
         DataTable alerta = new DataTable();

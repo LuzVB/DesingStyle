@@ -244,7 +244,7 @@ public class DAORegistroEstilista
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_mostar_servicio_usuario", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_mostar_servicio_usuario2", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
             conection.Open();
@@ -324,7 +324,7 @@ public class DAORegistroEstilista
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_estilistas_inasistencia", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_estilistas_inasistencia2", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
             conection.Open();
@@ -402,7 +402,7 @@ public class DAORegistroEstilista
         }
         return insertarHorario;
     }
-    public DataTable Inasistencia(int _usuario, string _fecha)
+    public DataTable Inasistencia(int _usuario, DateTime _fecha)
     {
         DataTable ActualizarInacistencia = new DataTable();
         NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
@@ -412,7 +412,7 @@ public class DAORegistroEstilista
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.actualizar_inasistencia2", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
             dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value =_usuario;
-            dataAdapter.SelectCommand.Parameters.Add("_fecha", NpgsqlDbType.Text).Value =_fecha;
+            dataAdapter.SelectCommand.Parameters.Add("_fecha", NpgsqlDbType.Date).Value =_fecha;
 
             conection.Open();
             dataAdapter.Fill(ActualizarInacistencia);
