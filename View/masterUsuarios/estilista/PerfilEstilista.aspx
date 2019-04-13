@@ -57,10 +57,13 @@
             width: 70%;
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             padding-left:17%;
-        }
+        text-align: center;
+        color: #000000;
+        font-size: 160%;
+    }
         .auto-style29 {
             width: 70%;
-            
+            height: 73px;
         }
         .auto-style30 {
             height: 23px;
@@ -77,10 +80,33 @@
             width: 30%;
             height: 97px;
         }
+    .auto-style33 {
+        margin-top: 48px;
+    }
+        .auto-style34 {
+            width: 70%;
+            height: 84px;
+            text-align: center;
+        }
+        .auto-style35 {
+            width: 30%;
+            height: 84px;
+        }
+        .auto-style36 {
+            width: 30%;
+            height: 73px;
+        }
+        .imgCli{
+            width:50%;
+            height:200px;
+            margin:1%;
+            object-fit:cover;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <table class="auto-style1">
+        
     <tr>
         <td class="auto-style26"><strong>PERFIL
         </strong>
@@ -92,11 +118,11 @@
         <td class="auto-style29">
             <asp:Label ID="LB_nombreEstilista" runat="server" CssClass="auto-style25" ForeColor="#0099FF"></asp:Label>
         </td>
-        <td class="auto-style11">&nbsp;</td>
+        <td class="auto-style36"></td>
     </tr>
     <tr>
         <td class="auto-style12">
-            <asp:Image ID="I_PerfilEstilista" runat="server" class="img_perfil" Height="200px" Width="40%" ImageUrl="~/Imagenes/perfil/estilista1.jpg" />
+            <asp:Image ID="I_PerfilEstilista" runat="server" class="imgCli" ImageUrl="~/Imagenes/perfil/estilista1.jpg" />
         </td>
         <td class="auto-style13">                       
             &nbsp;</td>
@@ -104,11 +130,14 @@
     <tr>
         <td class="auto-style30">&nbsp;</td>
         <td class="auto-style22">                       
-            <asp:Button ID="BT_CambiarImagen" runat="server" Text="Cambiar imagen" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_InicioSesion" CssClass="auto-style21" OnClick="BT_CambiarImagen_Click" />
             <br />
             <br />
-            <asp:RequiredFieldValidator ID="RFV_Up" runat="server" ControlToValidate="FU_Perfil" ErrorMessage="Agregue su imagen (*)" ForeColor="Red" ValidationGroup="VG_InicioSesion"></asp:RequiredFieldValidator>
             <asp:FileUpload ID="FU_Perfil" runat="server" />
+            <br />
+            <asp:RequiredFieldValidator ID="RFV_Up" runat="server" ControlToValidate="FU_Perfil" ErrorMessage="Agregue su imagen (*)"  class="alert alert-danger"  ValidationGroup="VG_InicioSesion"></asp:RequiredFieldValidator>
+            <br />
+            <br />
+            <asp:Button ID="BT_CambiarImagen" runat="server" Text="Cambiar imagen" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_InicioSesion" CssClass="auto-style21" OnClick="BT_CambiarImagen_Click" />
         </td>
     </tr>
     <tr>
@@ -116,14 +145,34 @@
         <td class="auto-style22">&nbsp;</td>
     </tr>
     <tr>
-        <td class="auto-style28">Descríbete a ti mismo y tu historia.</td>
+        <td class="auto-style28"><strong>Reseña de su biografía</strong></td>
         <td class="auto-style11">&nbsp;</td>
     </tr>
     <tr>
         <td class="auto-style27">
-            <asp:RequiredFieldValidator ID="RVF_biografia" runat="server" ControlToValidate="Tx_IBiografia" ErrorMessage="Registre Su biografia (*)" ForeColor="Red" ValidationGroup="VG_Biografia"></asp:RequiredFieldValidator>
+            <div class="text-center">
+                <asp:FormView ID="FV_Biografia" runat="server" DataSourceID="ODS_biografia" Width="100%" OnPageIndexChanging="FV_Biografia_PageIndexChanging" CssClass="auto-style33">
+                    <ItemTemplate>
+                        <asp:TextBox ID="Tx_IBiografia" runat="server" BorderColor="#0099FF" Height="100px" Text='<%# Bind("biografia") %>' ValidationGroup="VG_Biografia" Width="50%" TextMode="MultiLine"></asp:TextBox>
+                        <br />
+                        <br />
+                        <br />
+                        <asp:RequiredFieldValidator ID="RVF_biografia" runat="server" class="alert alert-danger" ControlToValidate="Tx_IBiografia" ErrorMessage="Registre Su biografia (*)" role="alert" ValidationGroup="VG_Biografia"></asp:RequiredFieldValidator>
+                    </ItemTemplate>
+                </asp:FormView>
+                <asp:ObjectDataSource ID="ODS_biografia" runat="server" SelectMethod="mostrarCliente" TypeName="DAOCliente">
+                    <SelectParameters>
+                        <asp:SessionParameter DefaultValue="id" Name="id" SessionField="user_id" Type="Int32" />
+                    </SelectParameters>
+                </asp:ObjectDataSource>
+            </div>
+            <asp:UpdatePanel ID="UP_RFV_Biografia" runat="server">
+                <ContentTemplate>
+                    <asp:Label ID="RFV_Biografia" runat="server" Text="" Visible="False" class="alert alert-warning" role="alert"></asp:Label>
+                </ContentTemplate>                
+            </asp:UpdatePanel>
+            
             <br />
-           <asp:TextBox ID="Tx_IBiografia" runat="server" BorderColor="#0099FF" Width="50%" Height="100px" TextMode="SingleLine" ValidationGroup="VG_Biografia" ></asp:TextBox>
             <%--  <cc1:TextBoxWatermarkExtender id="TBWEDOB_contraseñaNueva" runat="server" targetcontrolid="Tx_ContraseñaNueva" watermarktext="Contraseña nueva" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>--%>
         <td class="auto-style11">&nbsp;</td>
     </tr>
@@ -163,10 +212,10 @@
         <td class="auto-style32"></td>
     </tr>
     <tr>
-        <td class="auto-style8">
-            <asp:Label ID="LB_ErrorContraseña" runat="server" ForeColor="Red"></asp:Label>
+        <td class="auto-style34">
+            <asp:Label ID="LB_ErrorContraseña" runat="server" class="alert alert-danger" Visible="False"></asp:Label>
         </td>
-        <td class="auto-style11">
+        <td class="auto-style35">
             <asp:Button ID="BT_GuardarBiografia0" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_cambioContraseña" CssClass="auto-style21" OnClick="BT_GuardarBiografia0_Click" />
         </td>
     </tr>

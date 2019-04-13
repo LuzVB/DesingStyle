@@ -178,13 +178,13 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style8"><asp:TextBox ID="Tx_NombreServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroServicio"></asp:TextBox>
+            <td class="auto-style8"><asp:TextBox ID="Tx_NombreServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="50" ValidationGroup="registroServicio"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_NombreServicio" runat="server" ControlToValidate="Tx_NombreServicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroServicio" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
                 <cc1:TextBoxWatermarkExtender id="TBWEDOB_NombreServicio" runat="server" targetcontrolid="Tx_NombreServicio" watermarktext="Nombre" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
                 <cc1:filteredtextboxextender ID="FTBE_NombreServicio" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" TargetControlID="Tx_NombreServicio" InvalidChars=" ñ" />
             <td class="auto-style9">
-                <asp:TextBox ID="Tx_descripcionServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroServicio" ></asp:TextBox>
+                <asp:TextBox ID="Tx_descripcionServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="50" ValidationGroup="registroServicio" ></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_descripcionServicio" runat="server" ControlToValidate="Tx_descripcionServicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroServicio" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
                 <cc1:TextBoxWatermarkExtender id="TBWEDOB_descripcionServicio" runat="server" targetcontrolid="Tx_descripcionServicio" watermarktext="Descripcion" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>

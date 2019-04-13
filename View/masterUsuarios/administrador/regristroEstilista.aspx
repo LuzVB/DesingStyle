@@ -126,7 +126,6 @@
                         </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="L_Estado" runat="server" Text='<%# Bind("estado")%>'></asp:Label>
-                            <asp:Label ID="L_Prueba" runat="server" Text="Label"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField ShowHeader="False">
@@ -159,6 +158,7 @@
                     <asp:Parameter Name="telefono" Type="Int32" />
                     <asp:Parameter Name="correo" Type="String" />
                     <asp:Parameter Name="contrasena" Type="String" />
+                    <asp:Parameter Name="estado" Type="String" />
                     <asp:Parameter Name="id" Type="Int32" />
                 </UpdateParameters>
             </asp:ObjectDataSource>
@@ -265,7 +265,7 @@
                                 <td>&nbsp;</td>
                             </tr>
                         </table>
-                        <asp:GridView ID="GV_EstilistaServicio" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" CssClass="auto-style14" DataKeyNames="id" DataSourceID="ODS_Mostrar" Width="80%" PageSize="5">
+                        <asp:GridView ID="GV_EstilistaServicio" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" CssClass="auto-style14" DataKeyNames="id" DataSourceID="ODS_Mostrar" Width="80%" PageSize="5" OnDataBound="GV_EstilistaServicio_DataBound">
                             <Columns>
                                 <asp:BoundField DataField="servicio" HeaderText="Servicio" />
                                 <asp:BoundField DataField="nombre_usuario" HeaderText="Estilista" />

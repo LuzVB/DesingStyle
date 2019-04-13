@@ -153,16 +153,16 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
         {
             if (((Label)e.Row.FindControl("L_Estado")).Text.Equals("1"))
             {
-                ((Label)e.Row.FindControl("L_Estado")).Visible = false;
-                ((Label)e.Row.FindControl("L_Prueba")).Text = "Activo";
+                ((Label)e.Row.FindControl("L_Estado")).Text = "Activo";
             }
             else if (((Label)e.Row.FindControl("L_Estado")).Text.Equals("2"))
             {
-                ((Label)e.Row.FindControl("L_Estado")).Visible = false;
-                ((Label)e.Row.FindControl("L_Prueba")).Text = "Despedido";
+                ((Label)e.Row.FindControl("L_Estado")).Text = "Despedido";
+               
             }
             else {
-                ((Label)e.Row.FindControl("L_Prueba")).Text = "Activo";
+         
+                ((Label)e.Row.FindControl("L_Estado")).Text = "Activo";
             }
         }
      
@@ -172,6 +172,12 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
     protected void GV_Estilista_DataBound(object sender, EventArgs e)
     {
         DDL_estilistas.DataBind();
+        GV_EstilistaServicio.DataBind();
+    }
+
+    protected void GV_EstilistaServicio_DataBound(object sender, EventArgs e)
+    {
+
     }
 }
 
