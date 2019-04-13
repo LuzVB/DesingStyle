@@ -55,10 +55,12 @@
             <td class="auto-style18" colspan="2"> 
                  <div class="auto-style21">
 
-                <asp:GridView ID="GV_reservasEstilistas" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="80%" CssClass="auto-style14" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" AutoGenerateColumns="False" >
+                <asp:GridView ID="GV_reservasEstilistas" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="80%" CssClass="auto-style14" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="ODS_inasistencia" >
                     <Columns>
-                        <asp:BoundField DataField="nombre" HeaderText="Estilista" />
-                        <asp:BoundField DataField="valor" HeaderText="Fecha" />
+                        <asp:BoundField DataField="nombre_estilista" HeaderText="Estilista" />
+                        <asp:BoundField DataField="apellido_estilista" />
+                        <asp:BoundField DataField="fecha" HeaderText="Fecha" />
+                        <asp:BoundField DataField="servicio" HeaderText="Servicio" />
                     </Columns>
                 <EmptyDataTemplate>
                             <asp:Image ID="noRegistro" runat="server" ImageUrl="~/Imagenes/no-encontrado.png" Width="20%" CssClass="imgNoRegistro" />
@@ -75,6 +77,7 @@
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                   
             </asp:GridView>
+                     <asp:ObjectDataSource ID="ODS_inasistencia" runat="server" SelectMethod="mostrarEstilistaInasistencia" TypeName="DAORegistroEstilista"></asp:ObjectDataSource>
                 </div>
             
             </td>
@@ -85,15 +88,16 @@
         <tr>
             <td class="auto-style9">Estilistas</td>
             <td class="auto-style8">
-                <asp:DropDownList ID="DDL_EstilistaInasistencia" runat="server" Height="25px" Width="70%">
+                <asp:DropDownList ID="DDL_EstilistaInasistencia" runat="server" Height="25px" Width="70%" DataSourceID="ODS_estilista" DataTextField="nombre" DataValueField="id">
                 </asp:DropDownList>
+                <asp:ObjectDataSource ID="ODS_estilista" runat="server" SelectMethod="mostrarEstilista" TypeName="DAORegistroEstilista" OnSelecting="ODS_estilista_Selecting"></asp:ObjectDataSource>
                 <asp:RequiredFieldValidator ID="RFV_EstilistaInasistencia" runat="server" ControlToValidate="DDL_EstilistaInasistencia" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroInasistencia" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
             <td class="auto-style9">Fecha</td>
             <td class="auto-style16">
-                <asp:TextBox ID="Tx_FechaInasistencia" runat="server" BorderColor="#0099FF" Width="69%" Height="25px" MaxLength="10" ValidationGroup="registroInasistencia"></asp:TextBox>
+                <asp:TextBox ID="Tx_FechaInasistencia" runat="server" BorderColor="#0099FF" Width="69%" Height="25px" MaxLength="10" ValidationGroup="registroInasistencia" OnTextChanged="Tx_FechaInasistencia_TextChanged"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_FechaInasistencia" runat="server" ControlToValidate="Tx_FechaInasistencia" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroInasistencia" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
                
@@ -102,11 +106,13 @@
         <tr>
             <td class="auto-style8">&nbsp;</td>
             <td class="auto-style15">
-                <asp:Button ID="BT_Insasitencia" runat="server" Height="30px" Text="Enviar" Width="70%" ValidationGroup="registroInasistencia" />
+                <asp:Button ID="BT_Insasitencia" runat="server" Height="30px" Text="Enviar" Width="70%" ValidationGroup="registroInasistencia" OnClick="BT_Insasitencia_Click" />
             </td>
         </tr>
         <tr>
-            <td colspan="2" class="auto-style14">&nbsp;</td>
+            <td colspan="2" class="auto-style14">
+                <asp:Label ID="fecha" runat="server" Text="Label"></asp:Label>
+            </td>
         </tr>
     </table>
 </asp:Content>
