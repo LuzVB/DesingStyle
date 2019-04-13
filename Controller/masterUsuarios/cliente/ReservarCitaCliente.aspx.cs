@@ -38,9 +38,11 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         DAO_Reserva buscarPrecio = new DAO_Reserva();
         DataTable precio = buscarPrecio.mostrarPrecio(servicioID);
 
+
         fechaCliente = DateTime.Parse(DDL_Hora.SelectedItem.ToString());
         hora = fechaCliente.ToShortTimeString();
-        fecha = fechaCliente.ToShortDateString();
+        fecha = C_Reserva.SelectedDate.ToShortDateString();
+        //fecha = fechaCliente.ToShortDateString();
 
         L_estilistaPanel.Text = DDL_Estilista.SelectedItem.ToString();
         L_servicioPanel.Text = DDL_servicio.SelectedItem.ToString();
@@ -53,48 +55,49 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
 
     protected void BT_Reservar_Click(object sender, EventArgs e)
     {
-        string hora_cliente, diaReserva, duracionServicio, time24;
+        string hora_cliente, diaReserva, duracionServicio, time24 ,horaF, hora_clienteF;
         string[] cadena;
         DateTime horaCliente, horaFinal;
-        int servicio, hora, minuto, duracionFinal, id_estilista, id_servicio;
+        int  hora, minuto, duracionFinal, id_estilista, id_servicio;
         DAO_Reserva mostrarDuracion = new DAO_Reserva();
         DAO_Reserva buscarPrecio = new DAO_Reserva();
         
 
 
-        diaReserva = C_Reserva.SelectedDate.ToShortDateString();
+        diaReserva = C_Reserva.SelectedDate.ToShortDateString();//11/09/2019
 
-        hora_cliente = DDL_Hora.SelectedItem.ToString();
-        id_estilista = int.Parse(DDL_Estilista.SelectedValue.ToString());
-        id_servicio = int.Parse(DDL_servicio.SelectedValue.ToString());
+        hora_cliente = DDL_Hora.SelectedItem.ToString();//08:00:00
+        id_estilista = int.Parse(DDL_Estilista.SelectedValue.ToString());//39760672
+        id_servicio = int.Parse(DDL_servicio.SelectedValue.ToString());//quitar o modificar //7
 
-        horaCliente = DateTime.Parse(hora_cliente);
+        horaCliente = DateTime.Parse(hora_cliente); //10/04/2019 8:00:00 a. m.
         //hora_cliente = horaCliente.ToLongTimeString();
 
-        time24 = horaCliente.ToString("HH:mm", CultureInfo.CurrentCulture);
-
-
-        servicio = int.Parse(DDL_servicio.SelectedValue.ToString());
-        DataTable duracion = mostrarDuracion.duracionServicio(servicio);
-        duracionServicio = duracion.Rows[0]["duracion_servicio"].ToString();
+        time24 = horaCliente.ToString("HH:mm", CultureInfo.CurrentCulture); //08:00
+        
+        DataTable duracion = mostrarDuracion.duracionServicio(id_servicio);
+        duracionServicio = duracion.Rows[0]["duracion_servicio"].ToString();//00:30:00
 
         cadena = duracionServicio.Split(':');
 
         hora = int.Parse(cadena[0]);
         minuto = int.Parse(cadena[1]);
 
-        duracionFinal = (hora * 60) + minuto;
+        duracionFinal = (hora * 60) + minuto;//30
 
+        horaFinal = DateTime.Parse(time24).AddMinutes(duracionFinal);//10/04/2019 8:30:00 a. m
+        horaF = horaFinal.ToShortTimeString();
 
-
-        horaFinal = DateTime.Parse(time24).AddMinutes(duracionFinal);
+        hora_cliente = diaReserva +" "+ time24;
+        hora_clienteF = diaReserva +" " + horaF;       
+       
 
 
         ERegistroHorario reserva = new ERegistroHorario();
         ERegistroHorario gReserva = new ERegistroHorario();
         DAO_Reserva rangoHorario = new DAO_Reserva();
         DAO_Reserva guardarReserva = new DAO_Reserva();
-        DataTable horario = rangoHorario.horarioEstilista(id_estilista, hora_cliente, horaFinal.ToString());
+        DataTable horario = rangoHorario.horarioEstilista(id_estilista, hora_cliente, hora_clienteF);
         int tamano = horario.Rows.Count;
 
 
@@ -111,10 +114,10 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         DataTable precio = buscarPrecio.mostrarPrecio(id_servicio);
         gReserva.IdCliente = int.Parse(Session["user_id"].ToString());
         gReserva.Idestilista = id_estilista;
-        gReserva.IdServicio = servicio;
+        gReserva.IdServicio = id_servicio;
         gReserva.Session = Session["user"].ToString();
         gReserva.Fechaini = DateTime.Parse(hora_cliente);
-        gReserva.Fechafin = horaFinal;
+        gReserva.Fechafin = DateTime.Parse(hora_clienteF);
         gReserva.Precio = int.Parse(precio.Rows[0]["precio_servicio"].ToString());
 
         guardarReserva.guardarReserva(gReserva);
@@ -188,4 +191,6 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
 
        
     }
+
+   
 }

@@ -200,7 +200,7 @@
     <tr>
         <td class="auto-style37">
            Hora
-            <asp:RequiredFieldValidator ID="RFV_Hora" runat="server" ControlToValidate="DDL_Hora" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_reservar"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="RFV_Hora" runat="server" ControlToValidate="DDL_Hora" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_reservar" ></asp:RequiredFieldValidator>
            
         </td>
         <td class="auto-style36" >

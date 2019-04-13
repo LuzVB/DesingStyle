@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -105,9 +106,15 @@ public class DAO_Reserva
 
     public DataTable mostrarHorarios(int id_estilista, string hora_inicio)
     {
+        string hora_ini, hora_actual, fechaA;
+        DateTime fechaActual = new DateTime();
+        fechaActual = DateTime.Now;
+        fechaA = fechaActual.ToShortDateString();
         DateTime fecha = new DateTime();
+        DateTime hora_iniBD = new DateTime();
+        DateTime hora_finBD = new DateTime();
         DataTable horario = new DataTable();
-        string hora_ini;
+        
 
         if (hora_inicio == "1")
         {
@@ -119,25 +126,32 @@ public class DAO_Reserva
             hora_ini = DateTime.Parse(hora_inicio).ToShortDateString();
         }
 
-        //if (id_estilista.Equals(null))
-        //{
-        //    id_estilista = 0;
-        //}
-        //else
-        //{
+        if (DateTime.Parse(fechaA) == DateTime.Parse(hora_ini)){
+
+            hora_actual = fechaActual.ToString("HH:mm", CultureInfo.CurrentCulture); 
+
+            hora_iniBD = DateTime.Parse(hora_actual);
+            hora_finBD = DateTime.Parse(hora_ini + " 17:00:00");
             
-        //}
+        }
+        else if (DateTime.Parse(fechaA) > DateTime.Parse(hora_ini))
+        {
 
-
-
-        DateTime hora_iniBD = DateTime.Parse(hora_ini + " 08:00:00");
-        DateTime hora_finBD = DateTime.Parse(hora_ini + " 17:00:00");
+            hora_iniBD = DateTime.Parse(hora_ini + " 00:00:00");
+            hora_finBD = DateTime.Parse(hora_ini + " 00:00:00");
+        }
+        else
+        {
+            hora_iniBD = DateTime.Parse(hora_ini + " 08:00:00");
+            hora_finBD = DateTime.Parse(hora_ini + " 17:00:00");
+            
+        }
 
         NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
 
         try /*1203125647*/
         {
-            //NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horarios2", conection);
+            ////NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horarios2", conection);
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horarios5", conection);
             dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = id_estilista;
             dataAdapter.SelectCommand.Parameters.Add("_hora_inicio", NpgsqlDbType.Timestamp).Value = hora_iniBD;
@@ -158,6 +172,7 @@ public class DAO_Reserva
                 conection.Close();
             }
         }
+
         return horario;
     }
 
@@ -314,5 +329,94 @@ public class DAO_Reserva
             }
         }
         return reservas;
+    }
+
+    public DataTable mostrarReserva(int id)
+    {
+        DataTable reservas = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_reserva", conection);
+            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = id;
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(reservas);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return reservas;
+    }
+
+    public void eliminarReserva(EReserva reserva)
+    {
+        DataTable cita = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_eliminar_reserva", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = reserva.Id;
+
+            conection.Open();
+            dataAdapter.Fill(cita);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+    }
+
+
+    public DataTable traerHorario(EReserva traer)
+    {
+
+        DataTable horario = new DataTable();
+
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try /*1203125647*/
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_traer_reservas", conection);
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = traer.Id_estilista;
+            dataAdapter.SelectCommand.Parameters.Add("_id_cliente", NpgsqlDbType.Integer).Value = traer.Id_cliente;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_inicio", NpgsqlDbType.Timestamp).Value = traer.Hora_inicio;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_final", NpgsqlDbType.Timestamp).Value = traer.Hora_final; 
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(horario);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return horario;
     }
 }

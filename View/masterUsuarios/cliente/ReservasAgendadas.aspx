@@ -74,12 +74,12 @@
                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("precio" , "{0:C}") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField>
+                        <asp:TemplateField HeaderText="Cancelar cita">
                             <EditItemTemplate>
                                 <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:ImageButton ID="IB_Cancelar" runat="server" ImageUrl="~/Imagenes/multiplicar.png" Width="100%" />
+                                <asp:ImageButton ID="IB_Cancelar" runat="server" ImageUrl="~/Imagenes/multiplicar.png" Width="100%" CommandArgument='<%# Bind("id") %>' CommandName="Cancelar" />
                             </ItemTemplate>
                             <ItemStyle Width="10%" />
                         </asp:TemplateField>
