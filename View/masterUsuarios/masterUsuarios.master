@@ -4,18 +4,32 @@
 
 <html>
 <head runat="server">
-   <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <!-- Bootstrap CSS -->
+  <!-- Custom fonts for this template-->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template-->
+  <link href="../../css/sb-admin-2.min.css" rel="stylesheet">
+
+<%--   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">--%>
+
+<%--    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Datos Personales</title>
+    <title></title>
     <%--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">--%>
     <!-- Compiled and minified Bootstrap CSS -->
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+<%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >--%>
     
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 
@@ -70,25 +84,65 @@
 </head>
 <body class="body">
     <form id="form1" runat="server">
-            <div>
-        <table class="auto-style1">
-            <tr>
-                <td class="auto-style2">
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/logo/logo.png" Width="80%" />
-                </td>
-        <td class="auto-style3"></td>
-        </tr>
-            <tr>
-                <td class="auto-style4">
-                    <div class="auto-style6">
-                        <strong><span class="auto-style5">
-                            <br />
-                            <span class="auto-style7">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MENÚ</span><br />
-                        </span>
-                            <br />
-                    </div>
-                    <div class="auto-style6">
-                        <asp:Menu ID="M_Administrador" runat="server" BackColor="#E9E1E1" DynamicHorizontalOffset="2" Font-Names="Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif" Font-Size="150%" ForeColor="Black" Height="180%" StaticSubMenuIndent="10px" Width="70%">
+      <div id="wrapper">
+
+    <!-- Sidebar -->
+        
+    <ul class="navbar-nav  sidebar sidebar-dark accordion bg-info" >
+       <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/logo/logo.png" Width="100%" />
+      <!-- Sidebar - Brand -->
+      <li class="sidebar-brand d-flex align-items-center justify-content-center" >
+        <%--<div class="sidebar-brand-icon rotate-n-15">
+          <i class="fas fa-laugh-wink"></i>
+        </div>--%>
+        <div class="sidebar-brand-text mx-4">MENU</div>
+        
+      </li>
+        
+      <%--<!-- Divider -->
+      <hr class="sidebar-divider my-0">
+
+      <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Dashboard</span></a>
+      </li>--%>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading -->
+      <%--<div class="sidebar-heading">
+        MENU
+      </div>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Components</span>
+        </a>
+
+      </li>--%>
+    <li class="nav-item">
+        <asp:Menu ID="M_Cliente" runat="server" DynamicHorizontalOffset="2" Font-Names="Lucida Sans,Lucida Sans Regular,Lucida Grande,Lucida Sans Unicode,Geneva,Verdana,sans-serif" Font-Size="110%" ForeColor="White"  StaticSubMenuIndent="10px" >
+                            <DynamicHoverStyle BackColor="#008BE4" ForeColor="White" />
+                            <DynamicMenuItemStyle HorizontalPadding="80px" VerticalPadding="2px" />
+                            <DynamicMenuStyle BackColor="#E3EAEB" />
+                            <DynamicSelectedStyle BackColor="#1DAAFE" />
+                            <Items>
+                                <asp:MenuItem Text="Datos personales " Value="Datos personales " ImageUrl="~/Imagenes/menu/datos.png" NavigateUrl="~/View/masterUsuarios/cliente/datosPersonalesCliente.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text="Reservar Cita " Value="Reservar Cita" ImageUrl="~/Imagenes/menu/reservado.png" NavigateUrl="~/View/masterUsuarios/cliente/ReservarCitaCliente.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text="Reservas Agendadas " Value="Reservas Agendadas" ImageUrl="~/Imagenes/menu/agendas.png" NavigateUrl="~/View/masterUsuarios/cliente/ReservasAgendadas.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text="Servicios " Value="Servicios " ImageUrl="~/Imagenes/menu/servicio.png" NavigateUrl="~/View/masterUsuarios/cliente/Servicios.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text="Estilistas " Value="Estilistas " ImageUrl="~/Imagenes/menu/estilistas.png" NavigateUrl="~/View/masterUsuarios/cliente/Estilista.aspx"></asp:MenuItem>
+                            </Items>
+                            <StaticHoverStyle BackColor="#008BE4" ForeColor="White" />
+                            <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                            <StaticSelectedStyle BackColor="#1DAAFE" />
+        </asp:Menu>
+        <asp:Menu ID="M_Administrador" runat="server" DynamicHorizontalOffset="2" Font-Names="Lucida Sans,Lucida Sans Regular,Lucida Grande,Lucida Sans Unicode,Geneva,Verdana,sans-serif" Font-Size="110%" ForeColor="White"  StaticSubMenuIndent="10px" >
                             <DynamicHoverStyle BackColor="#008BE4" ForeColor="White" />
                             <DynamicMenuItemStyle HorizontalPadding="80px" VerticalPadding="2px" />
                             <DynamicMenuStyle BackColor="#E3EAEB" />
@@ -104,13 +158,13 @@
                             <StaticHoverStyle BackColor="#008BE4" ForeColor="White" />
                             <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
                             <StaticSelectedStyle BackColor="#1DAAFE" />
-                        </asp:Menu>
-                        <asp:Menu ID="M_Estilista" runat="server" BackColor="#E9E1E1" DynamicHorizontalOffset="2" Font-Names="Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif" Font-Size="150%" ForeColor="Black" Height="180%" StaticSubMenuIndent="10px" Width="70%">
+        </asp:Menu>
+        <asp:Menu ID="M_Estilista" runat="server" DynamicHorizontalOffset="2" Font-Names="Lucida Sans,Lucida Sans Regular,Lucida Grande,Lucida Sans Unicode,Geneva,Verdana,sans-serif" Font-Size="110%" ForeColor="White"  StaticSubMenuIndent="10px" >
                             <DynamicHoverStyle BackColor="#008BE4" ForeColor="White" />
                             <DynamicMenuItemStyle HorizontalPadding="80px" VerticalPadding="2px" />
                             <DynamicMenuStyle BackColor="#E3EAEB" />
                             <DynamicSelectedStyle BackColor="#1DAAFE" />
-                            <Items>
+                             <Items>
                                 <asp:MenuItem Text="Perfil" Value="Perfil" ImageUrl="~/Imagenes/menu/datos.png" NavigateUrl="~/View/masterUsuarios/estilista/PerfilEstilista.aspx"></asp:MenuItem>
                                 <asp:MenuItem Text="Catalogo" Value="Catalogo" ImageUrl="~/Imagenes/menu/catalogo.png" NavigateUrl="~/View/masterUsuarios/estilista/catalogoEstilista.aspx"></asp:MenuItem>
                                 <asp:MenuItem Text="Reservas" Value="Reservas" ImageUrl="~/Imagenes/menu/agendas.png" NavigateUrl="~/View/masterUsuarios/estilista/ReservaEstilista.aspx"></asp:MenuItem>
@@ -118,44 +172,70 @@
                             <StaticHoverStyle BackColor="#008BE4" ForeColor="White" />
                             <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
                             <StaticSelectedStyle BackColor="#1DAAFE" />
-                        </asp:Menu>
-                        <asp:Menu ID="M_Cliente" runat="server" BackColor="#E9E1E1" DynamicHorizontalOffset="2" Font-Names="Lucida Sans, Lucida Sans Regular, Lucida Grande, Lucida Sans Unicode, Geneva, Verdana, sans-serif" Font-Size="150%" ForeColor="Black" Height="180%" StaticSubMenuIndent="10px" Width="70%">
-                            <DynamicHoverStyle BackColor="#008BE4" ForeColor="White" />
-                            <DynamicMenuItemStyle HorizontalPadding="80px" VerticalPadding="2px" />
-                            <DynamicMenuStyle BackColor="#E3EAEB" />
-                            <DynamicSelectedStyle BackColor="#1DAAFE" />
-                            <Items>
-                                <asp:MenuItem Text="Datos personales " Value="Datos personales " ImageUrl="~/Imagenes/menu/datos.png" NavigateUrl="~/View/masterUsuarios/cliente/datosPersonalesCliente.aspx"></asp:MenuItem>
-                                <asp:MenuItem Text="Reservar Cita" Value="Reservar Cita" ImageUrl="~/Imagenes/menu/reservado.png" NavigateUrl="~/View/masterUsuarios/cliente/ReservarCitaCliente.aspx"></asp:MenuItem>
-                                <asp:MenuItem Text="Reservas Agendadas" Value="Reservas Agendadas" ImageUrl="~/Imagenes/menu/agendas.png" NavigateUrl="~/View/masterUsuarios/cliente/ReservasAgendadas.aspx"></asp:MenuItem>
-                                <asp:MenuItem Text="Servicios " Value="Servicios " ImageUrl="~/Imagenes/menu/servicio.png" NavigateUrl="~/View/masterUsuarios/cliente/Servicios.aspx"></asp:MenuItem>
-                                <asp:MenuItem Text="Estilistas " Value="Estilistas " ImageUrl="~/Imagenes/menu/estilistas.png" NavigateUrl="~/View/masterUsuarios/cliente/Estilista.aspx"></asp:MenuItem>
-                            </Items>
-                            <StaticHoverStyle BackColor="#008BE4" ForeColor="White" />
-                            <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
-                            <StaticSelectedStyle BackColor="#1DAAFE" />
-                        </asp:Menu>
-                    </div>
-                    <br />
-                    <div class="img_salir">
-                        <asp:ImageButton ID="IB_SalirAdministrador" runat="server" ImageUrl="~/Imagenes/menu/salir.png" Width="10%" OnClick="IB_SalirAdministrador_Click" />
-                    </div>
-                    <%--<a class="cerrar" href="administrador/datosPersonales.aspx"><Cerrar Sesion</a>--%><br />
-                    <br />
-                    <br />
-                    </strong></td>
-                <td class="auto-style3">
-                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:Menu>
+       
+    </li>
+    
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <asp:ImageButton ID="IB_SalirAdministrador" runat="server" ImageUrl="~/Imagenes/menu/salir.png" Width="15%" OnClick="IB_SalirAdministrador_Click" />
+      </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <div class="">
+
+              <!-- Illustrations -->
+              <div class="card shadow mb-4">
+                <%--<div class="card-header py-3">
+                  <h6 class="m-0 font-weight-bold text-primary">Illustrations</h6>
+                </div>--%>
+                <div class="card-body">
+                  <div >
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
-                    </td>
-                </td>
-                 
-            </tr>
-        </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <%--<div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Your Website 2019</span>
+          </div>
+        </div>--%>
+      </footer>
+      <!-- End of Footer -->
+
     </div>
-        
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+       
+
     </form>
-     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- Minified JS library -->
