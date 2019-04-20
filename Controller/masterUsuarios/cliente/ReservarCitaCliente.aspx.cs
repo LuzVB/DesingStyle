@@ -30,27 +30,48 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
     protected void BT_GuardarReserva_Click(object sender, EventArgs e)
     {
         string hora, fecha;
-        DateTime fechaCliente;
+        DateTime fechaCliente,fechaCalendario;
+        int servicioID, tamaño;
+        int contador = 0;
 
-        int servicioID;
         servicioID = int.Parse(DDL_servicio.SelectedValue.ToString());
 
-        DAO_Reserva buscarPrecio = new DAO_Reserva();
-        DataTable precio = buscarPrecio.mostrarPrecio(servicioID);
-
+        DAO_Reserva buscar = new DAO_Reserva();
+        DataTable precio = buscar.mostrarPrecio(servicioID);
 
         fechaCliente = DateTime.Parse(DDL_Hora.SelectedItem.ToString());
         hora = fechaCliente.ToShortTimeString();
         fecha = C_Reserva.SelectedDate.ToShortDateString();
+        fechaCalendario = C_Reserva.SelectedDate;
         //fecha = fechaCliente.ToShortDateString();
 
-        L_estilistaPanel.Text = DDL_Estilista.SelectedItem.ToString();
-        L_servicioPanel.Text = DDL_servicio.SelectedItem.ToString();
-        L_fechaPanel.Text = fecha;
-        L_horaPanel.Text = hora;
-        L_PrecioM.Text = "$ " + precio.Rows[0]["precio_servicio"].ToString();
+        DataTable verificar = buscar.verificarReserva(int.Parse(Session["user_id"].ToString()), fechaCalendario, fechaCalendario.AddDays(1));
+        tamaño = verificar.Rows.Count;
 
-        MPE_confirmarReserva.Show();
+        for (int i = 0; i < tamaño; i++)
+        {
+            if (verificar.Rows[i]["id_servicio"].ToString() == DDL_servicio.SelectedValue)
+            {
+                contador = 1;
+            }
+        }
+
+        if(contador == 1)
+        {
+            LB_Error.Text = "Lo sentimos ya tiene una reserva con ese servicio. Seleccione otra fecha u otro servicio.";
+            MPE_Error.Show();
+        }
+        else
+        {
+            L_estilistaPanel.Text = DDL_Estilista.SelectedItem.ToString();
+            L_servicioPanel.Text = DDL_servicio.SelectedItem.ToString();
+            L_fechaPanel.Text = fecha;
+            L_horaPanel.Text = hora;
+            L_PrecioM.Text = "$ " + precio.Rows[0]["precio_servicio"].ToString();
+
+            MPE_confirmarReserva.Show();
+        }
+
     }
 
     protected void BT_Reservar_Click(object sender, EventArgs e)
@@ -131,11 +152,12 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         int servicioID;
         servicioID = int.Parse(DDL_servicio.SelectedValue.ToString());
 
-        DAO_Reserva buscarPrecio = new DAO_Reserva();
-        DataTable precio = buscarPrecio.mostrarPrecio(servicioID);
+        DAO_Reserva servicio = new DAO_Reserva();
+        DataTable precio = servicio.mostrarPrecio(servicioID);
+        DataTable duracion = servicio.duracionServicio(servicioID);
 
         L_Precio.Text = "$ " + precio.Rows[0]["precio_servicio"].ToString();
-
+        L_Duracion.Text = duracion.Rows[0]["duracion_servicio"].ToString();
     }
 
     protected void BT_Aceptar_Click(object sender, EventArgs e)
@@ -165,6 +187,7 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         {
             LB_CalendarioAlert.Visible = false;
         }
+         
     }
 
     protected void ODS_servicio_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
@@ -178,6 +201,7 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         if (DDL_servicio.SelectedValue.Equals(""))
         {
             L_Precio.Text = "";
+            L_Duracion.Text = "";
         }
         else
         {
@@ -185,12 +209,26 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
 
             DAO_Reserva buscarPrecio = new DAO_Reserva();
             DataTable precio = buscarPrecio.mostrarPrecio(servicioID);
+            DataTable duracion = buscarPrecio.duracionServicio(servicioID);
 
             L_Precio.Text = "$ " + precio.Rows[0]["precio_servicio"].ToString();
+            L_Duracion.Text = duracion.Rows[0]["duracion_servicio"].ToString();
         }
 
        
     }
 
-   
+
+
+    protected void DDL_Hora_DataBound(object sender, EventArgs e)
+    {
+
+        int index = Int32.Parse(DDL_Hora.SelectedIndex.ToString());
+        if (index <= -1)
+        {
+            LB_CalendarioAlert.Visible = true;
+            LB_CalendarioAlert.Text = "No hay reservas por favor seleccione otra fecha.";
+        }
+
+    }
 }

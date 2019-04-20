@@ -55,7 +55,7 @@ public class DAO_Reserva
         try
         {
             //NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_cargar_estilista", conection);
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_cargar_estilista2", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_cargar_estilista3", conection);
             dataAdapter.SelectCommand.Parameters.Add("_id_servicio", NpgsqlDbType.Integer).Value = id_servicio;
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
@@ -156,6 +156,80 @@ public class DAO_Reserva
             dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = id_estilista;
             dataAdapter.SelectCommand.Parameters.Add("_hora_inicio", NpgsqlDbType.Timestamp).Value = hora_iniBD;
             dataAdapter.SelectCommand.Parameters.Add("_hora_final", NpgsqlDbType.Timestamp).Value = hora_finBD;
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(horario);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+
+        return horario;
+    }
+
+    public DataTable mostrarHorarios2(int id_estilista, string hora_inicio, int id_servicio)
+    {
+        string hora_ini, hora_actual, fechaA;
+        DateTime fechaActual = new DateTime();
+        fechaActual = DateTime.Now;
+        fechaA = fechaActual.ToShortDateString();
+        DateTime fecha = new DateTime();
+        DateTime hora_iniBD = new DateTime();
+        DateTime hora_finBD = new DateTime();
+        DataTable horario = new DataTable();
+
+
+        if (hora_inicio == "1")
+        {
+            fecha = DateTime.Now;
+            hora_ini = fecha.ToShortDateString();
+        }
+        else
+        {
+            hora_ini = DateTime.Parse(hora_inicio).ToShortDateString();
+        }
+
+        if (DateTime.Parse(fechaA) == DateTime.Parse(hora_ini))
+        {
+
+            hora_actual = fechaActual.ToString("HH:mm", CultureInfo.CurrentCulture);
+
+            hora_iniBD = DateTime.Parse(hora_actual);
+            hora_finBD = DateTime.Parse(hora_ini + " 17:00:00");
+
+        }
+        else if (DateTime.Parse(fechaA) > DateTime.Parse(hora_ini))
+        {
+
+            hora_iniBD = DateTime.Parse(hora_ini + " 00:00:00");
+            hora_finBD = DateTime.Parse(hora_ini + " 00:00:00");
+        }
+        else
+        {
+            hora_iniBD = DateTime.Parse(hora_ini + " 08:00:00");
+            hora_finBD = DateTime.Parse(hora_ini + " 17:00:00");
+
+        }
+
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try /*1203125647*/
+        {
+            ////NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horarios2", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_horarios6", conection);
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = id_estilista;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_inicio", NpgsqlDbType.Timestamp).Value = hora_iniBD;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_final", NpgsqlDbType.Timestamp).Value = hora_finBD;
+            dataAdapter.SelectCommand.Parameters.Add("_servicio", NpgsqlDbType.Integer).Value = id_servicio;
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
             conection.Open();
@@ -305,13 +379,77 @@ public class DAO_Reserva
 
     public DataTable mostrarReservas(int id_cliente)
     {
+        DateTime horaActual = DateTime.Now;
+
         DataTable reservas = new DataTable();
         NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostrar_reservas7", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostrar_reservas9", conection);
             dataAdapter.SelectCommand.Parameters.Add("_id_cliente", NpgsqlDbType.Integer).Value = id_cliente;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_actual", NpgsqlDbType.Timestamp).Value =horaActual;
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(reservas);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return reservas;
+    }
+
+    public DataTable verificarReserva(int id_cliente, DateTime fechaActual, DateTime horaFinal )
+    {
+        DataTable reservas = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_traer_rescliente", conection);
+            dataAdapter.SelectCommand.Parameters.Add("_id_cliente", NpgsqlDbType.Integer).Value = id_cliente;
+            dataAdapter.SelectCommand.Parameters.Add("_fechaactual", NpgsqlDbType.Timestamp).Value = fechaActual;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_final", NpgsqlDbType.Timestamp).Value = horaFinal;
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(reservas);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return reservas;
+    }
+
+    public DataTable mostrarHistorial(int id_cliente)
+    {
+        DateTime horaActual = DateTime.Now;
+
+        DataTable reservas = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostrar_historial", conection);
+            dataAdapter.SelectCommand.Parameters.Add("_id_cliente", NpgsqlDbType.Integer).Value = id_cliente;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_actual", NpgsqlDbType.Timestamp).Value = horaActual;
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
             conection.Open();

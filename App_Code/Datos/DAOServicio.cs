@@ -171,6 +171,7 @@ public class DAOServicio
         }
         return servicio;
     }
+
     public DataTable modificarEstado(int id)//los parametros se deben llamar igual como en la BD 
     {
         DataTable modificarEstado = new DataTable();

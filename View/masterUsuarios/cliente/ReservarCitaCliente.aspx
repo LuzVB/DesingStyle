@@ -11,7 +11,9 @@
         .auto-style12 {
             height: 48px;
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            font-size: 160%;
+            font-size: 120%;
+            color: #8587A8;
+            padding-left: 15%;
         }
         .auto-style21 {
             margin-left: 0px;
@@ -22,53 +24,25 @@
             font-size: 140%;
             height: 40px;
         }
-        .auto-style24 {
-            height: 39px;
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            font-size: 160%;
-        }
-        .auto-style26 {
-            width: 70%;
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            font-size: 160%;
-        }
         .img_perfil{
             object-fit:cover;
         }
         .auto-style28 {
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            /*padding-left:17%;*/
+            padding-left: 15%;
             height: 215px;
         }
         .auto-style32 {
-            width: 36%;
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 160%;
             height: 77px;
-        }
-        .auto-style33 {
-            width: 30%;
-            height: 77px;
-        }
-        .auto-style34 {
-            height: 76px;
+            color: #506B8D;
+            text-align: center;
         }
         .auto-style36 {
             height: 41px;
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 160%;
-        }
-        .auto-style37 {
-            height: 35px;
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            font-size: 160%;
-        }
-        .auto-style39 {
-            height: 41px;
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            font-size: 160%;
-            width: 36%;
-            text-align: left;
         }
         .auto-style40 {
             width: 36%
@@ -88,29 +62,50 @@
         .botones{
             padding-left:60%;
         }
+        .botones2{
+            padding-left:90%;
+        }
        
+        .auto-style43 {
+            font-size: 100%;
+        }
+        .auto-style44 {
+            height: 41px;
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            font-size: 140%;
+            width: 36%;
+            text-align: left;
+            padding-left: 15%;
+            color: #314257;
+        }
+        .auto-style46 {
+            color: #314257;
+        }
+        .auto-style47 {
+            color: #5274AD;
+        }
+               
+        .auto-style48 {
+            height: 36px;
+        }
+               
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
      <table class="auto-style41">
     <tr>
-        <td class="auto-style32">RESERVAR CITA</td>
-        <td class="auto-style33"><asp:ScriptManager ID="ScriptManager1" runat="server">
-            </asp:ScriptManager></td>
-    </tr>
-    <tr>
-        <td colspan="2" class="auto-style34">
-            <asp:Label ID="LB_titulo" runat="server" CssClass="auto-style26">Servicio,Dia,Hora y Estilista</asp:Label>
-        </td>
+        <td class="auto-style32" colspan="2">RESERVAR CITA</td>
     </tr>
     <tr>
         <td class="auto-style12" colspan="2">
             Seleccione el servicio</td>
     </tr>
     <tr>
-        <td class="auto-style39" >
-            <asp:Label ID="L_servicio" runat="server" Text="Servicio"></asp:Label>
-            &nbsp;<asp:RequiredFieldValidator ID="RFV_ServicioReserva" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DDL_servicio"></asp:RequiredFieldValidator>
+        <td class="auto-style44" >
+            <span class="auto-style46">Servicio
+            &nbsp;</span><asp:RequiredFieldValidator ID="RFV_ServicioReserva" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DDL_servicio" CssClass="auto-style46"></asp:RequiredFieldValidator>
         </td>
         <td class="auto-style36">
             <asp:DropDownList ID="DDL_servicio" runat="server" Height="25px" Width="70%" DataSourceID="ODS_servicio" DataTextField="nombre_servicio" DataValueField="id" CssClass="auto-style42" AutoPostBack="True" OnSelectedIndexChanged="DDL_servicio_SelectedIndexChanged" OnDataBound="DDL_servicio_DataBound" >
@@ -119,11 +114,24 @@
         </td>
     </tr>
     <tr>
-        <td class="auto-style23" >Precio del servicio</td>
+        <td class="auto-style44" >Precio del servicio</td>
         <td class="auto-style23" >
             <asp:UpdatePanel ID="UP_Precio" runat="server">
                 <ContentTemplate>
-                    <asp:Label ID="L_Precio" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="L_Precio" runat="server" Text="" CssClass="auto-style47"></asp:Label>
+                </ContentTemplate>
+                <Triggers>
+                    <asp:AsyncPostBackTrigger ControlID="DDL_servicio" EventName="SelectedIndexChanged" />
+                </Triggers>
+            </asp:UpdatePanel>
+        </td>
+    </tr>
+    <tr>
+        <td class="auto-style44" >Duracion del servicio</td>
+        <td class="auto-style23" >
+            <asp:UpdatePanel ID="UP_Duracion" runat="server">
+                <ContentTemplate>
+                    <asp:Label ID="L_Duracion" runat="server" Text="" CssClass="auto-style47"></asp:Label>
                 </ContentTemplate>
                 <Triggers>
                     <asp:AsyncPostBackTrigger ControlID="DDL_servicio" EventName="SelectedIndexChanged" />
@@ -132,13 +140,15 @@
         </td>
     </tr>
 
+
     <tr>
-        <td class="auto-style23" colspan="2">Seleccione el estilista</td>
+        <td class="auto-style12" colspan="2">Seleccione el estilista</td>
     </tr>
     <tr>
-        <td class="auto-style39" >
-            Estilista
-            <asp:RequiredFieldValidator ID="RFV_Estilista" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DDL_Estilista" ValidationGroup="VG_reservar"></asp:RequiredFieldValidator>
+        <td class="auto-style44" >
+            <span class="auto-style46">Estilista
+            </span>
+            <asp:RequiredFieldValidator ID="RFV_Estilista" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DDL_Estilista" ValidationGroup="VG_reservar" CssClass="auto-style46"></asp:RequiredFieldValidator>
           
         </td>
         <td class="auto-style36" >
@@ -159,7 +169,7 @@
         </td>
     </tr>
     <tr>
-        <td class="auto-style24" colspan="2">Seleccione el dia que quiere reservar&nbsp; </td>
+        <td class="auto-style12" colspan="2">Seleccione el dia que quiere reservar&nbsp; </td>
     </tr>
     <tr>
         <td class="auto-style28">
@@ -193,20 +203,23 @@
         </td>
     </tr>
     <tr>
-        <td class="auto-style36" colspan="2">
-            Seleccione la hora que quiere reservar</td>
+        <td class="auto-style12" colspan="2">
+            Seleccione la hora que quiere reservar
+
+        </td>
     </tr>
 
     <tr>
-        <td class="auto-style37">
-           Hora
-            <asp:RequiredFieldValidator ID="RFV_Hora" runat="server" ControlToValidate="DDL_Hora" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_reservar" ></asp:RequiredFieldValidator>
+        <td class="auto-style44">
+            <span class="auto-style46">Hora
+            </span>
+            <asp:RequiredFieldValidator ID="RFV_Hora" runat="server" ControlToValidate="DDL_Hora" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_reservar" CssClass="auto-style46" ></asp:RequiredFieldValidator>
            
         </td>
         <td class="auto-style36" >
              <asp:UpdatePanel ID="UP_Hora" runat="server">
                 <ContentTemplate>
-                    <asp:DropDownList ID="DDL_Hora" runat="server" CssClass="auto-style42" DataSourceID="ODS_PruebaHorarios" DataTextField="horario_estilista" DataValueField="id" Height="25px" Width="70%">
+                    <asp:DropDownList ID="DDL_Hora" runat="server" CssClass="auto-style42" DataSourceID="ODS_PruebaHorarios" DataTextField="horario_estilista" DataValueField="id" Height="25px" Width="70%" OnDataBound="DDL_Hora_DataBound">
                     </asp:DropDownList>
                 </ContentTemplate>
                 <Triggers>
@@ -214,10 +227,11 @@
                     <asp:AsyncPostBackTrigger ControlID="DDL_Estilista" EventName="SelectedIndexChanged" />
                 </Triggers>
             </asp:UpdatePanel>
-            <asp:ObjectDataSource ID="ODS_PruebaHorarios" runat="server" SelectMethod="mostrarHorarios" TypeName="DAO_Reserva">
+            <asp:ObjectDataSource ID="ODS_PruebaHorarios" runat="server" SelectMethod="mostrarHorarios2" TypeName="DAO_Reserva">
                 <SelectParameters>
                     <asp:ControlParameter ControlID="DDL_Estilista" DefaultValue="0" Name="id_estilista" PropertyName="SelectedValue" Type="Int32" />
                     <asp:ControlParameter ControlID="C_Reserva" DefaultValue="1" Name="hora_inicio" PropertyName="SelectedDate" Type="String" />
+                    <asp:ControlParameter ControlID="DDL_servicio" DefaultValue="0" Name="id_servicio" PropertyName="SelectedValue" Type="Int32" />
                 </SelectParameters>
             </asp:ObjectDataSource>
         </td>
@@ -252,8 +266,8 @@
                       <td><asp:Label ID="L_fechaPanel" runat="server" CssClass="auto-style43"></asp:Label></td>
                   </tr>
                   <tr>
-                      <td>Hora</td>
-                      <td><asp:Label ID="L_horaPanel" runat="server" CssClass="auto-style43"></asp:Label></td>
+                      <td class="auto-style48">Hora</td>
+                      <td class="auto-style48"><asp:Label ID="L_horaPanel" runat="server" CssClass="auto-style43"></asp:Label></td>
                   </tr>
                   <tr>
                       <td>Valor del servicio</td>
@@ -278,6 +292,20 @@
            <hr>
             <div class ="botones">
               <asp:Button ID="BT_Aceptar" runat="server" Text="Aceptar"  class="btn btn-outline-success" OnClick="BT_Aceptar_Click"/>
+            </div>
+        </div>
+    </asp:Panel>
+    
+    <cc1:modalpopupextender ID="MPE_Error" runat="server" PopupControlID="P_Error" CancelControlID="BT_okError"  TargetControlID="LB_target3" BackgroundCssClass="modalBackground"></cc1:modalpopupextender>
+    <asp:Label ID="LB_target3" runat="server" Text=""></asp:Label>
+    <asp:Panel ID="P_Error" runat="server" Width="40%">
+        <div class="alert alert-warning" role="alert" style=" width:100%" >
+            <h4 class="alert-heading">ERROR</h4>
+            <hr>
+            <asp:Label ID="LB_Error" runat="server" Text=""></asp:Label>
+           <hr>
+            <div class ="botones2">
+              <asp:Button ID="BT_okError" runat="server" Text="OK"  class="btn btn-outline-warning"/>
             </div>
         </div>
     </asp:Panel>

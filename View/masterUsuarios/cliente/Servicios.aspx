@@ -6,12 +6,13 @@
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 160%;
             padding-bottom:3%;
+                height: 67px;
             }
-        .auto-style14 {
+        /*.auto-style14 {
             padding-top:15%;
-        }
+        }*/
         .auto-style18 {
-            padding-left:20%;
+            /*padding-left:20%;*/
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 120%;        
         }
@@ -27,14 +28,41 @@
             <td class="auto-style18" colspan="2"> 
                  <div class="auto-style21">
 
-                <asp:GridView ID="GV_Servicios" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="80%" CssClass="auto-style14" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" AutoGenerateColumns="False" >
+                <asp:GridView ID="GV_Servicios" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="100%" CssClass="auto-style14" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" AutoGenerateColumns="False" DataSourceID="ODS_Servicios" PageSize="6" >
                     <Columns>
-                        <asp:BoundField HeaderText="Servicio" />
-                        <asp:BoundField HeaderText="Fecha" />
-                        <asp:BoundField HeaderText="Hora" />
-                        <asp:BoundField HeaderText="Precio" />
-                        <asp:BoundField HeaderText="Estilista" />
-                        <asp:CommandField HeaderText="Cancelar" ShowDeleteButton="True" />
+                        <asp:TemplateField HeaderText="Servicio">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("nombre") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("nombre") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Descripción">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("descripcion") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("descripcion") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Duración">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("duracion") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("duracion") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Precio">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("precio") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("precio" , "{0:C}") %>'></asp:Label>
+                            </ItemTemplate>
+                            <ItemStyle Width="13%" />
+                        </asp:TemplateField>
                     </Columns>
                 <EmptyDataTemplate>
                             <asp:Image ID="noRegistro" runat="server" ImageUrl="~/Imagenes/no-encontrado.png" Width="20%" CssClass="imgNoRegistro" />
@@ -51,6 +79,7 @@
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                   
             </asp:GridView>
+                     <asp:ObjectDataSource ID="ODS_Servicios" runat="server" SelectMethod="mostrarservicio" TypeName="DAOServicio"></asp:ObjectDataSource>
                 </div>
             
             </td>

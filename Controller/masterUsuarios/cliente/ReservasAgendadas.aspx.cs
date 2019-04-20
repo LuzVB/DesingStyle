@@ -30,6 +30,8 @@ public partial class View_masterUsuarios_cliente_ReservasAgendadas : System.Web.
         EReserva datosRes = new EReserva();
         ERegistroHorario guardarReserva = new ERegistroHorario();
         DAO_Reserva reserva = new DAO_Reserva();
+        DateTime horaActual = DateTime.Now;
+        //DateTime horaActual = DateTime.Parse("20/04/2019 07:00:00 a. m.");
 
         if (e.CommandName.Equals("Cancelar"))
         {
@@ -41,27 +43,61 @@ public partial class View_masterUsuarios_cliente_ReservasAgendadas : System.Web.
             datosRes.Hora_inicio = DateTime.Parse(reservaBd.Rows[0]["dia_hora_inicio"].ToString());
             datosRes.Hora_final = DateTime.Parse(reservaBd.Rows[0]["dia_hora_final"].ToString());
 
-            DataTable reservas = reserva.traerHorario(datosRes);
+            TimeSpan resultado = datosRes.Hora_inicio - horaActual;
+            TimeSpan cancelacion = TimeSpan.Parse("03:00:00");
 
-            int tamano = reservas.Rows.Count;
-
-            for (int i = 0; i < tamano; i++)
+            if (resultado >= cancelacion)
             {
-                guardarReserva.IdReserva = int.Parse(reservas.Rows[i]["id"].ToString());
+                DataTable reservas = reserva.traerHorario(datosRes);
 
-                guardarReserva.IdServicio = 0;
-                guardarReserva.IdCliente = 0;
-                guardarReserva.Estado = true;
+                int tamano = reservas.Rows.Count;
 
-                reserva.actulizarReserva(guardarReserva);
+                for (int i = 0; i < tamano; i++)
+                {
+                    guardarReserva.IdReserva = int.Parse(reservas.Rows[i]["id"].ToString());
+
+                    guardarReserva.IdServicio = 0;
+                    guardarReserva.IdCliente = 0;
+                    guardarReserva.Estado = true;
+
+                    reserva.actulizarReserva(guardarReserva);
+                }
+
+
+                reserva.eliminarReserva(datosRes);
             }
+            else
+            {
+                LB_Error.Text = "Lo sentimos usted ya no puede cancelar la reserva.";
+                MPE_Error.Show();
+            }
+            
 
-
-            reserva.eliminarReserva(datosRes);
-
+            GV_reservasAgendadas.DataBind();
+            
         }
 
-        GV_reservasAgendadas.DataBind();
+       
     }
-    
+
+
+    protected void BT_Reservas_Click(object sender, EventArgs e)
+    {
+       
+        GV_Historial.Visible = false;
+        GV_reservasAgendadas.Visible = true;
+        LB_Informacion.Visible = true;
+
+        LB_Informacion.Text = "En caso de que no pueda asistir a su cita, cancele la cita con el botón (x) " +
+       "y reagende una nueva cita. Tenga en cuenta que tiene que cancelar (tiempo) antes de su cita, si este no es el caso," +
+       " no cancela y no asiste se le multara.";
+    }
+
+    protected void BT_Historial_Click(object sender, EventArgs e)
+    {
+        GV_Historial.Visible = true;
+        GV_reservasAgendadas.Visible = false;
+        LB_Informacion.Visible = false;
+    }
+
 }
