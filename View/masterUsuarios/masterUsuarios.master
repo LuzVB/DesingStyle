@@ -27,7 +27,7 @@
     <%--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">--%>
     <!-- Compiled and minified Bootstrap CSS -->
-<%--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >--%>
+
     
 
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -142,7 +142,7 @@
                             <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
                             <StaticSelectedStyle BackColor="#1DAAFE" />
         </asp:Menu>
-        <asp:Menu ID="M_Administrador" runat="server" DynamicHorizontalOffset="2" Font-Names="Lucida Sans,Lucida Sans Regular,Lucida Grande,Lucida Sans Unicode,Geneva,Verdana,sans-serif" Font-Size="110%" ForeColor="White"  StaticSubMenuIndent="10px" >
+        <asp:Menu ID="M_Administrador" runat="server" DynamicHorizontalOffset="2" Font-Names="Lucida Sans,Lucida Sans Regular,Lucida Grande,Lucida Sans Unicode,Geneva,Verdana,sans-serif" Font-Size="110%" ForeColor="White"  StaticSubMenuIndent="10px" Width="100%" >
                             <DynamicHoverStyle BackColor="#008BE4" ForeColor="White" />
                             <DynamicMenuItemStyle HorizontalPadding="80px" VerticalPadding="2px" />
                             <DynamicMenuStyle BackColor="#E3EAEB" />
@@ -159,7 +159,7 @@
                             <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
                             <StaticSelectedStyle BackColor="#1DAAFE" />
         </asp:Menu>
-        <asp:Menu ID="M_Estilista" runat="server" DynamicHorizontalOffset="2" Font-Names="Lucida Sans,Lucida Sans Regular,Lucida Grande,Lucida Sans Unicode,Geneva,Verdana,sans-serif" Font-Size="110%" ForeColor="White"  StaticSubMenuIndent="10px" >
+        <asp:Menu ID="M_Estilista" runat="server" DynamicHorizontalOffset="2" Font-Names="Lucida Sans,Lucida Sans Regular,Lucida Grande,Lucida Sans Unicode,Geneva,Verdana,sans-serif" Font-Size="110%" ForeColor="White"  StaticSubMenuIndent="10px" Width="100%" >
                             <DynamicHoverStyle BackColor="#008BE4" ForeColor="White" />
                             <DynamicMenuItemStyle HorizontalPadding="80px" VerticalPadding="2px" />
                             <DynamicMenuStyle BackColor="#E3EAEB" />

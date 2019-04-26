@@ -49,7 +49,6 @@ public partial class View_masterUsuarios_masterUsuarios : System.Web.UI.MasterPa
 
     protected void IB_SalirAdministrador_Click(object sender, ImageClickEventArgs e)
     {
-        
 
         DAOUsuario user = new DAOUsuario();
         EUsuario datos = new EUsuario();

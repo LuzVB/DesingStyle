@@ -66,7 +66,7 @@
                     </Columns>
                 <EmptyDataTemplate>
                             <asp:Image ID="noRegistro" runat="server" ImageUrl="~/Imagenes/no-encontrado.png" Width="20%" CssClass="imgNoRegistro" />
-                            No hay inasistencias
+                            No hay servicios
                 </EmptyDataTemplate>
                 <FooterStyle BackColor="White" ForeColor="#000066" />
                 <HeaderStyle BackColor="#018BDE" Font-Bold="True" ForeColor="White" />
