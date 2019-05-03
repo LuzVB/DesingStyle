@@ -181,8 +181,9 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         gReserva.Fechaini = DateTime.Parse(hora_cliente);
         gReserva.Fechafin = DateTime.Parse(hora_clienteF);
         gReserva.Precio = int.Parse(precio.Rows[0]["precio_servicio"].ToString());
+        gReserva.Registro = true;
 
-        guardarReserva.guardarReserva(gReserva);
+        guardarReserva.guardarReserva2(gReserva);
 
         MPE_ReservaExitosa.Show();
     }
