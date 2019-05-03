@@ -31,97 +31,104 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
     protected void IB_GuardarEstilista_Click(object sender, ImageClickEventArgs e)
     {
         int error = 0;
+        int edadCliente;
+
         ERegistroUsuario estilista = new ERegistroUsuario();
+        ERegistroHorario horario = new ERegistroHorario();
+
         estilista.Cedula = Int32.Parse(Tx_CodigoEstilista.Text);
         estilista.Nombre = Tx_NombreEstilista.Text;
         estilista.Apellido = Tx_ApellidoEstilista.Text;
-        estilista.Telefono = Int32.Parse(Tx_TelefonoEstilista.Text);
+        estilista.Telefono = Int64.Parse(Tx_TelefonoEstilista.Text);
         estilista.Correo = Tx_CorreoEstilista.Text;
         estilista.Contraseña = Tx_ContraseñaEstilista.Text;
+        estilista.Fecha_nacimiento = DateTime.Parse(Tx_FechaNacimiento.Text);
         estilista.Estado = 1;
         estilista.Rol = 2;
+        horario.DisponibleSerie = true;
         estilista.Session = Session["user"].ToString();
+        estilista.Servicio = Int32.Parse(DDL_servicio.SelectedValue.ToString());
+
+        edadCliente = System.DateTime.Now.Year - estilista.Fecha_nacimiento.Year;
+
+        DataTable contarCorreo = new DAORegistroCliente().contarCorreos(estilista);
+        DataTable contarID = new DAORegistroCliente().contarId(estilista);
+
+        DAORegistroCliente registroEstilista = new DAORegistroCliente();
+        DAORegistroEstilista datosEstilista = new DAORegistroEstilista();
 
 
         int index = Int32.Parse(DDL_servicio.SelectedIndex.ToString());
         if (index <= -1)
         {
             L_ServicioR.Visible = true;
+            error = 1;
         }
-         
         else
         {
-            if (Tx_CodigoEstilista.Text.Length < 8)
-            {
-
-                LB_Datos.Visible = true;
-                LB_Datos.Text = "El numero de caracteres de la cedula son invalidos";
-                Tx_CodigoEstilista.Text = "";
-
-            } else if (Tx_NombreEstilista.Text.Length < 3 ) {
-                LB_Datos.Visible = true;
-                LB_Datos.Text = "El numero de caracteres del nombre son invalidos";
-                Tx_NombreEstilista.Text = "";
-            } else if (Tx_ApellidoEstilista.Text.Length < 3 ) {
-
-                LB_Datos.Visible = true;
-                LB_Datos.Text = "El numero de caracteres del apellido son invalidos";
-                Tx_ApellidoEstilista.Text = "";
-            } else if (Tx_TelefonoEstilista.Text.Length < 8) {
-
-                LB_Datos.Visible = true;
-                LB_Datos.Text = "El numero de caracteres del telefono son invalidos";
-                Tx_TelefonoEstilista.Text = "";
-            }
-            else if (Tx_CorreoEstilista.Text.Length < 10)
-            {
-
-                LB_Datos.Visible = true;
-                LB_Datos.Text = "El numero de caracteres del correo son invalidos";
-                Tx_CorreoEstilista.Text = "";
-            }
-            else
-            {
-                L_ServicioR.Visible = false;
-                LB_Datos.Visible = false;
-                ERegistroUsuario EstilistaServicio = new ERegistroUsuario();
+            error = 0;
+            L_ServicioR.Visible = false;
 
 
-                EstilistaServicio.Usuario = Int32.Parse(Tx_CodigoEstilista.Text);
-                EstilistaServicio.Servicio = Int32.Parse(DDL_servicio.SelectedValue.ToString());
-                EstilistaServicio.Session = Session["user"].ToString();
-                DataTable contarCorreo = new DAORegistroCliente().contarCorreos(estilista);
-                if (contarCorreo.Rows[0]["user_correo"].Equals("1"))
-                {
-
-                    DataTable datos = new DAORegistroEstilista().registroEstilista(estilista);
-                    DataTable datos2 = new DAORegistroEstilista().registroEstilistaServicio(EstilistaServicio);
-                    error = 0;
-                    L_correo.Visible = false;
-                    ERegistroHorario datoHorario = new ERegistroHorario();
-                    DAORegistroEstilista guardarHorario = new DAORegistroEstilista();
-                    DataTable horario = guardarHorario.mostrarHorario();
-                    for (int i = 0; i < horario.Rows.Count; i++)
-                    {
-                        datoHorario.Fechaini = DateTime.Parse(horario.Rows[i]["hora_inicio"].ToString());
-                        datoHorario.Fechafin = DateTime.Parse(horario.Rows[i]["hora_fin"].ToString());
-                        datoHorario.Estado = true;
-                        datoHorario.Idestilista = int.Parse(Tx_CodigoEstilista.Text);
-                        guardarHorario.registroHorario(datoHorario);
-                    }
-                }
-
-                else
-                {
-                    error = 1;
-                    L_correo.Visible = true;
-                }
-
-                GV_Estilista.DataBind();
-
-                Response.Redirect("regristroEstilista.aspx");
-            }
         }
+
+        if (contarCorreo.Rows[0]["user_correo"].Equals("1"))
+        {
+            error = 0;
+            L_correo.Visible = false;
+
+        }
+        else
+        {
+            error = 1;
+            L_correo.Visible = true;
+        }
+
+        if (contarID.Rows[0]["user_id"].Equals(-1))
+        {
+            error = 0;
+            L_cedula.Visible = false;
+
+        }
+        else
+        {
+            error = 1;
+            L_cedula.Visible = true;
+        }
+
+
+        if (System.DateTime.Now.Subtract(estilista.Fecha_nacimiento.AddYears(edadCliente)).TotalDays < 0)
+        {
+            edadCliente = edadCliente - 1;
+
+        }
+
+        if (edadCliente > 18)
+        {
+            L_ErrorFechaNacimiento.Visible = false;
+            error = 0;
+        }
+        else
+        {
+            L_ErrorFechaNacimiento.Visible = true;
+            L_ErrorFechaNacimiento.Text = "Fecha de nacimiento incorrecta, no es mayor de edad.";
+            error = 1;
+        }
+
+        if (error == 0)
+        {
+            L_ServicioR.Visible = false;
+            horario.Idestilista = Int32.Parse(Tx_CodigoEstilista.Text);
+
+            registroEstilista.registroCliente(estilista);
+            datosEstilista.registroEstilistaServicio(estilista);
+            datosEstilista.registroHorario2(horario);
+
+
+            Response.Redirect("regristroEstilista.aspx");
+        }
+
+
     }
 
 
@@ -210,11 +217,6 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
     }
 
     protected void GV_EstilistaServicio_DataBound(object sender, EventArgs e)
-    {
-
-    }
-
-    protected void Tx_CorreoEstilista_TextChanged(object sender, EventArgs e)
     {
 
     }

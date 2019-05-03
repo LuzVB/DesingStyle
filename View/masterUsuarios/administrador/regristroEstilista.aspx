@@ -57,6 +57,14 @@
             width: 33%;
             height: 71px;
         }
+        .auto-style25 {
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            font-size: 120%;
+            width: 774px;
+        }
+        .auto-style26 {
+            width: 774px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -175,6 +183,7 @@
     <tr>
         <td class="auto-style23"><asp:TextBox ID="Tx_CodigoEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" ValidationGroup="registroEstilista"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RFV_ICodigoEstilista" runat="server" ControlToValidate="Tx_CodigoEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista" SetFocusOnError="True"></asp:RequiredFieldValidator>
+            <asp:Label ID="L_cedula" runat="server" ForeColor="Red" Text="La cedula ya se encuentra registrada" Visible="False"></asp:Label>
         </td>
         <cc1:TextBoxWatermarkExtender id="TBWEDOB_codigoEstilista" runat="server" targetcontrolid="Tx_CodigoEstilista" watermarktext="Cedula" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
         <cc1:filteredtextboxextender ID="FTBE_CodigoEstilista" runat="server" FilterType="Numbers" TargetControlID="Tx_CodigoEstilista" />
@@ -199,9 +208,9 @@
         <cc1:filteredtextboxextender ID="FTBE_TelefonoEstilista" runat="server" FilterType="Numbers" TargetControlID="Tx_TelefonoEstilista" />
         <td class="auto-style24"><asp:TextBox ID="Tx_CorreoEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" ValidationGroup="registroEstilista" MaxLength="50" OnTextChanged="Tx_CorreoEstilista_TextChanged"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Tx_CorreoEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista"></asp:RequiredFieldValidator>
-            <asp:Label ID="L_correo" runat="server" ForeColor="Red" Text="El Correo ya existe(*)" Visible="False"></asp:Label>
+            <asp:Label ID="L_correo" runat="server" ForeColor="Red" Text="El Correo ya existe" Visible="False"></asp:Label>
         </td>
-        <%-- <cc1:TextBoxWatermarkExtender id="TBWEDOB_Tx_CorreoEstilista" runat="server" targetcontrolid="Tx_CorreoEstilista" watermarktext="Correo" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>--%>
+         <cc1:TextBoxWatermarkExtender id="TBWEDOB_Tx_CorreoEstilista" runat="server" targetcontrolid="Tx_CorreoEstilista" watermarktext="Correo" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
          <cc1:filteredtextboxextender ID="FTBE_CorreoEstilista" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@." TargetControlID="Tx_CorreoEstilista" />
         <td class="auto-style24">
             <asp:DropDownList ID="DDL_servicio" runat="server" DataSourceID="ODS_Servicio" DataTextField="nombre" DataValueField="id" Height="25px" Width="95%" ValidationGroup="registroEstilista">
@@ -220,7 +229,11 @@
         </td>
          <cc1:TextBoxWatermarkExtender id="TBWEDOB_Tx_ContraseñaEstilista" runat="server" targetcontrolid="Tx_ContraseñaEstilista" watermarktext="Contraseña" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
         <cc1:filteredtextboxextender ID="FTBE_ContraseñaEstilista" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_ContraseñaEstilista" />
-        <td class="auto-style18"></td>
+        <td class="auto-style18"><asp:TextBox ID="Tx_FechaNacimiento" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista" TextMode="Date" OnTextChanged="Tx_FechaNacimiento_TextChanged"></asp:TextBox>
+            <asp:RequiredFieldValidator ID="RFV_FechaNacimiento" runat="server" ControlToValidate="Tx_FechaNacimiento" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista" SetFocusOnError="True"></asp:RequiredFieldValidator>  
+            <asp:Label ID="L_ErrorFechaNacimiento" runat="server" ForeColor="Red" Text="" Visible="False"></asp:Label>
+        </td>
+         <%--<cc1:TextBoxWatermarkExtender id="TBWEDOB_Tx_FechaNacimiento" runat="server" targetcontrolid="Tx_FechaNacimiento" watermarktext="Fecha de Nacimiento" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>--%>
         <td class="auto-style18"><asp:ImageButton ID="IB_GuardarEstilista" runat="server" Height="50px" Width="15%" ValidationGroup="registroEstilista" ImageUrl="~/Imagenes/guardar.png" OnClick="IB_GuardarEstilista_Click" />
             <br />
             <br />
@@ -234,7 +247,7 @@
                     <td class="auto-style16" colspan="2"><strong>REGISTRAR UN SERVICIO ADICIONAL AL ESTILISTA</strong></td>
                 </tr>
                 <tr>
-                    <td  class="auto-style14">Eliga el documento del estilista<br />
+                    <td  class="auto-style25">Eliga el documento del estilista<br />
                         <asp:Label ID="L_REstilista" runat="server" ForeColor="Red" Text="Registre el estilista(*)" Visible="False"></asp:Label>
                     </td>
                     <td  class="auto-style14">Eliga servicio adicional<br />
@@ -242,7 +255,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="auto-style26">
                         <asp:ObjectDataSource ID="ODS_Estilista2" runat="server" SelectMethod="obtenerEstilista" TypeName="DAORegistroEstilista"></asp:ObjectDataSource>
                         <asp:DropDownList ID="DDL_estilistas" runat="server" DataSourceID="ODS_Estilista2" DataTextField="nombre_estilista" DataValueField="id" Height="25px" ValidationGroup="Adicional" Width="96%">
                         </asp:DropDownList>
@@ -254,7 +267,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>
+                    <td class="auto-style26">
                         <table class="auto-style20">
                             <tr>
                                 <td class="auto-style19">
