@@ -36,7 +36,8 @@ public class DAORegistroEstilista
             conection.Open();
             dataAdapter.Fill(insertarEstilista);
         }
-        catch (Npgsql.PostgresException e) {
+        catch (Npgsql.PostgresException e)
+        {
 
             MessageBox.Show("El estilista ya se encuentra registrado con ese servicio");
         }
@@ -101,7 +102,7 @@ public class DAORegistroEstilista
         }
         //catch (Npgsql.PostgresException e)
         //{
-       
+
         //    MessageBox.Show("El estilista ya se encuentra registrado con ese servicio");
         //}
         catch (Exception Ex)
@@ -117,7 +118,7 @@ public class DAORegistroEstilista
         }
         return Servicio;
     }
-    public DataTable ServicioEAdcional(ERegistroUsuario ServicioAdi) 
+    public DataTable ServicioEAdcional(ERegistroUsuario ServicioAdi)
     {
         DataTable Servicio = new DataTable();
         NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
@@ -192,7 +193,7 @@ public class DAORegistroEstilista
             dataAdapter.SelectCommand.Parameters.Add("_telefono", NpgsqlDbType.Integer).Value = telefono;
             dataAdapter.SelectCommand.Parameters.Add("_correo", NpgsqlDbType.Text).Value = correo;
             dataAdapter.SelectCommand.Parameters.Add("_contrasena", NpgsqlDbType.Text).Value = contrasena;
-            dataAdapter.SelectCommand.Parameters.Add("_estado", NpgsqlDbType.Integer).Value =Int32.Parse(estado);
+            dataAdapter.SelectCommand.Parameters.Add("_estado", NpgsqlDbType.Integer).Value = Int32.Parse(estado);
 
             conection.Open();
             dataAdapter.Fill(modificarEstilista);
@@ -411,8 +412,8 @@ public class DAORegistroEstilista
         {
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.actualizar_inasistencia2", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value =_usuario;
-            dataAdapter.SelectCommand.Parameters.Add("_fecha", NpgsqlDbType.Date).Value =_fecha;
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = _usuario;
+            dataAdapter.SelectCommand.Parameters.Add("_fecha", NpgsqlDbType.Date).Value = _fecha;
 
             conection.Open();
             dataAdapter.Fill(ActualizarInacistencia);
@@ -429,5 +430,61 @@ public class DAORegistroEstilista
             }
         }
         return ActualizarInacistencia;
+    }
+
+    public DataTable AsistenciaCliente(int Usuario, int id, int alerta)
+    {
+        DataTable AsisCliente = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.actualizar_asistencia", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = Usuario;
+            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = id;
+            dataAdapter.SelectCommand.Parameters.Add("_alerta", NpgsqlDbType.Integer).Value = alerta;
+
+            conection.Open();
+            dataAdapter.Fill(AsisCliente);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return AsisCliente;
+    }
+    public DataTable mostrarEstilistaAsis(int id)
+    {
+        DataTable Servicio = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostrar_asistencia2", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("id_", NpgsqlDbType.Integer).Value =id;
+            conection.Open();
+            dataAdapter.Fill(Servicio);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return Servicio;
     }
 }
