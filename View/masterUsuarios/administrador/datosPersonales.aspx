@@ -90,9 +90,13 @@
                             <td class="auto-style12">Apellido</td>
                         </tr>
                         <tr>
-                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("nombre") %>'></asp:TextBox></td>
+                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("nombre") %>' MaxLength="20"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RFV_NombreAdm" runat="server" ControlToValidate="Tx_AdmNombre" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
                             <cc1:filteredtextboxextender ID="FTBE_AdmNombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_AdmNombre" />
-                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("apellido") %>'></asp:TextBox></td>
+                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("apellido") %>' MaxLength="20"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RFV_ApellidoAdm" runat="server" ControlToValidate="Tx_AdmApellido" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
                             <cc1:filteredtextboxextender ID="FTBE_AdmApellido" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_AdmApellido" />
                         </tr>
                         <tr>
@@ -100,14 +104,19 @@
                             <td class="auto-style12">Correo</td>
                         </tr>
                         <tr>
-                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("telefono") %>'></asp:TextBox></td>
+                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("telefono") %>' MaxLength="10"></asp:TextBox>
+                                <asp:RequiredFieldValidator ID="RFV_TelefonoAdm" runat="server" ControlToValidate="Tx_AdmTelefono" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+                            </td>
                             <cc1:filteredtextboxextender ID="FTBE_AdmTelefono" runat="server" FilterType="Numbers" TargetControlID="Tx_AdmTelefono" />
-                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmCorreo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" ValidationGroup="VG_DatosPersonales "  Text='<%# Bind("correo") %>'></asp:TextBox></td>
+                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmCorreo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" ValidationGroup="VG_DatosPersonales "  Text='<%# Bind("correo") %>' MaxLength="50"></asp:TextBox></td>
                             <cc1:filteredtextboxextender ID="FTBE_AdmCorreo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_AdmCorreo" />
                         </tr>
                 <%--    </table>--%>
+                    <asp:RequiredFieldValidator ID="RFV_CorreoAdm" runat="server" ControlToValidate="Tx_AdmCorreo" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                 </ItemTemplate>
                 </asp:FormView>
+                <asp:Label ID="LB_Datos" runat="server" ForeColor="Red" Text="[LB_Datos]" Visible="False"></asp:Label>
+                <br />
                 <asp:ObjectDataSource ID="ODS_Admin" runat="server" SelectMethod="mostrarAdmin" TypeName="DAOAdmin">
                     <SelectParameters>
                         <asp:SessionParameter Name="id" SessionField="user_id" Type="Int32" />
@@ -130,10 +139,10 @@
             <td class="auto-style12">Contraseña nueva<asp:RequiredFieldValidator ID="RFV_ContrasenaNueva" runat="server" ControlToValidate="Tx_AdmCNueva" ErrorMessage="(*)" Font-Size="90%" ForeColor="Red" ValidationGroup="VG_AContraseña" SetFocusOnError="True"></asp:RequiredFieldValidator></td>
         </tr>
         <tr>
-            <td class="auto-style9"><asp:TextBox ID="Tx_AdmCActual" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_AContraseña"></asp:TextBox>
+            <td class="auto-style9"><asp:TextBox ID="Tx_AdmCActual" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_AContraseña" MaxLength="10" TextMode="Password"></asp:TextBox>
             <cc1:filteredtextboxextender ID="FTBE_AdmCActual" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_AdmCActual" />
             </td>
-            <td class="auto-style9"><asp:TextBox ID="Tx_AdmCNueva" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_AContraseña"></asp:TextBox></td>
+            <td class="auto-style9"><asp:TextBox ID="Tx_AdmCNueva" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_AContraseña" MaxLength="10" TextMode="Password"></asp:TextBox></td>
             <cc1:filteredtextboxextender ID="FTBE_AdmCNueva" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_AdmCNueva" />
            
         </tr>

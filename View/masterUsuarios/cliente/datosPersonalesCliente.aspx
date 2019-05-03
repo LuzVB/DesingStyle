@@ -144,9 +144,13 @@
                                 <td class="auto-style12">Apellido</td>
                              </tr>
                              <tr>
-                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("nombre") %>' CssClass="auto-style21"></asp:TextBox></td>
+                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("nombre") %>' CssClass="auto-style21" MaxLength="20"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RFV_NombreCliente" runat="server" ControlToValidate="Tx_ClienteNombre" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+                                 </td>
                                 <cc1:filteredtextboxextender ID="FTBE_ClienteNombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_ClienteNombre" />
-                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("apellido") %>' CssClass="auto-style21"></asp:TextBox></td>
+                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("apellido") %>' CssClass="auto-style21" MaxLength="20"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RFV_ApellidoCliente" runat="server" ControlToValidate="Tx_ClienteApellido" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+                                 </td>
                                 <cc1:filteredtextboxextender ID="FTBE_ClienteApellido" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_ClienteApellido" />
         
                              </tr>
@@ -155,15 +159,24 @@
                                 <td class="auto-style12">Correo</td>
                              </tr>
                              <tr>
-                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("telefono") %>' CssClass="auto-style21" MaxLength="10"></asp:TextBox></td>
+                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("telefono") %>' CssClass="auto-style21" MaxLength="10"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RFV_TelefonoCliente0" runat="server" ControlToValidate="Tx_ClienteTelefono" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+                                 </td>
                                 <cc1:filteredtextboxextender ID="FTBE_ClienteTelefono" runat="server" FilterType="Numbers" TargetControlID="Tx_ClienteTelefono" />
-                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteCorreo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("correo") %>' CssClass="auto-style21"></asp:TextBox></td>
+                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteCorreo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("correo") %>' CssClass="auto-style21" MaxLength="50"></asp:TextBox>
+                                    <asp:RequiredFieldValidator ID="RFV_CorreoCliente" runat="server" ControlToValidate="Tx_ClienteCorreo" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <br />
+                                 </td>
                                 <cc1:filteredtextboxextender ID="FTBE_ClienteCorreo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_ClienteCorreo" />
         
                             </tr>
                         </table>
                     </ItemTemplate>
                 </asp:FormView>
+
+                <asp:Label ID="LB_ErrorDatos" runat="server" ForeColor="Red" CssClass="auto-style22"></asp:Label>
+
+                <br />
                 <asp:ObjectDataSource ID="ODS_mostrarCliente" runat="server" SelectMethod="mostrarCliente" TypeName="DAOCliente">
                     <SelectParameters>
                         <asp:SessionParameter Name="id" SessionField="user_id" Type="Int32" />
@@ -193,12 +206,13 @@
         </tr>
         <tr>
             <td class="auto-style9">
-                <asp:TextBox ID="Tx_ContraseñaActual" runat="server" BorderColor="#0099FF" Width="95%" Height="25px"></asp:TextBox>
+                <asp:TextBox ID="Tx_ContraseñaActual" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" TextMode="Password"></asp:TextBox>
                 <cc1:filteredtextboxextender ID="FTBE_ContraseñaActual" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_ContraseñaActual" />
         
             </td>
             <td class="auto-style9">
-                <asp:TextBox ID="Tx_ContraseñaNueva" runat="server" BorderColor="#0099FF" Width="95%" Height="25px"></asp:TextBox>
+                <asp:TextBox ID="Tx_ContraseñaNueva" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" 
+                    TextMode="Password"></asp:TextBox>
                 <cc1:filteredtextboxextender ID="FTBE_ContraseñaNueva" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_ContraseñaNueva" />
             </td>
            
@@ -231,7 +245,7 @@
         </tr>
         <tr>
             <td class="auto-style9">
-                <asp:TextBox ID="Tx_EliminarCuenta" runat="server" BorderColor="#0099FF" Width="95%" Height="25px"></asp:TextBox>
+                <asp:TextBox ID="Tx_EliminarCuenta" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" TextMode="Password"></asp:TextBox>
                 <cc1:filteredtextboxextender ID="FTBE_EliminarCuenta" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_EliminarCuenta" />
         
             </td>

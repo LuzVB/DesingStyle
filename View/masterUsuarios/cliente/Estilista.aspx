@@ -146,9 +146,9 @@
                                 <td class="auto-style32"><span class="auto-style17">Estilista</span><asp:RequiredFieldValidator ID="RFV_Estilista" runat="server" ControlToValidate="DropDownList_Estilista" CssClass="auto-style17" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                                 </td>
                                 <td>
-                                    <asp:DropDownList ID="DropDownList_Estilista" runat="server" AutoPostBack="True" CssClass="auto-style17" DataSourceID="ODS_Estilista" DataTextField="nombre" DataValueField="id" OnDataBound="DropDownList_Estilista_DataBound" OnSelectedIndexChanged="DropDownList_Estilista_SelectedIndexChanged" Width="20%">
+                                    <asp:DropDownList ID="DropDownList_Estilista" runat="server" AutoPostBack="True" CssClass="auto-style17" DataSourceID="ODS_Estilista" DataTextField="nombre_estilista" DataValueField="id" OnDataBound="DropDownList_Estilista_DataBound" OnSelectedIndexChanged="DropDownList_Estilista_SelectedIndexChanged" Width="20%">
                                     </asp:DropDownList>
-                                    <asp:ObjectDataSource ID="ODS_Estilista" runat="server" SelectMethod="mostrarEstilista" TypeName="DAORegistroEstilista"></asp:ObjectDataSource>
+                                    <asp:ObjectDataSource ID="ODS_Estilista" runat="server" SelectMethod="obtenerEstilista" TypeName="DAORegistroEstilista"></asp:ObjectDataSource>
                                 </td>
                             </tr>
                         </table>
