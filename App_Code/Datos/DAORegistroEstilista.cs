@@ -93,7 +93,7 @@ public class DAORegistroEstilista
         {
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_insert_estilista_servicio", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-            dataAdapter.SelectCommand.Parameters.Add("_id_usuario", NpgsqlDbType.Integer).Value = EstilistaServicio.Usuario;
+            dataAdapter.SelectCommand.Parameters.Add("_id_usuario", NpgsqlDbType.Integer).Value = EstilistaServicio.Cedula;
             dataAdapter.SelectCommand.Parameters.Add("_id_servicio", NpgsqlDbType.Integer).Value = EstilistaServicio.Servicio;
             dataAdapter.SelectCommand.Parameters.Add("_session", NpgsqlDbType.Text).Value = EstilistaServicio.Session;
 
@@ -486,5 +486,46 @@ public class DAORegistroEstilista
             }
         }
         return Servicio;
+    }
+
+    public DataTable registroHorario2(ERegistroHorario cs)//los parametros se deben llamar igual como en la BD 
+    {
+        string fechaCorta;
+        DateTime fechaInicio = new DateTime();
+        DateTime fechaFin = new DateTime();
+        fechaInicio = DateTime.Now;
+        fechaCorta = fechaInicio.ToShortDateString();
+        // fechaFin = fechaInicio.AddYears(1);
+        fechaInicio = DateTime.Parse(fechaCorta);
+        fechaFin = fechaInicio.AddDays(1);
+
+
+        DataTable insertarHorario = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_insert_horarioprueba3", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = cs.Idestilista;
+            dataAdapter.SelectCommand.Parameters.Add("_inicio_serie", NpgsqlDbType.Timestamp).Value = fechaInicio;
+            dataAdapter.SelectCommand.Parameters.Add("_final_serie", NpgsqlDbType.Timestamp).Value = fechaFin;
+            dataAdapter.SelectCommand.Parameters.Add("_disponible", NpgsqlDbType.Boolean).Value = cs.DisponibleSerie;
+
+            conection.Open();
+            dataAdapter.Fill(insertarHorario);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return insertarHorario;
     }
 }
