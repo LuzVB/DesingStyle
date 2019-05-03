@@ -422,7 +422,7 @@ public class DAO_Reserva
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostrar_reservas9", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostrar_reservas10", conection);
             dataAdapter.SelectCommand.Parameters.Add("_id_cliente", NpgsqlDbType.Integer).Value = id_cliente;
             dataAdapter.SelectCommand.Parameters.Add("_hora_actual", NpgsqlDbType.Timestamp).Value =horaActual;
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;

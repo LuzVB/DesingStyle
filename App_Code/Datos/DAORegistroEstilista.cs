@@ -298,7 +298,7 @@ public class DAORegistroEstilista
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_obtener_estilista", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_obtener_estilista2", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
 

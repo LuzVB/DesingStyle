@@ -206,7 +206,7 @@
         </td>
         <cc1:TextBoxWatermarkExtender id="TBWEDOB_TelefonoEstilista" runat="server" targetcontrolid="Tx_TelefonoEstilista" watermarktext="Telefono" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
         <cc1:filteredtextboxextender ID="FTBE_TelefonoEstilista" runat="server" FilterType="Numbers" TargetControlID="Tx_TelefonoEstilista" />
-        <td class="auto-style24"><asp:TextBox ID="Tx_CorreoEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" ValidationGroup="registroEstilista" MaxLength="50" OnTextChanged="Tx_CorreoEstilista_TextChanged"></asp:TextBox>
+        <td class="auto-style24"><asp:TextBox ID="Tx_CorreoEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" ValidationGroup="registroEstilista" MaxLength="50" ></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Tx_CorreoEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista"></asp:RequiredFieldValidator>
             <asp:Label ID="L_correo" runat="server" ForeColor="Red" Text="El Correo ya existe" Visible="False"></asp:Label>
         </td>
@@ -229,7 +229,7 @@
         </td>
          <cc1:TextBoxWatermarkExtender id="TBWEDOB_Tx_ContraseñaEstilista" runat="server" targetcontrolid="Tx_ContraseñaEstilista" watermarktext="Contraseña" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
         <cc1:filteredtextboxextender ID="FTBE_ContraseñaEstilista" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_ContraseñaEstilista" />
-        <td class="auto-style18"><asp:TextBox ID="Tx_FechaNacimiento" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista" TextMode="Date" OnTextChanged="Tx_FechaNacimiento_TextChanged"></asp:TextBox>
+        <td class="auto-style18"><asp:TextBox ID="Tx_FechaNacimiento" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista" TextMode="Date" ></asp:TextBox>
             <asp:RequiredFieldValidator ID="RFV_FechaNacimiento" runat="server" ControlToValidate="Tx_FechaNacimiento" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista" SetFocusOnError="True"></asp:RequiredFieldValidator>  
             <asp:Label ID="L_ErrorFechaNacimiento" runat="server" ForeColor="Red" Text="" Visible="False"></asp:Label>
         </td>
