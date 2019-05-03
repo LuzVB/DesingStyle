@@ -197,7 +197,7 @@
         </td>
         <cc1:TextBoxWatermarkExtender id="TBWEDOB_TelefonoEstilista" runat="server" targetcontrolid="Tx_TelefonoEstilista" watermarktext="Telefono" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
         <cc1:filteredtextboxextender ID="FTBE_TelefonoEstilista" runat="server" FilterType="Numbers" TargetControlID="Tx_TelefonoEstilista" />
-        <td class="auto-style24"><asp:TextBox ID="Tx_CorreoEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" ValidationGroup="registroEstilista"></asp:TextBox>
+        <td class="auto-style24"><asp:TextBox ID="Tx_CorreoEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" ValidationGroup="registroEstilista" MaxLength="50" OnTextChanged="Tx_CorreoEstilista_TextChanged"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Tx_CorreoEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista"></asp:RequiredFieldValidator>
             <asp:Label ID="L_correo" runat="server" ForeColor="Red" Text="El Correo ya existe(*)" Visible="False"></asp:Label>
         </td>
@@ -215,13 +215,16 @@
         </td>
     </tr>
     <tr>
-        <td class="auto-style18"><asp:TextBox ID="Tx_ContraseñaEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista"></asp:TextBox>
+        <td class="auto-style18"><asp:TextBox ID="Tx_ContraseñaEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista" MaxLength="10"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RFV_IContraseñaEstilista" runat="server" ControlToValidate="Tx_ContraseñaEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista" SetFocusOnError="True"></asp:RequiredFieldValidator>     
         </td>
          <cc1:TextBoxWatermarkExtender id="TBWEDOB_Tx_ContraseñaEstilista" runat="server" targetcontrolid="Tx_ContraseñaEstilista" watermarktext="Contraseña" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
         <cc1:filteredtextboxextender ID="FTBE_ContraseñaEstilista" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_ContraseñaEstilista" />
         <td class="auto-style18"></td>
         <td class="auto-style18"><asp:ImageButton ID="IB_GuardarEstilista" runat="server" Height="50px" Width="15%" ValidationGroup="registroEstilista" ImageUrl="~/Imagenes/guardar.png" OnClick="IB_GuardarEstilista_Click" />
+            <br />
+            <br />
+            <asp:Label ID="LB_Datos" runat="server" ForeColor="Red" Text="LB_Datos" Visible="False"></asp:Label>
         </td>
     </tr>
     <tr>
@@ -241,7 +244,7 @@
                 <tr>
                     <td>
                         <asp:ObjectDataSource ID="ODS_Estilista2" runat="server" SelectMethod="obtenerEstilista" TypeName="DAORegistroEstilista"></asp:ObjectDataSource>
-                        <asp:DropDownList ID="DDL_estilistas" runat="server" DataSourceID="ODS_Estilista2" DataTextField="id" DataValueField="id" Height="25px" ValidationGroup="Adicional" Width="96%">
+                        <asp:DropDownList ID="DDL_estilistas" runat="server" DataSourceID="ODS_Estilista2" DataTextField="nombre_estilista" DataValueField="id" Height="25px" ValidationGroup="Adicional" Width="96%">
                         </asp:DropDownList>
                     </td>
                     <td>
