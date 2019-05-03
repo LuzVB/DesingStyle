@@ -46,6 +46,7 @@
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 160%;
             height: 120px;
+            color: #506B8D;
         }
 
         .modalBackground {
@@ -60,6 +61,19 @@
 
         .botones2 {
             padding-left: 90%;
+        }
+        .auto-style16 {
+            width: 50%;
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            text-align: left;
+            font-size: 110%;
+            color: #314257;
+        }
+        .auto-style17 {
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            font-size: 110%;
+            padding-left: 20%;
+            color: #5274AD;
         }
     </style>
 </asp:Content>
@@ -90,35 +104,55 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style15" colspan="2">REGISTRAR CITA</td>
+            <td class="auto-style15" colspan="2">PRE-REGISTRO</td>
         </tr>
         <tr>
-            <td class="auto-style13">Cedula del cliente
+            <td class="auto-style16">Cedula del cliente
             </td>
-            <td class="auto-style13">Nombre del cliente
+            <td class="auto-style16">Nombre del cliente
             </td>
         </tr>
         <tr>
             <td class="auto-style8">
                 <asp:TextBox ID="Tx_cedula" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10"></asp:TextBox>
                 <cc1:FilteredTextBoxExtender ID="FTBE_cedula" runat="server" FilterType="Numbers" TargetControlID="Tx_cedula" />
-                <asp:RequiredFieldValidator ID="RFV_Cedula" runat="server" ControlToValidate="Tx_cedula" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroClienteSin" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="RFV_Cedula" runat="server" ControlToValidate="Tx_cedula" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="preRegistro" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
             <td class="auto-style8">
                 <asp:TextBox ID="Tx_nombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px"></asp:TextBox>
                 <cc1:FilteredTextBoxExtender ID="FTBE_nombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_nombre" />
-                <asp:RequiredFieldValidator ID="RFV_Nombre" runat="server" ControlToValidate="Tx_nombre" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroClienteSin" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="RFV_Nombre" runat="server" ControlToValidate="Tx_nombre" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="preRegistro" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
         </tr>
         <tr>
             <td>
                 <asp:Label ID="L_ErrorCedula" runat="server" CssClass="auto-style32" Font-Size="100%" ForeColor="Red" Visible="False"></asp:Label>
             </td>
+            <td>
+                <asp:ImageButton ID="preRegistro" runat="server" Height="62px" Width="15%" ValidationGroup="preRegistro" ImageUrl="~/Imagenes/guardar.png" OnClick="preRegistro_Click" />
+            </td>
         </tr>
         <tr>
-            <td class="auto-style13">Servicio
+            <td class="auto-style15" colspan="2">REGISTRAR CITA</td>
+        </tr>
+        <tr>
+            <td class="auto-style16">Cedula del cliente
             </td>
-            <td class="auto-style13">Estilista
+            <td class="auto-style13"></td>
+        </tr>
+        <tr>
+            <td class="auto-style8">
+                <asp:DropDownList ID="DDL_CedulaSin" runat="server" Height="25px" Width="95%"  AutoPostBack="True" DataSourceID="ODS_clienteSin" DataTextField="id" DataValueField="id">
+                </asp:DropDownList>
+                <asp:ObjectDataSource ID="ODS_clienteSin" runat="server" SelectMethod="mostrarClientesin" TypeName="DAO_Reserva"></asp:ObjectDataSource>
+                <asp:RequiredFieldValidator ID="RFV_cedulaSin" runat="server" ControlToValidate="DDL_CedulaSin" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroClienteSin" SetFocusOnError="True"></asp:RequiredFieldValidator>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="auto-style16">Servicio
+            </td>
+            <td class="auto-style16">Estilista
             </td>
         </tr>
         <tr>
@@ -128,10 +162,16 @@
                 <asp:ObjectDataSource ID="ODS_Servicio2" runat="server" SelectMethod="mostrarServicio" TypeName="DAO_Reserva"></asp:ObjectDataSource>
                 <asp:RequiredFieldValidator ID="RFV_Servicio" runat="server" ControlToValidate="DDL_Servicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroClienteSin" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
-
             <td class="auto-style8">
-                <asp:DropDownList ID="DDL_NombreEstilista" runat="server" Height="25px" Width="95%" DataSourceID="ODS_Estilistas2" DataTextField="nombre_estilista" DataValueField="id">
-                </asp:DropDownList>
+                <asp:UpdatePanel ID="UP_estilista" runat="server">
+                    <ContentTemplate>
+                        <asp:DropDownList ID="DDL_NombreEstilista" runat="server" DataSourceID="ODS_Estilistas2" DataTextField="nombre_estilista" DataValueField="id" Height="25px" Width="95%">
+                        </asp:DropDownList>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="DDL_Servicio" EventName="SelectedIndexChanged" />
+                    </Triggers>
+                </asp:UpdatePanel>
                 <asp:ObjectDataSource ID="ODS_Estilistas2" runat="server" SelectMethod="mostrarEstilistas" TypeName="DAO_Reserva">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="DDL_Servicio" DefaultValue="0" Name="id_servicio" PropertyName="SelectedValue" Type="Int32" />
@@ -141,16 +181,16 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style13">Precio del servicio
+            <td class="auto-style16">Precio del servicio
             </td>
-            <td class="auto-style13">Duracion del servicio
+            <td class="auto-style16">Duracion del servicio
             </td>
         </tr>
         <tr>
             <td class="auto-style12">
                 <asp:UpdatePanel ID="UP_Precio" runat="server">
                     <ContentTemplate>
-                        <asp:Label ID="LB_Precio" runat="server" CssClass="auto-style47"></asp:Label>
+                        <asp:Label ID="LB_Precio" runat="server" CssClass="auto-style47" style="color: #5274AD; font-size: 110%"></asp:Label>
                     </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="DDL_Servicio" EventName="SelectedIndexChanged" />
@@ -160,7 +200,7 @@
             <td class="auto-style8">
                 <asp:UpdatePanel ID="UP_Duracion" runat="server">
                     <ContentTemplate>
-                        <asp:Label ID="L_Duracion" runat="server" Text="" CssClass="auto-style47"></asp:Label>
+                        <asp:Label ID="L_Duracion" runat="server" CssClass="auto-style47" style="color: #5274AD; font-size: 110%"></asp:Label>
                     </ContentTemplate>
                     <Triggers>
                         <asp:AsyncPostBackTrigger ControlID="DDL_Servicio" EventName="SelectedIndexChanged" />
@@ -169,14 +209,14 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style13">fecha
+            <td class="auto-style16">fecha
             </td>
-            <td class="auto-style13">Hora
+            <td class="auto-style16">Hora
             </td>
         </tr>
         <tr>
             <td class="auto-style12">
-                <asp:Label ID="LB_FechaSistema" runat="server" CssClass="auto-style11"></asp:Label>
+                <asp:Label ID="LB_FechaSistema" runat="server" CssClass="auto-style17"></asp:Label>
             </td>
             <td class="auto-style8">
                 <asp:DropDownList ID="DDL_HoraCliente" runat="server" Height="25px" Width="95%" DataSourceID="ODS_Horas" DataTextField="horario_estilista" DataValueField="id">

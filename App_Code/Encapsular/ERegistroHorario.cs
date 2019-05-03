@@ -23,8 +23,9 @@ public class ERegistroHorario
     private Int32 idCliente;
     private Int32 idServicio;
     private Int32 precio;
-    private string session; 
-    
+    private string session;
+    private bool registro;
+    private bool disponibleSerie;
 
 
 
@@ -39,4 +40,6 @@ public class ERegistroHorario
     public int IdServicio { get => idServicio; set => idServicio = value; }
     public string Session { get => session; set => session = value; }
     public int Precio { get => precio; set => precio = value; }
+    public bool Registro { get => registro; set => registro = value; }
+    public bool DisponibleSerie { get => disponibleSerie; set => disponibleSerie = value; }
 }

@@ -15,17 +15,15 @@ public class ERegistroUsuario
     private DateTime fecha_nacimiento;
     private string biografia;
     private string contraseña;
-    private int telefono;
+    private long telefono;
     private string telefono2;
     private string session;
     private int estado;
     private int rol;
     private int usuario;
     private int servicio;
-
-
-
     private string fecha;
+    private Boolean disponibleSerie;
 
 
     public string Nombre { get => nombre; set => nombre = value; }
@@ -37,7 +35,6 @@ public class ERegistroUsuario
     public string Session { get => session; set => session = value; }
     public int Estado { get => estado; set => estado = value; }
     public int Rol { get => rol; set => rol = value; }
-    public int Telefono { get => telefono; set => telefono = value; }
     public int Usuario { get => usuario; set => usuario = value; }
     public int Servicio { get => servicio; set => servicio = value; }
 
@@ -46,5 +43,7 @@ public class ERegistroUsuario
 
     public string Biografia { get => biografia; set => biografia = value; }
     public string Fecha { get => fecha; set => fecha = value; }
+    public long Telefono { get => telefono; set => telefono = value; }
+    public bool DisponibleSerie { get => disponibleSerie; set => disponibleSerie = value; }
 }
 

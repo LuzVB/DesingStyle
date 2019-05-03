@@ -68,11 +68,10 @@ public partial class View_masterUsuarios_administrador_usuariosSinRegistro : Sys
         string hora, fecha;
         DateTime fechaCliente;
         int servicioID;
-        int error = 0;
 
         ERegistroUsuario cliente = new ERegistroUsuario();
-        cliente.Cedula = Int32.Parse(Tx_cedula.Text);
-        cliente.Nombre = Tx_nombre.Text;
+        cliente.Cedula = Int32.Parse(DDL_CedulaSin.SelectedValue.ToString());
+        //cliente.Nombre = Tx_nombre.Text;
 
         servicioID = int.Parse(DDL_Servicio.SelectedValue.ToString());
 
@@ -84,32 +83,19 @@ public partial class View_masterUsuarios_administrador_usuariosSinRegistro : Sys
 
         fecha = LB_FechaSistema.Text;
 
-        DataTable contarId = new DAORegistroCliente().contarId(cliente);
 
-        if (contarId.Rows[0]["user_id"].Equals(-1))
-        {
-            L_ErrorCedula.Text = "";
-            error = 0;
-        }
-        else
-        {
-            L_ErrorCedula.Visible = true;
-            L_ErrorCedula.Text = "La cedula ya se encuentra registrada ";
-            error = 1;
-        }
+        //if (error == 0)
+        //{
+        //L_Cliente.Text = cliente.Nombre;
+        L_Cedula.Text = cliente.Cedula.ToString();
+        L_estilistaPanel.Text = DDL_NombreEstilista.SelectedItem.ToString();
+        L_servicioPanel.Text = DDL_Servicio.SelectedItem.ToString();
+        L_fechaPanel.Text = fecha;
+        L_horaPanel.Text = hora;
+        L_PrecioM.Text = LB_Precio.Text;
 
-        if (error == 0)
-        {
-            L_Cliente.Text = cliente.Nombre;
-            L_Cedula.Text = cliente.Cedula.ToString();
-            L_estilistaPanel.Text = DDL_NombreEstilista.SelectedItem.ToString();
-            L_servicioPanel.Text = DDL_Servicio.SelectedItem.ToString();
-            L_fechaPanel.Text = fecha;
-            L_horaPanel.Text = hora;
-            L_PrecioM.Text = LB_Precio.Text;
-
-            MPE_confirmarReserva.Show();
-        }
+        MPE_confirmarReserva.Show();
+        //}
 
     }
 
@@ -121,22 +107,6 @@ public partial class View_masterUsuarios_administrador_usuariosSinRegistro : Sys
         int hora, minuto, duracionFinal, id_estilista, id_servicio;
         DAO_Reserva mostrarDuracion = new DAO_Reserva();
         DAO_Reserva buscarPrecio = new DAO_Reserva();
-        ERegistroUsuario cliente = new ERegistroUsuario();
-
-        cliente.Cedula = Int32.Parse(Tx_cedula.Text);
-        cliente.Nombre = Tx_nombre.Text;
-        cliente.Apellido = "";
-        cliente.Correo = "";
-        cliente.Contraseña = "";
-        cliente.Fecha_nacimiento = DateTime.Parse(LB_FechaSistema.Text);
-        cliente.Telefono = 0;
-        cliente.Estado = 1;
-        cliente.Rol = 4;
-        cliente.Session = Session.SessionID;
-
-        new DAORegistroCliente().registroCliente(cliente);
-
-
 
         //diaReserva = C_Reserva.SelectedDate.ToShortDateString();//11/09/2019
         diaReserva = LB_FechaSistema.Text;
@@ -181,22 +151,23 @@ public partial class View_masterUsuarios_administrador_usuariosSinRegistro : Sys
         {
             reserva.IdReserva = int.Parse(horario.Rows[i]["id"].ToString());
             reserva.IdServicio = id_servicio;
-            reserva.IdCliente = int.Parse(Tx_cedula.Text);
+            reserva.IdCliente = int.Parse(DDL_CedulaSin.SelectedValue.ToString());
             reserva.Estado = false;
 
             rangoHorario.actulizarReserva(reserva);
         }
 
         DataTable precio = buscarPrecio.mostrarPrecio(id_servicio);
-        gReserva.IdCliente = int.Parse(Tx_cedula.Text);
+        gReserva.IdCliente = int.Parse(DDL_CedulaSin.SelectedValue.ToString());
         gReserva.Idestilista = id_estilista;
         gReserva.IdServicio = id_servicio;
         gReserva.Session = Session.SessionID;
         gReserva.Fechaini = DateTime.Parse(hora_cliente);
         gReserva.Fechafin = DateTime.Parse(hora_clienteF);
         gReserva.Precio = int.Parse(precio.Rows[0]["precio_servicio"].ToString());
+        gReserva.Registro = false;
 
-        guardarReserva.guardarReserva(gReserva);
+        guardarReserva.guardarReserva2(gReserva);
 
         MPE_ReservaExitosa.Show();
     }
@@ -204,5 +175,42 @@ public partial class View_masterUsuarios_administrador_usuariosSinRegistro : Sys
     protected void BT_Aceptar_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/View/masterUsuarios/administrador/usuariosSinRegistro.aspx");
+    }
+
+    protected void preRegistro_Click(object sender, ImageClickEventArgs e)
+    {
+
+        int error = 0;
+        ERegistroUsuario cliente = new ERegistroUsuario();
+        cliente.Cedula = Int32.Parse(Tx_cedula.Text);
+        cliente.Nombre = Tx_nombre.Text;
+        cliente.Apellido = "";
+        cliente.Correo = "";
+        cliente.Contraseña = "";
+        cliente.Fecha_nacimiento = DateTime.Parse(LB_FechaSistema.Text);
+        cliente.Telefono = 0;
+        cliente.Estado = 1;
+        cliente.Rol = 4;
+        cliente.Session = Session.SessionID;
+
+        DataTable contarId = new DAORegistroCliente().contarId(cliente);
+
+        if (contarId.Rows[0]["user_id"].Equals(-1))
+        {
+            L_ErrorCedula.Text = "";
+            error = 0;
+        }
+        else
+        {
+            L_ErrorCedula.Visible = true;
+            L_ErrorCedula.Text = "La cedula ya se encuentra registrada ";
+            error = 1;
+        }
+
+        if(error == 0)
+        {
+            new DAORegistroCliente().registroCliente(cliente);
+            Response.Redirect("usuariosSinRegistro.aspx");
+        }
     }
 }
