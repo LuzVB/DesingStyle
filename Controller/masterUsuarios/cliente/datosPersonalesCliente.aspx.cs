@@ -36,7 +36,8 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
         string nombre, apellido/*, telefono, correo*/;
         nombre = datosCliente.Rows[0]["nombre"].ToString();
         apellido = datosCliente.Rows[0]["apellido"].ToString();
-        L_Bienvenida.Text = ("HOLA " + nombre + " " + apellido).ToUpper();
+        L_Bienvenida.Text = ("HOLA " + nombre + " " + apellido ).ToUpper();
+
     }
 
     protected void BT_GuardarCliente_Click(object sender, EventArgs e)
@@ -74,15 +75,42 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
 
             error = 1;
         }
-
-        if (error == 0)
+        if (((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteNombre")).Text.Length < 3)
         {
-            DAOCliente guardarCambios = new DAOCliente();
-            guardarCambios.modificarCliente(cliente);
 
-            Response.Redirect("~/View/masterUsuarios/cliente/datosPersonalesCliente.aspx");
+            LB_ErrorDatos.Visible = true;
+            LB_ErrorDatos.Text = "El Numero de caracteres del nombre es invalido";
+            ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteNombre")).Text = "";
         }
+        else if (((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteApellido")).Text.Length < 3)
+        {
+            LB_ErrorDatos.Visible = true;
+            LB_ErrorDatos.Text = "El Numero de caracteres del apellido es invalido";
+            ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteApellido")).Text= "";
+        }
+        else if (((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteTelefono")).Text.Length < 8) {
 
+            LB_ErrorDatos.Visible = true;
+            LB_ErrorDatos.Text = "El Numero de caracteres del telefono es invalido";
+            ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteTelefono")).Text = "";
+        }
+        else if (((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteCorreo")).Text.Length < 10)
+        {
+
+            LB_ErrorDatos.Visible = true;
+            LB_ErrorDatos.Text = "El Numero de caracteres del correo es invalido";
+            ((TextBox)FV_MostrarCliente.Row.FindControl("Tx_ClienteCorreo")).Text = "";
+        }
+        else
+        {
+            if (error == 0)
+            {
+                DAOCliente guardarCambios = new DAOCliente();
+                guardarCambios.modificarCliente(cliente);
+
+                Response.Redirect("~/View/masterUsuarios/cliente/datosPersonalesCliente.aspx");
+            }
+        }
     }
 
 
@@ -101,17 +129,21 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
 
         if (contraseñaActual != _contraseñaActual)
         {
-            LB_ErrorContraseña.Text = "La contraseña actual es errónea";
+            LB_ErrorDatos.Text = "La contraseña actual es errónea";
+        }
+        if  (Tx_ContraseñaNueva.Text.Length < 4)
+        {
+            LB_ErrorContraseña.Text = "La contraseña debe tener más de 4 caracteres";
         }
         else
         {
-            clienteContra.Contraseña = contraseñaNueva;
-            clienteContra.UserId = int.Parse(Session["user_id"].ToString());
+            
+                clienteContra.Contraseña = contraseñaNueva;
+                clienteContra.UserId = int.Parse(Session["user_id"].ToString());
 
-            guardar.actualizarContrasena(clienteContra);
-
-            LB_ErrorContraseña.Text = "La contraseña ha sido actualizada";
-
+                guardar.actualizarContrasena(clienteContra);
+                LB_ErrorContraseña.Visible = false;
+                LB_ErrorDatos.Text = "La contraseña ha sido actualizada";
         }
 
 

@@ -65,13 +65,41 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
             
             error = 1;
         }
-
-        if ( error == 0)
+        if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmNombre")).Text.Length < 3 )
         {
-            DAOAdmin guardarCambios = new DAOAdmin();
-            guardarCambios.modificarAdmin(admin);
 
-            Response.Redirect("~/View/masterUsuarios/administrador/datosPersonales.aspx");
+            LB_Datos.Visible = true;
+            LB_Datos.Text = "El Numero de caracteres del nombre es invalido";
+            ((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmNombre")).Text = "";
+            
+        }
+         else if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmTelefono")).Text.Length < 8) {
+
+            LB_Datos.Visible = true;
+            ((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmTelefono")).Text = "";
+            LB_Datos.Text = "El Numero de caracteres del telefono es invalido";
+        }
+         else  if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmApellido")).Text.Length < 3) {
+
+            LB_Datos.Visible = true;
+            ((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmApellido")).Text = "";
+            LB_Datos.Text = "El Numero de caracteres del apellido es invalido";
+        }
+        else if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmCorreo")).Text.Length < 10)
+        {
+
+            LB_Datos.Visible = true;
+            ((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmCorreo")).Text = "";
+            LB_Datos.Text = "El Numero de caracteres del correo es invalido";
+        }
+        else {
+            if (error == 0)
+            {
+                DAOAdmin guardarCambios = new DAOAdmin();
+                guardarCambios.modificarAdmin(admin);
+                LB_Datos.Visible = false;
+                Response.Redirect("~/View/masterUsuarios/administrador/datosPersonales.aspx");
+            }
         }
 
 
@@ -91,6 +119,9 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
         if (contraseñaActual != _contraseñaActual)
         {
             LB_ErrorContraseña.Text = "La contraseña actual es errónea";
+        }
+        if (Tx_AdmCNueva.Text.Length < 4) {
+            LB_ErrorContraseña.Text = "La contraseña no puede tener menos de 4 caracteres";
         }
         else
         {
