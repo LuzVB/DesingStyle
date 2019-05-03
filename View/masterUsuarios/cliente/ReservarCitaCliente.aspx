@@ -100,12 +100,15 @@
     </tr>
     <tr>
         <td class="auto-style12" colspan="2">
-            Seleccione el servicio</td>
+            Seleccione el servicio<br />
+            <br />
+            <asp:Label ID="fecha" runat="server" Text="Label"></asp:Label>
+            <asp:Label ID="prueba" runat="server" Text="Label"></asp:Label>
+        </td>
     </tr>
     <tr>
         <td class="auto-style44" >
-            <span class="auto-style46">Servicio
-            &nbsp;</span><asp:RequiredFieldValidator ID="RFV_ServicioReserva" runat="server" ErrorMessage="(*)" ForeColor="Red" ControlToValidate="DDL_servicio" CssClass="auto-style46"></asp:RequiredFieldValidator>
+            
         </td>
         <td class="auto-style36">
             <asp:DropDownList ID="DDL_servicio" runat="server" Height="25px" Width="70%" DataSourceID="ODS_servicio" DataTextField="nombre_servicio" DataValueField="id" CssClass="auto-style42" AutoPostBack="True" OnSelectedIndexChanged="DDL_servicio_SelectedIndexChanged" OnDataBound="DDL_servicio_DataBound" >
@@ -245,6 +248,7 @@
         </td>
     </tr>
 </table>
+
     <cc1:modalpopupextender ID="MPE_confirmarReserva" runat="server" PopupControlID="P_confirmarReserva" CancelControlID="BT_Cancelar" TargetControlID="L_Target" BackgroundCssClass="modalBackground"></cc1:modalpopupextender>
     <asp:Label ID="L_Target" runat="server" Text=""></asp:Label>
     <asp:Panel ID="P_confirmarReserva" runat="server" Width="40%">
@@ -284,6 +288,35 @@
         </div>
     </asp:Panel>
 
+    <cc1:modalpopupextender ID="Asistencia" runat="server" PopupControlID="P_Reserva" CancelControlID="Cancelar" TargetControlID="L_TargetReserva" BackgroundCssClass="modalBackground"></cc1:modalpopupextender>
+    <asp:Label ID="L_TargetReserva" runat="server" Text=""></asp:Label>
+    <asp:Panel ID="P_Reserva" runat="server" Width="40%">
+        <div class="alert alert-danger" role="alert" style=" width:100% " >
+          <h4 class="alert-heading">Multa Por Inacistencia</h4>
+          <div>
+
+              <table class="w-100">
+                  <tr>
+                      <td><asp:Label ID="Label2" runat="server" CssClass="auto-style43"></asp:Label><br /></td>
+                  </tr>
+              </table>
+
+          </div>
+           <hr>
+            <div class ="botones">
+              <asp:Button ID="Cancelar" runat="server" Text="OK"  class="btn btn-outline-danger"/>
+              <asp:Button ID="Reservar" runat="server" Text="Cancelar"  class="btn btn-outline-primary" Visible="False"/>
+            </div>
+        </div>
+    </asp:Panel>
+
+
+
+
+
+
+
+
     <cc1:modalpopupextender ID="MPE_ReservaExitosa" runat="server" PopupControlID="P_ReservaExit"  TargetControlID="LB_target2" BackgroundCssClass="modalBackground"></cc1:modalpopupextender>
     <asp:Label ID="LB_target2" runat="server" Text=""></asp:Label>
     <asp:Panel ID="P_ReservaExit" runat="server" Width="40%">
@@ -295,7 +328,6 @@
             </div>
         </div>
     </asp:Panel>
-    
     <cc1:modalpopupextender ID="MPE_Error" runat="server" PopupControlID="P_Error" CancelControlID="BT_okError"  TargetControlID="LB_target3" BackgroundCssClass="modalBackground"></cc1:modalpopupextender>
     <asp:Label ID="LB_target3" runat="server" Text=""></asp:Label>
     <asp:Panel ID="P_Error" runat="server" Width="40%">
@@ -305,11 +337,10 @@
             <asp:Label ID="LB_Error" runat="server" Text=""></asp:Label>
            <hr>
             <div class ="botones2">
-              <asp:Button ID="BT_okError" runat="server" Text="OK"  class="btn btn-outline-warning"/>
+              <asp:Button ID="BT_okError" runat="server" Text="OK"  class="btn btn-outline-warning" />
             </div>
         </div>
+        <br />
     </asp:Panel>
 
-
 </asp:Content>
-
