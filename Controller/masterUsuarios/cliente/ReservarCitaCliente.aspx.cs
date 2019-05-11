@@ -166,8 +166,6 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         for (int i = 0; i < tamano; i++)
         {
             reserva.IdReserva = int.Parse(horario.Rows[i]["id"].ToString());
-            reserva.IdServicio = id_servicio;
-            reserva.IdCliente = int.Parse(Session["user_id"].ToString());
             reserva.Estado = false;
 
             rangoHorario.actulizarReserva(reserva);
@@ -270,6 +268,10 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         {
             LB_CalendarioAlert.Visible = true;
             LB_CalendarioAlert.Text = "No hay reservas por favor seleccione otra fecha.";
+        }
+        else
+        {
+            LB_CalendarioAlert.Visible = false;
         }
 
     }

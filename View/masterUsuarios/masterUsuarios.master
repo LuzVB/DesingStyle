@@ -154,6 +154,7 @@
                                 <asp:MenuItem Text="Reservar Cita" Value="Reservar Cita" ImageUrl="~/Imagenes/menu/clienteSin.png" NavigateUrl="~/View/masterUsuarios/administrador/usuariosSinRegistro.aspx"></asp:MenuItem>
                                 <asp:MenuItem Text="Citas Agendas " Value="Citas Agendas " ImageUrl="~/Imagenes/menu/agendas.png" NavigateUrl="~/View/masterUsuarios/administrador/reservaEstilista.aspx"></asp:MenuItem>
                                 <asp:MenuItem Text="Inasistencias " Value="Inasistencias " ImageUrl="~/Imagenes/menu/inasistencia2.png" NavigateUrl="~/View/masterUsuarios/administrador/inasistenciaEstilista.aspx"></asp:MenuItem>
+                                <asp:MenuItem ImageUrl="~/Imagenes/menu/baseline_import_contacts_black_18dp.png" Text="Reportes" Value="Reportes" NavigateUrl="~/View/masterUsuarios/administrador/reportes.aspx"></asp:MenuItem>
                             </Items>
                             <StaticHoverStyle BackColor="#008BE4" ForeColor="White" />
                             <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />

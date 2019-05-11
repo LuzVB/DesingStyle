@@ -23,4 +23,43 @@ public partial class View_masterUsuarios_administrador_reservaEstilista : System
         }
 
     }
+
+    protected void DDL_Estilistas_DataBound(object sender, EventArgs e)
+    {
+        if (DDL_Estilistas.SelectedValue.Equals("0"))
+        {
+            LB_NombreEstilista.Visible = false;
+        }
+        else
+        {
+            LB_NombreEstilista.Visible = true;
+            LB_NombreEstilista.Text = "Nombre del Estilista " + DDL_Estilistas.SelectedItem.ToString();
+        }
+    }
+
+    protected void DDL_Estilistas_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        LB_Seleccione.Text = "";
+        if (DDL_Estilistas.SelectedValue.Equals("0"))
+        {
+            LB_NombreEstilista.Visible = false;
+        }
+        else
+        {
+            LB_NombreEstilista.Visible = true;
+            LB_NombreEstilista.Text = "Nombre del Estilista " + DDL_Estilistas.SelectedItem.ToString();
+        }
+    }
+
+    protected void C_Fecha_SelectionChanged(object sender, EventArgs e)
+    {
+        if (DDL_Estilistas.SelectedValue.Equals("0"))
+        {
+            LB_Seleccione.Text = "Seleccione un estilista";
+        }
+        else
+        {
+            LB_Seleccione.Text = "";
+        }
+    }
 }

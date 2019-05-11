@@ -68,9 +68,59 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
         {
             error = 0;
             L_ServicioR.Visible = false;
-
-
         }
+
+        if (Tx_CodigoEstilista.Text.Length < 8)
+        {
+
+            L_cedula.Visible = true;
+            LB_Datos.Text = "El numero de caracteres de la cedula son invalidos";
+            error = 1;
+        }
+        else
+        {
+            L_cedula.Visible = false;
+            error = 0;
+        }
+
+        if (Tx_NombreEstilista.Text.Length < 3)
+        {
+            LB_Nombre.Visible = true;
+            LB_Nombre.Text = "El numero de caracteres del nombre son invalidos";
+            error = 1;
+        }
+        else
+        {
+            LB_Nombre.Visible = false;
+            error = 0;
+        }
+
+        if (Tx_ApellidoEstilista.Text.Length < 3)
+        {
+
+            LB_apellido.Visible = true;
+            LB_apellido.Text = "El numero de caracteres del apellido son invalidos";
+            error = 1;
+        }
+        else
+        {
+            LB_apellido.Visible = false;
+            error = 0;
+        }
+
+        if (Tx_TelefonoEstilista.Text.Length < 8)
+        {
+
+            LB_Telefono.Visible = true;
+            LB_Telefono.Text = "El numero de caracteres del telefono son invalidos";
+            error = 1;
+        }
+        else if (Tx_CorreoEstilista.Text.Length < 25)
+        {
+            LB_Telefono.Visible = false;
+            error = 0;
+        }
+        
 
         if (contarCorreo.Rows[0]["user_correo"].Equals("1"))
         {

@@ -150,8 +150,6 @@ public partial class View_masterUsuarios_administrador_usuariosSinRegistro : Sys
         for (int i = 0; i < tamano; i++)
         {
             reserva.IdReserva = int.Parse(horario.Rows[i]["id"].ToString());
-            reserva.IdServicio = id_servicio;
-            reserva.IdCliente = int.Parse(DDL_CedulaSin.SelectedValue.ToString());
             reserva.Estado = false;
 
             rangoHorario.actulizarReserva(reserva);

@@ -43,7 +43,7 @@ public partial class View_masterUsuarios_estilista_catalogoEstilista : System.We
         }
         else
         {
-            user.Muestra = "~\\Imagenes\\perfil\\" + Session["nombre"].ToString() + numero + System.IO.Path.GetFileName(FU_IMuestra.PostedFile.FileName);
+            user.Muestra = "~\\Imagenes\\catalogo\\" + Session["nombre"].ToString() + numero + System.IO.Path.GetFileName(FU_IMuestra.PostedFile.FileName);
             FU_IMuestra.PostedFile.SaveAs(Server.MapPath(user.Muestra));
 
             DataTable datos = new DAOPerfilEstilista().registroCatalogo(user);
