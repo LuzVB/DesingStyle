@@ -137,4 +137,78 @@ public class DAOAdmin
         }
         return administrador;
     }
+
+    public DataTable mostrarEstilistas()
+    {
+        DataTable estilista = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_cargar_estilistas", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(estilista);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return estilista;
+    }
+
+    public DataTable mostrarReservas(int id, string fecha_adm)
+    {
+        string fechaCorta;
+        DateTime fechaInicio = new DateTime();
+        DateTime fechaFin = new DateTime();
+
+        if (fecha_adm.Equals("0"))
+        {
+            fechaInicio = DateTime.Now;
+        }
+        else
+        {
+            fechaInicio = DateTime.Parse(fecha_adm);
+        }
+        
+        fechaCorta = fechaInicio.ToShortDateString();
+        fechaInicio = DateTime.Parse(fechaCorta);
+        fechaFin = fechaInicio.AddDays(1);
+
+        DataTable administrador = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_read_reservasest2", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = id;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_inicio", NpgsqlDbType.Timestamp).Value = fechaInicio;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_final", NpgsqlDbType.Timestamp).Value = fechaFin;
+
+            conection.Open();
+            dataAdapter.Fill(administrador);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return administrador;
+    }
 }

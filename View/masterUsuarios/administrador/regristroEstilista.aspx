@@ -189,20 +189,22 @@
         <cc1:filteredtextboxextender ID="FTBE_CodigoEstilista" runat="server" FilterType="Numbers" TargetControlID="Tx_CodigoEstilista" />
         <td class="auto-style23"><asp:TextBox ID="Tx_NombreEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista" OnTextChanged="Tx_NombreEstilista_TextChanged"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RFV_INombreEstilista" runat="server" ControlToValidate="Tx_NombreEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista" SetFocusOnError="True"></asp:RequiredFieldValidator>
+            <asp:Label ID="LB_Nombre" runat="server" ForeColor="Red" Text="" Visible="False"></asp:Label>
         </td>
         <cc1:TextBoxWatermarkExtender id="TBWEDOB_NombreEstilista" runat="server" targetcontrolid="Tx_NombreEstilista" watermarktext="Nombre" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
         <cc1:filteredtextboxextender ID="FTBE_NombreEstilista" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" ValidChars="ñ" TargetControlID="Tx_NombreEstilista" />
         <td class="auto-style23"><asp:TextBox ID="Tx_ApellidoEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px"  ValidationGroup="registroEstilista"></asp:TextBox>
         <cc1:TextBoxWatermarkExtender id="TBWEDOB_ApellidoEstilista" runat="server" targetcontrolid="Tx_ApellidoEstilista" watermarktext="Apellido" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
         <cc1:filteredtextboxextender ID="FTBE_ApellidoEstilista" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" ValidChars="ñ" TargetControlID="Tx_ApellidoEstilista" />
-
             <asp:RequiredFieldValidator ID="RFV_IApellidoEstilista" runat="server" ControlToValidate="Tx_ApellidoEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista" SetFocusOnError="True"></asp:RequiredFieldValidator>
+            <asp:Label ID="LB_apellido" runat="server" ForeColor="Red" Text="" Visible="False"></asp:Label>
         </td>
 
     </tr>
     <tr>
         <td class="auto-style24"><asp:TextBox ID="Tx_TelefonoEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista"></asp:TextBox>
             <asp:RequiredFieldValidator ID="RFV_ITelefonoEstilista" runat="server" ControlToValidate="Tx_TelefonoEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista" SetFocusOnError="True"></asp:RequiredFieldValidator>
+             <asp:Label ID="LB_Telefono" runat="server" ForeColor="Red" Text="" Visible="False"></asp:Label>
         </td>
         <cc1:TextBoxWatermarkExtender id="TBWEDOB_TelefonoEstilista" runat="server" targetcontrolid="Tx_TelefonoEstilista" watermarktext="Telefono" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
         <cc1:filteredtextboxextender ID="FTBE_TelefonoEstilista" runat="server" FilterType="Numbers" TargetControlID="Tx_TelefonoEstilista" />

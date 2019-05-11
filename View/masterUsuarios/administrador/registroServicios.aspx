@@ -38,7 +38,7 @@
 
                 <div class="auto-style11">
 
-                <asp:GridView ID="GV_Estilista" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" PageSize="5" Width="95%" CssClass="auto-style14" ShowHeaderWhenEmpty="True" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" DataSourceID="ODS_Servicio" AutoGenerateColumns="False" DataKeyNames="id" OnRowUpdating="GV_Estilista_RowUpdating">
+                <asp:GridView ID="GV_Estilista" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" PageSize="5" Width="100%" CssClass="auto-style14" ShowHeaderWhenEmpty="True" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" DataSourceID="ODS_Servicio" AutoGenerateColumns="False" DataKeyNames="id" OnRowUpdating="GV_Estilista_RowUpdating">
                     <Columns>
                         <asp:TemplateField HeaderText="Nombre">
                             <EditItemTemplate>
@@ -56,7 +56,7 @@
                                 <asp:Label ID="Label2" runat="server" Text='<%# Bind("descripcion") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Precio ($)">
+                        <asp:TemplateField HeaderText="Precio">
                             
                             <EditItemTemplate>
                                 <asp:DropDownList ID="DDL_precio" runat="server" SelectedValue='<%# Bind("precio") %>'>
@@ -88,10 +88,11 @@
                                     </asp:DropDownList>
                             </EditItemTemplate>
                             <ItemTemplate>
-                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("precio") %>'></asp:Label>
+                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("precio","{0:C}") %>' Width="100%"></asp:Label>
                             </ItemTemplate>
+                            <ControlStyle Width="100%" />
                         </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Duracion(HH:MM)">
+                        <asp:TemplateField HeaderText="Duracion">
                              <EditItemTemplate>
                                 <asp:DropDownList ID="DDL_duracion" runat="server" SelectedValue='<%# Bind("duracion") %>'>
                                                    <asp:ListItem Value="00:15:00">00:15</asp:ListItem>

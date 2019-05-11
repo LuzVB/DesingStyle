@@ -157,15 +157,19 @@
         </tr>
         <tr>
             <td class="auto-style8">
-                <asp:DropDownList ID="DDL_Servicio" runat="server" Height="25px" Width="95%" DataSourceID="ODS_Servicio2" DataTextField="nombre_servicio" DataValueField="id" OnDataBound="DDL_Servicio_DataBound" OnSelectedIndexChanged="DDL_Servicio_SelectedIndexChanged" AutoPostBack="True">
-                </asp:DropDownList>
+                <asp:UpdatePanel ID="UP_Servicio" runat="server">
+                    <ContentTemplate>
+                        <asp:DropDownList ID="DDL_Servicio" runat="server" Height="25px" Width="95%" DataSourceID="ODS_Servicio2" DataTextField="nombre_servicio" DataValueField="id" OnDataBound="DDL_Servicio_DataBound" OnSelectedIndexChanged="DDL_Servicio_SelectedIndexChanged" AutoPostBack="True">
+                        </asp:DropDownList>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
                 <asp:ObjectDataSource ID="ODS_Servicio2" runat="server" SelectMethod="mostrarServicio" TypeName="DAO_Reserva"></asp:ObjectDataSource>
                 <asp:RequiredFieldValidator ID="RFV_Servicio" runat="server" ControlToValidate="DDL_Servicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroClienteSin" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
             <td class="auto-style8">
                 <asp:UpdatePanel ID="UP_estilista" runat="server">
                     <ContentTemplate>
-                        <asp:DropDownList ID="DDL_NombreEstilista" runat="server" DataSourceID="ODS_Estilistas2" DataTextField="nombre_estilista" DataValueField="id" Height="25px" Width="95%">
+                        <asp:DropDownList ID="DDL_NombreEstilista" runat="server" DataSourceID="ODS_Estilistas2" DataTextField="nombre_estilista" DataValueField="id" Height="25px" Width="95%" AutoPostBack="True">
                         </asp:DropDownList>
                     </ContentTemplate>
                     <Triggers>
@@ -219,8 +223,16 @@
                 <asp:Label ID="LB_FechaSistema" runat="server" CssClass="auto-style17"></asp:Label>
             </td>
             <td class="auto-style8">
-                <asp:DropDownList ID="DDL_HoraCliente" runat="server" Height="25px" Width="95%" DataSourceID="ODS_Horas" DataTextField="horario_estilista" DataValueField="id">
-                </asp:DropDownList>
+                <asp:UpdatePanel ID="UP_Hora" runat="server">
+                    <ContentTemplate>
+                        <asp:DropDownList ID="DDL_HoraCliente" runat="server" AutoPostBack="True" DataSourceID="ODS_Horas" DataTextField="horario_estilista" DataValueField="id" Height="25px" Width="95%">
+                        </asp:DropDownList>
+                    </ContentTemplate>
+                    <Triggers>
+                        <asp:AsyncPostBackTrigger ControlID="DDL_NombreEstilista" EventName="SelectedIndexChanged" />
+                        <asp:AsyncPostBackTrigger ControlID="DDL_Servicio" EventName="SelectedIndexChanged" />
+                    </Triggers>
+                </asp:UpdatePanel>
                 <asp:ObjectDataSource ID="ODS_Horas" runat="server" SelectMethod="mostrarHorarios2" TypeName="DAO_Reserva">
                     <SelectParameters>
                         <asp:ControlParameter ControlID="DDL_NombreEstilista" DefaultValue="0" Name="id_estilista" PropertyName="SelectedValue" Type="Int32" />

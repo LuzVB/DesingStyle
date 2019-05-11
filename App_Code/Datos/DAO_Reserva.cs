@@ -319,11 +319,10 @@ public class DAO_Reserva
 
         try
         {
-            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_actualizar_reserva", conection);
+            //NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_actualizar_reserva", conection);
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_actualizar_reserva2", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
             dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = datos.IdReserva;
-            dataAdapter.SelectCommand.Parameters.Add("_id_servicio", NpgsqlDbType.Integer).Value = datos.IdServicio;
-            dataAdapter.SelectCommand.Parameters.Add("_id_cliente", NpgsqlDbType.Integer).Value = datos.IdCliente;
             dataAdapter.SelectCommand.Parameters.Add("_disponible", NpgsqlDbType.Boolean).Value = datos.Estado;
 
             conection.Open();
