@@ -101,4 +101,9 @@ public partial class View_masterUsuarios_administrador_reportes : System.Web.UI.
     {
         Response.Redirect("~/View/masterUsuarios/administrador/reporteUsuarioSinRegistro.aspx");
     }
+
+    protected void BT_ReservasEstilistas_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/View/masterUsuarios/administrador/reportesTabla.aspx");
+    }
 }

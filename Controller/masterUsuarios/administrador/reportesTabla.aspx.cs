@@ -115,4 +115,19 @@ public partial class View_masterUsuarios_administrador_reportes : System.Web.UI.
 
         return datos;
     }
+
+    protected void BT_Servicios_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/View/masterUsuarios/administrador/reportes.aspx");
+    }
+
+    protected void BT_PerfilEstilista_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/View/masterUsuarios/administrador/reportePerfilEstilista.aspx");
+    }
+
+    protected void BT_UsuariosSinServico_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/View/masterUsuarios/administrador/reporteUsuarioSinRegistro.aspx");
+    }
 }

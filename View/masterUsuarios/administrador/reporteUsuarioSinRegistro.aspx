@@ -27,12 +27,15 @@
                             <asp:Button ID="BT_Servicios" runat="server" Text="Servicios" OnClick="BT_Servicios_Click" class="btn btn-primary" />
                         </td>
                         <td>
+                         <asp:Button ID="BT_ReservasEstilistas" runat="server"  Text="Reservas de los Estilistas" class="btn btn-primary" OnClick="BT_ReservasEstilistas_Click"/>
+                        </td>
+                        <td>
                             <asp:Button ID="BT_PerfilEstilista" runat="server" Text="Perfil De Los Estilista" OnClick="BT_PerfilEstilista_Click" class="btn btn-primary" />
                         </td>
                     </tr>
                 </table>
                 <br />
-                <CR:CrystalReportViewer ID="CRV_UsuarioSinRegistro" runat="server" AutoDataBind="True" EnableDatabaseLogonPrompt="False" GroupTreeImagesFolderUrl="" Height="50px" ReportSourceID="CRS_PerfilEstilista" ToolbarImagesFolderUrl="" ToolPanelWidth="100px" Width="350px" />
+                <CR:CrystalReportViewer ID="CRV_UsuarioSinRegistro" runat="server" AutoDataBind="True" EnableDatabaseLogonPrompt="False" GroupTreeImagesFolderUrl="" Height="50px" ReportSourceID="CRS_UsuarioSinRegistro" ToolbarImagesFolderUrl="" ToolPanelWidth="100px" Width="350px" />
                 <CR:CrystalReportSource ID="CRS_UsuarioSinRegistro" runat="server">
                     <Report FileName="~\Reportes\reporteUsuarioSinRegistro.rpt">
                     </Report>
@@ -41,4 +44,6 @@
         </tr>
     </table>
 </asp:Content>
+
+
 

@@ -23,6 +23,9 @@
                             <asp:Button ID="BT_ServiciosAdq" runat="server" OnClick="BT_ServiciosAdq_Click" Text="Servicios Más Adquiridos" class="btn btn-primary" />
                         </td>
                         <td>
+                            <asp:Button ID="BT_ReservasEstilistas" runat="server"  Text="Reservas de los Estilistas" class="btn btn-primary" OnClick="BT_ReservasEstilistas_Click"/>
+                        </td>
+                        <td>
                             <asp:Button ID="BT_UsuariosSinRegistro" runat="server" OnClick="BT_UsuariosSinRegistro_Click" Text="Usuarios Sin Registro" class="btn btn-primary" />
                         </td>
                     </tr>
