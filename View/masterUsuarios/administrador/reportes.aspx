@@ -12,13 +12,25 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <table class="w-100">
         <tr>
-            <td class="auto-style8">titulo</td>
+            <td class="auto-style8">REPORTES</td>
         </tr>
         <tr>
             <td class="auto-style8">
+                <br />
+                <table class="w-100">
+                    <tr>
+                        <td>
+                            <asp:Button ID="BT_UsuariosSinServico" runat="server" OnClick="BT_UsuariosSinServico_Click" Text="Usuarios Sin Registro" class="btn btn-primary"/>
+                        </td>
+                        <td>
+                            <asp:Button ID="BT_PerfilEstilista" runat="server" OnClick="BT_PerfilEstilista_Click" Text="Perfil De Los Estilistas" class="btn btn-primary" />
+                        </td>
+                    </tr>
+                </table>
+                <br />
                 <CR:CrystalReportViewer ID="CRV_Servicios" runat="server" AutoDataBind="True" EnableDatabaseLogonPrompt="False" GroupTreeImagesFolderUrl="" Height="1202px" ReportSourceID="CRS_Servicios" ToolbarImagesFolderUrl="" ToolPanelWidth="100px" Width="1004px" />
                 <CR:CrystalReportSource ID="CRS_Servicios" runat="server">
-                    <Report FileName="C:\Users\Luz\Documents\UDEC\Semestres\Quinto Semestre\Ingenieria de software I\proyecto\construccion\proyecto\Reportes\reporteServicios.rpt">
+                    <Report FileName="~\Reportes\reporteServicios.rpt">
                     </Report>
                 </CR:CrystalReportSource>
             </td>

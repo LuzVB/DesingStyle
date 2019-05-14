@@ -72,4 +72,57 @@ public class DAOReportes
         }
         return animes;
     }
+
+    public DataTable mostrarestilistas()
+    {
+        DataTable animes = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_mostar_estilista", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(animes);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return animes;
+    }
+    public DataTable UsuarioSinRegistro()
+    {
+        DataTable Mostrar = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_reporte_usuario_sin_registro", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(Mostrar);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return Mostrar;
+    }
 }
