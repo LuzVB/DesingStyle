@@ -212,7 +212,7 @@
             <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Tx_CorreoEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista"></asp:RequiredFieldValidator>
             <asp:Label ID="L_correo" runat="server" ForeColor="Red" Text="El Correo ya existe" Visible="False"></asp:Label>
         </td>
-         <cc1:TextBoxWatermarkExtender id="TBWEDOB_Tx_CorreoEstilista" runat="server" targetcontrolid="Tx_CorreoEstilista" watermarktext="Correo" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
+<%--         <cc1:TextBoxWatermarkExtender id="TBWEDOB_Tx_CorreoEstilista" runat="server" targetcontrolid="Tx_CorreoEstilista" watermarktext="Correo" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>--%>
          <cc1:filteredtextboxextender ID="FTBE_CorreoEstilista" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@." TargetControlID="Tx_CorreoEstilista" />
         <td class="auto-style24">
             <asp:DropDownList ID="DDL_servicio" runat="server" DataSourceID="ODS_Servicio" DataTextField="nombre" DataValueField="id" Height="25px" Width="95%" ValidationGroup="registroEstilista">
@@ -259,8 +259,9 @@
                 <tr>
                     <td class="auto-style26">
                         <asp:ObjectDataSource ID="ODS_Estilista2" runat="server" SelectMethod="obtenerEstilista" TypeName="DAORegistroEstilista"></asp:ObjectDataSource>
-                        <asp:DropDownList ID="DDL_estilistas" runat="server" DataSourceID="ODS_Estilista2" DataTextField="nombre_estilista" DataValueField="id" Height="25px" ValidationGroup="Adicional" Width="96%">
+                        <asp:DropDownList ID="DDL_Estilistas" runat="server" DataSourceID="ODS_Estilista2" DataTextField="nombre_estilista" DataValueField="id" Height="25px" ValidationGroup="Adicional" Width="96%">
                         </asp:DropDownList>
+                        <br />
                     </td>
                     <td>
                         <asp:DropDownList ID="DDL_Aservicio" runat="server" Height="25px" Width="96%" DataSourceID="ODS_Servicio2" DataTextField="nombre" DataValueField="id" ValidationGroup="Adicional">
@@ -283,12 +284,16 @@
                                 <td>&nbsp;</td>
                             </tr>
                         </table>
-                        <asp:GridView ID="GV_EstilistaServicio" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" CssClass="auto-style14" DataKeyNames="id" DataSourceID="ODS_Mostrar" Width="80%" PageSize="5" OnDataBound="GV_EstilistaServicio_DataBound">
+                        <asp:GridView ID="GV_EstilistaServicio" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" CssClass="auto-style14" DataKeyNames="id" DataSourceID="ODS_Usuario_Servicio" Width="80%" PageSize="5" OnDataBound="GV_EstilistaServicio_DataBound" OnRowCommand="GV_EstilistaServicio_RowCommand">
                             <Columns>
                                 <asp:BoundField DataField="servicio" HeaderText="Servicio" />
-                                <asp:BoundField DataField="nombre_usuario" HeaderText="Estilista" />
-                                <asp:BoundField DataField="apellido_usuario" />
-                                <asp:CommandField ShowDeleteButton="True" />
+                                <asp:BoundField DataField="nombre_usuario" HeaderText="Nombre Estilista" />
+                                <asp:BoundField DataField="apellido_usuario" HeaderText="Apelido Estilista" />
+                                <asp:TemplateField ShowHeader="False">
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="Eliminar" runat="server" CommandName="Alerta" Width="100%" CommandArgument='<%# Bind("id") %>'>Eliminar</asp:LinkButton>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                             <FooterStyle BackColor="White" ForeColor="#000066" />
                             <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -300,10 +305,7 @@
                             <SortedDescendingCellStyle BackColor="#CAC9C9" />
                             <SortedDescendingHeaderStyle BackColor="#00547E" />
                         </asp:GridView>
-                        <asp:ObjectDataSource ID="ODS_Mostrar" runat="server" DeleteMethod="eliminarUsuario_Servicio" SelectMethod="mostrarUsuario_servicio" TypeName="DAORegistroEstilista">
-                            <DeleteParameters>
-                                <asp:Parameter Name="id" Type="Int32" />
-                            </DeleteParameters>
+                        <asp:ObjectDataSource ID="ODS_Usuario_Servicio" runat="server" SelectMethod="mostrarUsuario_servicio" TypeName="DAORegistroEstilista">
                         </asp:ObjectDataSource>
                     </td>
                     <td>

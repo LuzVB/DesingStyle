@@ -46,12 +46,7 @@
            padding-left:5%;
            padding-right:5%;
         }
-        .auto-style17 {
-            padding-left: 5%;
-            padding-right: 5%;
-            width: 100%;
-        }
-    </style>
+        </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     
@@ -91,10 +86,12 @@
                         </tr>
                         <tr>
                             <td class="auto-style9"><asp:TextBox ID="Tx_AdmNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("nombre") %>' MaxLength="20"></asp:TextBox>
+                                <asp:Label ID="LB_Nombre" runat="server" ForeColor="Red" Text="[LB_Nombre]" Visible="False"></asp:Label>
                                 <asp:RequiredFieldValidator ID="RFV_NombreAdm" runat="server" ControlToValidate="Tx_AdmNombre" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <cc1:filteredtextboxextender ID="FTBE_AdmNombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_AdmNombre" />
                             <td class="auto-style9"><asp:TextBox ID="Tx_AdmApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("apellido") %>' MaxLength="20"></asp:TextBox>
+                                <asp:Label ID="LB_Apellido" runat="server" ForeColor="Red" Text="[LB_Apellido]" Visible="False"></asp:Label>
                                 <asp:RequiredFieldValidator ID="RFV_ApellidoAdm" runat="server" ControlToValidate="Tx_AdmApellido" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <cc1:filteredtextboxextender ID="FTBE_AdmApellido" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_AdmApellido" />
@@ -105,6 +102,7 @@
                         </tr>
                         <tr>
                             <td class="auto-style9"><asp:TextBox ID="Tx_AdmTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("telefono") %>' MaxLength="10"></asp:TextBox>
+                                <asp:Label ID="LB_Telefono" runat="server" ForeColor="Red" Text="[LB_Telefono]" Visible="False"></asp:Label>
                                 <asp:RequiredFieldValidator ID="RFV_TelefonoAdm" runat="server" ControlToValidate="Tx_AdmTelefono" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <cc1:filteredtextboxextender ID="FTBE_AdmTelefono" runat="server" FilterType="Numbers" TargetControlID="Tx_AdmTelefono" />
@@ -112,10 +110,10 @@
                             <cc1:filteredtextboxextender ID="FTBE_AdmCorreo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_AdmCorreo" />
                         </tr>
                 <%--    </table>--%>
+                    <asp:Label ID="LB_Correo" runat="server" ForeColor="Red" Text="[LB_Co]" Visible="False"></asp:Label>
                     <asp:RequiredFieldValidator ID="RFV_CorreoAdm" runat="server" ControlToValidate="Tx_AdmCorreo" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                 </ItemTemplate>
                 </asp:FormView>
-                <asp:Label ID="LB_Datos" runat="server" ForeColor="Red" Text="[LB_Datos]" Visible="False"></asp:Label>
                 <br />
                 <asp:ObjectDataSource ID="ODS_Admin" runat="server" SelectMethod="mostrarAdmin" TypeName="DAOAdmin">
                     <SelectParameters>

@@ -210,7 +210,7 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
 
     protected void ServicioAd_Click(object sender, ImageClickEventArgs e)
     {
-        int indexEstilista = Int32.Parse(DDL_estilistas.SelectedIndex.ToString());
+        int indexEstilista = Int32.Parse(DDL_Estilistas.SelectedIndex.ToString());
         int indexAServicio = Int32.Parse(DDL_Aservicio.SelectedIndex.ToString());
 
         if (indexEstilista <= -1)
@@ -227,7 +227,7 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
 
 
             ERegistroUsuario ServicioAdi = new ERegistroUsuario();
-            ServicioAdi.Usuario = Int32.Parse(DDL_estilistas.SelectedValue.ToString());
+            ServicioAdi.Usuario = Int32.Parse(DDL_Estilistas.SelectedValue.ToString());
             ServicioAdi.Servicio = Int32.Parse(DDL_Aservicio.SelectedValue.ToString());
             ServicioAdi.Session = Session["user"].ToString();
 
@@ -262,13 +262,32 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
 
     protected void GV_Estilista_DataBound(object sender, EventArgs e)
     {
-        DDL_estilistas.DataBind();
+        DDL_Estilistas.DataBind();
         GV_EstilistaServicio.DataBind();
     }
 
     protected void GV_EstilistaServicio_DataBound(object sender, EventArgs e)
     {
 
+    }
+    protected void GV_EstilistaServicio_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+
+        int id = int.Parse(e.CommandArgument.ToString());
+        DataTable servicio = new DAORegistroEstilista().EliminarSerUsuario(id);
+        String Servicio = servicio.Rows[0]["servicio"].ToString();
+        String Estilista = servicio.Rows[0]["estilista"].ToString();
+
+        if (e.CommandName.Equals("Alerta"))
+        {
+
+            int Ser = Int32.Parse(Servicio);
+            int Est = Int32.Parse(Estilista);
+            int alerta = 6;
+            DAORegistroEstilista servicioa = new DAORegistroEstilista();
+            servicioa.AlertaSerUsario(Ser, Est, alerta, id);
+            GV_EstilistaServicio.DataBind();
+        }
     }
 }
 

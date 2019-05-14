@@ -25,18 +25,61 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
         {
             Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
         }
-        if (GV_alertaCliente.Rows.Count == 0)
-        {
-            GV_alertaCliente.Visible = false;
-        }
-        else {
-            GV_alertaCliente.Visible = true;
-        }
+
         DataTable datosCliente = new DAOCliente().mostrarCliente(int.Parse(Session["user_id"].ToString()));
+        int id = int.Parse(Session["user_id"].ToString());
+        DataTable asistencia = new DAORegistroEstilista().mostrarEstilistaAsis(id);
+        int vacio = int.Parse(asistencia.Rows.Count.ToString());
         string nombre, apellido/*, telefono, correo*/;
         nombre = datosCliente.Rows[0]["nombre"].ToString();
         apellido = datosCliente.Rows[0]["apellido"].ToString();
         L_Bienvenida.Text = ("HOLA " + nombre + " " + apellido ).ToUpper();
+
+        if (vacio != 0)
+        {
+            string FechaReserva, alerta;
+            FechaReserva = asistencia.Rows[0]["dia_hora_inicio"].ToString();
+            DateTime prueb = DateTime.Parse(FechaReserva);
+            String DiaReserva = prueb.ToString("dd/MM/yyyy");
+            String DiaMulta = prueb.AddDays(1).ToString("dd/MM/yyyy");
+            string FechaActual = DateTime.Now.ToString();
+            DateTime FechaAc = DateTime.Parse(FechaActual);
+            String FechaSistema = FechaAc.ToString("dd/MM/yyyy");
+            alerta = asistencia.Rows[0]["id_alerta"].ToString();
+            int Alerta = int.Parse(alerta);
+            String[] separador;
+            String[] separador1;
+            separador = FechaSistema.Split('/');
+            separador1 = DiaReserva.Split('/');
+            int Actual = int.Parse(separador[0]);
+            int Inacistencia = int.Parse(separador1[0]);
+            int ActualMes = int.Parse(separador[1]);
+            int InacistenciaMes = int.Parse(separador1[1]);
+            //int Reserva = int.Parse(DiaReserva);
+            if (Alerta == 1 || Alerta == 2 || Alerta == 3 || Alerta == 6 && Actual == Inacistencia && ActualMes == InacistenciaMes)
+            {
+                DataTable prueba = new DAORegistroEstilista().Alerta(id);
+                int vacio2 = int.Parse(prueba.Rows.Count.ToString());
+                if (vacio2 != 0)
+                {
+
+                    String descripcion = prueba.Rows[0]["descripcion"].ToString();
+                    String fecha = prueba.Rows[0]["fecha"].ToString();
+                    DateTime prue = DateTime.Parse(fecha);
+                    String DiaReserv = prueb.ToString("dd'de' MMM 'de' yyyy");
+                    String nombre_estilista = prueba.Rows[0]["nombre_estilista"].ToString();
+                    String apellido_estilista = prueba.Rows[0]["apellido_estilista"].ToString();
+                    String servicio = prueba.Rows[0]["servicio"].ToString();
+                    Nombre.Text = " " + nombre + " " + apellido;
+                    sera.Text = descripcion + " " + "el dia" + " " + DiaReserv + " " + "con el servicio " + " " + servicio + " " + "fue cancelada";
+                    MPE_Alerta.Show();
+                }
+            }
+            else
+            {
+
+            }
+        }
 
     }
 
@@ -191,8 +234,18 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
 
 
 
-    protected void GV_alertaCliente_SelectedIndexChanged(object sender, EventArgs e)
+    protected void Aceptar_Command(object sender, CommandEventArgs e)
     {
+        if (e.CommandName.Equals("Aceptar")) {
 
+            int id = int.Parse(Session["user_id"].ToString());
+            DataTable prueba = new DAORegistroEstilista().Alerta(id);
+            int IdReserva = int.Parse(prueba.Rows[0]["id"].ToString());
+            DataTable datoscliente = new DAORegistroEstilista().ConfirmacionAlerta(IdReserva);
+
+            Response.Redirect("~/View/masterUsuarios/cliente/datosPersonalesCliente.aspx");
+        }
     }
+
+
 }

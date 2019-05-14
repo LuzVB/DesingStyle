@@ -82,32 +82,7 @@
                 </asp:ScriptManager>
             </td>
             <td class="auto-style10">
-                <asp:GridView ID="GV_alertaCliente" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" CssClass="auto-style14" PageSize="1" ShowHeaderWhenEmpty="True" Width="30%" DataKeyNames="id" DataSourceID="ODS_Alerta" style="margin-left: 0px" OnSelectedIndexChanged="GV_alertaCliente_SelectedIndexChanged">
-                    <Columns>
-                        <asp:BoundField DataField="descripcion" HeaderText="Alerta" />
-                        <asp:BoundField DataField="servicio" HeaderText="servico" />
-                        <asp:BoundField DataField="apellido_estilista" HeaderText="Estilista" />
-                        <asp:CommandField DeleteText="Aceptar" ShowDeleteButton="True" />
-                    </Columns>
-                    <FooterStyle BackColor="White" ForeColor="#000066" />
-                    <HeaderStyle BackColor="#018BDE" Font-Bold="True" ForeColor="White" />
-                    <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                    <RowStyle ForeColor="#000066" />
-                    <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                    <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                    <SortedAscendingHeaderStyle BackColor="#007DBB" />
-                    <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                    <SortedDescendingHeaderStyle BackColor="#00547E" />
-                </asp:GridView>
-                <asp:ObjectDataSource ID="ODS_Alerta" runat="server" SelectMethod="Alerta" TypeName="DAOCliente" DeleteMethod="eliminarAlerta">
-                    <DeleteParameters>
-                        <asp:Parameter Name="id" Type="Int32" />
-                    </DeleteParameters>
-                    <SelectParameters>
-                        <asp:SessionParameter DefaultValue="id" Name="id" SessionField="user_id" Type="Int32" />
-                    </SelectParameters>
-                </asp:ObjectDataSource>
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td class="auto-style9">
@@ -264,6 +239,21 @@
           <hr>
            <asp:Button ID="BT_Eliminar" runat="server" Text="Eliminar"  class="btn btn-danger" OnClick ="eliminarCuenta" />
            <asp:Button ID="BT_Cancelar" runat="server" Text="Cancelar"  class="btn btn-primary"/>
+        </div>
+    </asp:Panel>
+
+    <cc1:ModalPopupExtender ID="MPE_Alerta" runat="server" PopupControlID="Alerta"  TargetControlID="L_TargetA" BackgroundCssClass="modalBackground"></cc1:ModalPopupExtender>
+    <asp:Label ID="L_TargetA" runat="server" Text=""></asp:Label>
+    <asp:Panel ID="Alerta" runat="server">
+        <div class="alert alert-primary"  role="alert" style=" width: 80% " >
+          <h4 class="alert-heading">
+              <asp:Label ID="Nombre" runat="server" Text="[Nombre_Estlista]"></asp:Label>
+            </h4>
+          <p>
+              <asp:Label ID="sera" runat="server" Text="Label"></asp:Label>
+            </p>
+          <hr>
+           <asp:Button ID="Aceptar" runat="server" Text="Aceptar"  class="btn btn-danger"  CommandArgument="id" CommandName="Aceptar" OnCommand="Aceptar_Command"/>
         </div>
     </asp:Panel>
 </asp:Content>

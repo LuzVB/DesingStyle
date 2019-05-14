@@ -24,46 +24,46 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
             Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
         }
 
-        //int id = int.Parse(Session["user_id"].ToString());
-        //int prueba = id;
-        //DataTable asistencia = new DAORegistroEstilista().mostrarEstilistaAsis(prueba);
-        //string fech;
-        //fech = asistencia.Rows[0]["id_alerta"].ToString();
-        //fecha.Text = fech;
         int id = int.Parse(Session["user_id"].ToString());
         DataTable asistencia = new DAORegistroEstilista().mostrarEstilistaAsis(id);
-        string FechaReserva, alerta;
-        FechaReserva = asistencia.Rows[0]["dia_hora_inicio"].ToString();
-        DateTime prueb = DateTime.Parse(FechaReserva);
-        String DiaReserva = prueb.ToString("dd/MM/yyyy");
-        String DiaMulta = prueb.AddDays(1).ToString("dd/MM/yyyy");
-        string FechaActual = DateTime.Now.ToString();
-        DateTime FechaAc = DateTime.Parse(FechaActual);
-        String FechaSistema = FechaAc.ToString("dd/MM/yyyy");
-        alerta = asistencia.Rows[0]["id_alerta"].ToString();
-        int Alerta = int.Parse(alerta);
-        String[] separador;
-        String[] separador1;
-        separador = FechaSistema.Split('/');
-        separador1 = DiaMulta.Split('/');
-        int Actual = int.Parse(separador[0]);
-        int Inacistencia = int.Parse(separador1[0]);
-        int ActualMes = int.Parse(separador[1]);
-        int InacistenciaMes = int.Parse(separador1[1]);
-        //int Reserva = int.Parse(DiaReserva);
-        if (Alerta == 4 && Actual == Inacistencia && ActualMes == InacistenciaMes)
+        int vacio = int.Parse(asistencia.Rows.Count.ToString());
+        if (vacio != 0)
         {
-            fecha.Text = DiaMulta.ToUpper();
-            prueba.Text = alerta.ToUpper();
-            Label2.Text = ("Debido a que usted INCUMPLIO con la reserva del dia " + DiaReserva + " " + " NO  prodra reserva durante 24 Horas");
-            Asistencia.Show();
-            BT_GuardarReserva.Visible = false;
+            string FechaReserva, alerta;
+            FechaReserva = asistencia.Rows[0]["dia_hora_inicio"].ToString();
+            DateTime prueb = DateTime.Parse(FechaReserva);
+            String DiaReserva = prueb.ToString("dd/MM/yyyy");
+            String DReserva = prueb.ToString("dd'de' MMM 'de' yyyy");
+            String DiaMulta = prueb.AddDays(1).ToString("dd/MM/yyyy");
+            string FechaActual = DateTime.Now.ToString();
+            DateTime FechaAc = DateTime.Parse(FechaActual);
+            String FechaSistema = FechaAc.ToString("dd/MM/yyyy");
+            alerta = asistencia.Rows[0]["id_alerta"].ToString();
+            int Alerta = int.Parse(alerta);
+            String[] separador;
+            String[] separador1;
+            separador = FechaSistema.Split('/');
+            separador1 = DiaMulta.Split('/');
+            int Actual = int.Parse(separador[0]);
+            int Inacistencia = int.Parse(separador1[0]);
+            int ActualMes = int.Parse(separador[1]);
+            int InacistenciaMes = int.Parse(separador1[1]);
+            //int Reserva = int.Parse(DiaReserva);
+            if (Alerta == 5 && Actual == Inacistencia && ActualMes == InacistenciaMes)
+            {
+                fecha.Text = DiaMulta.ToUpper();
+                prueba.Text = alerta.ToUpper();
+                Label2.Text = ("Debido a que usted INCUMPLIO con la reserva del dia " + DReserva + " " + " NO  prodra reserva durante 24 Horas");
+                Asistencia.Show();
+                BT_GuardarReserva.Visible = false;
 
-        }
-        else
-        {
-
-            BT_GuardarReserva.Visible = true;
+            }
+            else
+            {
+                fecha.Text = DiaMulta.ToUpper();
+                prueba.Text = alerta.ToUpper();
+                BT_GuardarReserva.Visible = true;
+            }
         }
     }
 

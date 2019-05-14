@@ -62,4 +62,6 @@ public partial class View_masterUsuarios_masterUsuarios : System.Web.UI.MasterPa
 
         Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
     }
+
+   
 }

@@ -19,6 +19,7 @@
             padding-left:20%;
             padding-top:2%;
             padding-bottom:2%;
+            height: 76px;
         }
         .auto-style28 {
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -29,19 +30,36 @@
         .auto-style15 {
             width: 60%;
             text-align: left;
+            height: 78px;
         }
         .auto-style16 {
             width: 60%;
             height: 26px;
+            text-align: left;
         }
         .auto-style14 {
             padding-top:15%;
+            font-size: 95%;
         }
         .auto-style18 {
-            padding-left:20%;
+            
+            
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 120%;
+            text-align: justify;
            
+        }
+        .auto-style29 {
+            width: 40%;
+            height: 78px;
+        }
+        .auto-style30 {
+            width: 40%;
+            height: 26px;
+            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+            font-size: 120%;
+            padding-left: 20%;
+            padding-top: 1%;
         }
     </style>
 </asp:Content>
@@ -55,57 +73,79 @@
             <td class="auto-style18" colspan="2"> 
                  <div class="auto-style21">
 
-                <asp:GridView ID="GV_reservasEstilistas" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="80%" CssClass="auto-style14" AllowPaging="True"  style="font-size: 120%; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="ODS_inasistencia" >
-                    <Columns>
-                        <asp:TemplateField HeaderText="Nombre Estilista">
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("nombre_estilista") %>'></asp:TextBox>
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("nombre_estilista") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Apellido Estilista">
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("apellido_estilista") %>'></asp:TextBox>
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="Label3" runat="server" Text='<%# Bind("apellido_estilista") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Fecha">
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("fecha") %>'></asp:TextBox>
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="Label1" runat="server" Text='<%# Bind("fecha","{0:d}") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Servicio">
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("servicio") %>'></asp:TextBox>
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="Label4" runat="server" Text='<%# Bind("servicio") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                    </Columns>
-                <EmptyDataTemplate>
-                            <asp:Image ID="noRegistro" runat="server" ImageUrl="~/Imagenes/no-encontrado.png" Width="20%" CssClass="imgNoRegistro" />
-                            No hay inasistencias
-                </EmptyDataTemplate>
-                <FooterStyle BackColor="White" ForeColor="#000066" />
-                <HeaderStyle BackColor="#018BDE" Font-Bold="True" ForeColor="White" />
-                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-                <RowStyle ForeColor="#000066" />
-                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
-                <SortedAscendingCellStyle BackColor="#F1F1F1" />
-                <SortedAscendingHeaderStyle BackColor="#007DBB" />
-                <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                <SortedDescendingHeaderStyle BackColor="#00547E" />
-                  
-            </asp:GridView>
-                     <asp:ObjectDataSource ID="ODS_inasistencia" runat="server" SelectMethod="mostrarEstilistaInasistencia" TypeName="DAORegistroEstilista"></asp:ObjectDataSource>
+                     <br />
+                     <asp:ScriptManager ID="ScriptManager1" runat="server">
+                     </asp:ScriptManager>
+
+                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                         <ContentTemplate>
+                                                  <asp:DropDownList ID="DD_Estilista" runat="server" DataSourceID="ODS_MEstilista" DataTextField="nombre_estilista" DataValueField="id" OnDataBound="DD_Estilista_DataBound" OnSelectedIndexChanged="DD_Estilista_SelectedIndexChanged">
+                     </asp:DropDownList>
+                     <br />
+                     <asp:ObjectDataSource ID="ODS_MEstilista" runat="server" SelectMethod="obtenerEstilista" TypeName="DAORegistroEstilista"></asp:ObjectDataSource>
+                     <br />
+                             <asp:GridView ID="GV_reservasEstilistas" runat="server" AllowPaging="True" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" CssClass="auto-style14" DataKeyNames="id" DataSourceID="ODS_inasistencia" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" Width="100%" OnRowCommand="GV_reservasEstilistas_RowCommand" PageSize="4">
+                                 <Columns>
+                                     <asp:TemplateField HeaderText="Nombre Estilista">
+                                         <EditItemTemplate>
+                                             <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("nombre_estilista") %>'></asp:TextBox>
+                                         </EditItemTemplate>
+                                         <ItemTemplate>
+                                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("nombre_estilista") %>'></asp:Label>
+                                         </ItemTemplate>
+                                     </asp:TemplateField>
+                                     <asp:TemplateField HeaderText="Apellido Estilista">
+                                         <EditItemTemplate>
+                                             <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("apellido_estilista") %>'></asp:TextBox>
+                                         </EditItemTemplate>
+                                         <ItemTemplate>
+                                             <asp:Label ID="Label3" runat="server" Text='<%# Bind("apellido_estilista") %>'></asp:Label>
+                                         </ItemTemplate>
+                                     </asp:TemplateField>
+                                     <asp:TemplateField HeaderText="Fecha">
+                                         <EditItemTemplate>
+                                             <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("fecha") %>'></asp:TextBox>
+                                         </EditItemTemplate>
+                                         <ItemTemplate>
+                                             <asp:Label ID="Fecha" runat="server" Text='<%# Bind("fecha","{0:D}") %>'></asp:Label>
+                                         </ItemTemplate>
+                                     </asp:TemplateField>
+                                     <asp:TemplateField ShowHeader="False">
+                                         <ItemTemplate>
+                                             <asp:ImageButton ID="IB_Cancelar" runat="server" ImageUrl="~/Imagenes/multiplicar.png" Width="100
+                                                 %" CommandArgument='<%# Bind("id") %>' CommandName="Cancelar" />
+                                         </ItemTemplate>
+                                         <ItemStyle Width="10%" />
+                                     </asp:TemplateField>
+                                 </Columns>
+                                 <EmptyDataTemplate>
+                                     <asp:Image ID="noRegistro" runat="server" CssClass="imgNoRegistro" ImageUrl="~/Imagenes/no-encontrado.png" Width="20%" />
+                                     No hay inasistencias
+                                 </EmptyDataTemplate>
+                                 <FooterStyle BackColor="White" ForeColor="#000066" />
+                                 <HeaderStyle BackColor="#018BDE" Font-Bold="True" ForeColor="White" />
+                                 <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                                 <RowStyle ForeColor="#000066" />
+                                 <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
+                                 <SortedAscendingCellStyle BackColor="#F1F1F1" />
+                                 <SortedAscendingHeaderStyle BackColor="#007DBB" />
+                                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
+                                 <SortedDescendingHeaderStyle BackColor="#00547E" />
+                             </asp:GridView>
+                                                  <br />
+                                                  <br />
+                             <asp:Label ID="Eliminar" runat="server" Text="[Eliminar Inasistencia]" class="alert alert-danger" Visible="False" Width="20%"></asp:Label>
+                                               <asp:ObjectDataSource ID="ODS_inasistencia" runat="server" SelectMethod="mostrarEstilistaInasistencia" TypeName="DAORegistroEstilista">
+                         <SelectParameters>
+                             <asp:ControlParameter ControlID="DD_Estilista" DefaultValue="" Name="id" PropertyName="SelectedValue" Type="Int32" />
+                         </SelectParameters>
+                     </asp:ObjectDataSource>
+                         </ContentTemplate>
+                     </asp:UpdatePanel>
+
+                     <br />
+                
+                     <br />
                 </div>
             
             </td>
@@ -123,24 +163,31 @@
             </td>
         </tr>
         <tr>
-            <td class="auto-style9">Fecha</td>
+            <td class="auto-style30">Fecha</td>
             <td class="auto-style16">
-                <asp:TextBox ID="Tx_FechaInasistencia" runat="server" BorderColor="#0099FF" Width="69%" Height="25px" MaxLength="10" ValidationGroup="registroInasistencia" OnTextChanged="Tx_FechaInasistencia_TextChanged" TextMode="Date"></asp:TextBox>
+                <br />
+                <br />
+                <br />
+                <asp:TextBox ID="Tx_FechaInasistencia" runat="server" BorderColor="#0099FF" Width="70%" Height="25px" MaxLength="10" ValidationGroup="registroInasistencia" OnTextChanged="Tx_FechaInasistencia_TextChanged" TextMode="Date"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_FechaInasistencia" runat="server" ControlToValidate="Tx_FechaInasistencia" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroInasistencia" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                <br />
+                <br />
+                <asp:Label ID="Alerta_Fecha" runat="server" Text="[Alerta_fecha]" class="alert alert-warning" Visible="False"></asp:Label>
+                <br />
+                <asp:Button ID="BT_Insasitencia" runat="server" Height="25px" Text="Enviar" Width="70%" ValidationGroup="registroInasistencia" OnClick="BT_Insasitencia_Click" />
             </td>
                
 
         </tr>
         <tr>
-            <td class="auto-style8">&nbsp;</td>
+            <td class="auto-style29">
+                &nbsp;</td>
             <td class="auto-style15">
-                <asp:Button ID="BT_Insasitencia" runat="server" Height="30px" Text="Enviar" Width="70%" ValidationGroup="registroInasistencia" OnClick="BT_Insasitencia_Click" />
-            </td>
+                &nbsp;</td>
         </tr>
         <tr>
             <td colspan="2" class="auto-style14">
-                <asp:Label ID="fecha" runat="server" Text="Label"></asp:Label>
-            </td>
+                &nbsp;</td>
         </tr>
     </table>
 </asp:Content>

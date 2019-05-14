@@ -33,10 +33,6 @@
              color: #018BDE;
              margin-right: 0px;
         }
-        .auto-style5 {
-            width: 70%;
-             font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
-        }
         .auto-style9 {           
             text-align: center;
             width: 50%;
@@ -59,6 +55,16 @@
             text-align: justify;
             padding-right:20%;
         }
+        .auto-style15 {
+            width: 70%;
+            font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+            text-align: left;
+            color: #0099FF;
+        }
+        .auto-style16 {
+            font-size: 160%;
+            color: #0099FF;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -71,10 +77,23 @@
                             <asp:Image ID="I_QuienesSomos" runat="server" ImageUrl="~/Imagenes/paginaInicio/quienesSomos/salon.png" class="galeria_img" Width="50%" />
                         </td>
                         <td class="auto-style13">
-                            <h2 class="auto-style12">¿Quienes Somos?</h2>
+                            <h2 class="auto-style16">¿Quienes Somos?</h2>
                             <div class="auto-style14">
                             <br />
-                                <span class="auto-style11"><span class="auto-style10">Somos un espacio dedicado a hombres, mujeres y niños donde podran accedeer a los mas altos estadandares de belleza y calidad con las ultimas tendencias mundiales ,ofrecemos productos de gran calidad para el cuidado del cabello, un área privada para el lavado y estaciones de peinado perzonalizadas.Ademas de un elegante mostrador de manicura&nbsp; y dos estaciones de pedicura.</span></span></div>
+                                <span class="auto-style11"><span class="auto-style10">Somos un espacio dedicado a hombres, mujeres y niños donde podran accedeer a los mas altos estadandares de belleza y calidad con las ultimas tendencias mundiales ,ofrecemos productos de gran calidad para el cuidado del cabello, un área privada para el lavado y estaciones de peinado perzonalizadas.Ademas de un elegante mostrador de manicura&nbsp; y dos estaciones de pedicura.<br />
+                                
+                                </span>
+                                
+                                <h2 class="auto-style15">Horarios De Atencion</h2>
+                                
+                                <span class="auto-style11">
+                                
+                                <br />
+                                8:00 am&nbsp; A 17:00 pm
+                                <br />
+                                Lunes a Domingo<br />
+                                </span>
+                                </span></div>
                         </td>
                     </tr>
                 </table>

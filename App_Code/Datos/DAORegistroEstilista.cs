@@ -431,7 +431,6 @@ public class DAORegistroEstilista
         }
         return ActualizarInacistencia;
     }
-
     public DataTable AsistenciaCliente(int Usuario, int id, int alerta)
     {
         DataTable AsisCliente = new DataTable();
@@ -470,7 +469,7 @@ public class DAORegistroEstilista
         {
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostrar_asistencia2", conection);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-            dataAdapter.SelectCommand.Parameters.Add("id_", NpgsqlDbType.Integer).Value =id;
+            dataAdapter.SelectCommand.Parameters.Add("id_", NpgsqlDbType.Integer).Value = id;
             conection.Open();
             dataAdapter.Fill(Servicio);
         }
@@ -487,7 +486,6 @@ public class DAORegistroEstilista
         }
         return Servicio;
     }
-
     public DataTable registroHorario2(ERegistroHorario cs)//los parametros se deben llamar igual como en la BD 
     {
         string fechaCorta;
@@ -495,9 +493,9 @@ public class DAORegistroEstilista
         DateTime fechaFin = new DateTime();
         fechaInicio = DateTime.Now;
         fechaCorta = fechaInicio.ToShortDateString();
-        // fechaFin = fechaInicio.AddYears(1);
+        fechaFin = fechaInicio.AddYears(1);
         fechaInicio = DateTime.Parse(fechaCorta);
-        fechaFin = fechaInicio.AddDays(1);
+        //fechaFin = fechaInicio.AddDays(1);
 
 
         DataTable insertarHorario = new DataTable();
@@ -528,4 +526,286 @@ public class DAORegistroEstilista
         }
         return insertarHorario;
     }
+
+    public DataTable ActualizarInasistencia(int _usuario, DateTime _fecha)
+    {
+        DataTable ActualizarInacistencia = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_actualizar_inacistencia", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = _usuario;
+            dataAdapter.SelectCommand.Parameters.Add("_dia_inacistencia", NpgsqlDbType.Date).Value = _fecha;
+
+            conection.Open();
+            dataAdapter.Fill(ActualizarInacistencia);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return ActualizarInacistencia;
+    }
+    public DataTable Inasistencia(int _usuario, DateTime _fecha, String session)
+    {
+        DataTable ActualizarInacistencia = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_insert_inacistencia", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            dataAdapter.SelectCommand.Parameters.Add("_id_alerta", NpgsqlDbType.Integer).Value = 1;
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = _usuario;
+            dataAdapter.SelectCommand.Parameters.Add("_dia_inacistencia", NpgsqlDbType.Date).Value = _fecha;
+            dataAdapter.SelectCommand.Parameters.Add("_session", NpgsqlDbType.Text).Value = session;
+
+            conection.Open();
+            dataAdapter.Fill(ActualizarInacistencia);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return ActualizarInacistencia;
+    }
+    public DataTable mostrarEstilistaInasistencia(int id)
+    {
+        DataTable estilistaInasistecnia = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_estilistas_inasistencia", conection);
+            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = id;
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(estilistaInasistecnia);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+
+        return estilistaInasistecnia;
+    }
+    public DataTable MostrarInasistencia(int id)
+    {
+        DataTable MostrarInasistencia = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_mostar_inacistencia", conection);
+            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = id;
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(MostrarInasistencia);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+
+        return MostrarInasistencia;
+    }
+    public DataTable EliminarIna(int Estilista, DateTime Dinasistencia)
+    {
+        DataTable ActualizarInacistencia = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_actualizar_inacistencia2", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = Estilista;
+            dataAdapter.SelectCommand.Parameters.Add("_dia_inacistencia", NpgsqlDbType.Date).Value = Dinasistencia;
+
+            conection.Open();
+            dataAdapter.Fill(ActualizarInacistencia);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return ActualizarInacistencia;
+    }
+    public DataTable EliminarInasistencia(int id)
+    {
+        DataTable Eliminar = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_eliminar_inasistencia", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("id_", NpgsqlDbType.Integer).Value = id;
+            conection.Open();
+            dataAdapter.Fill(Eliminar);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return Eliminar;
+    }
+
+    public DataTable EliminarSerUsuario(int id)
+    {
+        DataTable estilistaInasistecnia = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_mostar_usuario_servicio", conection);
+            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = id;
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(estilistaInasistecnia);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+
+        return estilistaInasistecnia;
+    }
+    public DataTable AlertaSerUsario(int Ser, int Est, int alerta, int id)
+    {
+        DataTable Asis = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_actualizar_servicioeliminado", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = id;
+            dataAdapter.SelectCommand.Parameters.Add("_estilista", NpgsqlDbType.Integer).Value = Est;
+            dataAdapter.SelectCommand.Parameters.Add("_servicio", NpgsqlDbType.Integer).Value = Ser;
+            dataAdapter.SelectCommand.Parameters.Add("_alerta", NpgsqlDbType.Integer).Value = alerta;
+            conection.Open();
+            dataAdapter.Fill(Asis);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return Asis;
+    }
+
+    public DataTable Alerta(int id)
+    {
+        DataTable Servicio = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_alerta2", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id_usuario", NpgsqlDbType.Integer).Value = id;
+            conection.Open();
+            dataAdapter.Fill(Servicio);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return Servicio;
+    }
+    public DataTable ConfirmacionAlerta(int id)
+    {
+        DataTable Servicio = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_actualizar_alerta_confirmacion", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id", NpgsqlDbType.Integer).Value = id;
+            conection.Open();
+            dataAdapter.Fill(Servicio);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return Servicio;
+    }
+
 }

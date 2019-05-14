@@ -25,8 +25,7 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
         }
 
         Prueba.Text = C_Reserva.SelectedDate.ToShortDateString();
-        prueba2.Text = C_ReservaHistorial.SelectedDate.ToShortDateString();
-       
+
     }
 
     protected void C_Reserva_SelectionChanged(object sender, EventArgs e)
@@ -63,8 +62,6 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
         C_Reserva.Visible = true;
         GridView_ReservasEst.Visible = true;
         GridView_Historial.Visible = false;
-        C_ReservaHistorial.Visible = false;
-        AlertaHistorial.Visible = false;
         Alerta_Rerva.Visible = false;
     }
 
@@ -73,10 +70,9 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
         C_Reserva.Visible = false;
         GridView_ReservasEst.Visible = false;
         GridView_Historial.Visible = true;
-        C_ReservaHistorial.Visible = true;
-        AlertaHistorial.Visible = false;
         Alerta_Rerva.Visible = false;
         Prueba.Visible = false;
+        UP_HoraReserva.Visible = false;
     }
 
     protected void GridView_ReservasEst_SelectedIndexChanged(object sender, EventArgs e)
@@ -86,48 +82,22 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
 
     protected void GridView_Historial_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        if (e.Row.FindControl("alerta") != null)
+        if (e.Row.FindControl("Alerta1") != null)
         {
-            if (((Label)e.Row.FindControl("alerta")).Text.Equals("4"))
+            if (((Label)e.Row.FindControl("Alerta1")).Text.Equals("4"))
             {
-                ((Label)e.Row.FindControl("alerta")).Text = "Asitio";
+                ((Label)e.Row.FindControl("Alerta1")).Text = "Asitio";
             }
-            else if (((Label)e.Row.FindControl("alerta")).Text.Equals("5"))
+            else if (((Label)e.Row.FindControl("Alerta1")).Text.Equals("5"))
             {
-                ((Label)e.Row.FindControl("alerta")).Text = "No Asistio";
+                ((Label)e.Row.FindControl("Alerta1")).Text = "No Asistio";
 
             }
            
         }
     }
 
-    protected void C_ReservaHistorial_SelectionChanged(object sender, EventArgs e)
-    {
-        Prueba.Text = C_ReservaHistorial.SelectedDate.ToShortDateString();
-        DateTime fecha = new DateTime();
-        DateTime calendario2 = new DateTime();
-        fecha = DateTime.Now;
-        string calendario, fecha2;
-        UP_HoraReserva.Visible = false;
 
-        calendario = C_ReservaHistorial.SelectedDate.ToShortDateString();
-        fecha2 = fecha.ToShortDateString();
-
-        fecha = DateTime.Parse(fecha2);
-        calendario2 = DateTime.Parse(calendario);
-
-        if (calendario2 > fecha)
-        {
-            GridView_Historial.Visible = false;
-            AlertaHistorial.Visible = true;
-            AlertaHistorial.Text = "No se han cumplido con las reservas";
-        }
-        else
-        {
-            GridView_Historial.Visible = true;
-            AlertaHistorial.Visible = false;
-        }
-    }
 
     protected void GridView_ReservasEst_RowDataBound(object sender, GridViewRowEventArgs e)
     {
@@ -199,8 +169,9 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
             else
             {
                 UP_HoraReserva.Visible = true;
+                Alerta_Rerva.Visible = false;
                 Asistencia.Text = ("No se ha cumplido con la reserva " + HoraReserva +" ");
-                Alerta0.Text = ("podra levar el registro de la asistencia cuando se cumpla con la hora establecida" +" "+ HoraActual + " ");
+                Alerta.Text = ("podra llevar el registro de la asistencia cuando se cumpla  con la hora establecida" + " " + "Hora Del Sistema: " + " " + HoraActual + " ");
             }
 
         } else if (e.CommandName.Equals("NoAsistio"))
@@ -238,8 +209,9 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
                 GridView_ReservasEst.DataBind();
             } else {
 
+                Alerta_Rerva.Visible = false;
                 Asistencia.Text = ("No se ha cumplido con la reserva " + HoraReserva + " ");
-                Alerta0.Text = ("podra levar el registro de la asistencia cuando se cumpla  con la hora establecida" + " "+ HoraActual + " ");
+                Alerta.Text = ("podra llevar el registro de la asistencia cuando se cumpla  con la hora establecida" +" "+ "Hora Del Sistema: "+" "+HoraActual + " ");
             }
            
         }
@@ -251,5 +223,6 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
 
     }
 
-    
+
+
 }
