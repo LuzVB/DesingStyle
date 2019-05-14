@@ -21,7 +21,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
       <table class="auto-style1">
         <tr>
-            <td class="auto-style28" colspan="2">Reservas Agendadas </td>
+            <td class="auto-style28" colspan="2">SERVICIOS</td>
         </tr>
         
         <tr>

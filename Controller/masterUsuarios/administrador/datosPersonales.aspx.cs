@@ -22,8 +22,7 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
         {
             Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
         }
-
-
+        
         DataTable datosAdmin = new DAOAdmin().mostrarAdmin(int.Parse(Session["user_id"].ToString()));
         string nombre, apellido/*, telefono, correo*/;
         nombre = datosAdmin.Rows[0]["nombre"].ToString();
