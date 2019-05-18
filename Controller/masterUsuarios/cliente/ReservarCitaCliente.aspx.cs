@@ -51,8 +51,8 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
             //int Reserva = int.Parse(DiaReserva);
             if (Alerta == 5 && Actual == Inacistencia && ActualMes == InacistenciaMes)
             {
-                fecha.Text = DiaMulta.ToUpper();
-                prueba.Text = alerta.ToUpper();
+                //fecha.Text = DiaMulta.ToUpper();
+                //prueba.Text = alerta.ToUpper();
                 Label2.Text = ("Debido a que usted INCUMPLIO con la reserva del dia " + DReserva + " " + " NO  prodra reserva durante 24 Horas");
                 Asistencia.Show();
                 BT_GuardarReserva.Visible = false;
@@ -60,8 +60,8 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
             }
             else
             {
-                fecha.Text = DiaMulta.ToUpper();
-                prueba.Text = alerta.ToUpper();
+                //fecha.Text = DiaMulta.ToUpper();
+                //prueba.Text = alerta.ToUpper();
                 BT_GuardarReserva.Visible = true;
             }
         }
