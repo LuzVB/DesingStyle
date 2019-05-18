@@ -165,7 +165,7 @@
         <tr>
             <td class="auto-style9">
                 &nbsp;</td>
-            <td class="auto-style10"><asp:Button ID="BT_GuardarCliente" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" OnClick="BT_GuardarCliente_Click" /></td>
+            <td class="auto-style10"><asp:Button ID="BT_GuardarCliente" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" OnClick="BT_GuardarCliente_Click" class="btn btn-primary" /></td>
         </tr>
         <tr>
             <td class="auto-style16"><strong>CAMBIAR CONTRASEÑA</strong></td>
@@ -199,7 +199,7 @@
 
              </td>
             <td class="auto-style10">
-                <asp:Button ID="BT_GuardarContraCliente" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_AContraseña" OnClick="BT_GuardarContraCliente_Click" />
+                <asp:Button ID="BT_GuardarContraCliente" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_AContraseña" OnClick="BT_GuardarContraCliente_Click" class="btn btn-primary" />
 
             </td>
         </tr>
@@ -225,7 +225,7 @@
         
             </td>
              <td>
-                <asp:Button ID="BT_EliminarCuenta" runat="server" Text="Eliminar Cuenta" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_EliminarCuenta" OnClick="BT_EliminarCuenta_Click" />
+                <asp:Button ID="BT_EliminarCuenta" runat="server" Text="Eliminar Cuenta" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_EliminarCuenta" OnClick="BT_EliminarCuenta_Click" class="btn btn-primary" />
             </td>
         </tr>
     </table>

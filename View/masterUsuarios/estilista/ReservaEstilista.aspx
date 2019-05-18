@@ -18,9 +18,7 @@
         .auto-style31 {
             width: 258px;
         }
-        .auto-style32 {
-            width: 1206px;
-        }
+       
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -211,20 +209,20 @@
                                                             <asp:Label ID="Alerta1" runat="server" Text='<%# Bind("alerta") %>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
-                                                    <asp:TemplateField HeaderText="Apellido Cliente">
-                                                        <EditItemTemplate>
-                                                            <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("apellido_cliente") %>' Width="100%"></asp:TextBox>
-                                                        </EditItemTemplate>
-                                                        <ItemTemplate>
-                                                            <asp:Label ID="Label7" runat="server" Text='<%# Bind("apellido_cliente") %>'></asp:Label>
-                                                        </ItemTemplate>
-                                                    </asp:TemplateField>
                                                     <asp:TemplateField HeaderText="Nombre Cliente">
                                                         <EditItemTemplate>
                                                             <asp:TextBox ID="TextBox12" runat="server" Text='<%# Bind("nombre_cliente") %>'></asp:TextBox>
                                                         </EditItemTemplate>
                                                         <ItemTemplate>
                                                             <asp:Label ID="Label2" runat="server" Text='<%# Bind("nombre_cliente") %>'></asp:Label>
+                                                        </ItemTemplate>
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField HeaderText="Apellido Cliente">
+                                                        <EditItemTemplate>
+                                                            <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("apellido_cliente") %>' Width="100%"></asp:TextBox>
+                                                        </EditItemTemplate>
+                                                        <ItemTemplate>
+                                                            <asp:Label ID="Label7" runat="server" Text='<%# Bind("apellido_cliente") %>'></asp:Label>
                                                         </ItemTemplate>
                                                     </asp:TemplateField>
                                                 </Columns>

@@ -16,7 +16,7 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
     protected void Bt_CrearU_Click(object sender, EventArgs e)
     {
         ERegistroUsuario cliente = new ERegistroUsuario();
-        
+
 
         cliente.Cedula = Int32.Parse(Tx_cedula.Text);
         cliente.Nombre = Tx_nombre.Text;
@@ -64,8 +64,86 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
             L_ErrorFechaNacimiento.Text = "Fecha de nacimiento incorrecta, no es mayor de edad.";
             error = 1;
         }
+        if (Tx_cedula.Text.Length < 8)
+        {
 
-        if (idSinRegistro.Rows[0]["user_id"].Equals(-1))
+            L_ErrorCedula.Visible = true;
+            LB_ErrorNombre.Visible = false;
+            LB_ErrorApellido.Visible = false;
+            LB_ErrorTelefono.Visible = false;
+            LB_ErrorContraseña.Visible = false;
+            L_ErrorCorreo.Visible = false;
+            L_ErrorCedula.Text = "El numero de caracteres de la cedula son invalidos";
+            error = 1;
+
+
+        }
+        else if (Tx_nombre.Text.Length < 3)
+        {
+            LB_ErrorNombre.Visible = true;
+
+            LB_ErrorApellido.Visible = false;
+            LB_ErrorTelefono.Visible = false;
+            LB_ErrorContraseña.Visible = false;
+            L_ErrorCorreo.Visible = false;
+            L_ErrorCedula.Visible = false;
+            LB_ErrorNombre.Text = "El numero de caracteres del nombre son invalidos";
+            error = 1;
+
+        }
+        else if (Tx_apellidos.Text.Length < 3)
+        {
+
+            LB_ErrorApellido.Visible = true;
+            LB_ErrorNombre.Visible = false;
+            LB_ErrorTelefono.Visible = false;
+            LB_ErrorContraseña.Visible = false;
+            L_ErrorCorreo.Visible = false;
+            L_ErrorCedula.Visible = false;
+            LB_ErrorApellido.Text = "El numero de caracteres del apellido son invalidos";
+            error = 1;
+
+        }
+        else if (Tx_Telefono.Text.Length < 8)
+        {
+
+
+            LB_ErrorNombre.Visible = false;
+            LB_ErrorApellido.Visible = false;
+            LB_ErrorTelefono.Visible = false;
+            LB_ErrorContraseña.Visible = false;
+            L_ErrorCorreo.Visible = false;
+            L_ErrorCedula.Visible = false;
+            LB_ErrorTelefono.Text = "El numero de caracteres del telefono son invalidos";
+            error = 1;
+
+        }
+        else if (Tx_contraseña.Text.Length < 4)
+        {
+
+            LB_ErrorContraseña.Visible = true;
+            LB_ErrorNombre.Visible = false;
+            LB_ErrorApellido.Visible = false;
+            LB_ErrorTelefono.Visible = false;
+            L_ErrorCorreo.Visible = false;
+            L_ErrorCedula.Visible = false;
+            LB_ErrorContraseña.Text = "El numero de caracteres del contraseña son invalidos";
+            error = 1;
+
+        }
+        else if (Tx_correo.Text.Length < 16)
+        {
+
+            L_ErrorCorreo.Visible = true;
+            LB_ErrorNombre.Visible = false;
+            LB_ErrorApellido.Visible = false;
+            LB_ErrorTelefono.Visible = false;
+            LB_ErrorContraseña.Visible = false;
+            L_ErrorCedula.Visible = false;
+            L_ErrorCorreo.Text = "El numero de caracteres del correo son invalidos";
+            error = 1;
+        }
+        else if (idSinRegistro.Rows[0]["user_id"].Equals(-1))
         {
             if (idRegistro.Rows[0]["user_id"].Equals(-1))
             {
@@ -73,11 +151,16 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
 
                 if (error == 0)
                 {
-                    
+
                     new DAORegistroCliente().registroCliente(cliente);
 
                     L_ErrorCrear.Text = "Cuenta creada, inicie sesión ";
-
+                    LB_ErrorNombre.Visible = false;
+                    LB_ErrorApellido.Visible = false;
+                    LB_ErrorTelefono.Visible = false;
+                    LB_ErrorContraseña.Visible = false;
+                    L_ErrorCorreo.Visible = false;
+                    L_ErrorCedula.Visible = false;
                     Tx_nombre.Text = "";
                     Tx_apellidos.Text = "";
                     Tx_correo.Text = "";
@@ -92,29 +175,6 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
                 error = 1;
             }
         }
-        else
-        {
-            L_ErrorCedula.Text = "";
-            if (error == 0)
-            {
-                
-                new DAORegistroCliente().registrarClienteSin(cliente);
 
-                L_ErrorCrear.Text = "Cuenta creada, inicie sesión ";
-
-                Tx_nombre.Text = "";
-                Tx_apellidos.Text = "";
-                Tx_correo.Text = "";
-                Tx_cedula.Text = "";
-                Tx_fecha.Text = "";
-                Tx_Telefono.Text = "";
-            }
-        }
-
-
-        
-
-
-        
     }
 }

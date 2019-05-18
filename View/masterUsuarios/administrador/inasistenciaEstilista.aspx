@@ -74,12 +74,8 @@
                  <div class="auto-style21">
 
                      <br />
-                     <asp:ScriptManager ID="ScriptManager1" runat="server">
-                     </asp:ScriptManager>
-
-                     <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                         <ContentTemplate>
-                                                  <asp:DropDownList ID="DD_Estilista" runat="server" DataSourceID="ODS_MEstilista" DataTextField="nombre_estilista" DataValueField="id" OnDataBound="DD_Estilista_DataBound" OnSelectedIndexChanged="DD_Estilista_SelectedIndexChanged">
+                   
+                                                  <asp:DropDownList ID="DD_Estilista" runat="server" DataSourceID="ODS_MEstilista" DataTextField="nombre_estilista" DataValueField="id"  AutoPostBack="True">
                      </asp:DropDownList>
                      <br />
                      <asp:ObjectDataSource ID="ODS_MEstilista" runat="server" SelectMethod="obtenerEstilista" TypeName="DAORegistroEstilista"></asp:ObjectDataSource>
@@ -137,11 +133,9 @@
                              <asp:Label ID="Eliminar" runat="server" Text="[Eliminar Inasistencia]" class="alert alert-danger" Visible="False" Width="20%"></asp:Label>
                                                <asp:ObjectDataSource ID="ODS_inasistencia" runat="server" SelectMethod="mostrarEstilistaInasistencia" TypeName="DAORegistroEstilista">
                          <SelectParameters>
-                             <asp:ControlParameter ControlID="DD_Estilista" DefaultValue="" Name="id" PropertyName="SelectedValue" Type="Int32" />
+                             <asp:ControlParameter ControlID="DD_Estilista" DefaultValue="0" Name="id" PropertyName="SelectedValue" Type="Int32" />
                          </SelectParameters>
                      </asp:ObjectDataSource>
-                         </ContentTemplate>
-                     </asp:UpdatePanel>
 
                      <br />
                 
@@ -158,7 +152,7 @@
             <td class="auto-style8">
                 <asp:DropDownList ID="DDL_EstilistaInasistencia" runat="server" Height="25px" Width="70%" DataSourceID="ODS_estilista" DataTextField="nombre_estilista" DataValueField="id">
                 </asp:DropDownList>
-                <asp:ObjectDataSource ID="ODS_estilista" runat="server" SelectMethod="obtenerEstilista" TypeName="DAORegistroEstilista" OnSelecting="ODS_estilista_Selecting"></asp:ObjectDataSource>
+                <asp:ObjectDataSource ID="ODS_estilista" runat="server" SelectMethod="obtenerEstilista" TypeName="DAORegistroEstilista" ></asp:ObjectDataSource>
                 <asp:RequiredFieldValidator ID="RFV_EstilistaInasistencia" runat="server" ControlToValidate="DDL_EstilistaInasistencia" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroInasistencia" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
         </tr>
@@ -168,7 +162,7 @@
                 <br />
                 <br />
                 <br />
-                <asp:TextBox ID="Tx_FechaInasistencia" runat="server" BorderColor="#0099FF" Width="70%" Height="25px" MaxLength="10" ValidationGroup="registroInasistencia" OnTextChanged="Tx_FechaInasistencia_TextChanged" TextMode="Date"></asp:TextBox>
+                <asp:TextBox ID="Tx_FechaInasistencia" runat="server" BorderColor="#0099FF" Width="70%" Height="25px" MaxLength="10" ValidationGroup="registroInasistencia"  TextMode="Date"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_FechaInasistencia" runat="server" ControlToValidate="Tx_FechaInasistencia" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroInasistencia" SetFocusOnError="True"></asp:RequiredFieldValidator>
                 <br />
                 <br />

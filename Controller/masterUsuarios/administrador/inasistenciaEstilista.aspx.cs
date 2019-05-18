@@ -25,11 +25,6 @@ public partial class View_masterUsuarios_administrador_inasistenciaEstilista : S
 
     }
 
-    protected void Tx_FechaInasistencia_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
     protected void BT_Insasitencia_Click(object sender, EventArgs e)
     {
         int indexEstilista = Int32.Parse(DDL_EstilistaInasistencia.SelectedIndex.ToString());
@@ -55,29 +50,6 @@ public partial class View_masterUsuarios_administrador_inasistenciaEstilista : S
             guardarCambios.Inasistencia(_usuario, _fecha, session);
             Response.Redirect("inasistenciaEstilista.aspx");
         }
-
-    }
-
-
-    protected void ODS_estilista_Selecting(object sender, ObjectDataSourceSelectingEventArgs e)
-    {
-
-    }
-
-    protected void DD_Estilista_DataBound(object sender, EventArgs e)
-    {
-        GV_reservasEstilistas.DataBind();
-    }
-
-    protected void DD_Estilista_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        int id = Int32.Parse(DD_Estilista.SelectedValue.ToString());
-        DAORegistroEstilista guardarCambios = new DAORegistroEstilista();
-        guardarCambios.mostrarEstilistaInasistencia(id);
-    }
-
-    protected void ImageButton1_Click(object sender, ImageClickEventArgs e)
-    {
 
     }
 

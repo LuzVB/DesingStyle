@@ -16,10 +16,7 @@
         .imgNoRegistro{
            text-align: center;
        }
-        .auto-style19 {
-            font-size: 110%;
-        }
-
+        
         .modalBackground{
             background-color: black;
             filter: alpha(opacity=60);
@@ -35,7 +32,6 @@
          Reservas Agendadas 
      </h1>
      <br/>
-
      <ul class="nav nav-tabs">
         <li class="nav-item">
             <asp:Button ID="BT_Reservas" runat="server" Text="Reservas pendientes" class="nav-link active" OnClick="BT_Reservas_Click" />
@@ -45,14 +41,10 @@
          </li>
      </ul>
     <br/>
-
-     
     <table class="auto-style1">
-        
         <tr>
             <td class="auto-style18" colspan="2"> 
                   <asp:Label ID="LB_Informacion" runat="server" Text="En caso de que no pueda asistir a su cita, cancele la cita con el botón (x) y reagende una nueva cita. Tenga en cuenta que tiene que cancelar 3 horas antes de su cita, si este no es el caso, no cancela y no asiste se le multara." Width="100%" class="alert alert-warning"  >
-
                   </asp:Label>
                 <div class="auto-style21">
                 <asp:GridView ID="GV_reservasAgendadas" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="100%" CssClass="auto-style14" AllowPaging="True"  style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="ODS_mostrarReserva" PageSize="5" OnRowCommand="GV_reservasAgendadas_RowCommand" >
@@ -128,16 +120,13 @@
                 <SortedAscendingCellStyle BackColor="#F1F1F1" />
                 <SortedAscendingHeaderStyle BackColor="#007DBB" />
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
-                <SortedDescendingHeaderStyle BackColor="#00547E" />
-                  
+                <SortedDescendingHeaderStyle BackColor="#00547E" /> 
             </asp:GridView>
             <asp:ObjectDataSource ID="ODS_mostrarReserva" runat="server" SelectMethod="mostrarReservas" TypeName="DAO_Reserva">
                <SelectParameters>
                   <asp:SessionParameter DefaultValue="" Name="id_cliente" SessionField="user_id" Type="Int32" />
                </SelectParameters>
             </asp:ObjectDataSource>
-
-
             <asp:GridView ID="GV_Historial" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" Width="100%" CssClass="auto-style14" AllowPaging="True"  style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="ODS_Historial" PageSize="6" Visible="False" >
                     <Columns>
                         <asp:TemplateField HeaderText="Fecha">
@@ -203,19 +192,16 @@
                 <SortedAscendingHeaderStyle BackColor="#007DBB" />
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
-                  
-            </asp:GridView>
+                  </asp:GridView>
             <asp:ObjectDataSource ID="ODS_Historial" runat="server" SelectMethod="mostrarHistorial" TypeName="DAO_Reserva">
                <SelectParameters>
                   <asp:SessionParameter DefaultValue="" Name="id_cliente" SessionField="user_id" Type="Int32" />
                </SelectParameters>
             </asp:ObjectDataSource>
           </div>
-            
         </td>
      </tr>
   </table>
-
    <cc1:modalpopupextender ID="MPE_Error" runat="server" PopupControlID="P_Error" CancelControlID="BT_okError"  TargetControlID="LB_target3" BackgroundCssClass="modalBackground"></cc1:modalpopupextender>
     <asp:Label ID="LB_target3" runat="server" Text=""></asp:Label>
     <asp:Panel ID="P_Error" runat="server" Width="40%">
@@ -227,12 +213,9 @@
             <div class ="botones2">
               <asp:Button ID="BT_okError" runat="server" Text="OK"  class="btn btn-outline-warning"/>
             </div>
-        </div>
-        
+        </div>  
     </asp:Panel>
-
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
-
 </asp:Content>
 

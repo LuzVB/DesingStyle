@@ -3,13 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">
-        .auto-style5 {
-            width: 100%;
-            height: 48px;
-            color: #000000;
-         
-        }
-                
+                        
     .imgRegistro{
         width:50%;
         padding-left:10%;
@@ -106,7 +100,9 @@
                                     </td>
                                 <td class="auto-style27">
                                     <asp:TextBox ID="Tx_nombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="20"></asp:TextBox>
+                                    <br />
                                     <cc1:filteredtextboxextender ID="FTBE_nombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_nombre" />
+                                    <asp:Label ID="LB_ErrorNombre" runat="server" CssClass="auto-style32" Font-Size="100%" ForeColor="Red"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
@@ -119,6 +115,8 @@
                                 </td>
                                 <td class="auto-style24">
                                     <asp:TextBox ID="Tx_apellidos" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="20"></asp:TextBox>
+                                    <br />
+                                    <asp:Label ID="LB_ErrorApellido" runat="server" CssClass="auto-style32" Font-Size="100%" ForeColor="Red"></asp:Label>
                                     <cc1:filteredtextboxextender ID="FTBE_apellidos" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_apellidos" />
                                 </td>
                             </tr>
@@ -131,7 +129,7 @@
                                     <asp:RequiredFieldValidator ID="RFV_CrearCorreo" runat="server" ControlToValidate="Tx_correo" ErrorMessage="(*)" ForeColor="Red" SetFocusOnError="True" ValidationGroup="crearCuenta"></asp:RequiredFieldValidator>
                                 </td>
                                 <td class="auto-style24">
-                                    <asp:TextBox ID="Tx_correo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" MaxLength="25"></asp:TextBox>
+                                    <asp:TextBox ID="Tx_correo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" MaxLength="40"></asp:TextBox>
                                     <cc1:filteredtextboxextender ID="FTBE_correo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_correo" />
                                     <br />
                                     <asp:Label ID="L_ErrorCorreo" runat="server" CssClass="auto-style32" Font-Size="100%" ForeColor="Red"></asp:Label>
@@ -176,6 +174,8 @@
                                 </td>
                                 <td class="auto-style37">
                                     <asp:TextBox ID="Tx_Telefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="8"></asp:TextBox>
+                                    <br />
+                                    <asp:Label ID="LB_ErrorTelefono" runat="server" CssClass="auto-style32" Font-Size="100%" ForeColor="Red"></asp:Label>
                                 </td>
                             </tr>
                             <tr>
@@ -187,7 +187,9 @@
                                     <asp:RequiredFieldValidator ID="RFV_CrearContraseña" runat="server" ControlToValidate="Tx_contraseña" ErrorMessage="(*)" ForeColor="Red" SetFocusOnError="True" ValidationGroup="crearCuenta"></asp:RequiredFieldValidator>
                                 </td>
                                 <td class="auto-style24">
-                                    <asp:TextBox ID="Tx_contraseña" runat="server" BorderColor="#0099FF" TextMode="Password" Width="95%" Height="25px" MaxLength="20"></asp:TextBox>
+                                    <asp:TextBox ID="Tx_contraseña" runat="server" BorderColor="#0099FF" TextMode="Password" Width="95%" Height="25px" MaxLength="10"></asp:TextBox>
+                                    <br />
+                                    <asp:Label ID="LB_ErrorContraseña" runat="server" CssClass="auto-style32" Font-Size="100%" ForeColor="Red"></asp:Label>
                                     <cc1:filteredtextboxextender ID="FTBE_contraseña" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_contraseña" />
                                 </td>
                             </tr>

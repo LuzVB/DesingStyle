@@ -62,8 +62,7 @@
             color: #0099FF;
         }
         .auto-style16 {
-            font-size: 160%;
-            color: #0099FF;
+            color: #0099CC;
         }
     </style>
 </asp:Content>
@@ -85,10 +84,8 @@
                                 </span>
                                 
                                 <h2 class="auto-style15">Horarios De Atencion</h2>
+                                <span class="auto-style10">
                                 
-                                <span class="auto-style11">
-                                
-                                <br />
                                 8:00 am&nbsp; A 17:00 pm
                                 <br />
                                 Lunes a Domingo<br />

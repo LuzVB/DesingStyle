@@ -3,15 +3,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
     <style type="text/css">
-        .auto-style8 {
-            width: 70%;
-        }
-      
+              
         .auto-style11 {
             width: 30%;
         }
         .auto-style12 {
-            width: 70%;
+            width: 77%;
             height: 23px;
             text-align: center;
         }
@@ -19,15 +16,11 @@
             width: 30%;
             height: 23px;
         }
-        .auto-style21 {
-            margin-left: 0px;
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-        }
         .auto-style22 {
             height: 23px;
         }
         .auto-style23 {
-            width: 70%;
+            width: 77%;
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 140%;
         }
@@ -35,6 +28,7 @@
             height: 23px;
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 160%;
+            width: 77%;
         }
         .auto-style25 {
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
@@ -42,27 +36,19 @@
             padding-left:30%;
         }
         .auto-style26 {
-            width: 70%;
+            width: 77%;
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 160%;
         }
         .auto-style27 {
-            width: 70%;
+            width: 77%;
             text-align: center;
         }
         .img_perfil{
             object-fit:cover;
         }
-        .auto-style28 {
-            width: 70%;
-            font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-            padding-left:17%;
-        text-align: center;
-        color: #000000;
-        font-size: 160%;
-    }
         .auto-style29 {
-            width: 70%;
+            width: 77%;
             height: 73px;
         }
         .auto-style30 {
@@ -70,9 +56,10 @@
             font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
             font-size: 160%;
             text-align: center;
+            width: 77%;
         }
         .auto-style31 {
-            width: 70%;
+            width: 77%;
             text-align: center;
             height: 97px;
         }
@@ -84,7 +71,7 @@
         margin-top: 48px;
     }
         .auto-style34 {
-            width: 70%;
+            width: 77%;
             height: 84px;
             text-align: center;
         }
@@ -101,6 +88,9 @@
             height:200px;
             margin:1%;
             object-fit:cover;
+        }
+        .auto-style37 {
+            width: 77%
         }
     </style>
 </asp:Content>
@@ -132,12 +122,12 @@
         <td class="auto-style22">                       
             <br />
             <br />
-            <asp:FileUpload ID="FU_Perfil" runat="server" />
+            <asp:FileUpload ID="FU_Perfil" runat="server"  />
             <br />
             <asp:RequiredFieldValidator ID="RFV_Up" runat="server" ControlToValidate="FU_Perfil" ErrorMessage="Agregue su imagen (*)"  class="alert alert-danger"  ValidationGroup="VG_InicioSesion"></asp:RequiredFieldValidator>
             <br />
             <br />
-            <asp:Button ID="BT_CambiarImagen" runat="server" Text="Cambiar imagen" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_InicioSesion" CssClass="auto-style21" OnClick="BT_CambiarImagen_Click" />
+            <asp:Button ID="BT_CambiarImagen" runat="server" Text="Cambiar imagen" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_InicioSesion"  OnClick="BT_CambiarImagen_Click" class="btn btn-primary"  />
         </td>
     </tr>
     <tr>
@@ -145,7 +135,7 @@
         <td class="auto-style22">&nbsp;</td>
     </tr>
     <tr>
-        <td class="auto-style28"><strong>Reseña de su biografía</strong></td>
+        <td class="auto-style30"><strong>Reseña de su biografía</strong></td>
         <td class="auto-style11">&nbsp;</td>
     </tr>
     <tr>
@@ -177,10 +167,10 @@
         <td class="auto-style11">&nbsp;</td>
     </tr>
     <tr>
-        <td class="auto-style8">&nbsp;</td>
+        <td class="auto-style37">&nbsp;</td>
         <td class="auto-style11">
                                    
-        <asp:Button ID="BT_GuardarBiografia" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_Biografia" CssClass="auto-style21" OnClick="BT_GuardarBiografia_Click" />
+        <asp:Button ID="BT_GuardarBiografia" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_Biografia"  OnClick="BT_GuardarBiografia_Click" class="btn btn-primary"  />
         </td>
     </tr>
     <tr>
@@ -216,7 +206,7 @@
             <asp:Label ID="LB_ErrorContraseña" runat="server" class="alert alert-danger" Visible="False"></asp:Label>
         </td>
         <td class="auto-style35">
-            <asp:Button ID="BT_GuardarBiografia0" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_cambioContraseña" CssClass="auto-style21" OnClick="BT_GuardarBiografia0_Click" />
+            <asp:Button ID="BT_GuardarBiografia0" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="64%" ValidationGroup="VG_cambioContraseña"  OnClick="BT_GuardarBiografia0_Click" class="btn btn-primary"  />
         </td>
     </tr>
 </table>

@@ -46,6 +46,9 @@
            padding-left:5%;
            padding-right:5%;
         }
+        .auto-style17 {
+            margin-bottom: 28px;
+        }
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -76,7 +79,7 @@
         <tr>
             
             <td colspan="2">
-                <asp:FormView ID="FV_datosAdmin" runat="server"  Width="100%" DataSourceID="ODS_Admin">
+                <asp:FormView ID="FV_datosAdmin" runat="server"  Width="100%" DataSourceID="ODS_Admin" CssClass="auto-style17">
                 <ItemTemplate>
                     <%--<table class="tablaAdm">--%>
                        <tr>
@@ -86,12 +89,12 @@
                         </tr>
                         <tr>
                             <td class="auto-style9"><asp:TextBox ID="Tx_AdmNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("nombre") %>' MaxLength="20"></asp:TextBox>
-                                <asp:Label ID="LB_Nombre" runat="server" ForeColor="Red" Text="[LB_Nombre]" Visible="False"></asp:Label>
+                                <asp:Label ID="LB_Nombre" runat="server" ForeColor="Red" Text="[LB_Nombre]" Visible="False" Width="100%"></asp:Label>
                                 <asp:RequiredFieldValidator ID="RFV_NombreAdm" runat="server" ControlToValidate="Tx_AdmNombre" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <cc1:filteredtextboxextender ID="FTBE_AdmNombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_AdmNombre" />
                             <td class="auto-style9"><asp:TextBox ID="Tx_AdmApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("apellido") %>' MaxLength="20"></asp:TextBox>
-                                <asp:Label ID="LB_Apellido" runat="server" ForeColor="Red" Text="[LB_Apellido]" Visible="False"></asp:Label>
+                                <asp:Label ID="LB_Apellido" runat="server" ForeColor="Red" Text="[LB_Apellido]" Visible="False" Width="100%"></asp:Label>
                                 <asp:RequiredFieldValidator ID="RFV_ApellidoAdm" runat="server" ControlToValidate="Tx_AdmApellido" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <cc1:filteredtextboxextender ID="FTBE_AdmApellido" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_AdmApellido" />
@@ -101,16 +104,16 @@
                             <td class="auto-style12">Correo</td>
                         </tr>
                         <tr>
-                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("telefono") %>' MaxLength="10"></asp:TextBox>
-                                <asp:Label ID="LB_Telefono" runat="server" ForeColor="Red" Text="[LB_Telefono]" Visible="False"></asp:Label>
+                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="VG_DatosPersonales " Text='<%# Bind("telefono") %>' MaxLength="8"></asp:TextBox>
+                                <asp:Label ID="LB_Telefono" runat="server" ForeColor="Red" Text="[LB_Telefono]" Visible="False" Width="100%"></asp:Label>
                                 <asp:RequiredFieldValidator ID="RFV_TelefonoAdm" runat="server" ControlToValidate="Tx_AdmTelefono" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                             </td>
                             <cc1:filteredtextboxextender ID="FTBE_AdmTelefono" runat="server" FilterType="Numbers" TargetControlID="Tx_AdmTelefono" />
-                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmCorreo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" ValidationGroup="VG_DatosPersonales "  Text='<%# Bind("correo") %>' MaxLength="50"></asp:TextBox></td>
+                            <td class="auto-style9"><asp:TextBox ID="Tx_AdmCorreo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" TextMode="Email" ValidationGroup="VG_DatosPersonales "  Text='<%# Bind("correo") %>' MaxLength="40"></asp:TextBox></td>
                             <cc1:filteredtextboxextender ID="FTBE_AdmCorreo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_AdmCorreo" />
                         </tr>
                 <%--    </table>--%>
-                    <asp:Label ID="LB_Correo" runat="server" ForeColor="Red" Text="[LB_Co]" Visible="False"></asp:Label>
+                    <asp:Label ID="LB_Correo" runat="server" ForeColor="Red" Text="[LB_Correo]" Visible="False" Width="100%"></asp:Label>
                     <asp:RequiredFieldValidator ID="RFV_CorreoAdm" runat="server" ControlToValidate="Tx_AdmCorreo" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                 </ItemTemplate>
                 </asp:FormView>
@@ -125,7 +128,7 @@
         
         <tr>
             <td class="auto-style9">&nbsp;</td>
-            <td class="auto-style10"><asp:Button ID="BT_GuardarAdm" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_DatosPersonales " OnClick="BT_GuardarAdm_Click" /></td>
+            <td class="auto-style10"><asp:Button ID="BT_GuardarAdm" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_DatosPersonales " OnClick="BT_GuardarAdm_Click" class="btn btn-primary"/></td>
         </tr>
         <tr>
             <td class="auto-style16"><strong>CAMBIAR CONTRASEÑA</strong></td>
@@ -150,7 +153,7 @@
                 <asp:Label ID="LB_ErrorContraseña" runat="server" ForeColor="Red" CssClass="auto-style22"></asp:Label>
 
             </td>
-            <td class="auto-style10"><asp:Button ID="BT_GuardarContraAdm" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_AContraseña" OnClick="BT_GuardarContraAdm_Click" /></td>
+            <td class="auto-style10"><asp:Button ID="BT_GuardarContraAdm" runat="server" Text="Guardar cambios" BorderColor="#0099FF" Font-Bold="True" Font-Size="86%" Height="30px" Width="96%" ValidationGroup="VG_AContraseña" OnClick="BT_GuardarContraAdm_Click" class="btn btn-primary" /></td>
         </tr>
         <tr>
             <td  class="footerDatos"colspan="2">

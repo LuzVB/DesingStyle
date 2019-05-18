@@ -89,8 +89,8 @@ public partial class View_masterUsuarios_cliente_ReservasAgendadas : System.Web.
         LB_Informacion.Visible = true;
 
         LB_Informacion.Text = "En caso de que no pueda asistir a su cita, cancele la cita con el botón (x) " +
-       "y reagende una nueva cita. Tenga en cuenta que tiene que cancelar (tiempo) antes de su cita, si este no es el caso," +
-       " no cancela y no asiste se le multara.";
+       "y re agende una nueva cita. Tenga en cuenta que tiene que cancelar (tiempo) antes de su cita, si este no es el caso," +
+       " no cancela y si no asiste se le multara.";
     }
 
     protected void BT_Historial_Click(object sender, EventArgs e)
