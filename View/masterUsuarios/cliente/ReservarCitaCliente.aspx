@@ -100,10 +100,7 @@
     </tr>
     <tr>
         <td class="auto-style12" colspan="2">
-            Seleccione el servicio<br />
-            <br />
-            <asp:Label ID="fecha" runat="server" Text="Label"></asp:Label>
-            <asp:Label ID="prueba" runat="server" Text="Label"></asp:Label>
+            Seleccione el servicio
         </td>
     </tr>
     <tr>

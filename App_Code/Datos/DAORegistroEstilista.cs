@@ -527,6 +527,49 @@ public class DAORegistroEstilista
         return insertarHorario;
     }
 
+    public DataTable registroAgenda(int id_estilista)//los parametros se deben llamar igual como en la BD 
+    {
+        string fechaCorta , f_corta;
+        DateTime fechaInicio = new DateTime();
+        DateTime fechaFin = new DateTime();
+        fechaInicio = DateTime.Now;
+        fechaCorta = fechaInicio.ToShortDateString();
+        // fechaFin = fechaInicio.AddYears(1);
+        fechaFin = fechaInicio.AddDays(7);
+        f_corta = fechaFin.ToShortDateString();
+        fechaInicio = DateTime.Parse(fechaCorta);
+        fechaFin = DateTime.Parse(f_corta);
+        
+
+
+        DataTable insertarHorario = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_guardar_agenda3", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = id_estilista;
+            dataAdapter.SelectCommand.Parameters.Add("_inicio_serie", NpgsqlDbType.Timestamp).Value = fechaInicio;
+            dataAdapter.SelectCommand.Parameters.Add("_final_serie", NpgsqlDbType.Timestamp).Value = fechaFin;
+
+            conection.Open();
+            dataAdapter.Fill(insertarHorario);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return insertarHorario;
+    }
+
     public DataTable ActualizarInasistencia(int _usuario, DateTime _fecha)
     {
         DataTable ActualizarInacistencia = new DataTable();
