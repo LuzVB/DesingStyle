@@ -118,7 +118,7 @@ public partial class View_masterUsuarios_administrador_reportes : System.Web.UI.
 
     protected void BT_UsuariosSinServico_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/View/masterUsuarios/administrador/reporteUsuarioSinRegistro.aspx");
+        Response.Redirect("~/View/masterUsuarios/administrador/repsin.aspx");
     }
 
     protected void BT_PerfilEstilista_Click(object sender, EventArgs e)

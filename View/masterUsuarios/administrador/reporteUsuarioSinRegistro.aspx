@@ -35,9 +35,9 @@
                     </tr>
                 </table>
                 <br />
-                <CR:CrystalReportViewer ID="CRV_UsuarioSinRegistro" runat="server" AutoDataBind="True" EnableDatabaseLogonPrompt="False" GroupTreeImagesFolderUrl="" Height="50px" ReportSourceID="CRS_UsuarioSinRegistro" ToolbarImagesFolderUrl="" ToolPanelWidth="100px" Width="350px" />
+                <CR:CrystalReportViewer ID="CRV_UsuarioSinRegistro" runat="server" AutoDataBind="True" EnableDatabaseLogonPrompt="False" GroupTreeImagesFolderUrl="" Height="50px" ReportSourceID="CRS_UsuarioSinRegistro" ToolbarImagesFolderUrl="" ToolPanelWidth="100px" Width="350px" EnableParameterPrompt="False" />
                 <CR:CrystalReportSource ID="CRS_UsuarioSinRegistro" runat="server">
-                    <Report FileName="~\Reportes\reporteUsuarioSinRegistro.rpt">
+                    <Report FileName="C:\Users\Luz\Documents\UDEC\Semestres\Quinto Semestre\Ingenieria de software I\proyecto\construccion\proyecto\Reportes\reporteServicios.rpt">
                     </Report>
                 </CR:CrystalReportSource>
             </td>
