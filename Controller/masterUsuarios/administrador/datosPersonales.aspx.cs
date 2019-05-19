@@ -45,7 +45,13 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
         DataTable contarCorreo = new DAOAdmin().contarCorreos(admin);
         DataTable datosAdmin = new DAOAdmin().mostrarAdmin(int.Parse(Session["user_id"].ToString()));
 
-        if(datosAdmin.Rows[0]["correo"].ToString() == admin.Correo)
+        ((Label)FV_datosAdmin.Row.FindControl("LB_Correo")).Visible = false;
+        ((Label)FV_datosAdmin.Row.FindControl("LB_Telefono")).Visible = false;
+        ((Label)FV_datosAdmin.Row.FindControl("LB_Apellido")).Visible = false;
+        ((Label)FV_datosAdmin.Row.FindControl("LB_Nombre")).Visible = false;
+
+
+        if (datosAdmin.Rows[0]["correo"].ToString() == admin.Correo)
         {
             error = 0;
             P_Alerta.Visible = false;
@@ -67,60 +73,40 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
         if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmNombre")).Text.Length < 3)
         {
             ((Label)FV_datosAdmin.Row.FindControl("LB_Nombre")).Visible = true;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Correo")).Visible = false;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Telefono")).Visible = false;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Apellido")).Visible = false;
             ((Label)FV_datosAdmin.Row.FindControl("LB_Nombre")).Text = "El numero de caracteres del nombre son invalidos";
             error = 1;
         }
-        else if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmApellido")).Text.Length < 3)
+        if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmApellido")).Text.Length < 3)
         {
 
             ((Label)FV_datosAdmin.Row.FindControl("LB_Apellido")).Visible = true;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Correo")).Visible = false;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Telefono")).Visible = false;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Nombre")).Visible = false;
             ((Label)FV_datosAdmin.Row.FindControl("LB_Apellido")).Text = "El numero de caracteres del apellido son invalidos";
             error = 1;
         }
        
-        else if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmTelefono")).Text.Length < 8)
+        if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmTelefono")).Text.Length < 8)
         {
 
             ((Label)FV_datosAdmin.Row.FindControl("LB_Telefono")).Visible = true;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Correo")).Visible = false;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Apellido")).Visible = false;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Nombre")).Visible = false;
             ((Label)FV_datosAdmin.Row.FindControl("LB_Telefono")).Text = "El numero de caracteres del telefono son invalidos";
             error = 1;
         }
-        else if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmCorreo")).Text.Length < 16)
+        if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmCorreo")).Text.Length < 16)
         {
 
             ((Label)FV_datosAdmin.Row.FindControl("LB_Correo")).Visible = true;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Telefono")).Visible = false;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Apellido")).Visible = false;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Nombre")).Visible = false;
             ((Label)FV_datosAdmin.Row.FindControl("LB_Correo")).Text = "El numero de caracteres del telefono son invalidos";
             error = 1;
         }
-
-        else {
             if (error == 0)
             {
                 DAOAdmin guardarCambios = new DAOAdmin();
                 guardarCambios.modificarAdmin(admin);
-
-                ((Label)FV_datosAdmin.Row.FindControl("LB_Correo")).Visible = false;
-                ((Label)FV_datosAdmin.Row.FindControl("LB_Telefono")).Visible = false;
-                ((Label)FV_datosAdmin.Row.FindControl("LB_Apellido")).Visible = false;
-                ((Label)FV_datosAdmin.Row.FindControl("LB_Nombre")).Visible = false;
                 Response.Redirect("~/View/masterUsuarios/administrador/datosPersonales.aspx");
             }
         }
 
 
-    }
 
     protected void BT_GuardarContraAdm_Click(object sender, EventArgs e)
     {
@@ -137,7 +123,8 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
         {
             LB_ErrorContraseña.Text = "La contraseña actual es errónea";
         }
-        if (Tx_AdmCNueva.Text.Length < 4) {
+        if (Tx_AdmCNueva.Text.Length < 4)
+        {
             LB_ErrorContraseña.Text = "La contraseña no puede tener menos de 4 caracteres";
         }
         else
@@ -147,7 +134,7 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
 
             guardar.actualizarContrasena(adminContra);
 
-            Tx_AdmCNueva.Text = "";
+            Tx_AdmCActual.Text = "";
             Tx_AdmCActual.Text = "";
 
             LB_ErrorContraseña.Text = "La contraseña ha sido actualizada";
@@ -155,3 +142,4 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
         }
     }
 }
+

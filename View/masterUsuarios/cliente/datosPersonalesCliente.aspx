@@ -121,10 +121,14 @@
                              <tr>
                                 <td class="auto-style9"><asp:TextBox ID="Tx_ClienteNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("nombre") %>' CssClass="auto-style21" MaxLength="20"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RFV_NombreCliente" runat="server" ControlToValidate="Tx_ClienteNombre" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <br />
+                                    <asp:Label ID="LB_ErrorNombre" runat="server" CssClass="auto-style22" ForeColor="Red" Visible="False" Width="100%"></asp:Label>
                                  </td>
                                 <cc1:filteredtextboxextender ID="FTBE_ClienteNombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_ClienteNombre" />
                                 <td class="auto-style9"><asp:TextBox ID="Tx_ClienteApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("apellido") %>' CssClass="auto-style21" MaxLength="20"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RFV_ApellidoCliente" runat="server" ControlToValidate="Tx_ClienteApellido" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <br />
+                                    <asp:Label ID="LB_ErrorApellido" runat="server" CssClass="auto-style22" ForeColor="Red" Visible="False" Width="100%"></asp:Label>
                                  </td>
                                 <cc1:filteredtextboxextender ID="FTBE_ClienteApellido" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_ClienteApellido" />
         
@@ -136,10 +140,14 @@
                              <tr>
                                 <td class="auto-style9"><asp:TextBox ID="Tx_ClienteTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("telefono") %>' CssClass="auto-style21" MaxLength="10"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RFV_TelefonoCliente0" runat="server" ControlToValidate="Tx_ClienteTelefono" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <br />
+                                    <asp:Label ID="LB_ErrorTelefono" runat="server" CssClass="auto-style22" ForeColor="Red" Visible="False" Width="100%"></asp:Label>
                                  </td>
                                 <cc1:filteredtextboxextender ID="FTBE_ClienteTelefono" runat="server" FilterType="Numbers" TargetControlID="Tx_ClienteTelefono" />
                                 <td class="auto-style9"><asp:TextBox ID="Tx_ClienteCorreo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("correo") %>' CssClass="auto-style21" MaxLength="50"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RFV_CorreoCliente" runat="server" ControlToValidate="Tx_ClienteCorreo" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
+                                    <br />
+                                    <asp:Label ID="LB_ErrorCorreo" runat="server" CssClass="auto-style22" ForeColor="Red" Visible="False" Width="100%"></asp:Label>
                                     <br />
                                  </td>
                                 <cc1:filteredtextboxextender ID="FTBE_ClienteCorreo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_ClienteCorreo" />
@@ -148,8 +156,6 @@
                         </table>
                     </ItemTemplate>
                 </asp:FormView>
-
-                <asp:Label ID="LB_ErrorDatos" runat="server" ForeColor="Red" CssClass="auto-style22"></asp:Label>
 
                 <br />
                 <asp:ObjectDataSource ID="ODS_mostrarCliente" runat="server" SelectMethod="mostrarCliente" TypeName="DAOCliente">
