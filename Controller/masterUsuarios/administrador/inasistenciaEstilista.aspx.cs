@@ -32,25 +32,36 @@ public partial class View_masterUsuarios_administrador_inasistenciaEstilista : S
         DateTime _fecha = DateTime.Parse(((TextBox)Tx_FechaInasistencia.FindControl("Tx_FechaInasistencia")).Text);
         DAORegistroEstilista guardarCambios = new DAORegistroEstilista();
         string session= Session["user"].ToString();
+        DataTable asistencia = new DAORegistroEstilista().Inasistenciavalidacion(_usuario, _fecha);
+        int vacio = int.Parse(asistencia.Rows.Count.ToString());
 
         DateTime fecha = new DateTime();
         fecha = DateTime.Now;
         String fecha2 = fecha.ToShortDateString();
         fecha = DateTime.Parse(fecha2);
-
-        if (_fecha < fecha)
+        if (vacio == 1)
         {
+
             Alerta_Fecha.Visible = true;
-            Alerta_Fecha.Text = "Error en la fecha seleccionada.";
+            Alerta_Fecha.Text = "la inasistencia ya fue registrada.";
+
         }
         else
         {
-            Alerta_Fecha.Visible = false;
-            guardarCambios.ActualizarInasistencia(_usuario, _fecha);
-            guardarCambios.Inasistencia(_usuario, _fecha, session);
-            Response.Redirect("inasistenciaEstilista.aspx");
-        }
+            if (_fecha < fecha || _fecha == fecha)
+            {
+                Alerta_Fecha.Visible = true;
+                Alerta_Fecha.Text = "Error en la fecha seleccionada.";
+            }
+            else
+            {
+                Alerta_Fecha.Visible = false;
+                guardarCambios.ActualizarInasistencia(_usuario, _fecha);
+                guardarCambios.Inasistencia(_usuario, _fecha, session);
+                Response.Redirect("inasistenciaEstilista.aspx");
+            }
 
+        }
     }
 
     protected void GV_reservasEstilistas_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -72,7 +83,7 @@ public partial class View_masterUsuarios_administrador_inasistenciaEstilista : S
             int MReserva = int.Parse(GDReserva[1]);
             int MActual = int.Parse(GDActual[1]);
 
-            if (DReserva < DActual && MReserva == MActual)
+            if (DReserva <= DActual && MReserva == MActual)
             {
                 Eliminar.Visible = true;
                 String Reserva = ((Label)GV_reservasEstilistas.Controls[0].Controls[idButton].FindControl("Fecha")).Text;

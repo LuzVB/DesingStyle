@@ -32,7 +32,7 @@
                 </table>
                 <CR:CrystalReportViewer ID="CRV_usn" runat="server" AutoDataBind="True" EnableDatabaseLogonPrompt="False" GroupTreeImagesFolderUrl="" Height="1490px" ReportSourceID="CRS_usn" ToolbarImagesFolderUrl="" ToolPanelWidth="100px" Width="1104px" />
                 <CR:CrystalReportSource ID="CRS_usn" runat="server">
-                    <Report FileName="C:\Users\Luz\Documents\UDEC\Semestres\Quinto Semestre\Ingenieria de software I\proyecto\construccion\proyecto\Reportes\reporteUsuarioSinRegistro.rpt">
+                    <Report FileName="~\Reportes\reporteUsuarioSinRegistro.rpt">
                     </Report>
                 </CR:CrystalReportSource>
                 <br />
