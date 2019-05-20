@@ -119,13 +119,13 @@
                                 <td class="auto-style12">Apellido</td>
                              </tr>
                              <tr>
-                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("nombre") %>' CssClass="auto-style21" MaxLength="20" AutoCompleteType="Disabled"></asp:TextBox>
+                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("nombre") %>' CssClass="auto-style21" MaxLength="30" AutoCompleteType="Disabled"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RFV_NombreCliente" runat="server" ControlToValidate="Tx_ClienteNombre" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <br />
                                     <asp:Label ID="LB_ErrorNombre" runat="server" CssClass="auto-style22" ForeColor="Red" Visible="False" Width="100%"></asp:Label>
                                  </td>
                                 <cc1:filteredtextboxextender ID="FTBE_ClienteNombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_ClienteNombre" />
-                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("apellido") %>' CssClass="auto-style21" MaxLength="20" AutoCompleteType="Disabled"></asp:TextBox>
+                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("apellido") %>' CssClass="auto-style21" MaxLength="30" AutoCompleteType="Disabled"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RFV_ApellidoCliente" runat="server" ControlToValidate="Tx_ClienteApellido" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <br />
                                     <asp:Label ID="LB_ErrorApellido" runat="server" CssClass="auto-style22" ForeColor="Red" Visible="False" Width="100%"></asp:Label>
@@ -187,12 +187,12 @@
         </tr>
         <tr>
             <td class="auto-style9">
-                <asp:TextBox ID="Tx_ContraseñaActual" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="Tx_ContraseñaActual" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="100" TextMode="Password"></asp:TextBox>
                 <cc1:filteredtextboxextender ID="FTBE_ContraseñaActual" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_ContraseñaActual" />
         
             </td>
             <td class="auto-style9">
-                <asp:TextBox ID="Tx_ContraseñaNueva" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" 
+                <asp:TextBox ID="Tx_ContraseñaNueva" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="100" 
                     TextMode="Password"></asp:TextBox>
                 <cc1:filteredtextboxextender ID="FTBE_ContraseñaNueva" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_ContraseñaNueva" />
             </td>
@@ -228,7 +228,7 @@
         </tr>
         <tr>
             <td class="auto-style9">
-                <asp:TextBox ID="Tx_EliminarCuenta" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="Tx_EliminarCuenta" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="100" TextMode="Password"></asp:TextBox>
                 <cc1:filteredtextboxextender ID="FTBE_EliminarCuenta" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_EliminarCuenta" />
         
             </td>

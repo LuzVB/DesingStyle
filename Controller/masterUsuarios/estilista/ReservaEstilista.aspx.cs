@@ -139,6 +139,8 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
         {
 
             Alerta_Rerva.Visible = true;
+            DateTime horaAgenda = new DateTime();
+            DateTime horaSistema = new DateTime();
 
             int id = int.Parse(e.CommandArgument.ToString());
             GridViewRow row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
@@ -146,8 +148,11 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
             //int mane = Convert.ToInt32(((Label)row.FindControl("Hora")).Text.ToString());
             String HoraReserva = ((Label)GridView_ReservasEst.Controls[0].Controls[id2].FindControl("Hora")).Text;
             //((Button)GridView_ReservasEst.Controls[0].Controls[id2].FindControl("NoAsistio")).Visible = false;
-            String HoraActual = DateTime.Now.ToString("hh:mm:ss");
+            String HoraActual = DateTime.Now.ToString("HH:MM:ss");
             int Usuario = int.Parse(Session["user_id"].ToString());
+
+            horaAgenda = DateTime.Parse(HoraReserva);
+            horaSistema = DateTime.Now;
 
             String[] separador2;
             String[] separador;
@@ -157,7 +162,7 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
             int HoraSistema = int.Parse(separador2[0]);
             int HorainicioMin = int.Parse(separador[1]);
             int HoraSistemaMin = int.Parse(separador2[1]);
-            if (Horainicio == HoraSistema && HorainicioMin < HoraSistemaMin )
+            if (horaAgenda <= horaSistema )
             {
                 DAORegistroEstilista guardarCambios = new DAORegistroEstilista();
                 int alerta = 4;
@@ -171,7 +176,7 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
                 UP_HoraReserva.Visible = true;
                 Alerta_Rerva.Visible = false;
                 Asistencia.Text = ("No se ha cumplido con la reserva " + HoraReserva +" ");
-                Alerta.Text = ("podra llevar el registro de la asistencia cuando se cumpla  con la hora establecida" + " " + "Hora Del Sistema: " + " " + HoraActual + " ");
+                Alerta.Text = ("podra llevar el registro de la asistencia cuando se cumpla  con la hora establecida" + " " + "Hora Del Sistema: " + " " + horaSistema + " ");
             }
 
         } else if (e.CommandName.Equals("NoAsistio"))
@@ -182,13 +187,19 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
 
             int id = int.Parse(e.CommandArgument.ToString());
 
+            DateTime horaAgenda = new DateTime();
+            DateTime horaSistema = new DateTime();
+
             GridViewRow row = (GridViewRow)(((Button)e.CommandSource).NamingContainer);
             int id2 = row.RowIndex + 1;
             //int mane = Convert.ToInt32(((Label)row.FindControl("Hora")).Text.ToString());
             String HoraReserva= ((Label)GridView_ReservasEst.Controls[0].Controls[id2].FindControl("Hora")).Text;
             //((Button)GridView_ReservasEst.Controls[0].Controls[id2].FindControl("Asistio")).Visible = false;
-            String HoraActual = DateTime.Now.ToString("hh:mm:ss");
+            String HoraActual = DateTime.Now.ToString("HH:MM:ss");
             int Usuario = int.Parse(Session["user_id"].ToString());
+
+            horaAgenda = DateTime.Parse(HoraReserva);
+            horaSistema = DateTime.Now;
 
             String[] separador2;
             String[] separador;
@@ -199,7 +210,7 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
             int HorainicioMin = int.Parse(separador[1]);
             int HoraSistemaMin = int.Parse(separador2[1]);
 
-            if (Horainicio == HoraSistema && HorainicioMin < HoraSistemaMin)
+            if (horaAgenda <= horaSistema)
             {
                 DAORegistroEstilista guardarCambios = new DAORegistroEstilista();
                 int alerta = 5;
@@ -211,7 +222,7 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
 
                 Alerta_Rerva.Visible = false;
                 Asistencia.Text = ("No se ha cumplido con la reserva " + HoraReserva + " ");
-                Alerta.Text = ("podra llevar el registro de la asistencia cuando se cumpla  con la hora establecida" +" "+ "Hora Del Sistema: "+" "+HoraActual + " ");
+                Alerta.Text = ("podra llevar el registro de la asistencia cuando se cumpla  con la hora establecida" +" "+ "Hora Del Sistema: "+" "+ horaSistema + " ");
             }
            
         }
@@ -225,4 +236,9 @@ public partial class View_masterUsuarios_estilista_ReservaEstilista : System.Web
 
 
 
+
+    protected void Asistio_Click(object sender, EventArgs e)
+    {
+
+    }
 }

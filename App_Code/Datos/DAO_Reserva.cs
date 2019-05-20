@@ -593,6 +593,38 @@ public class DAO_Reserva
         return horario;
     }
 
+    public DataTable traerHorario2(EReserva traer)
+    {
+
+        DataTable horario = new DataTable();
+
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try /*1203125647*/
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_traer_reservas2", conection);
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = traer.Id_estilista;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_inicio", NpgsqlDbType.Timestamp).Value = traer.Hora_inicio;
+            dataAdapter.SelectCommand.Parameters.Add("_hora_final", NpgsqlDbType.Timestamp).Value = traer.Hora_final;
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(horario);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return horario;
+    }
+
     public DataTable mostrarClientesin()//los parametros se deben llamar igual como en la BD 
     {
         string fechaCorta;

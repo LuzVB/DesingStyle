@@ -48,7 +48,7 @@ public partial class View_masterUsuarios_cliente_ReservasAgendadas : System.Web.
 
             if (resultado >= cancelacion)
             {
-                DataTable reservas = reserva.traerHorario(datosRes);
+                DataTable reservas = reserva.traerHorario2(datosRes);
 
                 int tamano = reservas.Rows.Count;
 

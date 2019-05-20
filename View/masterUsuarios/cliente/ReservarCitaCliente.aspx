@@ -154,7 +154,7 @@
         <td class="auto-style36" >
               <asp:UpdatePanel ID="UP_Estilista" runat="server">
                 <ContentTemplate>
-                    <asp:DropDownList ID="DDL_Estilista" runat="server" DataSourceID="ODS_luz" DataTextField="nombre_estilista" DataValueField="id" Height="25px" Width="70%" CssClass="auto-style42">
+                    <asp:DropDownList ID="DDL_Estilista" runat="server" DataSourceID="ODS_luz" DataTextField="nombre_estilista" DataValueField="id" Height="25px" Width="70%" CssClass="auto-style42" AutoPostBack="True">
                     </asp:DropDownList>
                 </ContentTemplate>
                 <Triggers>

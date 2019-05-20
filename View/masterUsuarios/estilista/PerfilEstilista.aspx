@@ -144,6 +144,7 @@
                 <asp:FormView ID="FV_Biografia" runat="server" DataSourceID="ODS_biografia" Width="100%" OnPageIndexChanging="FV_Biografia_PageIndexChanging" CssClass="auto-style33">
                     <ItemTemplate>
                         <asp:TextBox ID="Tx_IBiografia" runat="server" BorderColor="#0099FF" Height="100px" Text='<%# Bind("biografia") %>' ValidationGroup="VG_Biografia" Width="50%" TextMode="MultiLine"></asp:TextBox>
+                        <cc1:filteredtextboxextender ID="FTBE_Tx_IBiografia" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@." TargetControlID="Tx_IBiografia" />
                         <br />
                         <br />
                         <br />
@@ -188,13 +189,13 @@
             <br />
             <asp:RequiredFieldValidator ID="RFV_contraseñaActual" runat="server" ControlToValidate="Tx_ContraseñaActual" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_cambioContraseña"></asp:RequiredFieldValidator>
             <asp:TextBox ID="Tx_ContraseñaActual" runat="server" BorderColor="#0099FF" Width="40%" Height="25px" OnTextChanged="Tx_ContraseñaActual_TextChanged" TextMode="Password" ValidationGroup="VG_cambioContraseña" AutoCompleteType="Disabled"></asp:TextBox>
-            <cc1:filteredtextboxextender ID="FTBE_ContraseñaActual" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_ContraseñaActual" />
+            <cc1:filteredtextboxextender ID="FTBE_ContraseñaActual" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@." TargetControlID="Tx_ContraseñaActual" />
             <%--<cc1:filteredtextboxextender ID="FTBE_contraseñaNueva" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@" TargetControlID="Tx_ContraseñaNueva" />--%>
             <%--<cc1:filteredtextboxextender ID="FTBE_contraseñaActual" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@" TargetControlID="Tx_ContraseñaActual" />--%>
             
             &nbsp;<asp:RequiredFieldValidator ID="RFV_contraseñaNueva" runat="server" ControlToValidate="Tx_ContraseñaNueva" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="VG_cambioContraseña"></asp:RequiredFieldValidator>
             <asp:TextBox ID="Tx_ContraseñaNueva" runat="server" BorderColor="#0099FF" Width="40%" Height="25px" TextMode="Password" ValidationGroup="VG_cambioContraseña" AutoCompleteType="Disabled"></asp:TextBox>
-            <cc1:filteredtextboxextender ID="FTBE_ContraseñaNueva" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_ContraseñaNueva" />
+            <cc1:filteredtextboxextender ID="FTBE_ContraseñaNueva" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@." TargetControlID="Tx_ContraseñaNueva" />
             <%--  <cc1:TextBoxWatermarkExtender id="TBWEDOB_contraseñaNueva" runat="server" targetcontrolid="Tx_ContraseñaNueva" watermarktext="Contraseña nueva" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>--%>
             <%--<cc1:filteredtextboxextender ID="FTBE_contraseñaNueva" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@" TargetControlID="Tx_ContraseñaNueva" />--%>
                                    

@@ -33,7 +33,7 @@ public partial class View_masterUsuarios_administrador_reservaEstilista : System
         else
         {
             LB_NombreEstilista.Visible = true;
-            LB_NombreEstilista.Text = "Nombre del Estilista " + DDL_Estilistas.SelectedItem.ToString();
+            LB_NombreEstilista.Text = "Estilista: " + DDL_Estilistas.SelectedItem.ToString();
         }
     }
 
@@ -47,7 +47,7 @@ public partial class View_masterUsuarios_administrador_reservaEstilista : System
         else
         {
             LB_NombreEstilista.Visible = true;
-            LB_NombreEstilista.Text = "Nombre del Estilista " + DDL_Estilistas.SelectedItem.ToString();
+            LB_NombreEstilista.Text = "Estilista: " + DDL_Estilistas.SelectedItem.ToString();
         }
     }
 

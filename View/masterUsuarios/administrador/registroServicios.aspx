@@ -46,7 +46,8 @@
                         <Columns>
                             <asp:TemplateField HeaderText="Nombre">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("nombre") %>' CssClass="auto-style26" MaxLength="50" Width="100%" ></asp:TextBox>
+                                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("nombre") %>' CssClass="auto-style26" MaxLength="50" Width="100%" AutoCompleteType="Disabled" ></asp:TextBox>
+                                    <cc1:FilteredTextBoxExtender ID="FTBE_TextBox1" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="TextBox1" />
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("nombre") %>'></asp:Label>
@@ -54,7 +55,8 @@
                             </asp:TemplateField>
                             <asp:TemplateField HeaderText="Descripcion">
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("descripcion") %>' CssClass="auto-style26" Width="100%" MaxLength="200"></asp:TextBox>
+                                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("descripcion") %>' CssClass="auto-style26" Width="100%" MaxLength="200" AutoCompleteType="Disabled"></asp:TextBox>
+                                    <cc1:FilteredTextBoxExtender ID="FTBE_TextBox2" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="TextBox2" />
                                 </EditItemTemplate>
                                 <ItemTemplate>
                                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("descripcion") %>'></asp:Label>
@@ -186,11 +188,14 @@
             <td class="auto-style8">
                 <asp:TextBox ID="Tx_NombreServicio" runat="server" BorderColor="#0099FF" Height="25px" MaxLength="50" ValidationGroup="registroServicio" Width="95%" AutoCompleteType="Disabled"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_NombreServicio" runat="server" ControlToValidate="Tx_NombreServicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroServicio" SetFocusOnError="True"></asp:RequiredFieldValidator>
+                <br />
+                <br />
             </td>
             <cc1:TextBoxWatermarkExtender ID="TBWEDOB_NombreServicio" runat="server" TargetControlID="Tx_NombreServicio" WatermarkText="Nombre" WatermarkCssClass="watermarked"></cc1:TextBoxWatermarkExtender>
             <cc1:FilteredTextBoxExtender ID="FTBE_NombreServicio" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_NombreServicio" />
             <td class="auto-style9">
-                <asp:TextBox ID="Tx_descripcionServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="200" ValidationGroup="registroServicio" AutoCompleteType="Disabled"></asp:TextBox>
+                <br />
+                <asp:TextBox ID="Tx_descripcionServicio" runat="server" BorderColor="#0099FF" Width="95%" Height="68px" MaxLength="200" ValidationGroup="registroServicio" AutoCompleteType="Disabled" TextMode="MultiLine"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_descripcionServicio" runat="server" ControlToValidate="Tx_descripcionServicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroServicio" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
             <cc1:TextBoxWatermarkExtender ID="TBWEDOB_descripcionServicio" runat="server" TargetControlID="Tx_descripcionServicio" WatermarkText="Descripcion" WatermarkCssClass="watermarked"></cc1:TextBoxWatermarkExtender>

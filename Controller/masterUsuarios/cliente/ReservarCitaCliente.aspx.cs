@@ -72,6 +72,7 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
     {
         string hora, fecha;
         DateTime fechaCliente,fechaCalendario;
+        DateTime fechaF = new DateTime();
         int servicioID, tamaño;
         int contador = 0;
 
@@ -82,7 +83,14 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
 
         fechaCliente = DateTime.Parse(DDL_Hora.SelectedItem.ToString());
         hora = fechaCliente.ToShortTimeString();
-        fecha = C_Reserva.SelectedDate.ToShortDateString();
+        fecha = C_Reserva.SelectedDate.ToShortDateString();//"1/01/0001"
+        
+        if (fecha == "1/01/0001")
+        {
+            fechaF = DateTime.Now;
+            fecha = fechaF.ToShortDateString();
+        }
+
         fechaCalendario = C_Reserva.SelectedDate;
         //fecha = fechaCliente.ToShortDateString();
 
@@ -119,26 +127,31 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
     {
         string hora_cliente, diaReserva, duracionServicio, time24 ,horaF, hora_clienteF;
         string[] cadena;
-        DateTime horaCliente, horaFinal;
+        DateTime horaCliente, horaFinal, fechaF;
         int  hora, minuto, duracionFinal, id_estilista, id_servicio;
         DAO_Reserva mostrarDuracion = new DAO_Reserva();
         DAO_Reserva buscarPrecio = new DAO_Reserva();
         
 
 
-        diaReserva = C_Reserva.SelectedDate.ToShortDateString();//11/09/2019
+        diaReserva = C_Reserva.SelectedDate.ToShortDateString();//11/09/2019 //aqui
 
-        hora_cliente = DDL_Hora.SelectedItem.ToString();//08:00:00
-        id_estilista = int.Parse(DDL_Estilista.SelectedValue.ToString());//39760672
-        id_servicio = int.Parse(DDL_servicio.SelectedValue.ToString());//quitar o modificar //7
+        if (diaReserva == "1/01/0001")
+        {
+            fechaF = DateTime.Now;
+            diaReserva = fechaF.ToShortDateString();
+        }
 
-        horaCliente = DateTime.Parse(hora_cliente); //10/04/2019 8:00:00 a. m.
-        //hora_cliente = horaCliente.ToLongTimeString();
+        hora_cliente = DDL_Hora.SelectedItem.ToString();
+        id_estilista = int.Parse(DDL_Estilista.SelectedValue.ToString());
+        id_servicio = int.Parse(DDL_servicio.SelectedValue.ToString());
 
-        time24 = horaCliente.ToString("HH:mm", CultureInfo.CurrentCulture); //08:00
+        horaCliente = DateTime.Parse(hora_cliente); 
+
+        time24 = horaCliente.ToString("HH:mm", CultureInfo.CurrentCulture); 
         
         DataTable duracion = mostrarDuracion.duracionServicio(id_servicio);
-        duracionServicio = duracion.Rows[0]["duracion_servicio"].ToString();//00:30:00
+        duracionServicio = duracion.Rows[0]["duracion_servicio"].ToString();
 
         cadena = duracionServicio.Split(':');
 
@@ -147,7 +160,7 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
 
         duracionFinal = (hora * 60) + minuto;//30
 
-        horaFinal = DateTime.Parse(time24).AddMinutes(duracionFinal);//10/04/2019 8:30:00 a. m
+        horaFinal = DateTime.Parse(time24).AddMinutes(duracionFinal);
         horaF = horaFinal.ToShortTimeString();
 
         hora_cliente = diaReserva +" "+ time24;

@@ -875,4 +875,33 @@ public class DAORegistroEstilista
         return Servicio;
     }
 
+    public DataTable Inasistenciavalidacion(int _usuario, DateTime _fecha)
+    {
+        DataTable ActualizarInacistencia = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter(" reserva.f_mostrar_inacistencia4", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+            dataAdapter.SelectCommand.Parameters.Add("_id_estilista", NpgsqlDbType.Integer).Value = _usuario;
+            dataAdapter.SelectCommand.Parameters.Add("_dia_inacistencia", NpgsqlDbType.Date).Value = _fecha;
+
+            conection.Open();
+            dataAdapter.Fill(ActualizarInacistencia);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return ActualizarInacistencia;
+    }
+
 }

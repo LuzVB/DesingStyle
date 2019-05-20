@@ -211,6 +211,21 @@ public class DAOPerfilEstilista
 
     public DataTable mostrarReservasEstilistaHorario(int id, string _fecha)
     {
+        string hora_ini;
+        DateTime fecha = new DateTime();
+
+        if (_fecha == "1/01/0001")
+        {
+            fecha = DateTime.Now;
+            hora_ini = fecha.ToShortDateString();
+        }
+        else
+        {
+            hora_ini = DateTime.Parse(_fecha).ToShortDateString();
+        }
+
+
+
         DataTable Asistencia = new DataTable();
         NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
 
@@ -218,7 +233,7 @@ public class DAOPerfilEstilista
         {
             NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("reserva.f_mostar_reserva_estilista2", conection);
             dataAdapter.SelectCommand.Parameters.Add("_id_usuario", NpgsqlDbType.Integer).Value = id;
-            dataAdapter.SelectCommand.Parameters.Add("_fecha", NpgsqlDbType.Date).Value = DateTime.Parse(_fecha);
+            dataAdapter.SelectCommand.Parameters.Add("_fecha", NpgsqlDbType.Date).Value = DateTime.Parse(hora_ini);
             dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
 
             conection.Open();

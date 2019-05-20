@@ -114,7 +114,7 @@
         <tr>
             <td colspan="3" class="auto-style11">
 
-                <asp:GridView ID="GV_Estilista" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" PageSize="5" Width="85%" CssClass="auto-style14" ShowHeaderWhenEmpty="True" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="ODS_Estilista" OnSelectedIndexChanged="GV_Estilista_SelectedIndexChanged" OnRowDataBound="GV_Estilista_RowDataBound" OnDataBound="GV_Estilista_DataBound">
+                <asp:GridView ID="GV_Estilista" runat="server" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3" PageSize="5" Width="100%" CssClass="auto-style14" ShowHeaderWhenEmpty="True" AllowPaging="True" AutoGenerateColumns="False" DataKeyNames="id" DataSourceID="ODS_Estilista" OnSelectedIndexChanged="GV_Estilista_SelectedIndexChanged" OnRowDataBound="GV_Estilista_RowDataBound" OnDataBound="GV_Estilista_DataBound">
                     <Columns>
                         <asp:TemplateField HeaderText="Documento">
                             <EditItemTemplate>
@@ -126,7 +126,8 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Nombre">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("nombre") %>' Width="100%"></asp:TextBox>
+                                <asp:Label ID="TextBox6" runat="server" Text='<%# Bind("nombre") %>' Width="100%"></asp:Label>
+                                <%--<cc1:FilteredTextBoxExtender ID="FTBE_TextBox6" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" ValidChars=" ñ" TargetControlID="TextBox6" />--%>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label6" runat="server" Text='<%# Bind("nombre") %>'></asp:Label>
@@ -134,7 +135,8 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Apellido">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("apellido") %>' Width="100%"></asp:TextBox>
+                                <asp:Label ID="TextBox5" runat="server" Text='<%# Bind("apellido") %>' Width="100%"></asp:Label>
+                                <%--<cc1:FilteredTextBoxExtender ID="FTBE_TextBox5" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" ValidChars=" ñ" TargetControlID="TextBox5" />--%>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label5" runat="server" Text='<%# Bind("apellido") %>'></asp:Label>
@@ -142,7 +144,8 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Telefono">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("telefono") %>' Width="100%"></asp:TextBox>
+                                <asp:Label ID="TextBox4" runat="server" Text='<%# Bind("telefono") %>' Width="100%"></asp:Label>
+                                <%--<cc1:FilteredTextBoxExtender ID="FTBE_TextBox4" runat="server" FilterType="Numbers" TargetControlID="TextBox4" />--%>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label4" runat="server" Text='<%# Bind("telefono") %>'></asp:Label>
@@ -150,18 +153,11 @@
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Correo">
                             <EditItemTemplate>
-                                <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("correo") %>' Width="100%"></asp:TextBox>
+                                <asp:Label ID="TextBox3" runat="server" Text='<%# Bind("correo") %>' Width="100%"></asp:Label>
+                                <%--<cc1:FilteredTextBoxExtender ID="FTBE_TextBox3" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@."  InvalidChars=" " TargetControlID="TextBox3" />--%>
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Label ID="Label3" runat="server" Text='<%# Bind("correo") %>'></asp:Label>
-                            </ItemTemplate>
-                        </asp:TemplateField>
-                        <asp:TemplateField HeaderText="Contraseña">
-                            <EditItemTemplate>
-                                <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("contrasena") %>' Width="100%"></asp:TextBox>
-                            </EditItemTemplate>
-                            <ItemTemplate>
-                                <asp:Label ID="Label2" runat="server" Text='<%# Bind("contrasena") %>'></asp:Label>
                             </ItemTemplate>
                         </asp:TemplateField>
                         <asp:TemplateField HeaderText="Estado">
@@ -233,11 +229,11 @@
                 <asp:Label ID="LB_Nombre" runat="server" ForeColor="Red" Text="" Visible="False"></asp:Label>
             </td>
             <cc1:TextBoxWatermarkExtender ID="TBWEDOB_NombreEstilista" runat="server" TargetControlID="Tx_NombreEstilista" WatermarkText="Nombre" WatermarkCssClass="watermarked"></cc1:TextBoxWatermarkExtender>
-            <cc1:FilteredTextBoxExtender ID="FTBE_NombreEstilista" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" ValidChars="ñ" TargetControlID="Tx_NombreEstilista" />
+            <cc1:FilteredTextBoxExtender ID="FTBE_NombreEstilista" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" ValidChars=" ñ" TargetControlID="Tx_NombreEstilista" />
             <td class="auto-style23">
                 <asp:TextBox ID="Tx_ApellidoEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista" AutoCompleteType="Disabled"></asp:TextBox>
                 <cc1:TextBoxWatermarkExtender ID="TBWEDOB_ApellidoEstilista" runat="server" TargetControlID="Tx_ApellidoEstilista" WatermarkText="Apellido" WatermarkCssClass="watermarked"></cc1:TextBoxWatermarkExtender>
-                <cc1:FilteredTextBoxExtender ID="FTBE_ApellidoEstilista" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" ValidChars="ñ" TargetControlID="Tx_ApellidoEstilista" />
+                <cc1:FilteredTextBoxExtender ID="FTBE_ApellidoEstilista" runat="server" FilterType="Custom, UppercaseLetters, LowercaseLetters" ValidChars=" ñ" TargetControlID="Tx_ApellidoEstilista" />
                 <asp:RequiredFieldValidator ID="RFV_IApellidoEstilista" runat="server" ControlToValidate="Tx_ApellidoEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista" SetFocusOnError="True"></asp:RequiredFieldValidator>
                 <asp:Label ID="LB_apellido" runat="server" ForeColor="Red" Text="" Visible="False"></asp:Label>
             </td>
@@ -272,7 +268,7 @@
         <tr>
             <td class="auto-style18">
                 Contraseña<br />
-                <asp:TextBox ID="Tx_ContraseñaEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista" MaxLength="10" AutoCompleteType="Disabled" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="Tx_ContraseñaEstilista" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" ValidationGroup="registroEstilista" MaxLength="100" AutoCompleteType="Disabled" TextMode="Password"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RFV_IContraseñaEstilista" runat="server" ControlToValidate="Tx_ContraseñaEstilista" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroEstilista" SetFocusOnError="True"></asp:RequiredFieldValidator>
                 <asp:Label ID="L_ErrorContraseña" runat="server" ForeColor="Red" Visible="False"></asp:Label>
             </td>
