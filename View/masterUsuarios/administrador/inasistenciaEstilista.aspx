@@ -168,6 +168,7 @@
                 <br />
                 <asp:Label ID="Alerta_Fecha" runat="server" Text="[Alerta_fecha]" class="alert alert-warning" Visible="False"></asp:Label>
                 <br />
+                <br />
                 <asp:Button ID="BT_Insasitencia" runat="server" Height="25px" Text="Enviar" Width="70%" ValidationGroup="registroInasistencia" OnClick="BT_Insasitencia_Click" />
             </td>
                
