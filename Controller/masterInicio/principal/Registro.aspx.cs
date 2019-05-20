@@ -11,14 +11,37 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
+        Response.Cache.SetNoStore();
+
     }
 
     protected void Bt_CrearU_Click(object sender, EventArgs e)
     {
         ERegistroUsuario cliente = new ERegistroUsuario();
+        
+        L_ErrorCedula.Visible = false;
+        LB_ErrorNombre.Visible = false;
+        LB_ErrorApellido.Visible = false;
+        LB_ErrorTelefono.Visible = false;
+        LB_ErrorContraseña.Visible = false;
+        L_ErrorCorreo.Visible = false;
+        L_ErrorFechaNacimiento.Visible = false;
 
+        int error = 0;
 
-        cliente.Cedula = Int32.Parse(Tx_cedula.Text);
+        if (Int64.Parse(Tx_cedula.Text) > 2147483647)
+        {
+
+            L_ErrorCedula.Visible = true;
+            L_ErrorCedula.Text = "Error vuelva a ingresar la cedula ";
+            error = 1;
+
+        }
+        else
+        {
+            cliente.Cedula = Int32.Parse(Tx_cedula.Text);
+        }
+        
         cliente.Nombre = Tx_nombre.Text;
         cliente.Apellido = Tx_apellidos.Text;
         cliente.Correo = Tx_correo.Text;
@@ -34,15 +57,7 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
         DataTable idSinRegistro = new DAORegistroCliente().idRolSinRegistro(cliente);
         DateTime fechaCliente = DateTime.Parse(Tx_fecha.Text);
         int edadCliente = System.DateTime.Now.Year - fechaCliente.Year;
-        int error = 0;
-
-        L_ErrorCedula.Visible = false;
-        LB_ErrorNombre.Visible = false;
-        LB_ErrorApellido.Visible = false;
-        LB_ErrorTelefono.Visible = false;
-        LB_ErrorContraseña.Visible = false;
-        L_ErrorCorreo.Visible = false;
-
+        
 
         if (System.DateTime.Now.Subtract(fechaCliente.AddYears(edadCliente)).TotalDays < 0)
         {
@@ -50,38 +65,29 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
 
         }
 
-        if (contarCorreo.Rows[0]["user_correo"].Equals("1"))
-        {
-            L_ErrorCorreo.Text = "";
-            error = 0;
-        }
-        else
+        if (contarCorreo.Rows[0]["user_correo"].ToString() != "1")
         {
             L_ErrorCorreo.Visible = true;
             L_ErrorCorreo.Text = "El correo ya existe";
             error = 1;
+
         }
 
-
-        if (edadCliente > 18)
+        if (edadCliente < 18)
         {
-            L_ErrorFechaNacimiento.Text = "";
-            error = 0;
-        }
-        else
-        {
+            L_ErrorFechaNacimiento.Visible = true;
             L_ErrorFechaNacimiento.Text = "Fecha de nacimiento incorrecta, no es mayor de edad.";
             error = 1;
         }
-    
         
-         if (Tx_nombre.Text.Length < 3)
+        if (Tx_nombre.Text.Length < 3)
         {
             LB_ErrorNombre.Visible = true;
             LB_ErrorNombre.Text = "El numero de caracteres del nombre son invalidos";
             error = 1;
 
         }
+
         if (Tx_apellidos.Text.Length < 3)
         {
 
@@ -90,7 +96,8 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
             error = 1;
 
         }
-        if (Tx_Telefono.Text.Length < 8)
+
+        if (Tx_Telefono.Text.Length < 7)
         {
 
             LB_ErrorTelefono.Visible = true;
@@ -98,14 +105,16 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
             error = 1;
 
         }
+
         if (Tx_contraseña.Text.Length < 4)
         {
 
             LB_ErrorContraseña.Visible = true;
-            LB_ErrorContraseña.Text = "El numero de caracteres del contraseña son invalidos";
+            LB_ErrorContraseña.Text = "La contraseña no puede tener menos de 4 caracteres";
             error = 1;
 
         }
+
         if (Tx_correo.Text.Length < 16)
         {
 
@@ -113,6 +122,7 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
             L_ErrorCorreo.Text = "El numero de caracteres del correo son invalidos";
             error = 1;
         }
+
         if (Tx_cedula.Text.Length < 8)
         {
 
@@ -121,24 +131,21 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
             error = 1;
 
         }
-        else if (idSinRegistro.Rows[0]["user_id"].Equals(-1))
+        
+        if (idSinRegistro.Rows[0]["user_id"].Equals(-1))
         {
             if (idRegistro.Rows[0]["user_id"].Equals(-1))
             {
-                L_ErrorCedula.Text = "";
+                //L_ErrorCedula.Text = "";
 
                 if (error == 0)
                 {
-
+                    cliente.Rol = 3;
                     new DAORegistroCliente().registroCliente(cliente);
+
                     L_ErrorCrear.Visible = true;
                     L_ErrorCrear.Text = "Cuenta creada, inicie sesión ";
-                    LB_ErrorNombre.Visible = false;
-                    LB_ErrorApellido.Visible = false;
-                    LB_ErrorTelefono.Visible = false;
-                    LB_ErrorContraseña.Visible = false;
-                    L_ErrorCorreo.Visible = false;
-                    L_ErrorCedula.Visible = false;
+
                     Tx_nombre.Text = "";
                     Tx_apellidos.Text = "";
                     Tx_correo.Text = "";
@@ -149,10 +156,30 @@ public partial class View_masterInicio_principal_Registro : System.Web.UI.Page
             }
             else
             {
+                L_ErrorCedula.Visible = true;
                 L_ErrorCedula.Text = "La cedula ya se encuentra registrada ";
                 error = 1;
             }
         }
+        else
+        {
+            L_ErrorCedula.Text = "";
+            if (error == 0)
+            {
+                cliente.Rol = 4;
+                new DAORegistroCliente().registrarClienteSin(cliente);
 
+                L_ErrorCrear.Visible = true;
+                L_ErrorCrear.Text = "Cuenta creada, inicie sesión ";
+
+                Tx_nombre.Text = "";
+                Tx_apellidos.Text = "";
+                Tx_correo.Text = "";
+                Tx_cedula.Text = "";
+                Tx_fecha.Text = "";
+                Tx_Telefono.Text = "";
+            }
+        }
     }
+
 }

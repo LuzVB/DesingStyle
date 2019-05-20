@@ -37,11 +37,34 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
     {
         int error = 0;
         int edadCliente;
+        
+        L_correo.Visible = false;
+        LB_Nombre.Visible = false;
+        LB_apellido.Visible = false;
+        LB_Telefono.Visible = false;
+        L_ErrorContraseña.Visible = false;
+        L_correo.Visible = false;
+        L_cedula.Visible = false;
+        L_correo.Visible = false;
+        L_ErrorFechaNacimiento.Visible = false;
+
 
         ERegistroUsuario estilista = new ERegistroUsuario();
         ERegistroHorario horario = new ERegistroHorario();
 
-        estilista.Cedula = Int32.Parse(Tx_CodigoEstilista.Text);
+        if (Int64.Parse(Tx_CodigoEstilista.Text) > 2147483647)
+        {
+
+            L_cedula.Visible = true;
+            L_cedula.Text = "Error vuelva a ingresar la cedula ";
+            error = 1;
+
+        }
+        else
+        {
+            estilista.Cedula = Int32.Parse(Tx_CodigoEstilista.Text);
+        }
+        
         estilista.Nombre = Tx_NombreEstilista.Text;
         estilista.Apellido = Tx_ApellidoEstilista.Text;
         estilista.Telefono = Int64.Parse(Tx_TelefonoEstilista.Text);
@@ -61,16 +84,6 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
 
         DAORegistroCliente registroEstilista = new DAORegistroCliente();
         DAORegistroEstilista datosEstilista = new DAORegistroEstilista();
-
-        L_correo.Visible = false;
-        LB_Nombre.Visible = false;
-        LB_apellido.Visible = false;
-        LB_Telefono.Visible = false;
-        L_ErrorContraseña.Visible = false;
-        L_correo.Visible = false;
-        L_cedula.Visible = false;
-        L_correo.Visible = false;
-        L_ErrorFechaNacimiento.Visible = false;
 
 
         int index = Int32.Parse(DDL_servicio.SelectedIndex.ToString());
@@ -134,7 +147,7 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
 
         }
 
-        if (Tx_TelefonoEstilista.Text.Length < 8)
+        if (Tx_TelefonoEstilista.Text.Length < 7)
         {
             
             LB_Telefono.Visible = true;
@@ -189,22 +202,6 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
 
     }
 
-    //protected void Tx_NombreEstilista_TextChanged(object sender, EventArgs e)
-    //{
-
-    //    //Class1 cs = new Class1();
-    //    //DAO_Prueba p = new DAO_Prueba();
-    //    //DataTable horario = p.mostrarHorario();
-    //    //for(int i=0; i<horario.Rows.Count; i++){
-    //    //    cs.Fechaini = DateTime.Parse(horario.Rows[i]["hora_inicio"].ToString());
-    //    //    cs.Fechafin = DateTime.Parse(horario.Rows[i]["hora_fin"].ToString());
-    //    //    cs.Estado = true;
-    //    //    cs.Idestilista = int.Parse(Tx_CodigoEstilista.Text);
-    //    //    p.registroCliente(cs);
-    //    //}
-
-    //}
-
     protected void ServicioAd_Click(object sender, ImageClickEventArgs e)
     {
         int indexEstilista = Int32.Parse(DDL_Estilistas.SelectedIndex.ToString());
@@ -230,7 +227,19 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
 
 
             DataTable servicioa = new DAORegistroEstilista().ServicioEAdcional(ServicioAdi);
-            Response.Redirect("regristroEstilista.aspx");
+
+            if(servicioa.Rows[0]["ok"].ToString() == "ok")
+            {
+                Response.Redirect("regristroEstilista.aspx");
+            }
+            else if(servicioa.Rows[0]["nada"].ToString() == "nada")
+            {
+                LB_EAdicional.Visible = true;
+                LB_EAdicional.Text = "El servicio ya está añadido";
+            }
+            
+
+           
         }
     }
 
@@ -269,14 +278,13 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
     }
     protected void GV_EstilistaServicio_RowCommand(object sender, GridViewCommandEventArgs e)
     {
-
-        int id = int.Parse(e.CommandArgument.ToString());
-        DataTable servicio = new DAORegistroEstilista().EliminarSerUsuario(id);
-        String Servicio = servicio.Rows[0]["servicio"].ToString();
-        String Estilista = servicio.Rows[0]["estilista"].ToString();
-
         if (e.CommandName.Equals("Alerta"))
         {
+
+            int id = int.Parse(e.CommandArgument.ToString());
+            DataTable servicio = new DAORegistroEstilista().EliminarSerUsuario(id);
+            String Servicio = servicio.Rows[0]["servicio"].ToString();
+            String Estilista = servicio.Rows[0]["estilista"].ToString();
 
             int Ser = Int32.Parse(Servicio);
             int Est = Int32.Parse(Estilista);
@@ -381,7 +389,7 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
     protected void CB_Domingo_CheckedChanged(object sender, EventArgs e)
     {
         Agenda agenda = (Agenda)Session["agenda"];
-        if (CB_Sabado.Checked)
+        if (CB_Domingo.Checked)
         {
             agenda.Domingo = true;
             LB_EDias.Text = "";
@@ -405,78 +413,83 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
         horas.HoraInicio = horaaaInicio;
         horas.HoraFin = horaFin;
 
-       
-        if (horaaaInicio >= horaFin)
+        if(horaaaInicio == 0 || horaFin == 0)
         {
-            LB_ERango.Text = "Error el rango no es posible, debe ser mayor la hora final a la hora inicio o" +
-                " no pueden ser iguales las horas";
-            paso = false;
-        }
-        else if (agenda.ListaRango == null)
-        {
-            //if (agenda.ListaRango == null)
-            LB_ERango.Text = "";
-            agenda.ListaRango = new List<Horario>();
-            agenda.ListaRango.Add(horas);
-            paso = true;
+            LB_ERango.Text = "Seleccione una hora";
         }
         else
         {
-            foreach (Horario item in agenda.ListaRango)
+            if (horaaaInicio >= horaFin)
             {
-                if (item.HoraInicio == horas.HoraInicio || horas.HoraFin == item.HoraFin)
-                {
-                    LB_ERango.Text = "El rango ya se encuentra seleccione otro rango";
-                    malRango = true;
-                    break;
-                }
-                if ( item.HoraInicio > horas.HoraInicio  || horas.HoraInicio < item.HoraFin)
-                {
-                    LB_ERango.Text = "El rango no es valido";
-                    malRango = true;
-                    break;
-                }
-                else
-                {
-                    LB_ERango.Text = "";
-                }
-
+                LB_ERango.Text = "Error el rango no es posible, debe ser mayor la hora final a la hora inicio o" +
+                    " no pueden ser iguales las horas";
+                paso = false;
             }
-
-            if(malRango == false)
+            else if (agenda.ListaRango == null)
             {
+                //if (agenda.ListaRango == null)
+                LB_ERango.Text = "";
+                agenda.ListaRango = new List<Horario>();
                 agenda.ListaRango.Add(horas);
+                paso = true;
+            }
+            else
+            {
+                foreach (Horario item in agenda.ListaRango)
+                {
+                    if (item.HoraInicio == horas.HoraInicio || horas.HoraFin == item.HoraFin)
+                    {
+                        LB_ERango.Text = "El rango ya se encuentra seleccione otro rango";
+                        malRango = true;
+                        break;
+                    }
+                    if (item.HoraInicio > horas.HoraInicio || horas.HoraInicio < item.HoraFin)
+                    {
+                        LB_ERango.Text = "El rango no es valido";
+                        malRango = true;
+                        break;
+                    }
+                    else
+                    {
+                        LB_ERango.Text = "";
+                    }
+
+                }
+
+                if (malRango == false)
+                {
+                    agenda.ListaRango.Add(horas);
+                }
+
+                paso = true;
             }
 
-            paso = true;
+            if (paso == true)
+            {
+                DataTable dt = new DataTable();
+                dt.Columns.Add("HoraInicio");
+                dt.Columns.Add("HoraFinal");
+
+                foreach (Horario item in agenda.ListaRango)
+                {
+                    //creas una nueva row
+                    DataRow row = dt.NewRow();
+                    //asignas el dato a cada columna de la row
+                    row["HoraInicio"] = item.HoraInicio;
+                    row["HoraFinal"] = item.HoraFin;
+
+                    dt.Rows.Add(row);
+
+                }
+
+                GV_RangoHorario.DataSource = dt;
+                GV_RangoHorario.DataBind();
+            }
+
         }
         
-        if(paso == true)
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("HoraInicio");
-            dt.Columns.Add("HoraFinal");
-
-            foreach (Horario item in agenda.ListaRango)
-            {
-                //creas una nueva row
-                DataRow row = dt.NewRow();
-                //asignas el dato a cada columna de la row
-                row["HoraInicio"] = item.HoraInicio;
-                row["HoraFinal"] = item.HoraFin;
-
-                dt.Rows.Add(row);
-
-            }
-
-            GV_RangoHorario.DataSource = dt;
-            GV_RangoHorario.DataBind();
-        }
-       
-
         MPE_rangoHorario.Show();
-
-
+        
     }
 
     protected void BT_GuardarAgenda_Click(object sender, EventArgs e)

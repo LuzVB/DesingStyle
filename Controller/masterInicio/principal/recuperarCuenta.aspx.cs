@@ -13,6 +13,8 @@ public partial class View_masterInicio_principal_recuperarCuenta : System.Web.UI
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //Response.Cache.SetNoStore();
+
         if (Request.QueryString.Count > 0)
         {
             DAOUsuario user = new DAOUsuario();

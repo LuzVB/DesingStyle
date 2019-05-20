@@ -114,12 +114,12 @@
         </tr>
         <tr>
             <td class="auto-style8">
-                <asp:TextBox ID="Tx_cedula" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10"></asp:TextBox>
+                <asp:TextBox ID="Tx_cedula" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" MaxLength="10" AutoCompleteType="Disabled"></asp:TextBox>
                 <cc1:FilteredTextBoxExtender ID="FTBE_cedula" runat="server" FilterType="Numbers" TargetControlID="Tx_cedula" />
                 <asp:RequiredFieldValidator ID="RFV_Cedula" runat="server" ControlToValidate="Tx_cedula" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="preRegistro" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
             <td class="auto-style8">
-                <asp:TextBox ID="Tx_nombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px"></asp:TextBox>
+                <asp:TextBox ID="Tx_nombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" AutoCompleteType="Disabled"></asp:TextBox>
                 <cc1:FilteredTextBoxExtender ID="FTBE_nombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_nombre" />
                 <asp:RequiredFieldValidator ID="RFV_Nombre" runat="server" ControlToValidate="Tx_nombre" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="preRegistro" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>

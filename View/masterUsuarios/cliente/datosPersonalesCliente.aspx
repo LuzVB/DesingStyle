@@ -119,13 +119,13 @@
                                 <td class="auto-style12">Apellido</td>
                              </tr>
                              <tr>
-                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("nombre") %>' CssClass="auto-style21" MaxLength="20"></asp:TextBox>
+                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteNombre" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("nombre") %>' CssClass="auto-style21" MaxLength="20" AutoCompleteType="Disabled"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RFV_NombreCliente" runat="server" ControlToValidate="Tx_ClienteNombre" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <br />
                                     <asp:Label ID="LB_ErrorNombre" runat="server" CssClass="auto-style22" ForeColor="Red" Visible="False" Width="100%"></asp:Label>
                                  </td>
                                 <cc1:filteredtextboxextender ID="FTBE_ClienteNombre" runat="server" FilterType="LowercaseLetters, UppercaseLetters, Custom" ValidChars=" ñ" TargetControlID="Tx_ClienteNombre" />
-                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("apellido") %>' CssClass="auto-style21" MaxLength="20"></asp:TextBox>
+                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteApellido" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("apellido") %>' CssClass="auto-style21" MaxLength="20" AutoCompleteType="Disabled"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RFV_ApellidoCliente" runat="server" ControlToValidate="Tx_ClienteApellido" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <br />
                                     <asp:Label ID="LB_ErrorApellido" runat="server" CssClass="auto-style22" ForeColor="Red" Visible="False" Width="100%"></asp:Label>
@@ -138,13 +138,13 @@
                                 <td class="auto-style12">Correo</td>
                              </tr>
                              <tr>
-                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("telefono") %>' CssClass="auto-style21" MaxLength="10"></asp:TextBox>
+                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteTelefono" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("telefono") %>' CssClass="auto-style21" MaxLength="10" AutoCompleteType="Disabled"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RFV_TelefonoCliente0" runat="server" ControlToValidate="Tx_ClienteTelefono" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <br />
                                     <asp:Label ID="LB_ErrorTelefono" runat="server" CssClass="auto-style22" ForeColor="Red" Visible="False" Width="100%"></asp:Label>
                                  </td>
                                 <cc1:filteredtextboxextender ID="FTBE_ClienteTelefono" runat="server" FilterType="Numbers" TargetControlID="Tx_ClienteTelefono" />
-                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteCorreo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("correo") %>' CssClass="auto-style21" MaxLength="50"></asp:TextBox>
+                                <td class="auto-style9"><asp:TextBox ID="Tx_ClienteCorreo" runat="server" BorderColor="#0099FF" Width="95%" Height="25px" Text='<%# Bind("correo") %>' CssClass="auto-style21" MaxLength="50" AutoCompleteType="Disabled"></asp:TextBox>
                                     <asp:RequiredFieldValidator ID="RFV_CorreoCliente" runat="server" ControlToValidate="Tx_ClienteCorreo" ErrorMessage="(*)" ForeColor="Red"></asp:RequiredFieldValidator>
                                     <br />
                                     <asp:Label ID="LB_ErrorCorreo" runat="server" CssClass="auto-style22" ForeColor="Red" Visible="False" Width="100%"></asp:Label>
@@ -201,7 +201,7 @@
         <tr>
             <td class="auto-style9">
 
-                <asp:Label ID="LB_ErrorContraseña" runat="server" ForeColor="Red" CssClass="auto-style22"></asp:Label>
+                <asp:Label ID="LB_ErrorContraseña" runat="server" ForeColor="Red" CssClass="auto-style22" Visible="False"></asp:Label>
 
              </td>
             <td class="auto-style10">
@@ -218,6 +218,8 @@
             <asp:RequiredFieldValidator ID="RFV_eliminarCuenta" runat="server" ControlToValidate="Tx_EliminarCuenta" ErrorMessage="(*)" Font-Size="90%" ForeColor="Red" ValidationGroup="VG_EliminarCuenta" SetFocusOnError="True">
 
             </asp:RequiredFieldValidator>
+
+                <br />
 
                 <asp:Label ID="LB_ErrorEliminar" runat="server" ForeColor="Red" CssClass="auto-style23"></asp:Label>
 

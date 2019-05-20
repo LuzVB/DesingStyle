@@ -136,7 +136,19 @@ public class DAORegistroEstilista
         }
         catch (Npgsql.PostgresException e)
         {
-            MessageBox.Show("El estilista ya se encuentra registrado con ese servicio");
+            Servicio.Columns.Add("nada");
+
+            for (int i = 0; i < 1; i++)
+            {
+                //creas una nueva row
+                DataRow row = Servicio.NewRow();
+                //asignas el dato a cada columna de la row
+                row["nada"] = "nada";
+
+                Servicio.Rows.Add(row);
+            }
+
+            //}
         }
         catch (Exception Ex)
         {
@@ -148,6 +160,18 @@ public class DAORegistroEstilista
             {
                 conection.Close();
             }
+        }
+
+        Servicio.Columns.Add("ok");
+
+        for (int i = 0; i < 1; i++)
+        {
+            //creas una nueva row
+            DataRow row = Servicio.NewRow();
+            //asignas el dato a cada columna de la row
+            row["ok"] = "ok";
+
+            Servicio.Rows.Add(row);
         }
         return Servicio;
     }
@@ -534,8 +558,8 @@ public class DAORegistroEstilista
         DateTime fechaFin = new DateTime();
         fechaInicio = DateTime.Now;
         fechaCorta = fechaInicio.ToShortDateString();
-        // fechaFin = fechaInicio.AddYears(1);
-        fechaFin = fechaInicio.AddDays(7);
+        fechaFin = fechaInicio.AddYears(1);
+       // fechaFin = fechaInicio.AddDays(7);
         f_corta = fechaFin.ToShortDateString();
         fechaInicio = DateTime.Parse(fechaCorta);
         fechaFin = DateTime.Parse(f_corta);

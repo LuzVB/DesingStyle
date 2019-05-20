@@ -13,6 +13,8 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        Response.Cache.SetNoStore();
+
         if (Session["rol"] == null)
         {
             Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
@@ -150,13 +152,13 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
             error = 1;
         }
        
-            if (error == 0)
-            {
-                DAOCliente guardarCambios = new DAOCliente();
-                guardarCambios.modificarCliente(cliente);
+        if (error == 0)
+        {
+            DAOCliente guardarCambios = new DAOCliente();
+            guardarCambios.modificarCliente(cliente);
 
-                Response.Redirect("~/View/masterUsuarios/cliente/datosPersonalesCliente.aspx");
-            }
+            Response.Redirect("~/View/masterUsuarios/cliente/datosPersonalesCliente.aspx");
+        }
         
     }
 
@@ -173,37 +175,41 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
         contraseñaActual = Tx_ContraseñaActual.Text;
         contraseñaNueva = Tx_ContraseñaNueva.Text;
         _contraseñaActual = datosCliente.Rows[0]["contrasena"].ToString();
+        int error = 0;
 
         if (contraseñaActual != _contraseñaActual)
         {
+            LB_ErrorContraseña.Visible = true;
             LB_ErrorContraseña.Text = "La contraseña actual es errónea";
+            error = 1;
         }
-        if  (Tx_ContraseñaNueva.Text.Length < 4)
+
+        if (Tx_ContraseñaNueva.Text.Length < 4)
         {
+            LB_ErrorContraseña.Visible = true;
             LB_ErrorContraseña.Text = "La contraseña debe tener más de 4 caracteres";
+            error = 1;
         }
-        else
+
+        if (error == 0)
         {
-            
-                clienteContra.Contraseña = contraseñaNueva;
-                clienteContra.UserId = int.Parse(Session["user_id"].ToString());
 
-                guardar.actualizarContrasena(clienteContra);
-                LB_ErrorContraseña.Visible = true;
-                LB_ErrorContraseña.Text = "La contraseña ha sido actualizada";
+            clienteContra.Contraseña = contraseñaNueva;
+            clienteContra.UserId = int.Parse(Session["user_id"].ToString());
+
+            guardar.actualizarContrasena(clienteContra);
+            LB_ErrorContraseña.Visible = true;
+            LB_ErrorContraseña.Text = "La contraseña ha sido actualizada";
+
+            Tx_ContraseñaNueva.Text = "";
+            Tx_ContraseñaActual.Text = "";
+
         }
-
+        
 
     }
 
     protected void BT_EliminarCuenta_Click(object sender, EventArgs e)
-    {
-        
-        MPE_EliminarCuenta.Show();
-
-    }
-
-    protected void eliminarCuenta(object sender, EventArgs e)
     {
         DataTable datosCliente = new DAOCliente().mostrarCliente(int.Parse(Session["user_id"].ToString()));
         DAOCliente eliminar = new DAOCliente();
@@ -219,20 +225,28 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
         }
         else
         {
-
-            clienteContra.UserId = int.Parse(Session["user_id"].ToString());
-            eliminar.eliminarCuenta(clienteContra);
-
-            Session["rol"] = null;
-            Session["nombre"] = null;
-            Session["user_id"] = null;
-            Session["user"] = null;
-
-            Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
-
-            //LB_ErrorEliminar.Text = "La contraseña ha sido actualizada";
+            LB_ErrorEliminar.Text = "";
+            MPE_EliminarCuenta.Show();
 
         }
+
+    }
+
+    protected void eliminarCuenta(object sender, EventArgs e)
+    {
+        DAOCliente eliminar = new DAOCliente();
+        EUsuario clienteContra = new EUsuario();
+        clienteContra.UserId = int.Parse(Session["user_id"].ToString());
+        eliminar.eliminarCuenta(clienteContra);
+
+        Session["rol"] = null;
+        Session["nombre"] = null;
+        Session["user_id"] = null;
+        Session["user"] = null;
+
+        Response.Cache.SetNoStore();
+        Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+
 
     }
 

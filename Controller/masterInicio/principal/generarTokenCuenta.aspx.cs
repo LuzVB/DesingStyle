@@ -13,7 +13,7 @@ public partial class View_masterInicio_principal_generarTokenCuenta : System.Web
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        Response.Cache.SetNoStore();
     }
 
     protected void Bt_RecuperarC_Click(object sender, EventArgs e)

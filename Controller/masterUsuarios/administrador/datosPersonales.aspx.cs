@@ -27,7 +27,9 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
         string nombre, apellido/*, telefono, correo*/;
         nombre = datosAdmin.Rows[0]["nombre"].ToString();
         apellido = datosAdmin.Rows[0]["apellido"].ToString();
-        L_Bienvenida.Text = ("HOLA " + nombre + " " + apellido).ToUpper();
+        L_Bienvenida.Text = ("HOLA, " + nombre + " " + apellido).ToUpper();
+
+        //Response.Cache.SetNoStore();
     }
 
     protected void BT_GuardarAdm_Click(object sender, EventArgs e)
@@ -84,7 +86,7 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
             error = 1;
         }
        
-        if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmTelefono")).Text.Length < 8)
+        if (((TextBox)FV_datosAdmin.Row.FindControl("Tx_AdmTelefono")).Text.Length < 7)
         {
 
             ((Label)FV_datosAdmin.Row.FindControl("LB_Telefono")).Visible = true;
@@ -95,16 +97,17 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
         {
 
             ((Label)FV_datosAdmin.Row.FindControl("LB_Correo")).Visible = true;
-            ((Label)FV_datosAdmin.Row.FindControl("LB_Correo")).Text = "El numero de caracteres del telefono son invalidos";
+            ((Label)FV_datosAdmin.Row.FindControl("LB_Correo")).Text = "El numero de caracteres del correo son invalidos";
             error = 1;
         }
-            if (error == 0)
-            {
-                DAOAdmin guardarCambios = new DAOAdmin();
-                guardarCambios.modificarAdmin(admin);
-                Response.Redirect("~/View/masterUsuarios/administrador/datosPersonales.aspx");
-            }
+
+        if (error == 0)
+        {
+            DAOAdmin guardarCambios = new DAOAdmin();
+            guardarCambios.modificarAdmin(admin);
+            Response.Redirect("~/View/masterUsuarios/administrador/datosPersonales.aspx");
         }
+    }
 
 
 
@@ -113,6 +116,7 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
         DataTable datosAdmin = new DAOAdmin().mostrarAdmin(int.Parse(Session["user_id"].ToString()));
         DAOAdmin guardar = new DAOAdmin();
         EAdministrador adminContra = new EAdministrador();
+        int error = 0;
         string contraseñaActual, contraseñaNueva, _contraseñaActual;
 
         contraseñaActual = Tx_AdmCActual.Text;
@@ -122,12 +126,16 @@ public partial class View_masterUsuarios_administrador_datosPersonales : System.
         if (contraseñaActual != _contraseñaActual)
         {
             LB_ErrorContraseña.Text = "La contraseña actual es errónea";
+            error = 1;
         }
+
         if (Tx_AdmCNueva.Text.Length < 4)
         {
             LB_ErrorContraseña.Text = "La contraseña no puede tener menos de 4 caracteres";
+            error = 1;
         }
-        else
+
+        if (error == 0)
         {
             adminContra.Contraseña = contraseñaNueva;
             adminContra.Id = int.Parse(Session["user_id"].ToString());

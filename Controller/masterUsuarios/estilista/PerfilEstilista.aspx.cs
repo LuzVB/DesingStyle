@@ -45,21 +45,37 @@ public partial class View_masterUsuarios_estilista_PerfilEstilista : System.Web.
         contraseñaActual = Tx_ContraseñaActual.Text;
         contraseñaNueva = Tx_ContraseñaNueva.Text;
         _contraseñaActual = datosCliente.Rows[0]["contrasena"].ToString();
+        int error = 0;
 
         if (contraseñaActual != _contraseñaActual)
         {
+            LB_ErrorContraseña.Visible = true;
             LB_ErrorContraseña.Text = "La contraseña actual es errónea";
+            error = 1;
         }
-        else
+
+        if (Tx_ContraseñaNueva.Text.Length < 4)
         {
+            LB_ErrorContraseña.Visible = true;
+            LB_ErrorContraseña.Text = "La contraseña debe tener más de 4 caracteres";
+            error = 1;
+        }
+
+        if (error == 0)
+        {
+
             clienteContra.Contraseña = contraseñaNueva;
             clienteContra.UserId = int.Parse(Session["user_id"].ToString());
 
             guardar.actualizarContrasena(clienteContra);
-
+            LB_ErrorContraseña.Visible = true;
             LB_ErrorContraseña.Text = "La contraseña ha sido actualizada";
 
+            Tx_ContraseñaNueva.Text = "";
+            Tx_ContraseñaActual.Text = "";
+
         }
+        
     }
 
     protected void BT_GuardarBiografia_Click(object sender, EventArgs e)

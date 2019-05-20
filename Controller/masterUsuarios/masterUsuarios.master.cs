@@ -9,6 +9,8 @@ public partial class View_masterUsuarios_masterUsuarios : System.Web.UI.MasterPa
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        Response.Cache.SetNoStore();
+
         if (Session["rol"] == null)
         {
             M_Administrador.Visible = false;
@@ -63,5 +65,10 @@ public partial class View_masterUsuarios_masterUsuarios : System.Web.UI.MasterPa
         Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
     }
 
-   
+
+
+    protected void Image1_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/View/masterInicio/principal/inicio.aspx");
+    }
 }

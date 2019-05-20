@@ -16,15 +16,38 @@ public partial class View_masterUsuarios_administrador_registroServicios : Syste
     protected void IB_GuardarServicio_Click(object sender, ImageClickEventArgs e)
     {
         EServicio servicio = new EServicio();
-        servicio.Nombre = Tx_NombreServicio.Text;
-        servicio.Descripcion = Tx_descripcionServicio.Text;
-        servicio.Precio = Int32.Parse(DDL_precio.SelectedValue);
-        servicio.Duracion = DDL_duracion.SelectedValue;
-        servicio.Estado = "Disponible";
-        servicio.Session = Session["user"].ToString();
-        DataTable datos = new DAOServicio().registroServicio2(servicio);
-        GV_Estilista.DataBind();
-        Response.Redirect("registroServicios.aspx");
+        int error = 0;
+        LB_EPrecio.Visible = false;
+        LB_ETiempo.Visible = false;
+
+        if (DDL_precio.SelectedValue.Equals("0"))
+        {
+            LB_EPrecio.Visible = true;
+            LB_EPrecio.Text = "Seleccione un precio";
+            error = 1;
+        }
+
+        if (DDL_duracion.SelectedValue.Equals("0"))
+        {
+            LB_ETiempo.Visible = true;
+            LB_ETiempo.Text = "Seleccione una duración ";
+            error = 1;
+        }
+
+        if(error == 0)
+        {
+
+            servicio.Nombre = Tx_NombreServicio.Text;
+            servicio.Descripcion = Tx_descripcionServicio.Text;
+            servicio.Precio = Int32.Parse(DDL_precio.SelectedValue);
+            servicio.Duracion = DDL_duracion.SelectedValue;
+            servicio.Estado = "Disponible";
+            servicio.Session = Session["user"].ToString();
+            DataTable datos = new DAOServicio().registroServicio2(servicio);
+            GV_Estilista.DataBind();
+            Response.Redirect("registroServicios.aspx");
+        }
+
     }
 
     protected void GV_Estilista_RowCommand(object sender, GridViewCommandEventArgs e)

@@ -12,7 +12,7 @@ public partial class View_masterInicio_principal_generarTokenContraseña : Syste
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        Response.Cache.SetNoStore();
     }
 
     protected void Bt_RecuperarC_Click(object sender, EventArgs e)
@@ -64,4 +64,6 @@ public partial class View_masterInicio_principal_generarTokenContraseña : Syste
 
         return output.ToString();
     }
+
+    
 }

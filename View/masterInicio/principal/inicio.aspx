@@ -52,9 +52,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
    
     <div>
-         <asp:ImageButton ID="IB_Inicio1" runat="server" class="galeria_img" />
-         <asp:ImageButton ID="IB_Inicio2" runat="server" class="galeria_img" ImageUrl="~/Imagenes/paginaInicio/tintura_1.png"/>
-         <asp:ImageButton ID="IB_Inicio3" runat="server" class="galeria_img" ImageUrl="~/Imagenes/paginaInicio/uñas_1.png"/>
+         <asp:Image ID="IB_Inicio1" runat="server" class="galeria_img" />
+         <asp:Image ID="IB_Inicio2" runat="server" class="galeria_img" ImageUrl="~/Imagenes/paginaInicio/tintura_1.png"/>
+         <asp:Image ID="IB_Inicio3" runat="server" class="galeria_img" ImageUrl="~/Imagenes/paginaInicio/uñas_1.png"/>
     </div>
     <table class="auto-style1">
       
@@ -65,7 +65,7 @@
                 <asp:Label ID="L_Inicio1" runat="server" CssClass="auto-style7"></asp:Label>
                 <br />
                 <strong>
-                <asp:Button ID="BT_Reservar1" runat="server" OnClick="BT_Reservar1_Click" Text="Reservar" BackColor="#7DC2EC" CssClass="auto-style10" Height="40px" Width="75%" Font-Bold="True" Font-Size="100%" ForeColor="Black" />
+                <asp:Button ID="BT_Reservar1" runat="server" Text="Reservar" BackColor="#7DC2EC" CssClass="auto-style10" Height="40px" Width="75%" Font-Bold="True" Font-Size="100%" ForeColor="Black" OnClick="BT_Reservar1_Click" />
                 </strong>
                 <br />
                 <br />
@@ -76,7 +76,7 @@
                 <asp:Label ID="L_Inicio2" runat="server" CssClass="auto-style7"></asp:Label>
                 <br />
                 <strong>
-                <asp:Button ID="BT_Reservar2" runat="server" OnClick="BT_Reservar1_Click" Text="Reservar" BackColor="#7DC2EC" CssClass="auto-style10" Height="40px" Width="75%" Font-Bold="True" Font-Size="100%" ForeColor="Black" />
+                <asp:Button ID="BT_Reservar2" runat="server"  Text="Reservar" BackColor="#7DC2EC" CssClass="auto-style10" Height="40px" Width="75%" Font-Bold="True" Font-Size="100%" ForeColor="Black" OnClick="BT_Reservar2_Click" />
                 </strong>
                 <br />
                 <br />
@@ -85,7 +85,7 @@
                 <asp:Label ID="L_Inicio3" runat="server" CssClass="auto-style7"></asp:Label>
                 <br />
                 <strong>
-                <asp:Button ID="BT_Reservar3" runat="server" OnClick="BT_Reservar1_Click" Text="Reservar" BackColor="#7DC2EC" CssClass="auto-style10" Height="40px" Width="75%" Font-Bold="True" Font-Size="100%" ForeColor="Black" />
+                <asp:Button ID="BT_Reservar3" runat="server" Text="Reservar" BackColor="#7DC2EC" CssClass="auto-style10" Height="40px" Width="75%" Font-Bold="True" Font-Size="100%" ForeColor="Black" OnClick="BT_Reservar3_Click" />
                 </strong>
                 <br />
                 <br />
@@ -95,9 +95,9 @@
     </table>
 
      <div>
-         <asp:ImageButton ID="IB_Inicio4" runat="server" class="galeria_img" ImageUrl="~/Imagenes/paginaInicio/corte_1.jpg" />
-         <asp:ImageButton ID="IB_Inicio5" runat="server" class="galeria_img" ImageUrl="~/Imagenes/paginaInicio/barbero.jpg"/>
-         <asp:ImageButton ID="IB_Inicio6" runat="server" class="galeria_img" ImageUrl="~/Imagenes/paginaInicio/cara_1.jpg"/>
+         <asp:Image ID="IB_Inicio4" runat="server" class="galeria_img" ImageUrl="~/Imagenes/paginaInicio/corte_1.jpg" />
+         <asp:Image ID="IB_Inicio5" runat="server" class="galeria_img" ImageUrl="~/Imagenes/paginaInicio/barbero.jpg"/>
+         <asp:Image ID="IB_Inicio6" runat="server" class="galeria_img" ImageUrl="~/Imagenes/paginaInicio/cara_1.jpg"/>
     </div>
    
 </asp:Content>

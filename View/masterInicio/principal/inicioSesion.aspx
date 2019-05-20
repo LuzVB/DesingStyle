@@ -121,8 +121,8 @@
                                     <br />
                                 </td>
                                 <td class="auto-style25">
-                                    <asp:TextBox ID="Tx_Icorreo" runat="server" BorderColor="#0099FF" Width="50%" Height="25px" TextMode="Email" ValidationGroup="VG_InicioSesion" MaxLength="50"></asp:TextBox>
-                                    <cc1:FilteredTextBoxExtender ID="FTBE_Icorreo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_Icorreo" />
+                                    <asp:TextBox ID="Tx_Icorreo" runat="server" BorderColor="#0099FF" Width="50%" Height="25px" TextMode="Email" ValidationGroup="VG_InicioSesion" MaxLength="50" AutoCompleteType="Disabled"></asp:TextBox>
+                                    <cc1:FilteredTextBoxExtender ID="FTBE_Icorreo" runat="server"  FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@."  InvalidChars=" " TargetControlID="Tx_Icorreo" />
                                     <%--validar caracter especiales--%>
                                     <asp:RequiredFieldValidator ID="RFV_ICorreo" runat="server" ErrorMessage="(*)" ControlToValidate="Tx_Icorreo" ForeColor="Red" ValidationGroup="VG_InicioSesion" SetFocusOnError="True"></asp:RequiredFieldValidator>
 
@@ -134,7 +134,7 @@
                                     <br />
                                 </td>
                                 <td class="auto-style25">
-                                    <asp:TextBox ID="Tx_Icontraseña" runat="server" BorderColor="#0099FF" TextMode="Password" Width="50%" Height="25px" ValidationGroup="VG_InicioSesion" MaxLength="10"></asp:TextBox>
+                                    <asp:TextBox ID="Tx_Icontraseña" runat="server" BorderColor="#0099FF" TextMode="Password" Width="50%" Height="25px" ValidationGroup="VG_InicioSesion" AutoCompleteType="Disabled"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="FTBE_IContraseña" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ" TargetControlID="Tx_Icontraseña" />
                                     <%--validar caracter especiales--%>
                                     <asp:RequiredFieldValidator ID="RFV_IContraseña" runat="server" ErrorMessage="(*)" ControlToValidate="Tx_Icontraseña" ForeColor="Red" ValidationGroup="VG_InicioSesion" SetFocusOnError="True"></asp:RequiredFieldValidator>

@@ -78,18 +78,18 @@
 
          <tr>
             <td class="auto-style28">
-                <asp:TextBox ID="Tx_NuevaContraseña" runat="server" BorderColor="#0099FF" Width="50%" Height="25px" ValidationGroup="VG_RecuperarCuenta" CssClass="auto-style10"></asp:TextBox>
+                <asp:TextBox ID="Tx_NuevaContraseña" runat="server" BorderColor="#0099FF" Width="50%" Height="25px" ValidationGroup="VG_RecuperarCuenta" CssClass="auto-style10" placeholder="Contraseña Nueva"  TextMode="Password"></asp:TextBox>
                 <cc1:filteredtextboxextender ID="FTBE_nuevaContraseña" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@." TargetControlID="Tx_NuevaContraseña" /></td>
-                <cc1:TextBoxWatermarkExtender id="TBWEDOB_nuevaContraseña" runat="server" targetcontrolid="Tx_NuevaContraseña" watermarktext="Nueva Contraseña" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
+                <%--<cc1:TextBoxWatermarkExtender id="TBWEDOB_nuevaContraseña" runat="server" targetcontrolid="Tx_NuevaContraseña" watermarktext="Nueva Contraseña" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>--%>
             <td class="auto-style15">
                 <asp:RequiredFieldValidator ID="RFV_nuevaContraseña" runat="server" ErrorMessage="(*)" ControlToValidate="Tx_NuevaContraseña" ForeColor="Red" ValidationGroup="VG_RecuperarCuenta" SetFocusOnError="True"></asp:RequiredFieldValidator>
          </td>
         </tr>
          <tr>
             <td class="auto-style28">
-                <asp:TextBox ID="Tx_ConfirmarContraseña" runat="server" BorderColor="#0099FF" Width="50%" Height="25px" ValidationGroup="VG_RecuperarCuenta" CssClass="auto-style10"></asp:TextBox>
+                <asp:TextBox ID="Tx_ConfirmarContraseña" runat="server" BorderColor="#0099FF" Width="50%" Height="25px" ValidationGroup="VG_RecuperarCuenta" CssClass="auto-style10" placeholder="Confirmar Contraseña"  TextMode="Password" ></asp:TextBox>
                 <cc1:filteredtextboxextender ID="FTBE_ConfirmarContraseña" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars=" _-ñ@." TargetControlID="Tx_ConfirmarContraseña" /></td>
-                <cc1:TextBoxWatermarkExtender id="TBWEDOB_ConfirmarContraseña" runat="server" targetcontrolid="Tx_ConfirmarContraseña" watermarktext="Confirmar Contraseña" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>
+                <%--<cc1:TextBoxWatermarkExtender id="TBWEDOB_ConfirmarContraseña" runat="server" targetcontrolid="Tx_ConfirmarContraseña" watermarktext="Confirmar Contraseña" watermarkcssclass="watermarked"> </cc1:TextBoxWatermarkExtender>--%>
             <td class="auto-style15">
                 <asp:RequiredFieldValidator ID="RFV_ConfirmarContraseña" runat="server" ErrorMessage="(*)" ControlToValidate="Tx_ConfirmarContraseña" ForeColor="Red" ValidationGroup="VG_RecuperarCuenta" SetFocusOnError="True"></asp:RequiredFieldValidator>
          </td>

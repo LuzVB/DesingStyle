@@ -76,8 +76,8 @@
         </tr>
         <tr>
             <td class="auto-style28">
-                <asp:TextBox ID="Tx_RCuentaCorreo" runat="server" BorderColor="#0099FF" Width="50%" Height="25px" TextMode="Email" ValidationGroup="VG_RecuperarCuenta" CssClass="auto-style10"></asp:TextBox>
-                <cc1:filteredtextboxextender ID="FTBE_RCuentaCorreo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_RCuentaCorreo" /></td>
+                <asp:TextBox ID="Tx_RCuentaCorreo" runat="server" BorderColor="#0099FF" Width="50%" Height="25px" TextMode="Email" ValidationGroup="VG_RecuperarCuenta" CssClass="auto-style10" AutoCompleteType="Disabled"></asp:TextBox>
+                <cc1:filteredtextboxextender ID="FTBE_RCuentaCorreo" runat="server" FilterType="Numbers,LowercaseLetters, UppercaseLetters, Custom" ValidChars="_-ñ@." TargetControlID="Tx_RCuentaCorreo"  InvalidChars=" " /></td>
             <td class="auto-style15">
                 <asp:RequiredFieldValidator ID="RFV_RCuentaCorreo" runat="server" ErrorMessage="(*)" ControlToValidate="Tx_RCuentaCorreo" ForeColor="Red" ValidationGroup="VG_RecuperarCuenta" SetFocusOnError="True"></asp:RequiredFieldValidator>
          </td>

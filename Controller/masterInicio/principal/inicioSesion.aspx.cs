@@ -10,14 +10,17 @@ public partial class View_masterInicio_principal_inicioSesion : System.Web.UI.Pa
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Session["rol"] = null;
-        Session["nombre"] = null;
-        Session["user_id"] = null;
-        Session["user"] = null;
+        //Response.Cache.SetNoStore();
+        
     }
 
     protected void BT_InicioSesion_Click(object sender, EventArgs e)
     {
+        Session["rol"] = null;
+        Session["nombre"] = null;
+        Session["user_id"] = null;
+        Session["user"] = null;
+
         EUsuario user = new EUsuario();
         user.Correo = Tx_Icorreo.Text;
         user.Contraseña = Tx_Icontraseña.Text;
