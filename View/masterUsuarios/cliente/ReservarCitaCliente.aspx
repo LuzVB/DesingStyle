@@ -110,7 +110,7 @@
         <td class="auto-style36">
             <asp:DropDownList ID="DDL_servicio" runat="server" Height="25px" Width="70%" DataSourceID="ODS_servicio" DataTextField="nombre_servicio" DataValueField="id" CssClass="auto-style42" AutoPostBack="True" OnSelectedIndexChanged="DDL_servicio_SelectedIndexChanged" OnDataBound="DDL_servicio_DataBound" >
             </asp:DropDownList>
-            <asp:ObjectDataSource ID="ODS_servicio" runat="server" SelectMethod="mostrarServicio" TypeName="DAO_Reserva" OnSelecting="ODS_servicio_Selecting"></asp:ObjectDataSource>
+            <asp:ObjectDataSource ID="ODS_servicio" runat="server" SelectMethod="mostrarServicio2" TypeName="DAO_Reserva" OnSelecting="ODS_servicio_Selecting"></asp:ObjectDataSource>
         </td>
     </tr>
     <tr>

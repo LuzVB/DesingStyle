@@ -62,19 +62,18 @@ public partial class View_masterUsuarios_cliente_ReservasAgendadas : System.Web.
 
                     reserva.actulizarReserva(guardarReserva);
                 }
-
-
+                
                 reserva.eliminarReserva(datosRes);
             }
             else
             {
+                P_Error.Visible = true;
                 LB_Error.Text = "Lo sentimos usted ya no puede cancelar la reserva.";
                 MPE_Error.Show();
             }
-            
+
 
             GV_reservasAgendadas.DataBind();
-            
         }
 
        
@@ -100,4 +99,9 @@ public partial class View_masterUsuarios_cliente_ReservasAgendadas : System.Web.
         LB_Informacion.Visible = false;
     }
 
+
+    protected void BT_okError_Click(object sender, EventArgs e)
+    {
+        P_Error.Visible = false;
+    }
 }

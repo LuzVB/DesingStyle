@@ -163,7 +163,7 @@
                         </asp:DropDownList>
                     </ContentTemplate>
                 </asp:UpdatePanel>
-                <asp:ObjectDataSource ID="ODS_Servicio2" runat="server" SelectMethod="mostrarServicio" TypeName="DAO_Reserva"></asp:ObjectDataSource>
+                <asp:ObjectDataSource ID="ODS_Servicio2" runat="server" SelectMethod="mostrarServicio2" TypeName="DAO_Reserva"></asp:ObjectDataSource>
                 <asp:RequiredFieldValidator ID="RFV_Servicio" runat="server" ControlToValidate="DDL_Servicio" ErrorMessage="(*)" ForeColor="Red" ValidationGroup="registroClienteSin" SetFocusOnError="True"></asp:RequiredFieldValidator>
             </td>
             <td class="auto-style8">

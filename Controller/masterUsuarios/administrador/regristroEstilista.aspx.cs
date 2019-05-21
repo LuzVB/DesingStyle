@@ -731,7 +731,7 @@ public partial class View_masterUsuarios_administrador_regristroEstilista : Syst
             }
             else if (((Label)e.Row.FindControl("LB_HoraInicio")).Text.Equals("17"))
             {
-                ((Label)e.Row.FindControl("LB_HoraInicio")).Text = "15:00 p.m";
+                ((Label)e.Row.FindControl("LB_HoraInicio")).Text = "05:00 p.m";
             }
             
 

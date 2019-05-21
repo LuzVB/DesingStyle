@@ -13,7 +13,7 @@ public partial class View_masterInicio_principal_inicio : System.Web.UI.Page
         //Response.Cache.SetNoStore();
 
         DataTable catalogo = new DAOPerfilEstilista().mostrarcatalogo();
-        DataTable servicios = new DAOServicio().mostrarservicio();
+        DataTable servicios = new DAOServicio().mostrarservicio2();
 
         int tam, tam2;
         tam = catalogo.Rows.Count;

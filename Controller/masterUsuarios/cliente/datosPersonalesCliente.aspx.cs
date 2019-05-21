@@ -72,7 +72,7 @@ public partial class View_masterUsuarios_cliente_datosPersonalesCliente : System
                     String nombre_estilista = prueba.Rows[0]["nombre_estilista"].ToString();
                     String apellido_estilista = prueba.Rows[0]["apellido_estilista"].ToString();
                     String servicio = prueba.Rows[0]["servicio"].ToString();
-                    Nombre.Text = " " + nombre + " " + apellido;
+                    Nombre.Text = " " + nombre_estilista + " " + apellido_estilista;
                     sera.Text = descripcion + " " + "el dia" + " " + DiaReserv + " " + "con el servicio " + " " + servicio + " " + "fue cancelada";
                     MPE_Alerta.Show();
                 }

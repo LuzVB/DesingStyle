@@ -203,15 +203,15 @@
      </tr>
   </table>
    <cc1:modalpopupextender ID="MPE_Error" runat="server" PopupControlID="P_Error" CancelControlID="BT_okError"  TargetControlID="LB_target3" BackgroundCssClass="modalBackground"></cc1:modalpopupextender>
-    <asp:Label ID="LB_target3" runat="server" Text=""></asp:Label>
-    <asp:Panel ID="P_Error" runat="server" Width="40%">
+    <asp:Label ID="LB_target3" runat="server" Visible="False"></asp:Label>
+    <asp:Panel ID="P_Error" runat="server" Width="40%" Visible="False">
         <div class="alert alert-warning" role="alert" style=" width:100%" >
             <h4 class="alert-heading">ERROR</h4>
             <hr>
             <asp:Label ID="LB_Error" runat="server" Text=""></asp:Label>
            <hr>
             <div class ="botones2">
-              <asp:Button ID="BT_okError" runat="server" Text="OK"  class="btn btn-outline-warning"/>
+              <asp:Button ID="BT_okError" runat="server" Text="OK"  class="btn btn-outline-warning" OnClick="BT_okError_Click"/>
             </div>
         </div>  
     </asp:Panel>

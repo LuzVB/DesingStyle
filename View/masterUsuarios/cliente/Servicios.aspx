@@ -79,7 +79,7 @@
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
                   
             </asp:GridView>
-                     <asp:ObjectDataSource ID="ODS_Servicios" runat="server" SelectMethod="mostrarservicio" TypeName="DAOServicio"></asp:ObjectDataSource>
+                     <asp:ObjectDataSource ID="ODS_Servicios" runat="server" SelectMethod="mostrarservicio2" TypeName="DAOServicio"></asp:ObjectDataSource>
                 </div>
             
             </td>

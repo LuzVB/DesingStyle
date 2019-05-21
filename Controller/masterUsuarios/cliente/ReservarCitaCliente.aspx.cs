@@ -34,7 +34,7 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
             DateTime prueb = DateTime.Parse(FechaReserva);
             String DiaReserva = prueb.ToString("dd/MM/yyyy");
             String Hora1Reserva = prueb.ToString("hh:mm:ss");
-            String HoraActual = DateTime.Now.ToString("hh:mm:ss");
+            String HoraActual = DateTime.Now.ToString("HH:mm");
             String DReserva = prueb.ToString("dd'de' MMM 'de' yyyy");
             String DiaMulta = prueb.AddDays(1).ToString("dd/MM/yyyy");
             string FechaActual = DateTime.Now.ToString();
@@ -60,7 +60,7 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
             int MinReserva = int.Parse(separador2[1]);
             int Horaactual = int.Parse(separador4[0]);
             int Minactual = int.Parse(separador4[1]);
-            int DiaReservas= int.Parse(separador3[0]);
+            int DiaReservas = int.Parse(separador3[0]);
             int MesReservas = int.Parse(separador3[1]);
             //int Reserva = int.Parse(DiaReserva);
             if (Alerta == 5 && Actual == DiaReservas && ActualMes == MesReservas && HoraReserva < Horaactual || Alerta == 5 && Inacistencia == DiaReservas && InacistenciaMes == MesReservas && HoraReserva > Horaactual)
@@ -79,6 +79,7 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
                 BT_GuardarReserva.Visible = true;
             }
         }
+
     }
 
 
@@ -103,9 +104,14 @@ public partial class View_masterUsuarios_cliente_ReservarCitaCliente : System.We
         {
             fechaF = DateTime.Now;
             fecha = fechaF.ToShortDateString();
+            fechaCalendario = fechaF;
+        }
+        else
+        {
+            fechaCalendario = C_Reserva.SelectedDate;
         }
 
-        fechaCalendario = C_Reserva.SelectedDate;
+        
         //fecha = fechaCliente.ToShortDateString();
 
         DataTable verificar = buscar.verificarReserva(int.Parse(Session["user_id"].ToString()), fechaCalendario, fechaCalendario.AddDays(1));

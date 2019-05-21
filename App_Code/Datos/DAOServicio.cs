@@ -172,6 +172,33 @@ public class DAOServicio
         return servicio;
     }
 
+    public DataTable mostrarservicio2()
+    {
+        DataTable servicio = new DataTable();
+        NpgsqlConnection conection = new NpgsqlConnection(ConfigurationManager.ConnectionStrings["MiConexion"].ConnectionString);
+
+        try
+        {
+            NpgsqlDataAdapter dataAdapter = new NpgsqlDataAdapter("usuario.f_mostar_servicio2", conection);
+            dataAdapter.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            conection.Open();
+            dataAdapter.Fill(servicio);
+        }
+        catch (Exception Ex)
+        {
+            throw Ex;
+        }
+        finally
+        {
+            if (conection != null)
+            {
+                conection.Close();
+            }
+        }
+        return servicio;
+    }
+
     public DataTable modificarEstado(int id)//los parametros se deben llamar igual como en la BD 
     {
         DataTable modificarEstado = new DataTable();
